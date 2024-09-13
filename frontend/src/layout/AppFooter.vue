@@ -3,6 +3,6 @@
 <template>
     <div class="layout-footer">
         SITHS Science by
-        <p>Leo Dwi & Angelina Li</p>
+        <p>Leo Dwi, Veronica Frid, Samuel Kipnis & Angelina Li</p>
     </div>
 </template>
