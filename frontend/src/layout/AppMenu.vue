@@ -15,7 +15,7 @@ const model = ref([
                 label: 'Environmental Science',
                 icon: 'pi pi-fw pi-bookmark',
                 items: [
-                        { label: 'Coral Reefs and Abiotic Factors', icon: 'pi pi-fw pi-bookmark' },
+                        { label: 'Coral Reefs and Abiotic Factors', icon: 'pi pi-fw pi-bookmark', to: '/apes/abioticcoral' },
                 ]
             },
             /* {
