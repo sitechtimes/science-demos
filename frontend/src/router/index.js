@@ -16,6 +16,17 @@ const router = createRouter({
             ]
         },
         {
+            path: '/apes',
+            component: AppLayout,
+            children: [
+                {
+                    path: '/apes/abioticcoral',
+                    name: 'dashboard',
+                    component: () => import('@/views/pages/apes/AbioticCoral.vue')
+                },
+            ]
+        },
+        {
             path: '/:pathMatch(.*)*',
             name: 'notfound',
             component: () => import('@/views/pages/NotFound.vue')
