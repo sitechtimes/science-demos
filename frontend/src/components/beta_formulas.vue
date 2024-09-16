@@ -75,6 +75,7 @@ function calculate_animal(condition, reg_condition, animal, reg_animal){
     return result
 }
 function calc_algae(condition,reg_condition,animal,reg_animal){
+    console.log(conditions[0].storm_severity)
     animals[0].algae = calculate_animal(30,reg_conditions[0].storm_severity,animals[0].algae,reg_animals[0].reg_algae)
     console.log(animals[0].algae)
 }
@@ -82,9 +83,7 @@ function calc_algae(condition,reg_condition,animal,reg_animal){
 console.log(conditions[0].storm_severity)
 </script>
 <template>
-    <div class="slider">
-        <InputText v-model.number="conditions[0].storm_severity" />
-        <Slider v-model="conditions[0].storm_severity" @change="calc_algae"/>
-    </div>
+    <!-- <InputText type="text" v-model.number="conditions[0].agriculture" /> -->
+    <Slider v-model="conditions[0].storm_severity" @change="calc_algae(conditions[0].storm_severity,reg_conditions[0].storm_severity,animals[0].algae,reg_animals[0].reg_algae)"/>
 
 </template>
