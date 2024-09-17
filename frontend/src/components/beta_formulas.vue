@@ -1,6 +1,6 @@
 <script setup>
 import Slider from 'primevue/slider';
-import InputText from 'primevue/slider';
+import InputField from 'primevue/slider';
 import { ref } from 'vue';
 
 const reg_animals = [{
@@ -33,7 +33,7 @@ const reg_conditions = [{
     red_lionfish_invasive: false,
     crown_of_thorns_invasive: false
 }]
-let animals = [{
+const animals = ref([{
     staghorn_coral: 21,
     boulder_star_coral: 28,
     algae: 27,
@@ -46,8 +46,8 @@ let animals = [{
     yellowtail_snapper: 240,
     red_lionfish: 0,
     crown_of_thorns_starfish: 0
-}]
-let conditions = [{
+}])
+const conditions = ref([{
     storm_severity: 20,
     ocean_temp: 27,
     ocean_ph:8.1,
@@ -62,12 +62,12 @@ let conditions = [{
     sea_urchin_infection: 0,
     red_lionfish_invasive: false,
     crown_of_thorns_invasive: false
-}]
+}])
 function calculate_animal(condition, reg_condition, animal, reg_animal){
     const condition_difference = condition-reg_condition
     let result
     if (condition_difference<0){
-        result = reg_animal * ((condition_difference/100)+1)
+        result = reg_animal * (((condition_difference-(condition_difference*2))/100)+1)
     }
     else{
         result = reg_animal * (condition_difference/100)
@@ -75,15 +75,15 @@ function calculate_animal(condition, reg_condition, animal, reg_animal){
     return result
 }
 function calc_algae(condition,reg_condition,animal,reg_animal){
-    console.log(conditions[0].storm_severity)
-    animals[0].algae = calculate_animal(30,reg_conditions[0].storm_severity,animals[0].algae,reg_animals[0].reg_algae)
-    console.log(animals[0].algae)
+    console.log("Storm severity = "+ conditions.value[0].storm_severity)
+    animals.value[0].algae = calculate_animal(condition,reg_condition,animal,reg_animal)
+    console.log("Algae = "+ animals.value[0].algae)
 }
 
-console.log(conditions[0].storm_severity)
+// console.log("Storm severity = "+ conditions.value[0].storm_severity)
 </script>
 <template>
-    <!-- <InputText type="text" v-model.number="conditions[0].agriculture" /> -->
+    <InputText type="text" v-model.number="conditions[0].storm_severity" @change="calc_algae(conditions[0].storm_severity,reg_conditions[0].storm_severity,animals[0].algae,reg_animals[0].reg_algae)"/>
     <Slider v-model="conditions[0].storm_severity" @change="calc_algae(conditions[0].storm_severity,reg_conditions[0].storm_severity,animals[0].algae,reg_animals[0].reg_algae)"/>
 
 </template>
