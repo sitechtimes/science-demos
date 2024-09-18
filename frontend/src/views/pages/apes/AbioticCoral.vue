@@ -10,25 +10,93 @@ import { ref } from 'vue';
 import CoralChart from '../../../components/CoralChart.vue';
 import { useLayout } from '@/layout/composables/layout';
 
-const documentStyle = ref(getComputedStyle(document.documentElement));
-
-console.log(useLayout().isDarkTheme.value)
-
 const data = ref({
-        labels: ['January', 'February', 'March0', 'April', 'May', 'June', 'July'],
         datasets: [
             {
-                label: 'First Dataset',
-                data: [65, 59, 80, 81, 56, 55, 40],
+                label: 'Staghorn Coral',
+                data: [{x: 0, y: 65},
+                        {x: 1, y: 59},
+                        {x: 12, y: 92},
+                        ],
                 fill: false,
-                borderColor: documentStyle.value.getPropertyValue('--p-cyan-500'),
+                borderColor: '#cc0234',
                 tension: 0.4
             },
             {
-                label: 'Second Dataset',
-                data: [28, 48, 40, 19, 86, 27, 90],
+                label: 'Stoplight parrotfish',
+                data: [{x: 0, y: 28}, {x: 1, y: 48}],
                 fill: false,
-                borderColor: documentStyle.value.getPropertyValue('--p-gray-500'),
+                borderColor: '#0b0bce',
+                tension: 0.4
+            },
+            {
+                label: 'Long-spined sea urchin',
+                data: [{x: 0, y: 28}, {x: 1, y: 48}],
+                fill: false,
+                borderColor: '#ff48ff',
+                tension: 0.4
+            },
+            {
+                label: 'Boulder star coral',
+                data: [{x: 0, y: 28}, {x: 1, y: 48}],
+                fill: false,
+                borderColor: '#686868',
+                tension: 0.4
+            },
+            {
+                label: 'Queen angelfish',
+                data: [{x: 0, y: 28}, {x: 1, y: 48}],
+                fill: false,
+                borderColor: '#a348a3',
+                tension: 0.4
+            },
+            {
+                label: 'Hawksbill sea turtle',
+                data: [{x: 0, y: 28}, {x: 1, y: 48}],
+                fill: false,
+                borderColor: '#ff9a34',
+                tension: 0.4
+            },
+            {
+                label: 'Sponges',
+                data: [{x: 0, y: 28}, {x: 1, y: 48}],
+                fill: false,
+                borderColor: '#ffce9d',
+                tension: 0.4
+            },
+            {
+                label: 'Yellowtail snapper',
+                data: [{x: 0, y: 28}, {x: 1, y: 48}],
+                fill: false,
+                borderColor: '#ffce9d',
+                tension: 0.4
+            },
+            {
+                label: 'Red lionfish',
+                data: [{x: 0, y: 28}, {x: 1, y: 48}],
+                fill: false,
+                borderColor: '#ffce9d',
+                tension: 0.4
+            },
+            {
+                label: 'Algae',
+                data: [{x: 0, y: 28}, {x: 1, y: 48}],
+                fill: false,
+                borderColor: '#11cf70',
+                tension: 0.4
+            },
+            {
+                label: 'Nassau grouper',
+                data: [{x: 0, y: 28}, {x: 1, y: 48}],
+                fill: false,
+                borderColor: '#9d9d3c',
+                tension: 0.4
+            },
+            {
+                label: 'Crown-of-thorns starfish',
+                data: [{x: 0, y: 28}, {x: 1, y: 48}],
+                fill: false,
+                borderColor: '#cfcf6f',
                 tension: 0.4
             }
         ]

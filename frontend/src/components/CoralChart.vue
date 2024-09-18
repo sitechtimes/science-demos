@@ -35,11 +35,13 @@ const setChartOptions = () => {
             legend: {
                 labels: {
                     color: textColor
-                }
+                },
+                position: 'bottom'
             }
         },
         scales: {
             x: {
+                type: 'linear',
                 ticks: {
                     color: textColorSecondary
                 },
