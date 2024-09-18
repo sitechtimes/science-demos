@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <Chart type="line" :data="chartData" :options="chartOptions" class="h-[30rem]" />
+        <Chart type="line" :data="chartInfo.chartData" :options="chartOptions" class="h-[30rem]"/>
     </div>
 </template>
 
@@ -8,12 +8,9 @@
 import Chart from 'primevue/chart'
 import { ref, onMounted } from "vue";
 
-const chartInfo = defineProps({
-    chartData: Object,
-    chartTitle: String,
-    xAxis: String,
-    yAxis: String
-})
+const documentStyle = getComputedStyle(document.documentElement);
+
+const chartInfo = defineModel();
 
 onMounted(() => {
     chartData.value = setChartData();
@@ -22,16 +19,15 @@ onMounted(() => {
 
 const chartData = ref();
 const chartOptions = ref();
-        
+ 
 const setChartData = () => {
-    return chartInfo.chartData;
+    return chartInfo.value.chartData;
 };
 const setChartOptions = () => {
-    const documentStyle = getComputedStyle(document.documentElement);
+    // const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--p-text-color');
     const textColorSecondary = documentStyle.getPropertyValue('--p-text-muted-color');
     const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
-
     return {
         maintainAspectRatio: false,
         aspectRatio: 0.6,
@@ -52,7 +48,7 @@ const setChartOptions = () => {
                 },
                 title: {
                     display: true,
-                    text: chartInfo.xAxis,
+                    text: chartInfo.value.xAxis,
                     color: textColor
                 }
             },
@@ -65,7 +61,7 @@ const setChartOptions = () => {
                 },
                 title: {
                     display: true,
-                    text: chartInfo.yAxis,
+                    text: chartInfo.value.yAxis,
                     color: textColor
                 }
             }
