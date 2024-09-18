@@ -1,7 +1,7 @@
 <script setup>
 import Slider from 'primevue/slider';
 import InputField from 'primevue/slider';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 const reg_animals = [{
     reg_staghorn_coral: 21,
@@ -63,27 +63,36 @@ const conditions = ref([{
     red_lionfish_invasive: false,
     crown_of_thorns_invasive: false
 }])
+const past_algae = ref([27])
 function calculate_animal(condition, reg_condition, animal, reg_animal){
     const condition_difference = condition-reg_condition
     let result
     if (condition_difference<0){
-        result = reg_animal * (((condition_difference-(condition_difference*2))/100)+1)
+        result = animal * (((condition_difference-(condition_difference*2))/100)+1)
+    }
+    else if(condition_difference === 0){
+        result = animal
     }
     else{
-        result = reg_animal * (condition_difference/100)
+        result = animal * (condition_difference/100)
     }
+    past_algae.value.push(result)
     return result
 }
 function calc_algae(condition,reg_condition,animal,reg_animal){
     console.log("Storm severity = "+ conditions.value[0].storm_severity)
     animals.value[0].algae = calculate_animal(condition,reg_condition,animal,reg_animal)
     console.log("Algae = "+ animals.value[0].algae)
+    console.log(past_algae.value)
 }
-
+watch(conditions.value, (algae) => {
+    algae=calc_algae(conditions.value[0].storm_severity,reg_conditions[0].storm_severity,animals.value[0].algae,reg_animals[0].reg_algae)
+    animals.value[0].algae = algae
+})
 // console.log("Storm severity = "+ conditions.value[0].storm_severity)
 </script>
 <template>
-    <InputText type="text" v-model.number="conditions[0].storm_severity" @change="calc_algae(conditions[0].storm_severity,reg_conditions[0].storm_severity,animals[0].algae,reg_animals[0].reg_algae)"/>
-    <Slider v-model="conditions[0].storm_severity" @change="calc_algae(conditions[0].storm_severity,reg_conditions[0].storm_severity,animals[0].algae,reg_animals[0].reg_algae)"/>
+    <InputText type="text" v-model.number="conditions[0].storm_severity" />
+    <Slider v-model="conditions[0].storm_severity" :step="5" />
 
 </template>
