@@ -1,5 +1,5 @@
 <script setup>
-import Beta_formulas from '@/components/beta_formulas.vue';
+import Beta_formulas2 from '@/components/beta_formulas2.vue';
 import { useLayout } from '@/layout/composables/layout';
 import { ProductService } from '@/service/ProductService';
 import { onMounted, ref, watch } from 'vue';
@@ -20,5 +20,5 @@ const items = ref([
 
 <template>
     <div>placeholder for dashboard</div>
-    <Beta_formulas/>
+    <Beta_formulas2/>
 </template>

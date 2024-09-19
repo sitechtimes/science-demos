@@ -63,11 +63,23 @@ const conditions = ref([{
     red_lionfish_invasive: false,
     crown_of_thorns_invasive: false
 }])
+
 const past_algae = ref([27])
+const past_staghorn_coral=ref([21])
+const past_boulder_star_coral=ref([28])
+const past_long_spined_urchin=ref([1160])
+const past_sponge=ref([11])
+const past_queen_angelfish=ref([540])
+const past_nassau_grouper=ref([48])
+const past_hawksbill_sea_turtle=ref([25])
+const past_spotlight_parrotfish=ref([825])
+const past_yellowtail_snapper=ref([240])
+const past_red_lionfish=ref([0])
+const past_crown_of_thorns_starfish=ref([0])
+
 function calculate_animal(condition, reg_condition, animal, reg_animal, list){
     const condition_difference = condition-reg_condition
     let result
-    console.log(list.length)
     if (list.length === 1){
         console.log('list length 1')
         if (condition_difference<0){
@@ -81,7 +93,6 @@ function calculate_animal(condition, reg_condition, animal, reg_animal, list){
         }
     }
     else{
-        console.log(list[list.length-1])
         if (condition_difference<0){
             result = list[list.length-1] * (((condition_difference-(condition_difference*2))/100)+1)
         }
@@ -92,8 +103,7 @@ function calculate_animal(condition, reg_condition, animal, reg_animal, list){
             result = list[list.length-1] * (condition_difference/100)
         }
     }
-    console.log(condition_difference, result)
-    past_algae.value.push(result)
+    list.push(result)
     return result
 }
 function calc_algae(condition,reg_condition,animal,reg_animal, list){
@@ -102,13 +112,13 @@ function calc_algae(condition,reg_condition,animal,reg_animal, list){
     console.log("Algae = "+ animals.value[0].algae)
     console.log(past_algae.value)
 }
-function calc_algae2(){
-    const algae=calc_algae(conditions.value[0].storm_severity,reg_conditions[0].storm_severity,animals.value[0].algae,reg_animals[0].reg_algae, past_algae.value)
-    animals.value[0].algae = algae
+
+function calculate_everything(){
+    calc_algae(conditions.value[0].storm_severity,reg_conditions[0].storm_severity,animals.value[0].algae,reg_animals[0].reg_algae, past_algae.value)
 }
 </script>
 <template>
     <InputText v-model.number="conditions[0].storm_severity" />
     <Slider v-model="conditions[0].storm_severity" :step="5" />
-    <Button @click="calc_algae2()">Progress Year</Button>
+    <Button @click="calculate_everything()">Progress Year</Button>
 </template>
