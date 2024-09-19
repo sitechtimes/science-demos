@@ -1,20 +1,25 @@
 <template>
     <div>
-        <CoralChart v-model="dataInput" v-if="useLayout().isDarkTheme.value === false"/>
-        <CoralChart v-model="dataInput" v-if="useLayout().isDarkTheme.value === true"/>
+        <CoralChart v-model="dataInput" :key="rerenderKey"/>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import CoralChart from '../../../components/CoralChart.vue';
 import { useLayout } from '@/layout/composables/layout';
+
+const rerenderKey = ref(0);
+
+watch(useLayout().isDarkTheme, ()=>{
+    rerenderKey.value++;
+})
 
 const data = ref({
         datasets: [
             {
                 label: 'Staghorn Coral',
-                data: [{x: 0, y: 65},
+                data: [{x: 0, y: 65}, // example datasets
                         {x: 1, y: 59},
                         {x: 12, y: 92},
                         ],
@@ -104,9 +109,9 @@ const data = ref({
 
 const dataInput = ref({
     chartData: data,
-    chartTitle: 'Population Remaining Per Year',
-    xAxis: 'Years',
-    yAxis: 'Percent of Population Remaining'
+    chartTitle: ['Population Remaining Per Year'],
+    xAxis: ['Years'],
+    yAxis: ['Percent of Population Remaining']
 }) 
 </script>
 
