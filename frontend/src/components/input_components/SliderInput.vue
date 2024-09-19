@@ -1,12 +1,22 @@
 <script setup>
 import Slider from "primevue/slider";
-
-let placeholderMaxDataValue = 100;
+const props = defineProps([
+  sliderSteps,
+  minSliderValue,
+  maxSliderValue,
+  storeValue,
+]);
 </script>
 
 <template>
   <div>
-    <Slider v-model="value" :step="placeholderMaxDataValue" class="w-56" />
+    <Slider
+      v-model="storeValue"
+      :steps="sliderSteps"
+      :min="minSliderValue"
+      :max="maxSliderValue"
+      class="w-56"
+    />
   </div>
 </template>
 
