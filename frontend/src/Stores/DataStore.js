@@ -1,3 +1,5 @@
+//This store is read only in terms of other stores. You shouldn't need to change anything here.
+
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
