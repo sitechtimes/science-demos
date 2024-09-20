@@ -1,38 +1,34 @@
 <template>
-    <div class="chartType">
-        <SelectButton v-model="chartType" :options="['Population %', 'Population Count']" />
-    </div>
     <div class="card">
-        <Chart v-if="chartType === 'Population %'" type="line" :data="chartInfo.chartData" :options="chartOptions" class="h-[30rem]"/>
+        <Chart type="line" :data="chartInfo.chartData" :options="chartOptions" class="h-[30rem]"/>
     </div>
 </template>
 
 <script setup>
 import Chart from 'primevue/chart';
-import SelectButton from 'primevue/selectbutton';
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 
 const chartInfo = defineModel(); // receive chart data, chart axes titles
 
-const chartType = ref('Population %');
 
 onMounted(() => {
     chartData.value = setChartData();
-    chartOptions.value = setChartOptions();
+    chartOptions.value = setChartOptions(chartInfo.value.currentGraph);
 });
 
 const chartData = ref();
 const chartOptions = ref();
+const chartRefNum = ref(0);
  
 const setChartData = () => {
     return chartInfo.value.chartData;
 };
-const setChartOptions = () => { // return chart options
+const setChartOptions = (chartTypeNum) => { // return chart options
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--p-text-color'); // obtain current theme colors for chart options
     const textColorSecondary = documentStyle.getPropertyValue('--p-text-muted-color');
     const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
-    return {
+    const chartOptions = {
         maintainAspectRatio: false,
         aspectRatio: 0.6,
         plugins: {
@@ -44,7 +40,7 @@ const setChartOptions = () => { // return chart options
             },
             title: {
                 display: true,
-                text: chartInfo.value.chartTitle,
+                text: chartInfo.value.chartTitle[chartTypeNum],
                 color: textColor
             },
         },
@@ -59,7 +55,7 @@ const setChartOptions = () => { // return chart options
                 },
                 title: {
                     display: true,
-                    text: chartInfo.value.xAxis, // axes names
+                    text: chartInfo.value.xAxis[chartTypeNum], // axes names
                     color: textColor
                 }
             },
@@ -72,12 +68,14 @@ const setChartOptions = () => { // return chart options
                 },
                 title: {
                     display: true,
-                    text: chartInfo.value.yAxis,
+                    text: chartInfo.value.yAxis[chartTypeNum],
                     color: textColor
                 }
             }
         }
     };
+    console.log(chartTypeNum)
+    return chartOptions;
 }
 </script>
 

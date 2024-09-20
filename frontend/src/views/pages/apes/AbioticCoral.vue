@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="chartType">
+        <SelectButton v-model="chartType" :options="['Population %', 'Population Count']" />
+    </div>
         <CoralChart v-model="dataInput" :key="rerenderKey"/>
     </div>
 </template>
@@ -8,12 +11,15 @@
 import { ref, watch } from 'vue';
 import CoralChart from '../../../components/CoralChart.vue';
 import { useLayout } from '@/layout/composables/layout';
+import SelectButton from 'primevue/selectbutton';
 
 const rerenderKey = ref(0);
 
-watch(useLayout().isDarkTheme, ()=>{
+watch(useLayout().isDarkTheme, ()=>{ // rerender the chart if theme changes so the labels are visible
     rerenderKey.value++;
 })
+
+const chartType = ref('Population %');
 
 const data = ref({
         datasets: [
@@ -110,9 +116,19 @@ const data = ref({
 const dataInput = ref({
     chartData: data,
     chartTitle: ['Population Remaining Per Year'],
-    xAxis: ['Years'],
-    yAxis: ['Percent of Population Remaining']
+    xAxis: ['Years', 'Years'],
+    yAxis: ['Percent of Population Remaining', 'Individuals of Population Remaining'],
+    currentGraph: 0
 }) 
+
+watch(chartType, ()=>{
+    if(chartType.value === 'Population %'){
+        dataInput.value.currentGraph = 0;
+    }else if(chartType.value === 'Population Count'){
+        dataInput.value.currentGraph = 1;
+    }
+    rerenderKey.value++;
+});
 </script>
 
 <style scoped>
