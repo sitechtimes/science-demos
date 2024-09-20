@@ -10,62 +10,22 @@ export const DataStore = defineStore("data", () => {
   const netFishing = ref(); // (breaks coral / kills many other species with bycatch)
 
   //Disease
-  const blackBandDisease = ref(false);
-  const whiteBandDisease = ref(false);
+  const blackBandDisease = ref();
+  const whiteBandDisease = ref();
 
   //Keystone Species
-  const grouperSpecies = ref({
-    population: 100, //placeholder
-    species: "Keystone",
-    info: "blah blah blah blah blah",
-  });
-  const snapperSpecies = ref({
-    population: 100, //placeholder
-    species: "Keystone",
-    info: "blah blah blah blah blah",
-  });
-  const seaUrchinSpecies = ref({
-    population: 100, //placeholder
-    species: "Keystone",
-    info: "blah blah blah blah blah",
-  });
+  const grouperSpecies = ref();
+  const snapperSpecies = ref();
+  const seaUrchinSpecies = ref();
 
   //Ocean Conditions
-  const oceanTemp = ref({
-    defaultValue: 1,
-    sliderValue: 1,
-    sliderMin: 18,
-    sliderMax: 36,
-    sliderStep: 1,
-  }); //°C 18-36 slider
-  const stormSeverity = ref({
-    defaultValue: 1,
-    sliderValue: 1,
-    sliderMin: 0,
-    sliderMax: 100,
-    sliderStep: 1,
-  }); //% 0-100 slider
-  const WaterPH = ref({
-    defaultValue: 1,
-    sliderValue: 1,
-    sliderMin: 7.6,
-    sliderMax: 8.6,
-    sliderStep: 1,
-  }); // (acidity) 7.6-8.6 slider
+  const oceanTemp = ref(); //°C 18-36 slider
+  const stormSeverity = ref(); //% 0-100 slider
+  const WaterPH = ref(); // (acidity) 7.6-8.6 slider
 
   //invasive species
-  const crownOfThornsStarfish = ref({
-    population: 15,
-    species: "Invasive",
-    info: "blah blah blah blah blah",
-    isPresent: false,
-  });
-  const redLionfish = ref({
-    population: 20,
-    species: "Invasive",
-    info: "blah blah blah blah blah",
-    isPresent: false,
-  });
+  const crownOfThornsStarfish = ref(false);
+  const redLionfish = ref(false);
 
   return {
     logging,
