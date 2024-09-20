@@ -7,16 +7,14 @@ const { onMenuToggle, toggleDarkMode, isDarkTheme } = useLayout();
 
 <template>
     <div class="layout-topbar">
+        <button class="layout-menu-button layout-topbar-action" @click="onMenuToggle">
+            <i class="pi pi-bars"></i>
+        </button>
         <div class="layout-topbar-logo-container">
             <router-link to="/" class="layout-topbar-logo">
                 <span>SITHS Science Demos</span>
             </router-link>
         </div>
-
-        <button class="layout-menu-button layout-topbar-action" @click="onMenuToggle">
-            <i class="pi pi-bars"></i>
-        </button>
-
         <div class="layout-topbar-actions">
             <div class="layout-config-menu">
                 <button type="button" class="layout-topbar-action" @click="toggleDarkMode">
