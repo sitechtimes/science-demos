@@ -2,6 +2,7 @@
 import Slider from 'primevue/slider';
 import InputField from 'primevue/slider';
 import { ref, watch } from 'vue';
+import Select from 'primevue/select';
 
 const reg_animals = [{
     reg_staghorn_coral: 21,
@@ -63,6 +64,7 @@ const conditions = ref([{
     red_lionfish_invasive: false,
     crown_of_thorns_invasive: false
 }])
+const tf = [true, false]
 
 const past_algae = ref([27])
 const past_staghorn_coral=ref([21])
@@ -77,39 +79,14 @@ const past_yellowtail_snapper=ref([240])
 const past_red_lionfish=ref([0])
 const past_crown_of_thorns_starfish=ref([0])
 
-// function calculate_animal(condition, reg_condition, animal, reg_animal, list){
-//     const condition_difference = condition-reg_condition
-//     let result
-//     if (list.length === 1){
-//         console.log('list length 1')
-//         if (condition_difference<0){
-//             result = animal * (((condition_difference-(condition_difference*2))/100)+1)
-//         }
-//         else if(condition_difference === 0){
-//             result = animal
-//         }
-//         else{
-//             result = animal * (condition_difference/100)
-//         }
-//     }
-//     else{
-//         if (condition_difference<0){
-//             result = list[list.length-1] * (((condition_difference-(condition_difference*2))/100)+1)
-//         }
-//         else if(condition_difference === 0){
-//             result = list[list.length-1]
-//         }
-//         else{
-//             result = list[list.length-1] * (condition_difference/100)
-//         }
-//     }
-//     list.push(result)
-//     return result
-// }
 function find_mult_value(condition,reg_condition){
-    const condition_difference = condition-reg_condition
     let result
-    if (condition_difference<0){
+    if (condition === true){
+        result = 0.8
+    }
+    else{
+        const condition_difference = condition-reg_condition
+        if (condition_difference<0){
             result =  (((condition_difference-(condition_difference*2))/100)+1)
         }
         else if(condition_difference === 0){
@@ -118,6 +95,7 @@ function find_mult_value(condition,reg_condition){
         else{
             result = (condition_difference/100)
         }
+    }
     return result
 }
 function calc_animal(mult_list, list){
@@ -167,7 +145,48 @@ function calculate_everything(){
 }
 </script>
 <template>
+    Storm Severity:
     <InputText v-model.number="conditions[0].storm_severity" />
     <Slider v-model="conditions[0].storm_severity" :step="5" />
+    Ocean Temp:
+    <InputText v-model.number="conditions[0].ocean_temp" />
+    <Slider v-model="conditions[0].ocean_temp" :step="5" />
+    Ocean pH:
+    <InputText v-model.number="conditions[0].ocean_ph" />
+    <Slider v-model="conditions[0].ocean_ph" :step="5" />
+    Logging:
+    <InputText v-model.number="conditions[0].logging" />
+    <Slider v-model="conditions[0].logging" :step="5" />
+    Sewage:
+    <InputText v-model.number="conditions[0].sewage" />
+    <Slider v-model="conditions[0].sewage" :step="5" />
+    Agriculture:
+    <InputText v-model.number="conditions[0].agriculture" />
+    <Slider v-model="conditions[0].agriculture" :step="5" />
+    Net Fishing:
+    <InputText v-model.number="conditions[0].net_fishing" />
+    <Slider v-model="conditions[0].net_fishing" :step="5" />
+    Grouper:
+    <InputText v-model.number="conditions[0].grouper" />
+    <Slider v-model="conditions[0].grouper" :step="5" />
+    Snapper:
+    <InputText v-model.number="conditions[0].snapper" />
+    <Slider v-model="conditions[0].snapper" :step="5" />
+    Black Band:
+    <InputText v-model.number="conditions[0].black_band" />
+    <Slider v-model="conditions[0].black_band" :step="5" />
+    White Band:
+    <InputText v-model.number="conditions[0].white_band" />
+    <Slider v-model="conditions[0].white_band" :step="5" />
+    Sea Urchin Infection:
+    <InputText v-model.number="conditions[0].sea_urchin_infection" />
+    <Slider v-model="conditions[0].sea_urchin_infection" :step="5" />
+    Red Lionfish Invasive Species:
+    <Select v-model="conditions[0].red_lionfish_invasive" :options="tf" />
+    Crown of Thorns Invasive Species:
+    <Select v-model="conditions[0].crown_of_thorns_invasive" :options="tf" />
+
     <Button @click="calculate_everything()">Progress Year</Button>
+
+    {{ animals[0] }}
 </template>
