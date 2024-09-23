@@ -2,7 +2,7 @@
 
 import { defineStore } from "pinia";
 import { DataStore } from "./DataStore";
-import { CalculatedResultsStore } from "./CalculatedResultsResults";
+import { CalculatedResultsStore } from "./CalculatedResults";
 
 export const CalculationStore = defineStore("calculation", () => {
   const calculatedData = ref([]);
