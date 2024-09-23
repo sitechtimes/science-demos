@@ -1,9 +1,11 @@
 <template>
-    <div>
-        <div class="chartType">
-        <SelectButton v-model="chartType" :options="['Population %', 'Population Count']" />
-    </div>
-        <CoralChart v-model="dataInput" :key="rerenderKey"/>
+    <div class="col-span-12 xl:col-span-6">
+        <div class="card">
+            <div class="chartType">
+            <SelectButton v-model="chartType" :options="['Population %', 'Population Count']" />
+        </div>
+            <CoralChart v-model="dataInput" :key="rerenderKey"/>
+        </div>
     </div>
 </template>
 
@@ -25,7 +27,7 @@ const data = ref({
         datasets: [
             {
                 label: 'Staghorn Coral',
-                data: [{x: 0, y: 65}, // example datasets
+                data: [{x: 0, y: 65}, // example datasets; move to store later
                         {x: 1, y: 59},
                         {x: 12, y: 92},
                         ],
@@ -121,7 +123,7 @@ const dataInput = ref({
     currentGraph: 0
 }) 
 
-watch(chartType, ()=>{
+watch(chartType, ()=>{ // rerender with different axes if chart type changed
     if(chartType.value === 'Population %'){
         dataInput.value.currentGraph = 0;
     }else if(chartType.value === 'Population Count'){

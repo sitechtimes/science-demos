@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div>
         <Chart type="line" :data="chartInfo.chartData" :options="chartOptions" class="h-[30rem]"/>
     </div>
 </template>
