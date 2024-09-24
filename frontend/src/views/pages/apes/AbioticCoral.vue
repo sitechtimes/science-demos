@@ -1,13 +1,11 @@
-<template>
-    <div>
-
-    </div>
-</template>
-
 <script setup>
-
+import SliderContainer from "../../../components/SliderContainer.vue";
 </script>
 
-<style scoped>
+<template>
+  <div>
+    <SliderContainer />
+  </div>
+</template>
 
-</style>
+<style scoped></style>
