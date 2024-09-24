@@ -17,7 +17,7 @@ const reg_animals = [{
     reg_yellowtail_snapper: 240,
     reg_red_lionfish: 0,
     reg_crown_of_thorns_starfish: 0
-}]
+}] //og animal variables, for comparison. no changing
 const reg_conditions = [{
     storm_severity: 20,
     ocean_temp: 27,
@@ -33,7 +33,7 @@ const reg_conditions = [{
     sea_urchin_infection: 0,
     red_lionfish_invasive: false,
     crown_of_thorns_invasive: false
-}]
+}] //og condition variables, for comparison. no changing
 const animals = ref([{
     staghorn_coral: 21,
     boulder_star_coral: 28,
@@ -47,7 +47,7 @@ const animals = ref([{
     yellowtail_snapper: 240,
     red_lionfish: 0,
     crown_of_thorns_starfish: 0
-}])
+}]) //animal variables that change
 const conditions = ref([{
     storm_severity: 20,
     ocean_temp: 27,
@@ -63,8 +63,8 @@ const conditions = ref([{
     sea_urchin_infection: 0,
     red_lionfish_invasive: false,
     crown_of_thorns_invasive: false
-}])
-const tf = [true, false]
+}]) //condition variables that change
+const tf = [true, false] //options for the invasive species conditions for the ui dropdown
 
 const past_algae = ref([27])
 const past_staghorn_coral=ref([21])
@@ -78,6 +78,7 @@ const past_spotlight_parrotfish=ref([825])
 const past_yellowtail_snapper=ref([240])
 const past_red_lionfish=ref([0])
 const past_crown_of_thorns_starfish=ref([0])
+//^lists of all the data from the years
 
 function find_mult_value(condition,reg_condition){
     let result
@@ -97,7 +98,8 @@ function find_mult_value(condition,reg_condition){
         }
     }
     return result
-}
+}//change once we get values, for now it just gets like a decimal for the condition put in, to multiply animals by later
+
 function calc_animal(mult_list, list){
     let result
     list.push(list[list.length-1])
@@ -109,8 +111,9 @@ function calc_animal(mult_list, list){
             list[list.length-1]=mult_list[i]*list[list.length-2]
         }
     }
-    return list[list.length-1]
-}
+    console.log(list[list.length-1])
+    return Math.ceil(list[list.length-1])
+} //will hv to make separate functions for each animal once we get specific formulas
 
 function calculate_everything(){
     const storm = find_mult_value(conditions.value[0].storm_severity, reg_conditions[0].storm_severity)
@@ -142,7 +145,8 @@ function calculate_everything(){
     animals.value[0].red_lionfish=calc_animal(mult_list, past_red_lionfish.value)    
     animals.value[0].crown_of_thorns_starfish=calc_animal(mult_list, past_crown_of_thorns_starfish.value)
     console.log(animals.value[0])
-}
+}//just does all the calcs (calc stands for calculations btw) at once so we can use it for the progress year button
+
 </script>
 <template>
     Storm Severity:
