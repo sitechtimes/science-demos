@@ -6,6 +6,21 @@
         </div>
             <CoralChart v-model="dataInput" :key="rerenderKey"/>
         </div>
+        <div>
+            <p>{{ selectedYear }}</p>
+            <div class="flex gap-5">
+            <p>0</p>
+            <InputNumber v-model="selectedYear" inputId="horizontal-buttons" showButtons buttonLayout="horizontal" :step="1">
+                <template #incrementbuttonicon>
+                    <span class="pi pi-plus" />
+                </template>
+                <template #decrementbuttonicon>
+                    <span class="pi pi-minus" />
+                </template>
+            </InputNumber>
+            <p>100</p>
+        </div>
+        </div>
     </div>
 </template>
 
@@ -14,20 +29,42 @@ import { ref, watch } from 'vue';
 import CoralChart from '../../../components/CoralChart.vue';
 import { useLayout } from '@/layout/composables/layout';
 import SelectButton from 'primevue/selectbutton';
+import InputNumber from 'primevue/inputnumber';
+import hundredYearReg from '@/data/pCO2Reg';
 
 const rerenderKey = ref(0);
-
-watch(useLayout().isDarkTheme, ()=>{ // rerender the chart if theme changes so the labels are visible
-    rerenderKey.value++;
-})
-
+const selectedYear = ref(30);
 const chartType = ref('Population %');
 
-const data = ref({
+watch([useLayout().isDarkTheme, selectedYear, chartType], ()=>{
+    rerenderKey.value++; // rerender the chart if theme changes so the labels are visible
+    dataInput.value.chartData = setChartData();
+    switch(chartType.value){ // rerender with different axes if chart type changed
+        case 'Population %':
+            dataInput.value.currentGraph = 0;
+            break;
+        case 'Population Count':
+            dataInput.value.currentGraph = 1;
+            break;
+    }
+});
+
+const setChartData = () => { // move to store later with input options for current selected year & species data
+    return {
         datasets: [
             {
+                label: 'Estimated CO2 Pressure',
+                data: hundredYearReg(selectedYear.value),
+                fill: false,
+                borderColor: '#00aaaa',
+                tension: 0.4,
+                borderWidth: 1,
+                yAxisID: 'y1',
+                pointRadius: 0
+            },
+            {
                 label: 'Staghorn Coral',
-                data: [{x: 0, y: 65}, // example datasets; move to store later
+                data: [{x: 0, y: 65}, // example datasets; replace with calculated data
                         {x: 1, y: 59},
                         {x: 12, y: 92},
                         ],
@@ -113,24 +150,18 @@ const data = ref({
                 tension: 0.4
             }
         ]
-    });
+    };
+};
 
 const dataInput = ref({
-    chartData: data,
-    chartTitle: ['Population Remaining Per Year'],
+    chartData: {},
+    chartTitle: ['Percent of Population Remaining','Individuals of Population Remaining'],
     xAxis: ['Years', 'Years'],
     yAxis: ['Percent of Population Remaining', 'Individuals of Population Remaining'],
     currentGraph: 0
 }) 
 
-watch(chartType, ()=>{ // rerender with different axes if chart type changed
-    if(chartType.value === 'Population %'){
-        dataInput.value.currentGraph = 0;
-    }else if(chartType.value === 'Population Count'){
-        dataInput.value.currentGraph = 1;
-    }
-    rerenderKey.value++;
-});
+dataInput.value.chartData = setChartData();
 </script>
 
 <style scoped>

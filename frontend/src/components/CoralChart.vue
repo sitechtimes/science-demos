@@ -2,14 +2,14 @@
     <div>
         <Chart type="line" :data="chartInfo.chartData" :options="chartOptions" class="h-[30rem]"/>
     </div>
+
 </template>
 
 <script setup>
 import Chart from 'primevue/chart';
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted } from "vue";
 
 const chartInfo = defineModel(); // receive chart data, chart axes titles
-
 
 onMounted(() => {
     chartData.value = setChartData();
@@ -18,7 +18,6 @@ onMounted(() => {
 
 const chartData = ref();
 const chartOptions = ref();
-const chartRefNum = ref(0);
  
 const setChartData = () => {
     return chartInfo.value.chartData;
@@ -70,11 +69,29 @@ const setChartOptions = (chartTypeNum) => { // return chart options
                     display: true,
                     text: chartInfo.value.yAxis[chartTypeNum],
                     color: textColor
-                }
-            }
+                },
+                type: 'linear',
+                position: 'left',
+            },
+            y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    grid: {
+                    drawOnChartArea: false,
+                    color: surfaceBorder
+                    },
+                    ticks: {
+                    color: textColorSecondary
+                    },
+                    title: {
+                        display: true,
+                        text: 'CO₂ Pressure (µATM)',
+                        color: textColor
+                    },
+                },
         }
     };
-    console.log(chartTypeNum)
     return chartOptions;
 }
 </script>
