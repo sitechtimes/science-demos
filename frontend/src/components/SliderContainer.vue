@@ -9,15 +9,19 @@ const sliderVariables = ref([
   dataStore.stormSeverity,
   dataStore.WaterPH,
 ]);
+
+const patchStore = (value) => {
+  dataStore.sliderValue = value;
+};
 </script>
 
 <template>
   <div>
     <div v-for="variable in sliderVariables" :key="variable">
-      <InputText v-model.number="variable.sliderValue" />
       <SliderInput
+        @storeUpdate="patchStore(number)"
         :key="variable"
-        :storeValue="variable.sliderValue"
+        :storeValue="variable.defaultValue"
         :sliderSteps="variable.sliderStep"
         :minSliderValue="variable.sliderMax"
         :maxSliderValue="variable.sliderMin"
