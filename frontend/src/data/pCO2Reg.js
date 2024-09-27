@@ -16,7 +16,7 @@ function troughRegression(yearNum){
 }
 
 export default function hundredYearReg(yearNum){
-    let data = [];
+    const data = [];
     for(let i=1; i<=yearNum; i++){
         data.push(troughRegression(i));
         data.push(peakRegression(i));
