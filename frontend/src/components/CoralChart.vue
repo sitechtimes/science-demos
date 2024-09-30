@@ -23,7 +23,7 @@ const setChartOptions = (chartTypeNum) => { // return chart options
     const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
     const chartOptions = {
         maintainAspectRatio: false,
-        aspectRatio: 0.6,
+        responsive: true,
         plugins: {
             legend: { // it's possible to make it more minimalistic by having 1 button to disable/enable multiple datasets but that's a later problem for when we do mobile support (i dont want to)
                 labels: {
