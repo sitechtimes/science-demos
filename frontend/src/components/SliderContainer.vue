@@ -10,8 +10,8 @@ const sliderVariables = ref([
   dataStore.WaterPH,
 ]);
 
-const patchStore = (value) => {
-  dataStore.sliderValue = value;
+const patchStore = (number) => {
+  dataStore.sliderValue = number;
 };
 </script>
 
@@ -19,7 +19,7 @@ const patchStore = (value) => {
   <div>
     <div v-for="variable in sliderVariables" :key="variable">
       <SliderInput
-        @storeUpdate="patchStore(number)"
+        @storeUpdate="patchStore"
         :key="variable"
         :storeValue="variable.defaultValue"
         :sliderSteps="variable.sliderStep"
