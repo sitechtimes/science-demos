@@ -1,29 +1,28 @@
 <script setup>
 import Slider from "primevue/slider";
-import { ref, watch, defineEmits } from "vue";
+import { toRef } from "vue";
 const props = defineProps({
-  sliderSteps: Number,
-  minSliderValue: Number,
-  maxSliderValue: Number,
-  storeValue: Number,
+  var: Object,
 });
-const emit = defineEmits(["storeUpdate"]);
-const sliderValue = ref(props.storeValue);
-
-watch(sliderValue, () => {
-  emit("storeUpdate", sliderValue.value);
-});
+// toRef maintains reactivity with the prop var
+// and prop var is from the store
+// so this thing is reactive with the store
+const slider = toRef(props.var);
 </script>
 
 <template>
-  <div>
-    <InputText v-model.number="sliderValue" />
+  <div class="flex flex-col w-min">
+    <div>
+      <label :for="slider.name">{{ slider.name }}</label>
+      <InputText v-model.number="slider.sliderValue" />
+    </div>
     <Slider
-      v-model="sliderValue"
-      :steps="props.sliderSteps"
-      :min="props.minSliderValue"
-      :max="props.maxSliderValue"
-      class="w-56"
+      v-model="slider.sliderValue"
+      :steps="slider.sliderSteps"
+      :min="slider.minSliderValue"
+      :max="slider.maxSliderValue"
+      :id="slider.name"
+      class="w-full"
     />
   </div>
 </template>
