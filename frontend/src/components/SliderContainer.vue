@@ -4,28 +4,18 @@ import { DataStore } from "../Stores/DataStore";
 import { ref } from "vue";
 
 const dataStore = DataStore();
-const sliderVariables = ref([
-  dataStore.oceanTemp,
-  dataStore.stormSeverity,
-  dataStore.WaterPH,
-]);
-
-const patchStore = (number) => {
-  dataStore.sliderValue = number;
-};
+const sliderVariables = ref(["oceanTemp", "stormSeverity", "WaterPH"]);
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col gap-4">
     <div v-for="variable in sliderVariables" :key="variable">
-      <SliderInput
-        @storeUpdate="patchStore"
-        :key="variable"
-        :storeValue="variable.defaultValue"
-        :sliderSteps="variable.sliderStep"
-        :minSliderValue="variable.sliderMax"
-        :maxSliderValue="variable.sliderMin"
-      />
+      <SliderInput :var="dataStore[variable]" />
+    </div>
+    <div class="flex flex-col gap-2 text-center">
+      <h2 class="underline text-xl">store debugging...</h2>
+      <button @click="console.log(dataStore.oceanTemp, dataStore.stormSeverity, dataStore.WaterPH)">log sliders</button>
+      <button @click="dataStore.oceanTemp.sliderValue++">increment oceanTemp</button>
     </div>
   </div>
 </template>

@@ -34,6 +34,7 @@ export const DataStore = defineStore("data", () => {
 
   //Ocean Conditions
   const oceanTemp = ref({
+    name: "Ocean Temperature",
     defaultValue: 1,
     sliderValue: 1,
     sliderMin: 18,
@@ -41,6 +42,7 @@ export const DataStore = defineStore("data", () => {
     sliderStep: 1,
   }); //°C 18-36 slider
   const stormSeverity = ref({
+    name: "Storm Severity",
     defaultValue: 1,
     sliderValue: 1,
     sliderMin: 0,
@@ -48,6 +50,7 @@ export const DataStore = defineStore("data", () => {
     sliderStep: 1,
   }); //% 0-100 slider
   const WaterPH = ref({
+    name: "Water pH",
     defaultValue: 1,
     sliderValue: 1,
     sliderMin: 7.6,
