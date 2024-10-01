@@ -1,3 +1,7 @@
+<script setup>
+import SliderContainer from "../../../components/SliderContainer.vue";
+</script>
+
 <template>
     <div class="chart-slider-container">
         <div class="chart-container">
