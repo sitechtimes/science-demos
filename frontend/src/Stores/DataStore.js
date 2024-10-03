@@ -34,25 +34,25 @@ export const DataStore = defineStore("data", () => {
 
   //Ocean Conditions
   const oceanTemp = ref({
-    defaultValue: 1,
-    sliderValue: 1,
+    name: "Ocean Temperature (°C)",
+    sliderValue: 27,
     sliderMin: 18,
     sliderMax: 36,
     sliderStep: 1,
   }); //°C 18-36 slider
   const stormSeverity = ref({
-    defaultValue: 1,
-    sliderValue: 1,
+    name: "Storm Severity (%)",
+    sliderValue: 20,
     sliderMin: 0,
     sliderMax: 100,
-    sliderStep: 1,
+    sliderStep: 5,
   }); //% 0-100 slider
   const WaterPH = ref({
-    defaultValue: 1,
-    sliderValue: 1,
+    name: "Water pH",
+    sliderValue: 8.1,
     sliderMin: 7.6,
     sliderMax: 8.6,
-    sliderStep: 1,
+    sliderStep: 0.1,
   }); // (acidity) 7.6-8.6 slider
 
   //invasive species
@@ -67,6 +67,14 @@ export const DataStore = defineStore("data", () => {
     species: "Invasive",
     info: "blah blah blah blah blah",
     isPresent: false,
+  });
+
+  const selectedYear = ref({
+    name: "Current Year",
+    sliderValue: 0,
+    sliderMin: 0,
+    sliderMax: 100,
+    sliderStep: 1,
   });
 
   return {
@@ -85,5 +93,6 @@ export const DataStore = defineStore("data", () => {
     WaterPH,
     crownOfThornsStarfish,
     redLionfish,
+    selectedYear,
   };
 });
