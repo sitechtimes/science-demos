@@ -1,23 +1,31 @@
 <script setup>
 import Slider from "primevue/slider";
-const props = defineProps([
-  sliderSteps,
-  minSliderValue,
-  maxSliderValue,
-  storeValue,
-]);
+import { toRef } from "vue";
+const props = defineProps({
+  var: Object,
+});
+// toRef maintains reactivity with the prop var
+// and prop var is from the store
+// so this thing is reactive with the store
+// make it so it takes input of unit % nothing years etc
+const slider = toRef(props.var);
 </script>
 
 <template>
+  <div class="flex flex-col space-y-4">
   <div>
-    <Slider
-      v-model="storeValue"
-      :steps="sliderSteps"
-      :min="minSliderValue"
-      :max="maxSliderValue"
-      class="w-56"
-    />
+    <label :for="slider.name" class="block">{{ slider.name }}</label>
+    <InputText v-model.number="slider.sliderValue" />
   </div>
+  <Slider
+    v-model="slider.sliderValue"
+    :step="slider.sliderStep"
+    :min="slider.sliderMin"
+    :max="slider.sliderMax"
+    :id="slider.name"
+    class="w-full"
+  />
+</div>
 </template>
 
 <style lang="scss" scoped></style>
