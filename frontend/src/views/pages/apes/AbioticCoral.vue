@@ -10,10 +10,10 @@
     </div>
     <div class="slider-container">
         <div class="card">
-            <SliderContainer/>
+            <SliderConditions/>
         </div>
         <div class="card">
-            <!-- placeholder for selected year -->
+            <SliderYear/>
         </div>
         </div>
     </div>
@@ -25,7 +25,8 @@ import CoralChart from '../../../components/CoralChart.vue';
 import { useLayout } from '@/layout/composables/layout';
 import SelectButton from 'primevue/selectbutton';
 import setChartData from '@/Stores/chartDataFunc';
-import SliderContainer from "../../../components/SliderContainer.vue";
+import SliderConditions from "../../../components/SliderConditions.vue";
+import SliderYear from '@/components/SliderYear.vue';
 
 const rerenderKey = ref(0);
 const selectedYear = ref(30);

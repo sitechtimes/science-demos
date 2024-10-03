@@ -7,6 +7,7 @@ const props = defineProps({
 // toRef maintains reactivity with the prop var
 // and prop var is from the store
 // so this thing is reactive with the store
+// make it so it takes input of unit % nothing years etc
 const slider = toRef(props.var);
 </script>
 

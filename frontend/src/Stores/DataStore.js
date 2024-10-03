@@ -35,14 +35,14 @@ export const DataStore = defineStore("data", () => {
   //Ocean Conditions
   const oceanTemp = ref({
     name: "Ocean Temperature (°C)",
-    sliderValue: 18,
+    sliderValue: 27,
     sliderMin: 18,
     sliderMax: 36,
     sliderStep: 1,
   }); //°C 18-36 slider
   const stormSeverity = ref({
     name: "Storm Severity (%)",
-    sliderValue: 0,
+    sliderValue: 20,
     sliderMin: 0,
     sliderMax: 100,
     sliderStep: 5,
@@ -69,6 +69,14 @@ export const DataStore = defineStore("data", () => {
     isPresent: false,
   });
 
+  const selectedYear = ref({
+    name: "Current Year",
+    sliderValue: 0,
+    sliderMin: 0,
+    sliderMax: 100,
+    sliderStep: 1,
+  });
+
   return {
     logging,
     agriculture,
@@ -85,5 +93,6 @@ export const DataStore = defineStore("data", () => {
     WaterPH,
     crownOfThornsStarfish,
     redLionfish,
+    selectedYear,
   };
 });

@@ -41,7 +41,7 @@ const setChartData = (currentYear, data) => { // move to store later with input 
                 borderColor: '#686868',
                 tension: 0.4
             },
-            {
+            /* {
                 label: 'Queen angelfish',
                 data: data,
                 fill: false,
@@ -68,7 +68,7 @@ const setChartData = (currentYear, data) => { // move to store later with input 
                 fill: false,
                 borderColor: '#ffce9d',
                 tension: 0.4
-            },
+            }, */
             {
                 label: 'Red lionfish',
                 data: data,
@@ -83,13 +83,13 @@ const setChartData = (currentYear, data) => { // move to store later with input 
                 borderColor: '#11cf70',
                 tension: 0.4
             },
-            {
+/*             {
                 label: 'Nassau grouper',
                 data: data,
                 fill: false,
                 borderColor: '#9d9d3c',
                 tension: 0.4
-            },
+            }, */
             {
                 label: 'Crown-of-thorns starfish',
                 data: data,

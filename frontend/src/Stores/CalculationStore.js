@@ -5,7 +5,7 @@ import { DataStore } from "./DataStore";
 import { CalculatedResultsStore } from "./CalculatedResults";
 
 export const CalculationStore = defineStore("calculation", () => {
-  const years = ref([]);
+  const years = ref([]); // moving to datastore
 
   return { years };
 });

@@ -12,10 +12,6 @@ const sliderVariables = ref(["oceanTemp", "stormSeverity", "WaterPH"]);
     <div v-for="variable in sliderVariables" :key="variable">
       <SliderInput :var="dataStore[variable]" />
     </div>
-    <div class="flex flex-col gap-2 text-center">
-      <h2 class="underline text-xl">store debugging...</h2>
-      <button @click="console.log(dataStore.oceanTemp, dataStore.stormSeverity, dataStore.WaterPH)">log sliders</button>
-      <button @click="dataStore.oceanTemp.sliderValue++">increment oceanTemp</button>
-    </div>
+    <!-- return to original settings button? will need store to have default value -->
   </div>
 </template>
