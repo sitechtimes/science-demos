@@ -1,6 +1,7 @@
 <template>
     <div class="chart-slider-container">
         <div class="chart-container">
+            <!-- placeholder for phaser container (?) -->
         <div class="card">
             <CoralChart/>
         </div>
@@ -17,12 +18,10 @@
 </template>
 
 <script setup>
-// import { ref } from 'vue';
-import CoralChart from '../../../components/CoralChart.vue';
-import SliderConditions from "../../../components/SliderConditions.vue";
-import SliderYear from '@/components/SliderYear.vue';
+import CoralChart from '../../../components/coral/CoralChart.vue';
+import SliderConditions from "../../../components/coral/SliderConditions.vue";
+import SliderYear from '@/components/coral/SliderYear.vue';
 
-// const rerenderKey = ref(0);
 </script>
 
 <style scoped>

@@ -13,24 +13,26 @@ import SelectButton from 'primevue/selectbutton';
 import { ref, onMounted, watch } from "vue";
 import {setChartData, setChartOptions} from '@/Stores/chartDataOptions';
 import { useLayout } from '@/layout/composables/layout';
+import { toRef } from "vue";
+import { DataStore } from "@/Stores/DataStore";
 
-const rerenderKey = ref(0);
-const chartType = ref('Population %');
+const dataStore = DataStore();
+const selectedYear = toRef(dataStore.selectedYear); // reactive source to watch
+
+const chartType = ref('Population %'); // track which dataset the user wants to see
 
 const chartInfo = ref({
-    chartData: setChartData(2, [{x: 0, y: 65}, // example datasets; replace with calculated data
+    chartData: setChartData(selectedYear.value.sliderValue, [{x: 0, y: 65}, // example datasets; replace with calculated data
                         {x: 1, y: 59},
                         {x: 12, y: 92},
                         ]),
     currentGraph: 0
 }); 
-
+const chartOptions = ref();
 
 onMounted(() => {
     chartOptions.value = setChartOptions(chartInfo.value.currentGraph, getStyles);
 });
-
-const chartOptions = ref();
 
 function getStyles(){ // obtain current theme colors for chart options
     const documentStyle = getComputedStyle(document.documentElement);
@@ -44,21 +46,19 @@ function getStyles(){ // obtain current theme colors for chart options
     };
 }
 
-watch([useLayout().isDarkTheme, /* selectedYear, */ chartType], ()=>{
-    // rerenderKey.value++; // rerender the chart if theme changes so the labels are visible
-    chartInfo.value.chartData = setChartData(2);
+watch([useLayout().isDarkTheme, selectedYear.value, chartType], ()=>{
     switch(chartType.value){ // rerender with different axes if chart type changed
         case 'Population %':
             chartInfo.value.currentGraph = 0;
-            chartInfo.value.chartData = setChartData(2, [{x: 0, y: 65}, // example datasets; replace with calculated data
+            chartInfo.value.chartData = setChartData(selectedYear.value.sliderValue, [{x: 0, y: 65},
                         {x: 1, y: 59},
                         {x: 12, y: 92},
                         ]);
             chartOptions.value = setChartOptions(chartInfo.value.currentGraph, getStyles());
             break;
         case 'Population Count':
-        chartInfo.value.currentGraph = 1;
-        chartInfo.value.chartData = setChartData(2, [{x: 0, y: 30}, // example datasets; replace with calculated data
+            chartInfo.value.currentGraph = 1;
+            chartInfo.value.chartData = setChartData(selectedYear.value.sliderValue, [{x: 0, y: 30},
                         {x: 1, y: 20},
                         {x: 12, y: 70},
                         {x: 20, y: 30},
