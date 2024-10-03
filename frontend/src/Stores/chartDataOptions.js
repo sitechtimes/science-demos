@@ -101,4 +101,79 @@ const setChartData = (currentYear, data) => { // move to store later with input 
     };
 };
 
-export default setChartData;
+const axesLabels = {
+    chartTitle: ['Percent of Population Remaining','Individuals of Population Remaining'],
+    xAxis: ['Years', 'Years'],
+    yAxis: ['Percent of Population Remaining', 'Individuals of Population Remaining'],
+};
+
+const setChartOptions = (chartTypeNum, doc) => { // return chart options
+    const chartOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+            legend: { // it's possible to make it more minimalistic by having 1 button to disable/enable multiple datasets
+                labels: {
+                    color: doc.textColor
+                },
+                position: 'bottom'
+            },
+            title: {
+                display: true,
+                text: axesLabels.chartTitle[chartTypeNum],
+                color: doc.textColor
+            },
+        },
+        scales: {
+            x: {
+                type: 'linear',
+                ticks: {
+                    color: doc.textColorSecondary
+                },
+                grid: {
+                    color: doc.surfaceBorder
+                },
+                title: {
+                    display: true,
+                    text: axesLabels.xAxis[chartTypeNum], // axes names
+                    color: doc.textColor
+                }
+            },
+            y: {
+                ticks: {
+                    color: doc.textColorSecondary
+                },
+                grid: {
+                    color: doc.surfaceBorder
+                },
+                title: {
+                    display: true,
+                    text: axesLabels.yAxis[chartTypeNum],
+                    color: doc.textColor
+                },
+                type: 'linear',
+                position: 'left',
+            },
+            y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    grid: {
+                    drawOnChartArea: false,
+                    color: doc.surfaceBorder
+                    },
+                    ticks: {
+                    color: doc.textColorSecondary
+                    },
+                    title: {
+                        display: true,
+                        text: 'CO₂ Pressure (µATM)',
+                        color: doc.textColor
+                    },
+                },
+        }
+    };
+    return chartOptions;
+}
+
+export {setChartData, setChartOptions};
