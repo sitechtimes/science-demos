@@ -18,7 +18,6 @@
 </template>
 
 <script setup>
-import beta_formulas from '@/components/beta_formulas.vue';
 import CoralChart from '../../../components/coral/CoralChart.vue';
 import SliderConditions from "../../../components/coral/SliderConditions.vue";
 import SliderYear from '@/components/coral/SliderYear.vue';
