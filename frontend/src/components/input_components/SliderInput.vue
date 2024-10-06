@@ -1,14 +1,9 @@
 <script setup>
 import Slider from "primevue/slider";
-import { toRef } from "vue";
-const props = defineProps({
-  var: Object,
-});
-// toRef maintains reactivity with the prop var
-// and prop var is from the store
-// so this thing is reactive with the store
+const props = defineProps(['var']);
+// props.var is a ref from the store, so it's already reactive
 // make it so it takes input of unit % nothing years etc
-const slider = toRef(props.var);
+const slider = props.var;
 </script>
 
 <template>
