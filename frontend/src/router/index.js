@@ -12,7 +12,7 @@ const router = createRouter({
                     path: '/',
                     name: 'dashboard',
                     component: () => import('@/views/Dashboard.vue')
-                },
+                }
             ]
         },
         {
@@ -21,7 +21,7 @@ const router = createRouter({
             children: [
                 {
                     path: '/apes/abioticcoral',
-                    name: 'dashboard',
+                    name: 'Abiotic Coral',
                     component: () => import('@/views/pages/apes/AbioticCoral.vue')
                 },
             ]
