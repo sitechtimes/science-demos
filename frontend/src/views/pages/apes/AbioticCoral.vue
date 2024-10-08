@@ -1,7 +1,7 @@
 <template>
     <div class="chart-slider-container">
         <div class="chart-container">
-            <!-- placeholder for phaser container (?) -->
+            <GameScene/>
         <div class="card">
             <CoralChart/>
         </div>
@@ -21,6 +21,7 @@
 import CoralChart from '../../../components/coral/CoralChart.vue';
 import SliderConditions from "../../../components/coral/SliderConditions.vue";
 import SliderYear from '@/components/coral/SliderYear.vue';
+import GameScene from '@/components/coral/game/GameScene.vue'
 
 </script>
 
