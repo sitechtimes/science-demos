@@ -1,8 +1,9 @@
 <script setup>
-import * as Phaser from 'phaser';
+import Phaser from 'phaser';
 import { ref, toRaw } from 'vue';
 import PhaserGame from './PhaserGame.vue';
 import Fish from './Fish'
+import Button from 'primevue/button';
 
 // The sprite can only be moved in the MainMenu Scene
 
@@ -37,7 +38,7 @@ function addOrganism(type) {
     <PhaserGame ref="phaserRef" @current-active-scene="currentScene" />
     <div>
         <div>
-            <button class="button" @click="() => addOrganism('starfish')">Add New Sprite</button>
+            <Button @click="() => addOrganism('starfish')">Add New Sprite</Button>
         </div>
     </div>
 </template>

@@ -1,18 +1,20 @@
 <template>
     <div class="chart-slider-container">
         <div class="chart-container">
-            <GameScene/>
-        <div class="card">
-            <CoralChart/>
+            <div class="card">
+                <GameScene/>
+            </div>
+            <div class="card">
+                <CoralChart/>
+            </div>
         </div>
-    </div>
-    <div class="slider-container">
-        <div class="card">
-            <SliderConditions/>
-        </div>
-        <div class="card">
-            <SliderYear/>
-        </div>
+        <div class="slider-container">
+            <div class="card">
+                <SliderConditions/>
+            </div>
+            <div class="card">
+                <SliderYear/>
+            </div>
         </div>
     </div>
 </template>

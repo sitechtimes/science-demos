@@ -22,9 +22,12 @@ onMounted(() => {
     });
 
 });
-
+const size = ref({
+    width: 0,
+    height: 0
+})
 onUnmounted(() => {
-
+    
     if (game.value)
     {
         game.value.destroy(true);

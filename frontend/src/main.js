@@ -7,6 +7,7 @@ import { definePreset } from '@primevue/themes';
 import PrimeVue from "primevue/config";
 import ConfirmationService from "primevue/confirmationservice";
 import ToastService from "primevue/toastservice";
+import StyleClass from 'primevue/styleclass';
 import { createPinia } from "pinia";
 
 import "@/assets/styles.scss";
@@ -76,5 +77,6 @@ app.use(PrimeVue, {
 app.use(ToastService);
 app.use(ConfirmationService);
 app.use(pinia);
+app.directive('styleclass', StyleClass);
 
 app.mount("#app");
