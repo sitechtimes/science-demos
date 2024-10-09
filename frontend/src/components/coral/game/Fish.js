@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser'
+import Phaser from 'phaser'
 
 export default class Fish extends Phaser.Physics.Arcade.Sprite {
   constructor( scene, x, y, texture, type ) {

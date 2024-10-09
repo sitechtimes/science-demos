@@ -1,11 +1,14 @@
 <template>
+    <div class="bg-surface-900 w-fit p-2 rounded">
+            <SelectButton v-model="chartType" :options="['Simulation', 'Population %', 'Population Count']" />
+        </div>
     <div class="chart-slider-container">
         <div class="chart-container">
-            <div class="card">
+            <div class="card" v-if="chartType === 'Simulation'">
                 <GameScene/>
             </div>
-            <div class="card">
-                <CoralChart/>
+            <div class="card" v-else>
+                <CoralChart v-model="chartType"/>
             </div>
         </div>
         <div class="slider-container">
@@ -20,11 +23,14 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import CoralChart from '../../../components/coral/CoralChart.vue';
 import SliderConditions from "../../../components/coral/SliderConditions.vue";
 import SliderYear from '@/components/coral/SliderYear.vue';
 import GameScene from '@/components/coral/game/GameScene.vue'
+import SelectButton from 'primevue/selectbutton';
 
+const chartType = ref('Population %')
 </script>
 
 <style scoped>
