@@ -4,7 +4,7 @@ import { DataStore } from "@/Stores/DataStore";
 import { ref } from "vue";
 
 const dataStore = DataStore();
-const sliderVariables = ref(["oceanTemp", "stormSeverity", "WaterPH"]);
+const sliderVariables = ref(["oceanTemp", "stormSeverity", "waterPH"]);
 // if we do include more conditions we will have to include a selectbutton or dropdown to switch between
 </script>
 

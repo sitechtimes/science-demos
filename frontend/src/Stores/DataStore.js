@@ -47,13 +47,20 @@ export const DataStore = defineStore("data", () => {
     sliderMax: 100,
     sliderStep: 5,
   }); //% 0-100 slider
-  const WaterPH = ref({
+  const waterPH = ref({
     name: "Water pH",
     sliderValue: 8.1,
     sliderMin: 7.6,
     sliderMax: 8.6,
     sliderStep: 0.1,
   }); // (acidity) 7.6-8.6 slider
+  const waterSalinity = ref({
+    name: "Water Salinity",
+    sliderValue: 8.1,
+    sliderMin: 33,
+    sliderMax: 36,
+    sliderStep: 0.1,
+  }); // slider for salinity, 33-36. Used to adjust the carbon equations
 
   //invasive species
   const crownOfThornsStarfish = ref({
@@ -90,7 +97,8 @@ export const DataStore = defineStore("data", () => {
     seaUrchinSpecies,
     oceanTemp,
     stormSeverity,
-    WaterPH,
+    waterPH,
+    waterSalinity,
     crownOfThornsStarfish,
     redLionfish,
     selectedYear,
