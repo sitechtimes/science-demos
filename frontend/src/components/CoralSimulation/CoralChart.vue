@@ -1,7 +1,7 @@
 <template>
-    <div class="chartType">
+    <!-- <div class="chartType">
             <SelectButton v-model="chartType" :options="['Population %', 'Population Count']" />
-        </div>
+        </div> -->
     <div>
         <Chart type="line" :data="chartInfo.chartData" :options="chartOptions" class="h-[30rem]"/>
     </div>
@@ -19,7 +19,7 @@ import { DataStore } from "@/Stores/DataStore";
 const dataStore = DataStore();
 const selectedYear = toRef(dataStore.selectedYear); // reactive source to watch
 
-const chartType = ref('Population %'); // track which dataset the user wants to see
+const chartType = defineModel(); // track which dataset the user wants to see
 
 const chartInfo = ref({
     chartData: setChartData(selectedYear.value.sliderValue, [{x: 0, y: 65}, // example datasets; replace with calculated data

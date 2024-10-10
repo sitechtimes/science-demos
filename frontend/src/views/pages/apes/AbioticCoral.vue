@@ -1,27 +1,36 @@
 <template>
+    <div class="bg-surface-900 w-fit p-2 rounded">
+            <SelectButton v-model="chartType" :options="['Simulation', 'Population %', 'Population Count']" />
+        </div>
     <div class="chart-slider-container">
         <div class="chart-container">
-            <!-- placeholder for phaser container (?) -->
-        <div class="card">
-            <CoralChart/>
+            <div class="card" v-if="chartType === 'Simulation'">
+                <GameScene/>
+            </div>
+            <div class="card" v-else>
+                <CoralChart v-model="chartType"/>
+            </div>
         </div>
-    </div>
-    <div class="slider-container">
-        <div class="card">
-            <SliderConditions/>
-        </div>
-        <div class="card">
-            <SliderYear/>
-        </div>
+        <div class="slider-container">
+            <div class="card">
+                <SliderConditions/>
+            </div>
+            <div class="card">
+                <SliderYear/>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import CoralChart from '../../../components/coral/CoralChart.vue';
-import SliderConditions from "../../../components/coral/SliderConditions.vue";
-import SliderYear from '@/components/coral/SliderYear.vue';
+import { ref } from 'vue';
+import CoralChart from '@/components/CoralSimulation/CoralChart.vue';
+import SliderConditions from "@/components/CoralSimulation/SliderConditions.vue";
+import SliderYear from '@/components/CoralSimulation/SliderYear.vue';
+import GameScene from '@/components/CoralSimulation/GameScene.vue'
+import SelectButton from 'primevue/selectbutton';
 
+const chartType = ref('Population %')
 </script>
 
 <style scoped>

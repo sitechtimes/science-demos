@@ -27,6 +27,11 @@ const router = createRouter({
             ]
         },
         {
+            path: '/testphaser',
+            component: () => import('@/components/CoralSimulation/GameScene.vue'),
+            name: 'phaser'
+        },
+        {
             path: '/:pathMatch(.*)*',
             name: 'notfound',
             component: () => import('@/views/pages/NotFound.vue')
