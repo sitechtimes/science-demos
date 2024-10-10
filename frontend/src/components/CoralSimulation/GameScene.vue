@@ -2,7 +2,7 @@
 import Phaser from 'phaser';
 import { ref, toRaw } from 'vue';
 import PhaserGame from './PhaserGame.vue';
-import Fish from './Fish'
+import Fish from '@/games/CoralSimulation/Fish'
 import Button from 'primevue/button';
 
 // The sprite can only be moved in the MainMenu Scene

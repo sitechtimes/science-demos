@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
-import { EventBus } from './EventBus';
-import StartGame from './main';
+import { EventBus } from '@/games/CoralSimulation/EventBus';
+import StartGame from '@/games/CoralSimulation/main';
 
 // Save the current scene instance
 const scene = ref();

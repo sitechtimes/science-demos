@@ -28,7 +28,7 @@ const router = createRouter({
         },
         {
             path: '/testphaser',
-            component: () => import('@/components/coral/game/GameScene.vue'),
+            component: () => import('@/components/CoralSimulation/GameScene.vue'),
             name: 'phaser'
         },
         {

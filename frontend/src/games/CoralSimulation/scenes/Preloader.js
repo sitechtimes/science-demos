@@ -30,8 +30,8 @@ export class Preloader extends Scene
     preload ()
     {
         //  Load the assets for the game - Replace with your own assets
-        this.load.image('fish', "/src/components/coral/game/images/fish.png")
-        this.load.image('textbox', "/src/components/coral/game/images/textbox.png")
+        this.load.image('fish', "/src/games/CoralSimulation/images/fish.png")
+        this.load.image('textbox', "/src/games/CoralSimulation/images/textbox.png")
         
     }
 
