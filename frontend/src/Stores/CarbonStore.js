@@ -2,10 +2,13 @@
 
 import { defineStore } from "pinia";
 import { DataStore } from "./DataStore";
+import { ref, computed } from "vue";
 
 export const CalculatedResultsStore = defineStore("calculated", () => {
+  const dataStore = DataStore();
+
   const partialPressureCO2 = ref();
-  const TemperatureKelvins = ref(DataStore.oceanTemp.sliderValue + 273);
+  const temperatureKelvins = computed(() => dataStore.oceanTemp.sliderValue + 273);
   const carbonConcentration = ref();
   const salinityCoefficient = ref();
   const henrysConstant = ref();
@@ -14,7 +17,7 @@ export const CalculatedResultsStore = defineStore("calculated", () => {
 
   return {
     partialPressureCO2,
-    TemperatureKelvins,
+    temperatureKelvins,
     carbonConcentration,
     salinityCoefficient,
     henrysConstant,
