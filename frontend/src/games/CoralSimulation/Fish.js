@@ -1,20 +1,16 @@
 import Phaser from 'phaser'
+import organisms from './organisms'
 
 export default class Fish extends Phaser.Physics.Arcade.Sprite {
-  constructor( scene, x, y, texture, type ) {
-    super(scene, x, y, texture)
+  constructor( scene, x, y, type ) {
+    super(scene, x, y, organisms[type].img)
 
     scene.add.existing(this)
     scene.physics.add.existing(this)
 
     this.setScale(0.5).setInteractive()
     this.on('pointerdown', () => {
-      if (this.popup) {
-        this.deletePopup()
-        this.popup = undefined
-      } else {
-        this.addPopup(scene, 'description', this.x, this.y, this)
-      }
+      this.addPopup()
     })
 
     scene.events.on('update', () => { this.update(scene) })

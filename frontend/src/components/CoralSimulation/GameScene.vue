@@ -28,7 +28,7 @@ function addOrganism(type) {
     // const fish = addSprite(type)
     const scene = toRaw(phaserRef.value.scene);
 
-    scene.addOrganism(type, type + ' is the coolest fish')
+    scene.addOrganism(type)
 }
 
 //  This event is emitted from the PhaserGame component:
@@ -38,7 +38,7 @@ function addOrganism(type) {
     <PhaserGame ref="phaserRef" @current-active-scene="currentScene" />
     <div>
         <div>
-            <Button @click="() => addOrganism('starfish')">Add New Sprite</Button>
+            <Button @click="() => addOrganism('nassau_grouper')">Add New Sprite</Button>
         </div>
     </div>
 </template>

@@ -16,31 +16,13 @@ export class Game extends Scene
         this.add.image(512, 384, 'background').setAlpha(1);
         this.organisms = this.physics.add.staticGroup();
 
-        this.fish = [new Fish(this, Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'fish', 'fish')]
+        this.fish = []
+
 
         EventBus.emit('current-scene-ready', this);
     }
 
     update () {
-    if (this.organisms.getChildren() !== undefined) {
-            const organisms = this.organisms.getChildren()
-            // console.log(organism)
-
-            organisms.forEach((organism) => {
-                if(organism.x < this.scale.width) {
-                    organism.x++ 
-                    if(organism.popup){
-                        organism.popup.x++
-                    }
-                } 
-                else {
-                    organism.x = 0   
-                    if(organism.popup) {
-                        organism.popup.x = 0
-                    }
-                }
-            })
-        }
     }
     
     changeScene ()
@@ -48,7 +30,7 @@ export class Game extends Scene
         this.scene.start('GameOver');
     }
     addOrganism(type) {
-        new Fish(this, Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'fish', 'fish') 
+        this.fish.push(new Fish(this, 100 + Math.floor(Math.random() * this.scale.width - 200), 100 + Math.floor(Math.random() * this.scale.height - 200), type))
         // console.log(this.organisms.children.getArray())
     }
 }

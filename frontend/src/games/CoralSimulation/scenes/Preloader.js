@@ -1,4 +1,5 @@
 import {Scene} from 'phaser';
+import organisms from '../organisms';
 
 export class Preloader extends Scene
 {
@@ -33,6 +34,9 @@ export class Preloader extends Scene
         this.load.image('fish', "/src/games/CoralSimulation/images/fish.png")
         this.load.image('textbox', "/src/games/CoralSimulation/images/textbox.png")
         
+        Object.keys(organisms).forEach((key) => {
+            this.load.image(key, organisms[key].img)
+        })
     }
 
     create ()
