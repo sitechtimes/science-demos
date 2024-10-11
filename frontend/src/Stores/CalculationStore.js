@@ -15,7 +15,8 @@ export const CalculationStore = defineStore("calculation", () => {
   const survivalRateCalc = (baseSurvival, sensitivityFactor) => {
     baseSurvival *
       Math.exp(
-        -sensitivityFactor *
+        -1 *
+          sensitivityFactor *
           carbonStore.hydrogenIons *
           DataStore.years.sliderValue
       );
