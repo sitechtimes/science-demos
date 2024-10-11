@@ -3,9 +3,23 @@
 import { defineStore } from "pinia";
 import { DataStore } from "./DataStore";
 import { CalculatedResultsStore } from "./CalculatedResults";
+import { CarbonStore } from "./CarbonStore";
+import { ref } from "vue";
+
+const dataStore = dataStore();
+const carbonStore = CarbonStore();
 
 export const CalculationStore = defineStore("calculation", () => {
   const years = ref([]); // moving to datastore
 
-  return { years };
+  const survivalRateCalc = (baseSurvival, sensitivityFactor) => {
+    baseSurvival *
+      Math.exp(
+        -sensitivityFactor *
+          carbonStore.hydrogenIons *
+          DataStore.years.sliderValue
+      );
+  };
+
+  return { years, survivalRateCalc };
 });

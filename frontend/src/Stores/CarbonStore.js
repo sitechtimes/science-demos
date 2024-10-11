@@ -4,11 +4,13 @@ import { defineStore } from "pinia";
 import { DataStore } from "./DataStore";
 import { ref, computed } from "vue";
 
-export const CalculatedResultsStore = defineStore("calculated", () => {
+export const CarbonStore = defineStore("calculated", () => {
   const dataStore = DataStore();
 
   const partialPressureCO2 = ref();
-  const temperatureKelvins = computed(() => dataStore.oceanTemp.sliderValue + 273);
+  const temperatureKelvins = computed(
+    () => dataStore.oceanTemp.sliderValue + 273
+  );
   const carbonConcentration = ref();
   const salinityCoefficient = ref();
   const henrysConstant = ref();
