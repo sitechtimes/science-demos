@@ -4,8 +4,9 @@ import { ref } from 'vue';
 import CoralChart from '@/components/CoralSimulation/CoralChart.vue';
 import SliderConditions from "@/components/CoralSimulation/SliderConditions.vue";
 import SliderYear from '@/components/CoralSimulation/SliderYear.vue';
-import GameScene from '@/components/CoralSimulation/GameScene.vue'
+import GameScene from '@/components/CellDivision/GameScene.vue'
 import SelectButton from 'primevue/selectbutton';
+const chartType = ref('Mitosis')
 
 //mitosis:
 //'progress time' button will go to the next phase
@@ -21,20 +22,12 @@ import SelectButton from 'primevue/selectbutton';
 </script>
 <template>
     <div class="bg-surface-900 w-fit p-2 rounded">
-            <SelectButton v-model="chartType" :options="['Simulation', 'Population %', 'Population Count']" />
+            <SelectButton v-model="chartType" :options="['Mitosis', 'Meiosis']" />
         </div>
     <div class="chart-slider-container">
         <div class="chart-container">
-            <div class="card" v-if="chartType === 'Simulation'">
+            <div class="card" v-if="chartType === 'Mitosis'">
                 <GameScene/>
-            </div>
-        </div>
-        <div class="slider-container">
-            <div class="card">
-                <SliderConditions/>
-            </div>
-            <div class="card">
-                <SliderYear/>
             </div>
         </div>
     </div>

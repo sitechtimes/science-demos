@@ -10,7 +10,6 @@ export class Preloader extends Scene
     init ()
     {
         //  We loaded this image in our Boot Scene, so we can display it here
-        this.add.image(512, 384, 'background');
 
         //  A simple progress bar. This is the outline of the bar.
         this.add.rectangle(512, 384, 468, 32).setStrokeStyle(1, 0xffffff);
@@ -30,8 +29,8 @@ export class Preloader extends Scene
     preload ()
     {
         //  Load the assets for the game - Replace with your own assets
-        this.load.image('cell', "/src/games/CoralSimulation/images/placeholder_cell.png")
-        this.load.image('textbox', "/src/games/CoralSimulation/images/textbox.png")
+        this.load.image('cell', "/src/games/CellDivisionSimulation/images/placeholder_cell.png")
+        this.load.image('textbox', "/src/games/CellDivisionSimulation/images/textbox.png")
         
     }
 
@@ -42,5 +41,6 @@ export class Preloader extends Scene
 
         //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
         this.scene.start('Game');
+        this.add.image('cell', "/src/games/CellDivisionSimulation/images/placeholder_cell.png")
     }
 }
