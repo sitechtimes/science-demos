@@ -14,10 +14,10 @@ export class Game extends Scene
         // this.cameras.main.setBackgroundColor(0x00ff00);
 
         this.add.image(512, 384, 'background').setAlpha(1);
+
         this.organisms = this.physics.add.staticGroup();
 
-        this.fish = []
-
+        this.fish = [new Fish(this, 100 + Math.floor(Math.random() * (this.scale.width - 200)), 100 + Math.floor(Math.random() * (this.scale.height - 200)), 'nassau_grouper')]
 
         EventBus.emit('current-scene-ready', this);
     }
@@ -30,7 +30,7 @@ export class Game extends Scene
         this.scene.start('GameOver');
     }
     addOrganism(type) {
-        this.fish.push(new Fish(this, 100 + Math.floor(Math.random() * this.scale.width - 200), 100 + Math.floor(Math.random() * this.scale.height - 200), type))
+        this.fish.push(new Fish(this, 100 + Math.floor(Math.random() * (this.scale.width - 200)), 100 + Math.floor(Math.random() * (this.scale.height - 200)), 'nassau_grouper'))
         // console.log(this.organisms.children.getArray())
     }
 }

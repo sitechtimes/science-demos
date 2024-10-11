@@ -3,14 +3,15 @@ import organisms from './organisms'
 
 export default class Fish extends Phaser.Physics.Arcade.Sprite {
   constructor( scene, x, y, type ) {
-    super(scene, x, y, organisms[type].img)
+    super(scene, x, y, type)
+    console.log(type)
 
     scene.add.existing(this)
     scene.physics.add.existing(this)
 
     this.setScale(0.5).setInteractive()
     this.on('pointerdown', () => {
-      this.addPopup()
+      this.togglePopup()
     })
 
     scene.events.on('update', () => { this.update(scene) })
@@ -18,21 +19,18 @@ export default class Fish extends Phaser.Physics.Arcade.Sprite {
     this.textbox = new Textbox(scene)
   }
   update(scene) {
-    if(this.x < scene.scale.width) {
+    if(this.x < scene.scale.width + 100) {
       this.x++
     }
     else {
-        this.x = 0   
+        this.x = -100   
     }
     this.textbox.follow(this)
   }
-  addPopup(scene, description, x, y, organism) {
+  togglePopup() {
     this.textbox.setVisible(!this.textbox.visible)
     this.textbox.text.setVisible(!this.textbox.text.visible)
 
-  }
-  deletePopup() {
-    this.popupContainer.destroy()
   }
 }
 
