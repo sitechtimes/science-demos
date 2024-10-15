@@ -25,7 +25,6 @@ const changeScene = () => {
 
 
 function addOrganism(type) {
-    // const fish = addSprite(type)
     const scene = toRaw(phaserRef.value.scene);
 
     scene.addOrganism(type)
