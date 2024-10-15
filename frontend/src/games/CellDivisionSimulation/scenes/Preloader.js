@@ -29,7 +29,7 @@ export class Preloader extends Scene
     preload ()
     {
         //  Load the assets for the game - Replace with your own assets
-        this.load.image('cell', "/src/games/CellDivisionSimulation/images/placeholder_cell.png")
+        this.load.image('placeholder_cell', "/src/games/CellDivisionSimulation/images/placeholder_cell.jfif")
         this.load.image('textbox', "/src/games/CellDivisionSimulation/images/textbox.png")
         
     }
@@ -41,6 +41,6 @@ export class Preloader extends Scene
 
         //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
         this.scene.start('Game');
-        this.add.image('cell', "/src/games/CellDivisionSimulation/images/placeholder_cell.png")
+        this.add.image('placeholder_cell', "/src/games/CellDivisionSimulation/images/placeholder_cell.jfif")
     }
 }

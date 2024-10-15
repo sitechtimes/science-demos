@@ -51,4 +51,7 @@ export class Game extends Scene
     //     new Fish(this, Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'fish', 'fish') 
     //     // console.log(this.organisms.children.getArray())
     // }
+    // progressYear(){
+    //     // if year/7=0, make a new cell
+    // }
 }
