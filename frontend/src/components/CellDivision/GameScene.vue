@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 import { ref, toRaw } from 'vue';
 import PhaserGame from './PhaserGame.vue';
 import Button from 'primevue/button';
+import {progressYear, time_in_cycle, year} from '@/games/CellDivisionSimulator/scenes/Game.js'
 
 // The sprite can only be moved in the MainMenu Scene
 
@@ -29,41 +30,16 @@ const changeScene = () => {
 
 //     scene.addOrganism(type, type + ' is the coolest fish')
 // }
+// let cell = this.add.sprite(192, 512, "time0.jfif");
+// const time0 = this.add.sprite(192,512, "time0.jfif")
+// const time1 = this.add.sprite(192,512, "time1.png")
+// const time2 = this.add.sprite(192,512, "time2.png")
+// const time3 = this.add.sprite(192,512, "time3.png")
+// const time4 = this.add.sprite(192,512, "time4.png")
+// const time5 = this.add.sprite(192,512, "time5.png")
 
-let time_in_cycle = ref(0)
-let year = ref(0)
-function progressYear(){
-    if (time_in_cycle.value === 0){
-        //dissolve nuclear membrane
-        time_in_cycle.value++;
-        year.value++
-    }
-    else if (time_in_cycle.value === 1){
-        //centrosomes attach to chromosomes
-        time_in_cycle.value++;
-        year.value++
-    }
-    else if(time_in_cycle.value === 2){
-        //centrosomes pull apart chromosomes, cell squishes in middle
-        time_in_cycle.value++;
-        year.value++
-    }
-    else if(time_in_cycle.value===3){
-        //nuclear membrane develops around each set of chromosomes, cell squishes more
-        time_in_cycle.value++;
-        year.value++
-    }
-    else if(time_in_cycle.value===4){
-        //cell separates
-        time_in_cycle.value++;
-        year.value++
-    }
-    else{
-        time_in_cycle.value=0;
-        year.value++
-    }
-    console.log(time_in_cycle.value, year.value)
-}
+
+
 //  This event is emitted from the PhaserGame component:
 </script>
 
