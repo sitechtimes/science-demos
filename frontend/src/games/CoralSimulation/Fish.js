@@ -11,7 +11,7 @@ export default class Fish extends Phaser.Physics.Arcade.Sprite {
 
     this.setScale(0.25).setInteractive()
     this.on('pointerdown', () => {
-      this.togglePopup()
+      this.togglePopup(scene)
     })
 
     scene.events.on('update', () => { this.update(scene) })
@@ -27,10 +27,15 @@ export default class Fish extends Phaser.Physics.Arcade.Sprite {
     }
     this.textbox.follow(this)
   }
-  togglePopup() {
+  togglePopup(scene) {
+    scene.clearTextboxes(this)
     this.textbox.setVisible(!this.textbox.visible)
     this.textbox.text.setVisible(!this.textbox.text.visible)
+  }
 
+  clearPopup() {
+    this.textbox.setVisible(false)
+    this.textbox.text.setVisible(false)
   }
 }
 
@@ -42,12 +47,14 @@ class Textbox extends Phaser.GameObjects.Sprite {
     scene.add.existing(this)
     this.setVisible(false)
     this.setScale(1.3)
+    this.setDepth(10)
     
     this.text = scene.add
       .text(10, 10, organisms[type].description)
       .setColor('0x000000')
     this.text.setWordWrapWidth(290, false)
     this.text.setVisible(false)
+    this.text.setDepth(11)
   }
 
   follow(organism) {
