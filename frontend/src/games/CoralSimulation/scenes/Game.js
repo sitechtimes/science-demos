@@ -1,6 +1,7 @@
 import { EventBus } from '../EventBus';
 import {Scene} from 'phaser';
 import Fish from '../Fish'
+import StaticOrganism from '../StaticOrganism';
 import organisms from '../organisms';
 
 export class Game extends Scene
@@ -35,22 +36,40 @@ export class Game extends Scene
 
         const newFish = new Fish(this, x, y, type)
         
-        this.fish.forEach((fish) => {
-            if(Math.abs(newFish.x - fish.x) > 50) {
-                newFish
-            }
-        })
+        // this.fish.forEach((fish) => {
+        //     if(Math.abs(newFish.x - fish.x) > 50) {
+        //         newFish
+        //     }
+        // })
 
         this.fish.push(newFish)
-        // console.log(this.organisms.children.getArray())
+    }
+    addStaticOrganism(type) {
+        const x = 20 + Math.floor(Math.random() * (this.scale.width - 40))
+        const y = Math.floor(this.scale.height - (Math.random() * (this.scale.height * 0.1))) - 30
+
+        const newStaticOrganism = new StaticOrganism(this, x, y, type)
+        
+        // this.fish.forEach((fish) => {
+        //     if(Math.abs(newFish.x - fish.x) > 50) {
+        //         newFish
+        //     }
+        // })
+
+        this.fish.push(newStaticOrganism)
     }
 
     initializeOrganisms() {
-        // const fish = ['hawksbill_sea_turtle', 'nassau_grouper',]
+        const fish = ['hawksbill_sea_turtle', 'nassau_grouper', 'queen_angelfish', 'red_lionfish', 'spotlight_parrotfish', 'yellowtail_snapper']
+        const staticOrganisms = ['algae', 'boulder_star_coral', 'crown_of_thorns_starfish', 'long_spined_urchin', 'sponge', 'staghorn_coral']
 
         Object.keys(organisms).forEach((i) => {
-            for(let j = 0; j < Math.ceil(organisms[i].number / 50); j++) {
-                this.addFish(i)
+            for(let j = 0; j < Math.ceil(organisms[i].number ** (2/5)); j++) {
+                if(fish.includes(i)) {
+                    this.addFish(i)
+                } else if (staticOrganisms.includes(i)) {
+                    this.addStaticOrganism(i)
+                }
             }
         })
     }
