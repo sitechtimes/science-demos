@@ -1,11 +1,11 @@
 import { EventBus } from '../EventBus';
 import {Scene} from 'phaser';
-// import Fish from '../Fish'
+import Cell from '../Cell'
+import {ref} from 'vue'
 
-
-let time_in_cycle = ref(0)
-let year = ref(0)
-function progressYear(){
+export let time_in_cycle = ref(0)
+export let year = ref(0)
+export function progressYear(){
 
     if (time_in_cycle.value === 0){
         //dissolve nuclear membrane
@@ -51,25 +51,26 @@ export class Game extends Scene
 
         this.add.image(512, 384, 'backgroundimg').setAlpha(1);
         // this.add.image(400,300, "time0").setAlpha(1).setScale(0.5);
-        if( time_in_cycle === 0){
-            this.add.image(400,300, "time0").setAlpha(1).setScale(0.5)
-        }
-        else if( time_in_cycle === 1){
-            this.add.image(400,300, "time1").setAlpha(1).setScale(0.5)
-        }
-        else if( time_in_cycle === 2){
-            this.add.image(400,300, "time2").setAlpha(1).setScale(0.5)
-        }
-        else if( time_in_cycle === 3){
-            this.add.image(400,300, "time3").setAlpha(1).setScale(0.5)
-        }
-        else if( time_in_cycle === 4){
-            this.add.image(400,300, "time4").setAlpha(1).setScale(0.5)
-        }
-        else{
-            this.add.image(400,300, "time5").setAlpha(1).setScale(0.5)
-        }
+        // if( time_in_cycle.value === 0){
+        //     this.add.image(400,300, "time0").setAlpha(1).setScale(0.5)
+        // }
+        // else if( time_in_cycle.value === 1){
+        //     this.add.image(400,300, "time1").setAlpha(1).setScale(0.5)
+        // }
+        // else if( time_in_cycle.value === 2){
+        //     this.add.image(400,300, "time2").setAlpha(1).setScale(0.5)
+        // }
+        // else if( time_in_cycle.value === 3){
+        //     this.add.image(400,300, "time3").setAlpha(1).setScale(0.5)
+        // }
+        // else if( time_in_cycle.value === 4){
+        //     this.add.image(400,300, "time4").setAlpha(1).setScale(0.5)
+        // }
+        // else{
+        //     this.add.image(400,300, "time5").setAlpha(1).setScale(0.5)
+        // }
         this.organisms = this.physics.add.staticGroup();
+        this.cell = [new Cell(this, Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'cell', 'cell')]
 
         // this.fish = [new Fish(this, Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'fish', 'fish')]
 

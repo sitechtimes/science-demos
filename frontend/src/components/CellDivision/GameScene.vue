@@ -3,7 +3,7 @@ import Phaser from 'phaser';
 import { ref, toRaw } from 'vue';
 import PhaserGame from './PhaserGame.vue';
 import Button from 'primevue/button';
-import {progressYear, time_in_cycle, year} from '@/games/CellDivisionSimulator/scenes/Game.js'
+import {progressYear, time_in_cycle, year} from '@/games/CellDivisionSimulation/scenes/Game.js'
 
 // The sprite can only be moved in the MainMenu Scene
 
