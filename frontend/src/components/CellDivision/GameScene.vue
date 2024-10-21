@@ -47,7 +47,7 @@ const changeScene = () => {
     <PhaserGame ref="phaserRef" @current-active-scene="currentScene" />
     <div>
         <div>
-            <Button @click="() => progressYear()">Progress Year</Button>
+            <Button @click="progressYear()">Progress Year</Button>
         </div>
     </div>
 </template>

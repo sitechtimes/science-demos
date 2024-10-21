@@ -70,7 +70,7 @@ export class Game extends Scene
         //     this.add.image(400,300, "time5").setAlpha(1).setScale(0.5)
         // }
         this.organisms = this.physics.add.staticGroup();
-        this.cell = [new Cell(this, Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'cell', 'cell')]
+        this.cell = [new Cell(this, this.scale.width/2, this.scale.height/2), 'cell', 'cell']
 
         // this.fish = [new Fish(this, Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'fish', 'fish')]
 

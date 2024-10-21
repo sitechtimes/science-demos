@@ -22,7 +22,7 @@ class Textbox extends Phaser.GameObjects.Sprite {
     //   this.text.setY(organism.y - 120)
     // }
   }
-
+  
 export default class Cell extends Phaser.Physics.Arcade.Sprite {
 constructor( scene, x, y, texture, type ) {
     super(scene, x, y, texture)
@@ -40,7 +40,7 @@ constructor( scene, x, y, texture, type ) {
     }
     })
 
-    scene.events.on('update', () => { this.update(scene) })
+    // scene.events.on('update', () => { this.update(scene) })
 
     this.textbox = new Textbox(scene)
 }
