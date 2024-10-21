@@ -14,9 +14,9 @@ export default class StaticOrganism extends Phaser.Physics.Arcade.Sprite {
       this.togglePopup(scene)
     })
 
-    this.textbox = new Textbox(scene, 0, 0, 'textbox', type)
+    this.textbox = new Textbox(scene, 0, 0, 'textbox', type, this)
     this.textbox.x = x
-    this.textbox.y = y
+    this.textbox.y = y - 100
   }
   togglePopup(scene) {
     scene.clearTextboxes(this)
@@ -30,7 +30,7 @@ export default class StaticOrganism extends Phaser.Physics.Arcade.Sprite {
 }
 
 class Textbox extends Phaser.GameObjects.Sprite {
-  constructor(scene, x = 0, y = 0, texture = 'textbox', type) {
+  constructor(scene, x = 0, y = 0, texture = 'textbox', type, organism) {
     super(scene, x, y, texture)
     console.log(type, organisms[type].description)
 
@@ -46,5 +46,7 @@ class Textbox extends Phaser.GameObjects.Sprite {
     this.text.setVisible(false)
     this.text.setDepth(11)
 
+    this.text.x = organism.x - 140
+    this.text.y = organism.y - 120
   }
 }
