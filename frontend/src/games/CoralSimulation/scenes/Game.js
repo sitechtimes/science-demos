@@ -3,6 +3,7 @@ import {Scene} from 'phaser';
 import Fish from '../Fish'
 import StaticOrganism from '../StaticOrganism';
 import organisms from '../organisms';
+import { generateLocationsFish, generateLocationsStaticOrganism } from '../locationsScript';
 
 export class Game extends Scene
 {
@@ -30,18 +31,8 @@ export class Game extends Scene
     {
         this.scene.start('GameOver');
     }
-    addFish(type) {
-        const x = Math.floor(Math.random() * (this.scale.width + 200))
-        const y = Math.floor((Math.random() * (this.scale.height)) * 0.7) + 80
-
+    addFish(type, {x, y}) {
         const newFish = new Fish(this, x, y, type)
-        
-        // this.fish.forEach((fish) => {
-        //     if(Math.abs(newFish.x - fish.x) > 50) {
-        //         newFish
-        //     }
-        // })
-
         this.fish.push(newFish)
     }
     addStaticOrganism(type) {
@@ -59,14 +50,24 @@ export class Game extends Scene
         this.fish.push(newStaticOrganism)
     }
 
+    randomElement(arr) {
+        const i = Math.floor(Math.random() * arr.length)
+        return [arr[i], i]
+    }
+
     initializeOrganisms() {
+        const locationsFish = generateLocationsFish()
+        const locationsStaticOrganism = generateLocationsStaticOrganism()
+
         const fish = ['hawksbill_sea_turtle', 'nassau_grouper', 'queen_angelfish', 'red_lionfish', 'spotlight_parrotfish', 'yellowtail_snapper']
         const staticOrganisms = ['algae', 'boulder_star_coral', 'crown_of_thorns_starfish', 'long_spined_urchin', 'sponge', 'staghorn_coral']
 
         Object.keys(organisms).forEach((i) => {
-            for(let j = 0; j < Math.ceil(organisms[i].number ** (2/5)); j++) {
+            for(let j = 0; j < Math.ceil(organisms[i].number ** (1/3)); j++) {
                 if(fish.includes(i)) {
-                    this.addFish(i)
+                    const [location, index] = this.randomElement(locationsFish)
+                    locationsFish.splice(index, 1)
+                    this.addFish(i, location)
                 } else if (staticOrganisms.includes(i)) {
                     this.addStaticOrganism(i)
                 }
