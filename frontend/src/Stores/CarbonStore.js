@@ -12,20 +12,21 @@ export const CarbonStore = defineStore("calculated", () => {
     () => dataStore.oceanTemp.sliderValue + 273
   );
   const salinityCoefficient = computed(
-    () => 0.0433 - 2.67 * Math.pow(10, -4) * temperatureKelvins
+    () => 0.0433 - 2.67 * Math.pow(10, -4) * temperatureKelvins.value
   );
   const salinityFactor = computed(
-    () => 1 + salinityCoefficient * dataStore.waterSalinity.sliderValue
+    () => 1 + salinityCoefficient.value * dataStore.waterSalinity.sliderValue
   );
-  const henrysConstant = computed(() => {
-    salinityFactor *
+  const henrysConstant = computed(
+    () =>
+      salinityFactor.value *
       12.59 *
-      Math.pow(temperatureKelvins, -1.14) *
-      Math.pow(10, -2700 / temperatureKelvins);
-  });
-  const carbonConcentration = computed(() => {
-    henrysConstant * partialPressureCO2;
-  });
+      Math.pow(temperatureKelvins.value, -1.14) *
+      Math.pow(10, -2700 / temperatureKelvins.value)
+  );
+  const carbonConcentration = computed(
+    () => henrysConstant.value * partialPressureCO2.value
+  );
   const hydrogenIons = computed(() => Math.pow(10, -acidity));
 
   //variables that need to be changed during calc?
