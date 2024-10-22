@@ -13,7 +13,8 @@ export function progressYear(){
         year.value++
     }
     else if (time_in_cycle.value === 1){
-        //centrosomes attach to chromosomes
+        //centrosomes attach to 
+        // this.cell.setTexture('time1')
         time_in_cycle.value++;
         year.value++
     }
@@ -70,9 +71,9 @@ export class Game extends Scene
         //     this.add.image(400,300, "time5").setAlpha(1).setScale(0.5)
         // }
         this.organisms = this.physics.add.staticGroup();
-        this.cell = [new Cell(this, this.scale.width/2, this.scale.height/2), 'cell', 'cell']
+        // this.cell = [new Cell(this, this.scale.width/2, this.scale.height/2), 'time0', 'cell']
 
-        // this.fish = [new Fish(this, Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'fish', 'fish')]
+        this.cell = [new Cell(this, 400,300, 'time'+time_in_cycle.value, 'cell', 'time'+time_in_cycle.value, 'time'+time_in_cycle.value)]
 
         EventBus.emit('current-scene-ready', this);
     }
