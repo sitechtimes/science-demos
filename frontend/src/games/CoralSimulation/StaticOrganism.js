@@ -5,11 +5,10 @@ export default class StaticOrganism extends Phaser.Physics.Arcade.Sprite {
   constructor( scene, x, y, type) {
     super(scene, x, y, type)
 
-    this.setScale(0.5)
     scene.add.existing(this)
     scene.physics.add.existing(this)
 
-    this.setScale(0.25).setInteractive()
+    this.setScale(0.2).setInteractive()
     this.on('pointerdown', () => {
       this.togglePopup(scene)
     })
