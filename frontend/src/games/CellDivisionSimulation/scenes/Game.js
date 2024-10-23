@@ -3,49 +3,59 @@ import {Scene} from 'phaser';
 import Cell from '../Cell'
 import {ref} from 'vue'
 
-export let time_in_cycle = ref(0)
-export let year = ref(0)
-export function progressYear(){
 
-    if (time_in_cycle.value === 0){
-        //dissolve nuclear membrane
-        time_in_cycle.value++;
-        year.value++
-    }
-    else if (time_in_cycle.value === 1){
-        //centrosomes attach to 
-        // this.cell.setTexture('time1')
-        time_in_cycle.value++;
-        year.value++
-    }
-    else if(time_in_cycle.value === 2){
-        //centrosomes pull apart chromosomes, cell squishes in middle
-        time_in_cycle.value++;
-        year.value++
-    }
-    else if(time_in_cycle.value===3){
-        //nuclear membrane develops around each set of chromosomes, cell squishes more
-        time_in_cycle.value++;
-        year.value++
-    }
-    else if(time_in_cycle.value===4){
-        //cell separates
-        time_in_cycle.value++;
-        year.value++
-    }
-    else{
-        time_in_cycle.value=0;
-        year.value++
-    }
-    console.log(time_in_cycle.value, year.value)
-}
 export class Game extends Scene
 {
     constructor ()
     {
         super('Game');
+        this.time_in_cycle = 0
+        this.year = 0
     }
 
+    progressYear(){
+
+        if (this.time_in_cycle === 0){
+            //dissolve nuclear membrane
+            this.time_in_cycle++;
+            this.year++
+            this.cells.forEach((cell)=>cell.setTexture('time1'))
+        }
+        else if (this.time_in_cycle === 1){
+            //centrosomes attach to 
+            // this.cell.setTexture('time1')
+            this.time_in_cycle++;
+            this.year++
+            this.cells.forEach((cell)=>cell.setTexture('time2'))
+        }
+        else if(this.time_in_cycle === 2){
+            //centrosomes pull apart chromosomes, cell squishes in middle
+            this.time_in_cycle++;
+            this.year++
+            this.cells.forEach((cell)=>cell.setTexture('time3'))
+        }
+        else if(this.time_in_cycle===3){
+            //nuclear membrane develops around each set of chromosomes, cell squishes more
+            this.time_in_cycle++;
+            this.year++
+            this.cells.forEach((cell)=>cell.setTexture('time4'))
+        }
+        else if(this.time_in_cycle===4){
+            //cell separates
+            this.time_in_cycle++;
+            this.year++
+            this.cells.forEach((cell)=>cell.setTexture('time5'))
+        }
+        else{
+            this.time_in_cycle=0;
+            this.year++
+            this.cells.forEach((cell)=>cell.setTexture('time0'))
+            for(let i=-1;i++;i<this.cells.length+1){
+                this.cells.push(new Cell(this,  Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'time0', 'cell', 'time0', 'time0'))
+            }
+        }
+        console.log(this.time_in_cycle, this.year)
+    }
     create ()
     {
         // this.cameras.main.setBackgroundColor(0x00ff00);
@@ -73,8 +83,7 @@ export class Game extends Scene
         this.organisms = this.physics.add.staticGroup();
         // this.cell = [new Cell(this, this.scale.width/2, this.scale.height/2), 'time0', 'cell']
 
-        this.cell = [new Cell(this, 400,300, 'time'+time_in_cycle.value, 'cell', 'time'+time_in_cycle.value, 'time'+time_in_cycle.value)]
-
+        this.cells = [new Cell(this, 400,300, 'time0', 'cell', 'time0', 'time0')]
         EventBus.emit('current-scene-ready', this);
     }
 

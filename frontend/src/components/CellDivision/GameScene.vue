@@ -3,7 +3,7 @@ import Phaser from 'phaser';
 import { ref, toRaw } from 'vue';
 import PhaserGame from './PhaserGame.vue';
 import Button from 'primevue/button';
-import {progressYear, time_in_cycle, year} from '@/games/CellDivisionSimulation/scenes/Game.js'
+import {Game} from '@/games/CellDivisionSimulation/scenes/Game.js'
 
 // The sprite can only be moved in the MainMenu Scene
 
@@ -22,7 +22,10 @@ const changeScene = () => {
     }
 
 }
-
+function handleClick(){
+    const scene = toRaw(phaserRef.value.scene);
+    scene.progressYear()
+}
 
 // function addOrganism(type) {
 //     // const fish = addSprite(type)
@@ -47,7 +50,7 @@ const changeScene = () => {
     <PhaserGame ref="phaserRef" @current-active-scene="currentScene" />
     <div>
         <div>
-            <Button @click="progressYear()">Progress Year</Button>
+            <Button @click="handleClick">Progress Year</Button>
         </div>
     </div>
 </template>
