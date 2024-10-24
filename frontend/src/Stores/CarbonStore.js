@@ -15,7 +15,7 @@ export const CarbonStore = defineStore("calculated", () => {
     () => 0.0433 - 2.67 * Math.pow(10, -4) * temperatureKelvins.value
   );
   const salinityFactor = computed(
-    () => 1 + salinityCoefficient.value * dataStore.waterSalinity.sliderValue
+    () => (1 + salinityCoefficient.value) * dataStore.waterSalinity.sliderValue
   );
   const henrysConstant = computed(
     () =>
