@@ -56,7 +56,7 @@ export const DataStore = defineStore("data", () => {
   }); // (acidity) 7.6-8.6 slider
   const waterSalinity = ref({
     name: "Water Salinity",
-    sliderValue: 8.1,
+    sliderValue: 34.5,
     sliderMin: 33,
     sliderMax: 36,
     sliderStep: 0.1,

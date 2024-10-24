@@ -25,13 +25,14 @@ export const CarbonStore = defineStore("calculated", () => {
       Math.pow(10, -2700 / temperatureKelvins.value)
   );
   const carbonConcentration = computed(
-    () => henrysConstant.value * partialPressureCO2.value
+    () => henrysConstant.value * tempPartialPressureCO2.value
   );
-  const hydrogenIons = computed(() => Math.pow(10, -acidity));
+  const acidity = computed(() => 6.37 + carbonConcentration.value / 0.00813566);
+  const hydrogenIons = computed(() => Math.pow(10, -acidity.value));
 
   //variables that need to be changed during calc?
-  const partialPressureCO2 = ref(0.2711885);
-  const acidity = ref();
+  const partialPressureCO2 = ref(356.8269697);
+  const tempPartialPressureCO2 = ref(100);
 
   return {
     partialPressureCO2,
@@ -42,5 +43,6 @@ export const CarbonStore = defineStore("calculated", () => {
     henrysConstant,
     acidity,
     hydrogenIons,
+    tempPartialPressureCO2,
   };
 });
