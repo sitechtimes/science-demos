@@ -1,15 +1,15 @@
 import Phaser from 'phaser'
 
 class Textbox extends Phaser.GameObjects.Sprite {
-    constructor(scene, x = 0, y = 0, texture = 'textbox', text) {
-      super(scene, x, y, texture, text)
+    constructor(scene, x = 0, y = 0, texture = 'textbox') {
+      super(scene, x, y, texture)
   
       scene.add.existing(this)
       this.setVisible(false)
       this.setScale(1.3)
       
       this.text = scene.add
-        .text(x-150, y, text)
+        .text(x-150, y)
         .setColor('0x000000')
       this.text.setWordWrapWidth(290, false)
       this.text.setVisible(false)
@@ -22,10 +22,9 @@ class Textbox extends Phaser.GameObjects.Sprite {
     //   this.text.setY(organism.y - 120)
     // }
   }
-  
 export default class Cell extends Phaser.Physics.Arcade.Sprite {
 constructor( scene, x, y, texture, type, text ) {
-    super(scene, x, y, texture)
+    super(scene, x, y, texture, type)
 
     scene.add.existing(this)
     // scene.physics.add.existing(this)
@@ -36,16 +35,16 @@ constructor( scene, x, y, texture, type, text ) {
         this.deletePopup()
         this.popup = undefined
     } else {
-        this.addPopup(scene, 'description', this.x, this.y, this)
+        this.addPopup()
     }
     })
 
     // scene.events.on('update', () => { this.update(scene) })
 
-    this.textbox = new Textbox(scene, x,y-200,text)
+    this.textbox = new Textbox(scene, x,y-200, 'textbox')
 }
 
-addPopup(scene, description, x, y, organism) {
+addPopup() {
     this.textbox.setVisible(!this.textbox.visible)
     this.textbox.text.setVisible(!this.textbox.text.visible)
 
