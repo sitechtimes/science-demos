@@ -5,7 +5,7 @@ export function generateLocationsFish() {
 
     while(x > -160) {
         while(y > 40) {
-            squares.push({ x, y })
+            squares.push({ x: x + ((Math.random() - 0.5) * 40), y: y + ((Math.random() - 0.5) * 40) })
             y -= 40
         }
         x -= 40
@@ -18,15 +18,15 @@ export function generateLocationsFish() {
 export function generateLocationsStaticOrganism() {
     const squares = []
     let x = 760
-    let y = 160
+    let y = 240
 
     while(x > 40) {
         while(y > 40) {
-            squares.push({ x, y: y + 400 })
+            squares.push({ x: x + ((Math.random() - 0.5) * 40), y: y + 440 + ((Math.random() - 0.5) * 40)})
             y -= 40
         }
         x -= 40
-        y = 400
+        y = 240
     }
 
     return squares

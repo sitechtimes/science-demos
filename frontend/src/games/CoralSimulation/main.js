@@ -9,7 +9,7 @@ import { Preloader } from './scenes/Preloader';
 const config = {
     type: Phaser.AUTO,
     width: 800,
-    height: 600,
+    height: 800,
     parent: 'game-container',
     transparent: true,
     physics: {

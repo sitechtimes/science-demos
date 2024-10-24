@@ -14,17 +14,21 @@ export class Game extends Scene
 
     create ()
     {
-        // this.cameras.main.setBackgroundColor(0x00ff00);
 
         this.add.image(512, 384, 'background').setAlpha(1);
         this.fish = []
+
+        this.locationsFish = generateLocationsFish()
+        this.locationsStaticOrganism = generateLocationsStaticOrganism()
+        this.fishDisplayed = {}
+
         this.initializeOrganisms()
-        // this.fish = [new Fish(this, 100 + Math.floor(Math.random() * (this.scale.width - 200)), 100 + Math.floor(Math.random() * (this.scale.height - 200)), 'nassau_grouper')]
 
         EventBus.emit('current-scene-ready', this);
     }
 
     update () {
+
     }
     
     changeScene ()
@@ -35,18 +39,8 @@ export class Game extends Scene
         const newFish = new Fish(this, x, y, type)
         this.fish.push(newFish)
     }
-    addStaticOrganism(type) {
-        const x = 20 + Math.floor(Math.random() * (this.scale.width - 40))
-        const y = Math.floor(this.scale.height - (Math.random() * (this.scale.height * 0.1))) - 30
-
+    addStaticOrganism(type, {x, y}) {
         const newStaticOrganism = new StaticOrganism(this, x, y, type)
-        
-        // this.fish.forEach((fish) => {
-        //     if(Math.abs(newFish.x - fish.x) > 50) {
-        //         newFish
-        //     }
-        // })
-
         this.fish.push(newStaticOrganism)
     }
 
@@ -56,31 +50,32 @@ export class Game extends Scene
     }
 
     initializeOrganisms() {
-        const locationsFish = generateLocationsFish()
-        const locationsStaticOrganism = generateLocationsStaticOrganism()
-        console.log(locationsStaticOrganism)
+
 
         const fish = ['hawksbill_sea_turtle', 'nassau_grouper', 'queen_angelfish', 'red_lionfish', 'spotlight_parrotfish', 'yellowtail_snapper']
         // const staticOrganisms = ['algae', 'boulder_star_coral', 'crown_of_thorns_starfish', 'long_spined_urchin', 'sponge', 'staghorn_coral']
 
         Object.keys(organisms).forEach((i) => {
-            for(let j = 0; j < Math.ceil(organisms[i].number ** (1/3)); j++) {
+            for(let j = 0; j < Math.ceil(organisms[i].number ** (2/5)); j++) {
                 if(fish.includes(i)) {
-                    const [location, index] = this.randomElement(locationsFish)
-                    locationsFish.splice(index, 1)
+                    const [location, index] = this.randomElement(this.locationsFish)
+                    this.locationsFish.splice(index, 1)
                     this.addFish(i, location)
+                    this.fishDisplayed[i] = (this.fishDisplayed[i] || 0) + 1
                 } else {
-                    const [location, index] = this.randomElement(locationsStaticOrganism)
-                    locationsStaticOrganism.splice(index, 1)
+                    const [location, index] = this.randomElement(this.locationsStaticOrganism)
+                    this.locationsStaticOrganism.splice(index, 1)
                     this.addStaticOrganism(i, location)
+                    this.fishDisplayed[i] = (this.fishDisplayed[i] || 0) + 1
                 }
             }
         })
+        console.log(this.fishDisplayed)
     }
 
     clearTextboxes(excluded) {
         this.fish.forEach((fish) => {
-            if (fish.x !== excluded.x && fish.y !== excluded.y) {
+            if (fish.x !== excluded.x || fish.y !== excluded.y) {
                 fish.clearPopup()
             }
         })
