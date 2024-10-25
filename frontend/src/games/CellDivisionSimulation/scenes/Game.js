@@ -53,7 +53,7 @@ export class Game extends Scene
             let temp_length = this.cells.length
             console.log(temp_length)
             for(let i in this.cells){
-                this.cells.push(new Cell(this,  Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'time0', 'cell', 'time0', 'time0').setScale(0.5))
+                this.cells.push(new Cell(this,  Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'time0').setScale(0.5).setDepth(0))
                 console.log(this.cells.length, temp_length)
             }
         }
@@ -86,7 +86,7 @@ export class Game extends Scene
         this.organisms = this.physics.add.staticGroup();
         // this.cell = [new Cell(this, this.scale.width/2, this.scale.height/2), 'time0', 'cell']
 
-        this.cells = [new Cell(this, 400,300, 'time0', 'cell', 'time0', 'time0').setScale(0.5)]
+        this.cells = [new Cell(this, 400,300, 'time0', 'x').setScale(0.5).setDepth(0)]
         EventBus.emit('current-scene-ready', this);
     }
 
