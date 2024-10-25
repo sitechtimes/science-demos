@@ -16,21 +16,70 @@ export const DataStore = defineStore("data", () => {
   const whiteBandDisease = ref(false);
 
   //Keystone Species
-  const grouperSpecies = ref({
-    population: 100, //placeholder
-    species: "Keystone",
-    info: "blah blah blah blah blah",
-  });
-  const snapperSpecies = ref({
-    population: 100, //placeholder
-    species: "Keystone",
-    info: "blah blah blah blah blah",
-  });
-  const seaUrchinSpecies = ref({
-    population: 100, //placeholder
-    species: "Keystone",
-    info: "blah blah blah blah blah",
-  });
+
+  const path = '/src/games/CoralSimulation/images/'
+  const organisms = ref({
+    algae: {
+      population: 27,
+      img: path + 'algae.png',
+      description: "blah blah blah blah blah",
+    },
+    boulderStarCoral: {
+      population: 28, 
+      img: path + 'boulder_star_coral.png',
+      description: "blah blah blah blah blah",
+    },
+    crownOfThornsStarfish: {
+      population: 0, 
+      img: path + 'crown_of_thorns_starfish.png',
+      description: "blah blah blah blah blah",
+    },
+    hawksbillSeaTurtle: {
+      population: 25, 
+      img: path + 'hawksbill_sea_turtle.png',
+      description: "blah blah blah blah blah",
+    },
+    longSpinedUrchin: {
+      population: 1160, 
+      img: path + 'long_spined_urchin.png',
+      description: "blah blah blah blah blah",
+    },
+    nassauGrouper: {
+      population: 48, 
+      img: path + 'nassau_grouper.png',
+      description: "blah blah blah blah blah",
+    },
+    queenAngelfish: {
+      population: 480, 
+      img: path + 'queen_angelfish.png',
+      description: "blah blah blah blah blah",
+    },
+    redLionfish: {
+      population: 0, 
+      img: path + 'red_lionfish.png',
+      description: "blah blah blah blah blah",
+    },
+    sponge: {
+      population: 11, 
+      img: path + 'sponge.png',
+      description: "blah blah blah blah blah",
+    },
+    stoplightParrotfish: {
+      population: 825, 
+      img: path + 'stoplight_parrotfish.png',
+      description: "blah blah blah blah blah",
+    },
+    staghornCoral: {
+    population: 21, 
+    img: path + 'staghorn_coral.png',
+    description: "blah blah blah blah blah",
+    },
+    yellowtailSnapper: {
+      population: 240, 
+      img: path + 'yellowtail_snapper.png',
+      description: "blah blah blah blah blah",
+    }
+  })
 
   //Ocean Conditions
   const oceanTemp = ref({
@@ -56,18 +105,7 @@ export const DataStore = defineStore("data", () => {
   }); // (acidity) 7.6-8.6 slider
 
   //invasive species
-  const crownOfThornsStarfish = ref({
-    population: 15,
-    species: "Invasive",
-    info: "blah blah blah blah blah",
-    isPresent: false,
-  });
-  const redLionfish = ref({
-    population: 20,
-    species: "Invasive",
-    info: "blah blah blah blah blah",
-    isPresent: false,
-  });
+
 
   const selectedYear = ref({
     name: "Current Year",
@@ -85,14 +123,10 @@ export const DataStore = defineStore("data", () => {
     netFishing,
     blackBandDisease,
     whiteBandDisease,
-    grouperSpecies,
-    snapperSpecies,
-    seaUrchinSpecies,
     oceanTemp,
     stormSeverity,
     WaterPH,
-    crownOfThornsStarfish,
-    redLionfish,
     selectedYear,
+    organisms
   };
 });

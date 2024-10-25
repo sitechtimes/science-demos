@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import organisms from './organisms'
+import { DataStore } from '@/Stores/DataStore'
 
 export default class Fish extends Phaser.Physics.Arcade.Sprite {
   constructor( scene, x, y, type) {
@@ -41,7 +41,8 @@ export default class Fish extends Phaser.Physics.Arcade.Sprite {
 class Textbox extends Phaser.GameObjects.Sprite {
   constructor(scene, x = 0, y = 0, texture = 'textbox', type) {
     super(scene, x, y, texture)
-    // console.log(text)
+    
+    const organisms = DataStore().organisms
 
     scene.add.existing(this)
     this.setVisible(false)

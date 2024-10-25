@@ -2,7 +2,7 @@ import { EventBus } from '../EventBus';
 import {Scene} from 'phaser';
 import Fish from '../Fish'
 import StaticOrganism from '../StaticOrganism';
-import organisms from '../organisms';
+import { DataStore } from '@/Stores/DataStore';
 import { generateLocationsFish, generateLocationsStaticOrganism } from '../locationsScript';
 
 export class Game extends Scene
@@ -50,13 +50,15 @@ export class Game extends Scene
     }
 
     initializeOrganisms() {
+        const dataStore = DataStore()
+        const organisms = dataStore.organisms
+        console.log(Object.keys(organisms))
 
-
-        const fish = ['hawksbill_sea_turtle', 'nassau_grouper', 'queen_angelfish', 'red_lionfish', 'spotlight_parrotfish', 'yellowtail_snapper']
+        const fish = ['hawksbillSeaTurtle', 'nassauGrouper', 'queenAngelfish', 'redLionfish', 'spotlightParrotfish', 'yellowtailSnapper']
         // const staticOrganisms = ['algae', 'boulder_star_coral', 'crown_of_thorns_starfish', 'long_spined_urchin', 'sponge', 'staghorn_coral']
 
         Object.keys(organisms).forEach((i) => {
-            for(let j = 0; j < Math.ceil(organisms[i].number ** (2/5)); j++) {
+            for(let j = 0; j < Math.ceil(organisms[i].population ** (2/5)); j++) {
                 if(fish.includes(i)) {
                     const [location, index] = this.randomElement(this.locationsFish)
                     this.locationsFish.splice(index, 1)

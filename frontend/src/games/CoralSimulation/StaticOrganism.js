@@ -1,5 +1,5 @@
-import Phaser from 'phaser'
-import organisms from './organisms'
+import Phaser, { Data } from 'phaser'
+import { DataStore } from '@/Stores/DataStore'
 
 export default class StaticOrganism extends Phaser.Physics.Arcade.Sprite {
   constructor( scene, x, y, type) {
@@ -31,7 +31,8 @@ export default class StaticOrganism extends Phaser.Physics.Arcade.Sprite {
 class Textbox extends Phaser.GameObjects.Sprite {
   constructor(scene, x = 0, y = 0, texture = 'textbox', type, organism) {
     super(scene, x, y, texture)
-    console.log(type, organisms[type].description)
+
+    const organisms = DataStore().organisms
 
     scene.add.existing(this)
     this.setVisible(false)
