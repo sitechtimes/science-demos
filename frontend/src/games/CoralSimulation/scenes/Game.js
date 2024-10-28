@@ -52,29 +52,26 @@ export class Game extends Scene
     initializeOrganisms() {
         const dataStore = DataStore()
         const organisms = dataStore.organisms
-        console.log(Object.keys(organisms))
+        // console.log(Object.keys(organisms))
 
         const fish = ['hawksbillSeaTurtle', 'nassauGrouper', 'queenAngelfish', 'redLionfish', 'spotlightParrotfish', 'yellowtailSnapper']
-        // const staticOrganisms = ['algae', 'boulder_star_coral', 'crown_of_thorns_starfish', 'long_spined_urchin', 'sponge', 'staghorn_coral']
 
         Object.keys(organisms).forEach((i) => {
             for(let j = 0; j < Math.ceil(organisms[i].population ** (2/5)); j++) {
                 if(fish.includes(i)) {
                     const [location, index] = this.randomElement(this.locationsFish)
                     this.locationsFish.splice(index, 1)
-                    const fish = this.addFish(i, location)
-                    console.log(fish)
+                    this.addFish(i, location)
                     this.fishDisplayed[i] = (this.fishDisplayed[i] || 0) + 1
                 } else {
                     const [location, index] = this.randomElement(this.locationsStaticOrganism)
                     this.locationsStaticOrganism.splice(index, 1)
-                    const staticOrganism = this.addStaticOrganism(i, location)
-                    console.log(staticOrganism)
+                    this.addStaticOrganism(i, location)
                     this.fishDisplayed[i] = (this.fishDisplayed[i] || 0) + 1
                 }
             }
         })
-        console.log(this.fishDisplayed)
+        console.log(this.fish.map((fish) => fish.texture.key))
     }
 
     clearTextboxes(excluded) {
