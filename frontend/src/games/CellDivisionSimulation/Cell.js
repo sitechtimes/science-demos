@@ -6,10 +6,10 @@ class Textbox extends Phaser.GameObjects.Sprite {
   
       scene.add.existing(this)
       this.setVisible(false)
-      this.setScale(1.3)
+      this.setScale(0.5)
       
       this.text = scene.add
-        .text(x-150, y, text)
+        .text(x-30, y, text)
         .setColor('0x000000')
       this.text.setWordWrapWidth(290, false)
       this.text.setVisible(false)
@@ -30,28 +30,39 @@ constructor( scene, x, y, texture ) {
     // scene.physics.add.existing(this)
     console.log(this.texture)
     this.setScale(0.5).setInteractive()
-    this.on('pointerdown', () => {
     let text = this.texture.key
-    if (this.popup) {
-        this.deletePopup()
-        this.popup = undefined
-    } else {
-        this.textbox = new Textbox(scene, x,y-200, 'textbox', text)
-        this.addPopup()
-    }
+    this.textbox = new Textbox(scene, x,y-200, 'textbox', text).setDepth(2)
+    this.textbox.visible = false
+    this.on('pointerdown', () => {
+      this.togglePopup(scene)
+      this.textbox.text.setText(this.texture.key).setDepth(3)
+      // if (this.popup) {
+      //     this.deletePopup()
+      //     this.popup = undefined
+      // } else {
+      //     this.addPopup()
+      // }
     })
 
     // scene.events.on('update', () => { this.update(scene) })
 
     // this.textbox = new Textbox(scene, x,y-200, 'textbox', text)
 }
+  clearPopup(){
+    this.textbox.setVisible(false)
+    this.textbox.text.setVisible(false)
+  }
+  togglePopup(scene){
+    scene.clearTextboxes(this)
+    this.textbox.setVisible(!this.textbox.visible)
+    this.textbox.text.setVisible(!this.textbox.text.visible)
+  }
+  addPopup() {
+      this.textbox.setVisible(!this.textbox.visible).setDepth(2)
+      this.textbox.text.setVisible(!this.textbox.text.visible).setDepth(3)
 
-addPopup() {
-    this.textbox.setVisible(!this.textbox.visible).setDepth(1)
-    this.textbox.text.setVisible(!this.textbox.text.visible).setDepth(2)
-
-}
-deletePopup() {
-    this.popupContainer.destroy()
-}
+  }
+  deletePopup() {
+      this.popupContainer.destroy()
+  }
 }
