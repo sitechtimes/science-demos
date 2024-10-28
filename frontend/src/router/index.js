@@ -27,6 +27,17 @@ const router = createRouter({
             ]
         },
         {
+            path: '/',
+            component: AppLayout,
+            children: [
+                {
+                    path: '/test',
+                    name: 'test d3',
+                    component: () => import('@/views/pages/TestFile.vue')
+                },
+            ]
+        },
+        {
             path: '/testphaser',
             component: () => import('@/components/CoralSimulation/GameScene.vue'),
             name: 'phaser'

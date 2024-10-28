@@ -8,6 +8,7 @@ import PrimeVue from "primevue/config";
 import ConfirmationService from "primevue/confirmationservice";
 import ToastService from "primevue/toastservice";
 import StyleClass from 'primevue/styleclass';
+import Tooltip from "primevue/tooltip";
 import { createPinia } from "pinia";
 
 import "@/assets/styles.scss";
@@ -78,5 +79,6 @@ app.use(ToastService);
 app.use(ConfirmationService);
 app.use(pinia);
 app.directive('styleclass', StyleClass);
+app.directive('tooltip', Tooltip);
 
 app.mount("#app");
