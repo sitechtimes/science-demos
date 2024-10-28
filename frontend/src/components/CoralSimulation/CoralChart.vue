@@ -9,7 +9,6 @@
 
 <script setup>
 import Chart from 'primevue/chart';
-import SelectButton from 'primevue/selectbutton';
 import { ref, onMounted, watch } from "vue";
 import {setChartData, setChartOptions} from '@/Stores/chartDataOptions';
 import { useLayout } from '@/layout/composables/layout';

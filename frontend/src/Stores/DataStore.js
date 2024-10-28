@@ -26,37 +26,37 @@ export const DataStore = defineStore("data", () => {
     },
     boulderStarCoral: {
       population: 28, 
-      img: path + 'boulder_star_coral.png',
+      img: path + 'boulderStarCoral.png',
       description: "blah blah blah blah blah",
     },
     crownOfThornsStarfish: {
       population: 0, 
-      img: path + 'crown_of_thorns_starfish.png',
+      img: path + 'crownOfThornsStarfish.png',
       description: "blah blah blah blah blah",
     },
     hawksbillSeaTurtle: {
       population: 25, 
-      img: path + 'hawksbill_sea_turtle.png',
+      img: path + 'hawksbillSeaTurtle.png',
       description: "blah blah blah blah blah",
     },
     longSpinedUrchin: {
       population: 1160, 
-      img: path + 'long_spined_urchin.png',
+      img: path + 'longSpinedUrchin.png',
       description: "blah blah blah blah blah",
     },
     nassauGrouper: {
       population: 48, 
-      img: path + 'nassau_grouper.png',
+      img: path + 'nassauGrouper.png',
       description: "blah blah blah blah blah",
     },
     queenAngelfish: {
       population: 480, 
-      img: path + 'queen_angelfish.png',
+      img: path + 'queenAngelfish.png',
       description: "blah blah blah blah blah",
     },
     redLionfish: {
       population: 0, 
-      img: path + 'red_lionfish.png',
+      img: path + 'redLionfish.png',
       description: "blah blah blah blah blah",
     },
     sponge: {
@@ -66,17 +66,17 @@ export const DataStore = defineStore("data", () => {
     },
     stoplightParrotfish: {
       population: 825, 
-      img: path + 'stoplight_parrotfish.png',
+      img: path + 'stoplightParrotfish.png',
       description: "blah blah blah blah blah",
     },
     staghornCoral: {
     population: 21, 
-    img: path + 'staghorn_coral.png',
+    img: path + 'staghornCoral.png',
     description: "blah blah blah blah blah",
     },
     yellowtailSnapper: {
       population: 240, 
-      img: path + 'yellowtail_snapper.png',
+      img: path + 'yellowtailSnapper.png',
       description: "blah blah blah blah blah",
     }
   })
@@ -114,6 +114,8 @@ export const DataStore = defineStore("data", () => {
     sliderMax: 100,
     sliderStep: 1,
   });
+
+  actions: {}
 
   return {
     logging,

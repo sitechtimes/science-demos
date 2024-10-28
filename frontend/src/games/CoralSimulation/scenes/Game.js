@@ -62,12 +62,14 @@ export class Game extends Scene
                 if(fish.includes(i)) {
                     const [location, index] = this.randomElement(this.locationsFish)
                     this.locationsFish.splice(index, 1)
-                    this.addFish(i, location)
+                    const fish = this.addFish(i, location)
+                    console.log(fish)
                     this.fishDisplayed[i] = (this.fishDisplayed[i] || 0) + 1
                 } else {
                     const [location, index] = this.randomElement(this.locationsStaticOrganism)
                     this.locationsStaticOrganism.splice(index, 1)
-                    this.addStaticOrganism(i, location)
+                    const staticOrganism = this.addStaticOrganism(i, location)
+                    console.log(staticOrganism)
                     this.fishDisplayed[i] = (this.fishDisplayed[i] || 0) + 1
                 }
             }
@@ -81,6 +83,5 @@ export class Game extends Scene
                 fish.clearPopup()
             }
         })
-
     }
 }

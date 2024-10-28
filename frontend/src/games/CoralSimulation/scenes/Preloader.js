@@ -30,9 +30,7 @@ export class Preloader extends Scene
 
     preload ()
     {
-        //  Load the assets for the game - Replace with your own assets
-        this.load.image('fish', "/src/games/CoralSimulation/images/fish.png")
-        this.load.image('textbox', "/src/games/CoralSimulation/images/textbox.png")
+        //  Load the assets for the game - Replace with your own assets        this.load.image('textbox', "/src/games/CoralSimulation/images/textbox.png")
         
         const organisms = DataStore().organisms
 
@@ -41,6 +39,7 @@ export class Preloader extends Scene
             // console.log(organisms[key].img)
 
             this.load.image(key, organisms[key].img)
+            console.log(key, organisms[key].img)
         })
     }
 
