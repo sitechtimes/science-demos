@@ -1,20 +1,34 @@
 <template>
     <div>
-        <LinePlot :data="data" :tooltip="false" />
+        <ScatterPlot :data="data" :tooltip="true" />
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import LinePlot from '@/components/d3-charts/ScatterPlot.vue'
-import * as d3 from 'd3';
+import ScatterPlot from '@/components/d3-charts/ScatterPlot.vue'
 
-const data = ref(d3.ticks(-2, 2, 30).map(Math.sin));
-
-/* function onMousemove(event) {
-    const [x, y] = d3.pointer(event);
-    data.value = data.value.slice(-200).concat(Math.atan2(y, x));
-} */
+const data = ref({
+    datasets: [
+        {
+            label: 'name',
+            color: '#42c0c3',
+            data: [
+                { x: 321.978691, y: 94.27701674 },
+                { x: 232.7853881, y: 96.71232877 },
+            ]
+        },
+        {
+            label: 'name2',
+            color: '#422',
+            showLine: true,
+            data: [
+                { x: 150.978691, y: 94.27701674 },
+                { x: 232.7853881, y: 34.71232877 },
+            ]
+        },
+    ]
+});
 </script>
 
 <style lang="scss" scoped></style>
