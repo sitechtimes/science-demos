@@ -2,20 +2,12 @@
     <svg :width="width" :height="height">
         <g ref="gx" :transform="`translate(0, ${height - marginBottom})`" />
         <g ref="gy" :transform="`translate(${marginLeft}, 0)`" />
-        <g v-if="props.tooltip === true" fill="white" stroke="currentColor" stroke-width="1.5">
-            <!-- create a tooltip with primevue directive if selected -->
-            <g v-for="(dataset, datasetIndex) in data.datasets" :key="datasetIndex">
-                <circle v-tooltip.top="`(${point.x}, ${point.y})`" v-for="(point, pointIndex) in dataset.data"
-                    :key="pointIndex" :cx="point.x" :cy="point.y" r="2.5" :fill="dataset.color || 'white'" />
-                <!-- for each data pair, make circles and attribute a color based on dataset -->
-            </g>
+        <g v-for="(dataset, datasetIndex) in data.datasets" :key="datasetIndex">
+            <circle v-tooltip.top="props.tooltip ? `(${point.x}, ${point.y})` : ''"
+                v-for="(point, pointIndex) in dataset.data" :key="pointIndex" :cx="point.x" :cy="point.y" r="2.5"
+                :fill="dataset.color || 'white'" />
         </g>
-        <g v-else fill="white" stroke="currentColor" stroke-width="1.5">
-            <g v-for="(dataset, datasetIndex) in data.datasets" :key="datasetIndex">
-                <circle v-for="(point, pointIndex) in dataset.data" :key="pointIndex" :cx="point.x" :cy="point.y"
-                    r="2.5" :fill="dataset.color || 'white'" />
-            </g>
-        </g>
+        <g ref="grid" />
     </svg>
 </template>
 
@@ -60,12 +52,12 @@ const props = defineProps({
 
 const gx = ref(null);
 const gy = ref(null);
+const grid = ref(null);
 
-function extrapolateData(data) { // get min and max values to define axes minmax
+function extrapolateData(data) {
     const xValues = [];
     const yValues = [];
 
-    // Extract x and y values from the datasets
     data.datasets.forEach(dataset => {
         dataset.data.forEach(point => {
             xValues.push(point.x);
@@ -73,30 +65,53 @@ function extrapolateData(data) { // get min and max values to define axes minmax
         });
     });
 
-    // Calculate min and max for x and y
     const minX = Math.min(...xValues);
     const maxX = Math.max(...xValues);
     const minY = Math.min(...yValues);
     const maxY = Math.max(...yValues);
 
-    // Return the extents
-    const xExtent = [minX, maxX];
-    const yExtent = [minY, maxY];
-
     return {
-        xExtent,
-        yExtent,
+        xExtent: [minX, maxX],
+        yExtent: [minY, maxY],
     };
 }
 
 const dataRange = extrapolateData(props.data);
 
-const x = d3.scaleLinear(dataRange.xExtent, [props.marginLeft, props.width - props.marginRight]); // create axes
+const x = d3.scaleLinear(dataRange.xExtent, [props.marginLeft, props.width - props.marginRight]);
 const y = d3.scaleLinear(dataRange.yExtent, [props.height - props.marginBottom, props.marginTop]);
 
 const updateAxes = () => {
     d3.select(gy.value).call(d3.axisLeft(y));
     d3.select(gx.value).call(d3.axisBottom(x));
+    drawGrid();
+};
+
+const drawGrid = () => {
+    const gridGroup = d3.select(grid.value);
+    gridGroup.selectAll("*").remove(); // Clear previous grid lines
+
+    // Draw vertical grid lines
+    x.ticks().forEach(tick => {
+        gridGroup.append("line")
+            .attr("x1", x(tick))
+            .attr("y1", props.marginTop)
+            .attr("x2", x(tick))
+            .attr("y2", props.height - props.marginBottom)
+            .attr("stroke", "gray")
+            .attr("stroke-width", 1);
+    });
+
+    // Draw horizontal grid lines
+    y.ticks().forEach(tick => {
+        gridGroup.append("line")
+            .attr("x1", props.marginLeft)
+            .attr("y1", y(tick))
+            .attr("x2", props.width - props.marginRight)
+            .attr("y2", y(tick))
+            .attr("stroke", "#ccc")
+            .attr("stroke-width", 1);
+    });
 };
 
 watch(() => props.data, updateAxes, { immediate: true });
