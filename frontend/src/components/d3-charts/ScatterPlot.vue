@@ -1,19 +1,12 @@
 <template>
-    <svg :width="width" :height="height">
-        <g ref="gx" :transform="`translate(0, ${height - marginBottom})`" />
-        <g ref="gy" :transform="`translate(${marginLeft}, 0)`" />
-        <g v-for="(dataset, datasetIndex) in data.datasets" :key="datasetIndex">
-            <circle v-tooltip.top="props.tooltip ? `(${point.x}, ${point.y})` : ''"
-                v-for="(point, pointIndex) in dataset.data" :key="pointIndex" :cx="point.x" :cy="point.y" r="2.5"
-                :fill="dataset.color || 'white'" />
-        </g>
-        <g ref="grid" />
-    </svg>
+    <div class="card">
+        <div ref="chart"></div>
+    </div>
 </template>
 
 <script setup>
-import * as d3 from 'd3';
-import { ref, watch, onMounted } from 'vue';
+import Plotly from 'plotly.js-dist';
+import { ref, onMounted } from 'vue';
 
 const props = defineProps({
     data: {
@@ -50,77 +43,34 @@ const props = defineProps({
     },
 });
 
-const gx = ref(null);
-const gy = ref(null);
-const grid = ref(null);
+const chart = ref(null);
 
-function extrapolateData(data) {
-    const xValues = [];
-    const yValues = [];
-
-    data.datasets.forEach(dataset => {
-        dataset.data.forEach(point => {
-            xValues.push(point.x);
-            yValues.push(point.y);
-        });
-    });
-
-    const minX = Math.min(...xValues);
-    const maxX = Math.max(...xValues);
-    const minY = Math.min(...yValues);
-    const maxY = Math.max(...yValues);
-
-    return {
-        xExtent: [minX, maxX],
-        yExtent: [minY, maxY],
-    };
-}
-
-const dataRange = extrapolateData(props.data);
-
-const x = d3.scaleLinear(dataRange.xExtent, [props.marginLeft, props.width - props.marginRight]);
-const y = d3.scaleLinear(dataRange.yExtent, [props.height - props.marginBottom, props.marginTop]);
-
-const updateAxes = () => {
-    d3.select(gy.value).call(d3.axisLeft(y));
-    d3.select(gx.value).call(d3.axisBottom(x));
-    drawGrid();
+var trace1 = {
+    x: [1, 2, 3, 4],
+    y: [10, 15, 13, 17],
+    mode: 'markers',
+    type: 'scatter'
 };
 
-const drawGrid = () => {
-    const gridGroup = d3.select(grid.value);
-    gridGroup.selectAll("*").remove(); // Clear previous grid lines
-
-    // Draw vertical grid lines
-    x.ticks().forEach(tick => {
-        gridGroup.append("line")
-            .attr("x1", x(tick))
-            .attr("y1", props.marginTop)
-            .attr("x2", x(tick))
-            .attr("y2", props.height - props.marginBottom)
-            .attr("stroke", "gray")
-            .attr("stroke-width", 1);
-    });
-
-    // Draw horizontal grid lines
-    y.ticks().forEach(tick => {
-        gridGroup.append("line")
-            .attr("x1", props.marginLeft)
-            .attr("y1", y(tick))
-            .attr("x2", props.width - props.marginRight)
-            .attr("y2", y(tick))
-            .attr("stroke", "#ccc")
-            .attr("stroke-width", 1);
-    });
+var trace2 = {
+    x: [2, 3, 4, 5],
+    y: [16, 5, 11, 9],
+    mode: 'lines',
+    type: 'scatter'
 };
 
-watch(() => props.data, updateAxes, { immediate: true });
+var trace3 = {
+    x: [1, 2, 3, 4],
+    y: [12, 9, 15, 12],
+    mode: 'lines+markers',
+    type: 'scatter'
+};
+
+var data = [trace1, trace2, trace3];
 
 onMounted(() => {
-    updateAxes();
+    Plotly.newPlot(chart.value, data);
 });
 </script>
 
-<style scoped>
-/* Add any necessary styles here */
-</style>
+<style lang="scss" scoped></style>
