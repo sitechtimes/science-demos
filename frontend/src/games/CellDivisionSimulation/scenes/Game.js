@@ -2,8 +2,8 @@ import { EventBus } from '../EventBus';
 import {Scene} from 'phaser';
 import Cell from '../Cell';
 import Textbox from '../Cell'
-import {ref} from 'vue'
-
+import {ref, reactive} from 'vue'
+export let limit = reactive(false)
 export class Game extends Scene
 {
     constructor ()
@@ -12,7 +12,12 @@ export class Game extends Scene
         this.time_in_cycle = 0
         this.year = 0
     }
-
+    restart(){
+        limit = false
+        this.year = 0
+        this.time_in_cycle = 0
+        this.cells.length = 1
+    }
     progressYear(){
         if(this.year<31){
             if (this.time_in_cycle === 0){
@@ -65,9 +70,10 @@ export class Game extends Scene
             }
         }
         console.log(this.time_in_cycle, this.year)
-        if(this.year>30){
+        if(this.year>=30){
             console.log('ive hit my limit')
-            new Textbox(this, 300,400, 'Max Limit Reached')
+            limit = true
+            console.log(limit)
         }
     }
     create ()
