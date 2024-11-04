@@ -64,9 +64,9 @@ export const DataStore = defineStore("data", () => {
       img: path + 'sponge.png',
       description: "blah blah blah blah blah",
     },
-    stoplightParrotfish: {
+    spotlightParrotfish: {
       population: 825, 
-      img: path + 'stoplightParrotfish.png',
+      img: path + 'spotlightParrotfish.png',
       description: "blah blah blah blah blah",
     },
     staghornCoral: {

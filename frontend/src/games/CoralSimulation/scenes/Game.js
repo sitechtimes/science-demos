@@ -59,6 +59,7 @@ export class Game extends Scene
         Object.keys(organisms).forEach((i) => {
             for(let j = 0; j < Math.ceil(organisms[i].population ** (2/5)); j++) {
                 if(fish.includes(i)) {
+                    console.log(i)
                     const [location, index] = this.randomElement(this.locationsFish)
                     this.locationsFish.splice(index, 1)
                     this.addFish(i, location)
@@ -72,6 +73,36 @@ export class Game extends Scene
             }
         })
         console.log(this.fish.map((fish) => fish.texture.key))
+    }
+
+    modifyOrganismCount(organism, count) {
+        const fish = ['hawksbillSeaTurtle', 'nassauGrouper', 'queenAngelfish', 'redLionfish', 'spotlightParrotfish', 'yellowtailSnapper']
+        if(count > 0) {
+            for(let i = 0; i < count; i++) {
+                if(fish.includes(organism)) {
+                    const [location, index] = this.randomElement(this.locationsStaticOrganism)
+                    this.locationsStaticOrganism.splice(index, 1)
+                    this.addFish(organism, location)
+                    this.fishDisplayed[organism] = (this.fishDisplayed[organism] || 0) + 1
+                } else {
+                    const [location, index] = this.randomElement(this.locationsStaticOrganism)
+                    this.locationsStaticOrganism.splice(index, organism)
+                    this.addStaticOrganism(organism, location)
+                    this.fishDisplayed[organism] = (this.fishDisplayed[organism] || 0) + 1
+                }
+            }
+        }
+        else if(count < 0) {
+            let i = 0
+            while(count < 0) {
+                if(this.fish[i].texture.key === organism) {
+                    this.fish[i].destroy()
+                    this.fish.splice(i, 1)
+                    count++
+                    i++
+                }
+            }
+        }
     }
 
     clearTextboxes(excluded) {

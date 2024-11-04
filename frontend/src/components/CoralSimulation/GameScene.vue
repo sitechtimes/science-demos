@@ -27,7 +27,12 @@ const changeScene = () => {
 function addOrganism(type) {
     const scene = toRaw(phaserRef.value.scene);
 
-    scene.addOrganism(type)
+    scene.modifyOrganismCount('algae', 10)
+}
+function removeOrganism(type) {
+    const scene = toRaw(phaserRef.value.scene);
+
+    scene.modifyOrganismCount('algae', -10)
 }
 
 //  This event is emitted from the PhaserGame component:
@@ -37,7 +42,8 @@ function addOrganism(type) {
     <PhaserGame ref="phaserRef" @current-active-scene="currentScene" />
     <div>
         <div>
-            <Button @click="() => addOrganism('nassau_grouper')">Add New Sprite</Button>
+            <Button @click="() => addOrganism('nassau_grouper')">Add Sprites</Button>
+            <Button @click="() => removeOrganism('nassau_grouper')">Remove Sprites</Button>
         </div>
     </div>
 </template>
