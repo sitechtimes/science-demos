@@ -13,6 +13,14 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    layout: {
+        type: Object,
+        default: {},
+    },
+    config: {
+        type: Object,
+        default: { staticPlot: true },
+    },
     width: {
         type: Number,
         default: 640,
@@ -45,31 +53,27 @@ const props = defineProps({
 
 const chart = ref(null);
 
-var trace1 = {
-    x: [1, 2, 3, 4],
-    y: [10, 15, 13, 17],
-    mode: 'markers',
-    type: 'scatter'
-};
+function dataProcess(dataset) {
+    const data = [];
+    let xArray = [];
+    let yArray = [];
+    dataset.forEach((item) => {
+        xArray = item.data.map(item => item.x);
+        yArray = item.data.map(item => item.y);
+        data.push({
+            x: xArray,
+            y: yArray,
+            mode: item.mode,
+            type: 'scatter'
+        });
+    });
+    return data;
+}
 
-var trace2 = {
-    x: [2, 3, 4, 5],
-    y: [16, 5, 11, 9],
-    mode: 'lines',
-    type: 'scatter'
-};
-
-var trace3 = {
-    x: [1, 2, 3, 4],
-    y: [12, 9, 15, 12],
-    mode: 'lines+markers',
-    type: 'scatter'
-};
-
-var data = [trace1, trace2, trace3];
+const data = dataProcess(props.data.datasets)
 
 onMounted(() => {
-    Plotly.newPlot(chart.value, data);
+    Plotly.newPlot(chart.value, data, props.layout, props.config);
 });
 </script>
 

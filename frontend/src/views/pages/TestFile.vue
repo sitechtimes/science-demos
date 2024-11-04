@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ScatterPlot :data="data" :tooltip="false" />
+        <ScatterPlot :data="data" :layout="layout" :config="config" :tooltip="false" />
     </div>
 </template>
 
@@ -19,7 +19,8 @@ const data = ref({
                 { x: 232.79, y: 96.71 },
                 { x: 146.33, y: 3.77 },
                 { x: 3.37, y: -0.81 },
-            ]
+            ],
+            mode: 'markers'
         },
         {
             label: 'wk2',
@@ -39,7 +40,8 @@ const data = ref({
                 { x: -0.22, y: -0.59 },
                 { x: -0.68, y: 200.06 },
                 { x: 272.79, y: 123.70 },
-            ]
+            ],
+            mode: 'markers'
         },
         {
             label: 'wk5',
@@ -58,10 +60,21 @@ const data = ref({
                 { x: -0.09, y: 2.55 },
                 { x: -0.12, y: 0.94 },
                 { x: 0.04, y: -0.13 },
-            ]
+            ],
+            mode: 'markers'
         },
     ]
 });
+
+const layout = ref({
+    title: 'Nitrate abababa',
+    xaxis: { title: 'no biochar' },
+    yaxis: { title: 'biochar' },
+});
+
+const config = ref({
+    displayModeBar: false,
+})
 </script>
 
 <style lang="scss" scoped></style>
