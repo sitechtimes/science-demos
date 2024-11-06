@@ -2,8 +2,8 @@ import { EventBus } from '../EventBus';
 import {Scene} from 'phaser';
 import Cell from '../Cell';
 import Textbox from '../Cell'
-import {ref, reactive} from 'vue'
-export let limit = reactive(false)
+import {ref} from 'vue'
+export let limit = ref(false)
 export class Game extends Scene
 {
     constructor ()
