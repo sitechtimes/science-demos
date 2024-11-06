@@ -76,6 +76,7 @@ export class Game extends Scene
     }
 
     modifyOrganismCount(organism, count) {
+        const dataStore = DataStore()
         const fish = ['hawksbillSeaTurtle', 'nassauGrouper', 'queenAngelfish', 'redLionfish', 'spotlightParrotfish', 'yellowtailSnapper']
         if(count > 0) {
             for(let i = 0; i < count; i++) {
@@ -84,27 +85,34 @@ export class Game extends Scene
                     this.locationsStaticOrganism.splice(index, 1)
                     this.addFish(organism, location)
                     this.fishDisplayed[organism] = (this.fishDisplayed[organism] || 0) + 1
+                    dataStore.organisms[organism].population++
                 } else {
                     const [location, index] = this.randomElement(this.locationsStaticOrganism)
                     this.locationsStaticOrganism.splice(index, organism)
                     this.addStaticOrganism(organism, location)
                     this.fishDisplayed[organism] = (this.fishDisplayed[organism] || 0) + 1
+                    dataStore.organisms[organism].population++
                 }
             }
         }
         else if(count < 0) {
-            let i = 0
-            while(count < 0) {
+            // const matchingFish = this.fish.filter((fish) => fish.texture.key === organism)
+            let numRemoved = 0
+            
+            for(let i = 0; i < this.fish.length; i++) {
+                if(numRemoved === (count * -1)) {
+                    return
+                }
                 if(this.fish[i].texture.key === organism) {
                     this.fish[i].destroy()
                     this.fish.splice(i, 1)
-                    count++
-                    i++
+                    numRemoved++
                 }
+
             }
+            console.log(this.fish)
         }
     }
-
     clearTextboxes(excluded) {
         this.fish.forEach((fish) => {
             if (fish.x !== excluded.x || fish.y !== excluded.y) {

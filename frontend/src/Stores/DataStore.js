@@ -115,7 +115,6 @@ export const DataStore = defineStore("data", () => {
     sliderStep: 1,
   });
 
-  actions: {}
 
   return {
     logging,
