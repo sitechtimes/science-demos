@@ -1,8 +1,11 @@
 import { EventBus } from '../EventBus';
 import {Scene} from 'phaser';
+
 import Fish from '../Fish'
 import StaticOrganism from '../StaticOrganism';
+
 import { DataStore } from '@/Stores/DataStore';
+
 import { generateLocationsFish, generateLocationsStaticOrganism } from '../locationsScript';
 
 export class Game extends Scene
@@ -14,107 +17,95 @@ export class Game extends Scene
 
     create ()
     {
-
         this.add.image(512, 384, 'background').setAlpha(1);
-        this.fish = []
 
-        this.locationsFish = generateLocationsFish()
-        this.locationsStaticOrganism = generateLocationsStaticOrganism()
-        this.fishDisplayed = {}
+        this.organisms = []
+
+        this.locations = {
+            fish: generateLocationsFish(),
+            staticOrganisms: generateLocationsStaticOrganism()
+        }
 
         this.initializeOrganisms()
 
         EventBus.emit('current-scene-ready', this);
     }
 
-    update () {
-
-    }
+    update () {}
     
-    changeScene ()
-    {
-        this.scene.start('GameOver');
-    }
-    addFish(type, {x, y}) {
-        const newFish = new Fish(this, x, y, type)
-        this.fish.push(newFish)
-    }
-    addStaticOrganism(type, {x, y}) {
-        const newStaticOrganism = new StaticOrganism(this, x, y, type)
-        this.fish.push(newStaticOrganism)
+    // Adds organism, either with class Fish or StaticOrganism based on organism species
+    addOrganism(type, {x, y}) {
+        const fish = ['hawksbillSeaTurtle', 'nassauGrouper', 'queenAngelfish', 'redLionfish', 'spotlightParrotfish', 'yellowtailSnapper']
+
+        // if organism is a fish, use Fish class, else, use StaticOrganism
+        const newOrganism = fish.includes(type) ? new Fish(this, x, y, type) : new StaticOrganism(this, x, y, type)
+        this.organisms.push(newOrganism)
     }
 
+    // returns random element and index of element from an array
     randomElement(arr) {
         const i = Math.floor(Math.random() * arr.length)
         return [arr[i], i]
     }
 
+    // Generate initial organisms, based on num in data store
     initializeOrganisms() {
-        const dataStore = DataStore()
-        const organisms = dataStore.organisms
-        // console.log(Object.keys(organisms))
+        const organisms = DataStore().organisms
 
-        const fish = ['hawksbillSeaTurtle', 'nassauGrouper', 'queenAngelfish', 'redLionfish', 'spotlightParrotfish', 'yellowtailSnapper']
+        const fishTypes = ['hawksbillSeaTurtle', 'nassauGrouper', 'queenAngelfish', 'redLionfish', 'spotlightParrotfish', 'yellowtailSnapper']
 
-        Object.keys(organisms).forEach((i) => {
-            for(let j = 0; j < Math.ceil(organisms[i].population ** (2/5)); j++) {
-                if(fish.includes(i)) {
-                    console.log(i)
-                    const [location, index] = this.randomElement(this.locationsFish)
-                    this.locationsFish.splice(index, 1)
-                    this.addFish(i, location)
-                    this.fishDisplayed[i] = (this.fishDisplayed[i] || 0) + 1
-                } else {
-                    const [location, index] = this.randomElement(this.locationsStaticOrganism)
-                    this.locationsStaticOrganism.splice(index, 1)
-                    this.addStaticOrganism(i, location)
-                    this.fishDisplayed[i] = (this.fishDisplayed[i] || 0) + 1
-                }
+        Object.keys(organisms).forEach((fish) => {
+            for(let i = 0; i < Math.ceil(organisms[fish].population ** (2/5)); i++) {
+                // if organism is fish, use fish locations, else, use static organism locations
+                const locations = fishTypes.includes(fish) ? this.locations.fish : this.locations.staticOrganisms
+
+                // get random location from object and then splices it so it cannot be reused, prevents two organisms in same location
+                const [location, index] = this.randomElement(locations)
+                locations.splice(index, 1)
+
+                this.addOrganism(fish, location)
             }
         })
-        console.log(this.fish.map((fish) => fish.texture.key))
     }
 
-    modifyOrganismCount(organism, count) {
-        const dataStore = DataStore()
-        const fish = ['hawksbillSeaTurtle', 'nassauGrouper', 'queenAngelfish', 'redLionfish', 'spotlightParrotfish', 'yellowtailSnapper']
-        if(count > 0) {
-            for(let i = 0; i < count; i++) {
-                if(fish.includes(organism)) {
-                    const [location, index] = this.randomElement(this.locationsStaticOrganism)
-                    this.locationsStaticOrganism.splice(index, 1)
-                    this.addFish(organism, location)
-                    this.fishDisplayed[organism] = (this.fishDisplayed[organism] || 0) + 1
-                    dataStore.organisms[organism].population++
-                } else {
-                    const [location, index] = this.randomElement(this.locationsStaticOrganism)
-                    this.locationsStaticOrganism.splice(index, organism)
-                    this.addStaticOrganism(organism, location)
-                    this.fishDisplayed[organism] = (this.fishDisplayed[organism] || 0) + 1
-                    dataStore.organisms[organism].population++
-                }
+    modifyOrganismCount(organism, numToChange) {
+        const fishTypes = ['hawksbillSeaTurtle', 'nassauGrouper', 'queenAngelfish', 'redLionfish', 'spotlightParrotfish', 'yellowtailSnapper']
+
+        if(numToChange > 0) {
+            for(let i = 0; i < numToChange; i++) {
+                // if organism is fish, use fish locations, else, use static organism locations
+                const locations = fishTypes.includes(organism) ? this.locations.fish : this.locations.staticOrganisms
+                
+                // get random location from object and then splices it so it cannot be reused, prevents two organisms in same location
+                const [location, index] = this.randomElement(locations)
+                locations.splice(index, 1)
+                this.addOrganism(organism, location)
             }
         }
-        else if(count < 0) {
-            // const matchingFish = this.fish.filter((fish) => fish.texture.key === organism)
-            let numRemoved = 0
+        else if(numToChange < 0) {
+            let numChanged = 0
             
-            for(let i = 0; i < this.fish.length; i++) {
-                if(numRemoved === (count * -1)) {
+            for(let i = 0; i < this.organisms.length; i++) {
+                if(numChanged === numToChange) {
                     return
-                }
-                if(this.fish[i].texture.key === organism) {
-                    this.fish[i].destroy()
-                    this.fish.splice(i, 1)
-                    numRemoved++
+                } else if(this.organisms[i].texture.key === organism) {
+                    // destroy organism visual and remove from organisms array
+                    this.organisms[i].destroy()
+                    this.organisms.splice(i, 1)
+                    numChanged--
+
+                    // decrease i by 1 because the array is spliced, therefore the same i number that is used in this loop should also be used in the next loop due to the previous 
+                    // value at i being removed and replaced by the next value in the array
+                    i--
                 }
 
             }
-            console.log(this.fish)
         }
     }
+    // removes textboxes of all organisms other than the one clicked (to prevent duplicate textboxes)
     clearTextboxes(excluded) {
-        this.fish.forEach((fish) => {
+        // if organism is not at location of excluded one, remove textbox
+        this.organisms.forEach((fish) => {
             if (fish.x !== excluded.x || fish.y !== excluded.y) {
                 fish.clearPopup()
             }
