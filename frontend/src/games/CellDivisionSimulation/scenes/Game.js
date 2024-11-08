@@ -3,7 +3,7 @@ import {Scene} from 'phaser';
 import Cell from '../Cell';
 import Textbox from '../Cell'
 import {ref} from 'vue'
-export let limit = ref(false)
+export const limit = ref(false)
 export class Game extends Scene
 {
     constructor ()
@@ -13,10 +13,14 @@ export class Game extends Scene
         this.year = 0
     }
     restart(){
-        limit = false
+        limit.value = false
         this.year = 0
         this.time_in_cycle = 0
-        this.cells.length = 1
+        this.cells.forEach((cell)=>cell.destroy())
+        const cell = new Cell(this, 400,300, 'time0', 'x').setScale(0.5).setDepth(0)
+        this.cells = [cell]
+        // console.log('restarted')
+        // console.log(this.cells)
     }
     progressYear(){
         if(this.year<31){
@@ -61,19 +65,19 @@ export class Game extends Scene
                 this.year++
                 this.cells.forEach((cell)=>cell.setTexture('time0'))
                 let temp_length = this.cells.length
-                console.log(temp_length)
+                // console.log(temp_length)
                 for(let i in this.cells){
                     this.cells.push(new Cell(this,  Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'time0').setScale(0.5).setDepth(0))
-                    console.log(this.cells.length, temp_length)
+                    // console.log(this.cells.length, temp_length)
                 }
                 this.cells.forEach((cell)=>cell.clearPopup())
             }
         }
-        console.log(this.time_in_cycle, this.year)
+        // console.log(this.time_in_cycle, this.year)
         if(this.year>=30){
-            console.log('ive hit my limit')
-            limit = true
-            console.log(limit)
+            // console.log('ive hit my limit')
+            limit.value = true
+            // console.log(limit)
         }
     }
     create ()
@@ -81,27 +85,6 @@ export class Game extends Scene
         // this.cameras.main.setBackgroundColor(0x00ff00);
 
         this.add.image(512, 384, 'backgroundimg').setAlpha(1);
-        // this.add.image(400,300, "time0").setAlpha(1).setScale(0.5);
-        // if( time_in_cycle.value === 0){
-        //     this.add.image(400,300, "time0").setAlpha(1).setScale(0.5)
-        // }
-        // else if( time_in_cycle.value === 1){
-        //     this.add.image(400,300, "time1").setAlpha(1).setScale(0.5)
-        // }
-        // else if( time_in_cycle.value === 2){
-        //     this.add.image(400,300, "time2").setAlpha(1).setScale(0.5)
-        // }
-        // else if( time_in_cycle.value === 3){
-        //     this.add.image(400,300, "time3").setAlpha(1).setScale(0.5)
-        // }
-        // else if( time_in_cycle.value === 4){
-        //     this.add.image(400,300, "time4").setAlpha(1).setScale(0.5)
-        // }
-        // else{
-        //     this.add.image(400,300, "time5").setAlpha(1).setScale(0.5)
-        // }
-        this.organisms = this.physics.add.staticGroup();
-        // this.cell = [new Cell(this, this.scale.width/2, this.scale.height/2), 'time0', 'cell']
 
         this.cells = [new Cell(this, 400,300, 'time0', 'x').setScale(0.5).setDepth(0)]
         EventBus.emit('current-scene-ready', this);

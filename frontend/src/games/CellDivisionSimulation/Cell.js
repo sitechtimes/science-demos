@@ -28,7 +28,7 @@ constructor( scene, x, y, texture ) {
 
     scene.add.existing(this)
     // scene.physics.add.existing(this)
-    console.log(this.texture)
+    // console.log(this.texture)
     this.setScale(0.5).setInteractive()
     let text = this.texture.key
     this.textbox = new Textbox(scene, x,y-200, 'textbox', text).setDepth(2)

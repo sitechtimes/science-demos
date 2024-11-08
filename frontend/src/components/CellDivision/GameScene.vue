@@ -24,14 +24,14 @@ const changeScene = () => {
 function handleClick(){
     const scene = toRaw(phaserRef.value.scene);
     scene.progressYear()
-    console.log(limit, limit.value)
+    // console.log(limit, limit.value)
 }
 function handleRestart(){
     const scene = toRaw(phaserRef.value.scene);
     scene.restart()
 }
 
-console.log(limit, limit.value)
+// console.log(limit, limit.value)
 watch(limit, async (newLimit) => {
   if (newLimit===true) {
     try {
