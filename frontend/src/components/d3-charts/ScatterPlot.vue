@@ -6,11 +6,11 @@
 
 <script setup>
 import Plotly from 'plotly.js-dist';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 
 const props = defineProps({
     data: {
-        type: Object,
+        type: Array,
         required: true,
     },
     layout: {
@@ -21,59 +21,100 @@ const props = defineProps({
         type: Object,
         default: { staticPlot: true },
     },
-    width: {
-        type: Number,
-        default: 640,
-    },
-    height: {
-        type: Number,
-        default: 400,
-    },
-    marginTop: {
-        type: Number,
-        default: 20,
-    },
-    marginRight: {
-        type: Number,
-        default: 20,
-    },
-    marginBottom: {
-        type: Number,
-        default: 30,
-    },
-    marginLeft: {
-        type: Number,
-        default: 40,
-    },
-    tooltip: {
-        type: Boolean,
-        default: true,
-    },
 });
 
 const chart = ref(null);
 
-function dataProcess(dataset) {
-    const data = [];
-    let xArray = [];
-    let yArray = [];
-    dataset.forEach((item) => {
-        xArray = item.data.map(item => item.x);
-        yArray = item.data.map(item => item.y);
-        data.push({
-            x: xArray,
-            y: yArray,
-            mode: item.mode,
-            type: 'scatter'
-        });
-    });
-    return data;
+const chartOptions = ref();
+
+function getStyles() { // obtain current theme colors for chart options
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--p-text-color');
+    const textColorSecondary = documentStyle.getPropertyValue('--p-text-muted-color');
+    const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
+    return {
+        textColor: textColor,
+        textColorSecondary: textColorSecondary,
+        surfaceBorder: surfaceBorder
+    };
 }
 
-const data = dataProcess(props.data.datasets)
+const setChartOptions = (doc) => { // return chart options
+    const chartOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+            legend: { // it's possible to make it more minimalistic by having 1 button to disable/enable multiple datasets
+                labels: {
+                    color: doc.textColor
+                },
+                position: 'bottom'
+            },
+            title: {
+                display: true,
+                text: axesLabels.chartTitle[chartTypeNum],
+                color: doc.textColor
+            },
+        },
+        scales: {
+            x: {
+                type: 'linear',
+                ticks: {
+                    color: doc.textColorSecondary
+                },
+                grid: {
+                    color: doc.surfaceBorder
+                },
+                title: {
+                    display: true,
+                    text: axesLabels.xAxis[chartTypeNum], // axes names
+                    color: doc.textColor
+                }
+            },
+            y: {
+                ticks: {
+                    color: doc.textColorSecondary
+                },
+                grid: {
+                    color: doc.surfaceBorder
+                },
+                title: {
+                    display: true,
+                    text: axesLabels.yAxis[chartTypeNum],
+                    color: doc.textColor
+                },
+                type: 'linear',
+                position: 'left',
+            },
+            y1: {
+                type: 'linear',
+                display: true,
+                position: 'right',
+                grid: {
+                    drawOnChartArea: false,
+                    color: doc.surfaceBorder
+                },
+                ticks: {
+                    color: doc.textColorSecondary
+                },
+                title: {
+                    display: true,
+                    text: 'CO₂ Pressure (µATM)',
+                    color: doc.textColor
+                },
+            },
+        }
+    };
+    return chartOptions;
+}
+
+/* watch([useLayout().isDarkTheme, selectedYear.value, chartType], () => {
+    chartOptions.value = setChartOptions(chartInfo.value.currentGraph, getStyles);
+}); */
 
 onMounted(() => {
-    Plotly.newPlot(chart.value, data, props.layout, props.config);
+    // chartOptions.value = setChartOptions(chartInfo.value.currentGraph, getStyles);
+    Plotly.newPlot(chart.value, props.data, props.layout, props.config);
 });
 </script>
 
