@@ -26,6 +26,8 @@ const config = {
     ]
 };
 
+this.cells = this.cells[this.cells[0]]
+
 const StartGame = (parent) => {
 
     return new Phaser.Game({ ...config, parent });
