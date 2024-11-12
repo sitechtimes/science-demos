@@ -3,8 +3,8 @@ import Phaser from 'phaser';
 import { ref, toRaw, watch } from 'vue';
 import PhaserGame from './PhaserGame.vue';
 import Button from 'primevue/button';
-import {Game} from '@/games/CellDivisionSimulation/scenes/Game.js'
-import {limit} from '@/games/CellDivisionSimulation/scenes/Game'
+import {Game} from '@/games/CellDivisionSimulation/mitosis/scenes/Game.js'
+import {limit} from '@/games/CellDivisionSimulation/mitosis/scenes/Game'
 // The sprite can only be moved in the MainMenu Scene
 
 //  References to the PhaserGame component (game and scene are exposed)

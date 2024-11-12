@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
-import { EventBus } from '@/games/CellDivisionSimulation/EventBus';
-import StartGame from '@/games/CellDivisionSimulation/main';
+import { EventBus } from '@/games/CellDivisionSimulation/mitosis/EventBus';
+import StartGame from '@/games/CellDivisionSimulation/mitosis/main';
 
 // Save the current scene instance
 const scene = ref();

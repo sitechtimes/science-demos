@@ -1,10 +1,9 @@
 
 <script setup>
 import { ref } from 'vue';
-import CoralChart from '@/components/CoralSimulation/CoralChart.vue';
-import SliderConditions from "@/components/CoralSimulation/SliderConditions.vue";
-import SliderYear from '@/components/CoralSimulation/SliderYear.vue';
-import GameScene from '@/components/CellDivision/GameScene.vue'
+import MiGameScene from '@/components/CellDivision/MiGameScene.vue'
+import MeiGameScene from '@/components/CellDivision/MeiGameScene.vue'
+
 import SelectButton from 'primevue/selectbutton';
 const chartType = ref('Mitosis')
 
@@ -27,7 +26,10 @@ const chartType = ref('Mitosis')
     <div class="chart-slider-container">
         <div class="chart-container">
             <div class="card" v-if="chartType === 'Mitosis'">
-                <GameScene/>
+                <MiGameScene/>
+            </div>
+            <div class="card" v-if="chartType === 'Meiosis'">
+                <MeiGameScene/>
             </div>
         </div>
     </div>
