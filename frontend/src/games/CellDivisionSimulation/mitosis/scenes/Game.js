@@ -24,53 +24,21 @@ export class Game extends Scene
     }
     progressYear(){
         if(this.year<31){
-            if (this.time_in_cycle === 0){
-                //dissolve nuclear membrane
-                this.time_in_cycle++;
-                this.year++
-                this.cells.forEach((cell)=>cell.setTexture('time1'))
-                this.cells.forEach((cell)=>cell.clearPopup())
-            }
-            else if (this.time_in_cycle === 1){
-                //centrosomes attach to 
-                // this.cell.setTexture('time1')
-                this.time_in_cycle++;
-                this.year++
-                this.cells.forEach((cell)=>cell.setTexture('time2'))
-                this.cells.forEach((cell)=>cell.clearPopup())
-            }
-            else if(this.time_in_cycle === 2){
-                //centrosomes pull apart chromosomes, cell squishes in middle
-                this.time_in_cycle++;
-                this.year++
-                this.cells.forEach((cell)=>cell.setTexture('time3'))
-                this.cells.forEach((cell)=>cell.clearPopup())
-            }
-            else if(this.time_in_cycle===3){
-                //nuclear membrane develops around each set of chromosomes, cell squishes more
-                this.time_in_cycle++;
-                this.year++
-                this.cells.forEach((cell)=>cell.setTexture('time4'))
-                this.cells.forEach((cell)=>cell.clearPopup())
-            }
-            else if(this.time_in_cycle===4){
-                //cell separates
-                this.time_in_cycle++;
-                this.year++
-                this.cells.forEach((cell)=>cell.setTexture('time5'))
-                this.cells.forEach((cell)=>cell.clearPopup())
-            }
-            else{
-                this.time_in_cycle=0;
-                this.year++
-                this.cells.forEach((cell)=>cell.setTexture('time0'))
-                let temp_length = this.cells.length
-                // console.log(temp_length)
-                for(let i in this.cells){
-                    this.cells.push(new Cell(this,  Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'time0').setScale(0.5).setDepth(0))
-                    // console.log(this.cells.length, temp_length)
-                }
-                this.cells.forEach((cell)=>cell.clearPopup())
+            switch(this.time_in_cycle){
+                case 5:
+                    this.time_in_cycle=0;
+                    this.year++
+                    this.cells.forEach((cell)=>cell.setTexture('time0'))
+                    for(let i in this.cells){
+                        this.cells.push(new Cell(this,  Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'time0').setScale(0.5).setDepth(0))
+                    }
+                    this.cells.forEach((cell)=>cell.clearPopup())
+                    break
+                default:
+                    this.time_in_cycle++;
+                    this.year++
+                    this.cells.forEach((cell)=>cell.setTexture('time'+this.time_in_cycle))
+                    this.cells.forEach((cell)=>cell.clearPopup())
             }
         }
         // console.log(this.time_in_cycle, this.year)

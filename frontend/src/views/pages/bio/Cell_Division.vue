@@ -5,7 +5,7 @@ import MiGameScene from '@/components/CellDivision/MiGameScene.vue'
 import MeiGameScene from '@/components/CellDivision/MeiGameScene.vue'
 
 import SelectButton from 'primevue/selectbutton';
-const chartType = ref('Mitosis')
+const chartType = ref('Meiosis')
 
 //mitosis:
 //'progress time' button will go to the next phase
