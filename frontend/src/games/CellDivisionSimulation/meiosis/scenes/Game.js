@@ -54,7 +54,7 @@ export class Game extends Scene
             }
         }
         // console.log(this.time_in_cycle, this.year)
-        if(this.year>=15){
+        if(this.year>=21){
             // console.log('ive hit my limit')
             limit.value = true
             // console.log(limit)
