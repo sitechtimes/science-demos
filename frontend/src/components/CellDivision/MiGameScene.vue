@@ -1,7 +1,7 @@
 <script setup>
 import Phaser from 'phaser';
 import { ref, toRaw, watch } from 'vue';
-import PhaserGame from './PhaserGame.vue';
+import PhaserGame from './MiPhaserGame.vue';
 import Button from 'primevue/button';
 import {Game} from '@/games/CellDivisionSimulation/mitosis/scenes/Game.js'
 import {limit} from '@/games/CellDivisionSimulation/mitosis/scenes/Game'

@@ -17,7 +17,7 @@ export class Game extends Scene
         this.year = 0
         this.time_in_cycle = 0
         this.cells.forEach((cell)=>cell.destroy())
-        const cell = new Cell(this, 400,300, 'time0', 'x').setScale(0.5).setDepth(0)
+        const cell = new Cell(this, 400,300, 'mei-time-0', 'x').setDepth(0)
         this.cells = [cell]
         // console.log('restarted')
         // console.log(this.cells)
@@ -25,24 +25,36 @@ export class Game extends Scene
     progressYear(){
         if(this.year<31){
             switch(this.time_in_cycle){
-                case 5:
-                    this.time_in_cycle=0;
+                case 4:
+                    this.time_in_cycle++;
                     this.year++
-                    this.cells.forEach((cell)=>cell.setTexture('time0'))
+                    this.cells.forEach((cell)=>cell.setTexture('mei-time-5'))
                     for(let i in this.cells){
-                        this.cells.push(new Cell(this,  Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'time0').setScale(0.5).setDepth(0))
+                        this.cells.push(new Cell(this,  Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'mei-time-5').setDepth(0))
                     }
                     this.cells.forEach((cell)=>cell.clearPopup())
+                    console.log(this.time_in_cycle)
+                    break
+                case 9:
+                    this.time_in_cycle=0;
+                    this.year++
+                    this.cells.forEach((cell)=>cell.setTexture('mei-time-9'))
+                    for(let i in this.cells){
+                        this.cells.push(new Cell(this,  Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'mei-time-9').setDepth(0))
+                    }
+                    this.cells.forEach((cell)=>cell.clearPopup())
+                    console.log(this.time_in_cycle)
                     break
                 default:
                     this.time_in_cycle++;
                     this.year++
-                    this.cells.forEach((cell)=>cell.setTexture('time'+this.time_in_cycle))
+                    this.cells.forEach((cell)=>cell.setTexture('mei-time-'+this.time_in_cycle))
                     this.cells.forEach((cell)=>cell.clearPopup())
+                    console.log(this.time_in_cycle)
             }
         }
         // console.log(this.time_in_cycle, this.year)
-        if(this.year>=30){
+        if(this.year>=15){
             // console.log('ive hit my limit')
             limit.value = true
             // console.log(limit)
@@ -54,7 +66,7 @@ export class Game extends Scene
 
         this.add.image(512, 384, 'backgroundimg').setAlpha(1);
 
-        this.cells = [new Cell(this, 400,300, 'time0', 'x').setScale(0.5).setDepth(0)]
+        this.cells = [new Cell(this, 400,300, 'mei-time-0', 'x').setDepth(0)]
         EventBus.emit('current-scene-ready', this);
     }
 

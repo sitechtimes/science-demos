@@ -29,12 +29,17 @@ export class Preloader extends Scene
     preload ()
     {
         //  Load the assets for the game - Replace with your own assets
-        this.load.image('time0', "/src/games/CellDivisionSimulation/images/time0.jfif")
-        this.load.image('time1', "/src/games/CellDivisionSimulation/images/time1.png")
-        this.load.image('time2', "/src/games/CellDivisionSimulation/images/time2.png")
-        this.load.image('time3', "/src/games/CellDivisionSimulation/images/time3.png")
-        this.load.image('time4', "/src/games/CellDivisionSimulation/images/time4.png")
-        this.load.image('time5', "/src/games/CellDivisionSimulation/images/time5.png")
+        this.load.image('mei-time-0', "/src/games/CellDivisionSimulation/images/mei-time-0.jpg")
+        this.load.image('mei-time-1', "/src/games/CellDivisionSimulation/images/mei-time-1.jpg")
+        this.load.image('mei-time-2', "/src/games/CellDivisionSimulation/images/mei-time-2.jpg")
+        this.load.image('mei-time-3', "/src/games/CellDivisionSimulation/images/mei-time-3.jpg")
+        this.load.image('mei-time-4', "/src/games/CellDivisionSimulation/images/mei-time-4.jpg")
+        this.load.image('mei-time-5', "/src/games/CellDivisionSimulation/images/mei-time-5.jpg")
+        this.load.image('mei-time-6', "/src/games/CellDivisionSimulation/images/mei-time-6.jpg")
+        this.load.image('mei-time-7', "/src/games/CellDivisionSimulation/images/mei-time-7.jpg")
+        this.load.image('mei-time-8', "/src/games/CellDivisionSimulation/images/mei-time-8.jpg")
+        this.load.image('mei-time-9', "/src/games/CellDivisionSimulation/images/mei-time-9.jpg")
+        this.load.image('mei-time-10', "/src/games/CellDivisionSimulation/images/mei-time-10.jpg")
 
         this.load.image('textbox', "/src/games/CellDivisionSimulation/images/textbox.png")
         
