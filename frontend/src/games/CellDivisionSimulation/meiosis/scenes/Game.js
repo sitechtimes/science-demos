@@ -66,7 +66,7 @@ export class Game extends Scene
 
         this.add.image(512, 384, 'backgroundimg').setAlpha(1);
 
-        this.cells = [new Cell(this, 400,300, 'mei-time-0', 'x').setDepth(0)]
+        this.cells = [new Cell(this, 400,300, 'mei-time-0', 'time0hahh').setDepth(0)]
         EventBus.emit('current-scene-ready', this);
     }
 

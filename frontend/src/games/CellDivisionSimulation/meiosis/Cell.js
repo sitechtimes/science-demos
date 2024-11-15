@@ -23,19 +23,20 @@ class Textbox extends Phaser.GameObjects.Sprite {
     // }
   }
 export default class Cell extends Phaser.Physics.Arcade.Sprite {
-constructor( scene, x, y, texture ) {
+constructor( scene, x, y, texture, desc ) {
+  let text=desc
     super(scene, x, y, texture)
 
     scene.add.existing(this)
     // scene.physics.add.existing(this)
     // console.log(this.texture)
     this.setInteractive()
-    let text = this.texture.key
+    console.log(text)
     this.textbox = new Textbox(scene, x,y-200, 'textbox', text).setDepth(2)
     this.textbox.visible = false
     this.on('pointerdown', () => {
       this.togglePopup(scene)
-      this.textbox.text.setText(this.texture.key).setDepth(3)
+      this.textbox.text.setText(text).setDepth(3)
       // if (this.popup) {
       //     this.deletePopup()
       //     this.popup = undefined
