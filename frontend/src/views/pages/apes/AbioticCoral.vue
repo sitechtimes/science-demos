@@ -1,22 +1,22 @@
 <template>
-    <div class="bg-surface-900 w-fit p-2 rounded">
-            <SelectButton v-model="chartType" :options="['Simulation', 'Population %', 'Population Count']" />
-        </div>
+    <div class="card w-fit p-2">
+        <SelectButton v-model="chartType" :options="['Simulation', 'Population %', 'Population Count']" />
+    </div>
     <div class="chart-slider-container">
         <div class="chart-container">
             <div class="card" v-if="chartType === 'Simulation'">
-                <GameScene/>
+                <GameScene />
             </div>
             <div class="card" v-else>
-                <CoralChart v-model="chartType"/>
+                <CoralChart v-model="chartType" />
             </div>
         </div>
         <div class="slider-container">
             <div class="card">
-                <SliderConditions/>
+                <SliderConditions />
             </div>
             <div class="card">
-                <SliderYear/>
+                <SliderYear />
             </div>
         </div>
     </div>
@@ -39,12 +39,15 @@ const chartType = ref('Population %')
     grid-template-columns: 1fr;
     gap: 1rem;
 }
+
 .chart-container {
     width: 100%;
 }
+
 .slider-container {
     width: 100%;
 }
+
 @media (min-width: 768px) {
     .chart-slider-container {
         grid-template-columns: 2fr 1fr;
