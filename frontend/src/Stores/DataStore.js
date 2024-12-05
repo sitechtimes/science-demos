@@ -4,35 +4,21 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 
 export const DataStore = defineStore("data", () => {
-  //Human activity
-  const logging = ref(); //(runoff + eutrophication via soil erosion)
-  const agriculture = ref(); //(runoff + eutrophication)
-  const sewage = ref(); // (disease + eutrophication
-  const fishing = ref();
-  const netFishing = ref(); // (breaks coral / kills many other species with bycatch)
+  // Environment input is an object with key properties
+  // Ocean Conditions
+  // - environment.oceanTemp: ocean temperature (°C)
+  // - environment.stormSeverity: storm severity (0 to 1)
+  // - environment.pH: ocean pH (acidity)
+  // Land Use
+  // - environment.logging, environment.agriculture, environment.sewage (0 to 1 scale)
+  // Fishing
+  // - environment.netFishing, environment.grouperFishing, environment.snapperFishing (0 to 1 scale)
+  // Disease
+  // - environment.blackBandDisease, environment.whiteBandDisease, environment.urchinDisease (0 to 1 scale)
+  // Invasive Species (booleans for presence)
+  // - environment.crownOfThorns, environment.redLionfish (true or false)
 
-  //Disease
-  const blackBandDisease = ref(false);
-  const whiteBandDisease = ref(false);
-
-  //Keystone Species
-  const grouperSpecies = ref({
-    population: 100, //placeholder
-    species: "Keystone",
-    info: "blah blah blah blah blah",
-  });
-  const snapperSpecies = ref({
-    population: 100, //placeholder
-    species: "Keystone",
-    info: "blah blah blah blah blah",
-  });
-  const seaUrchinSpecies = ref({
-    population: 100, //placeholder
-    species: "Keystone",
-    info: "blah blah blah blah blah",
-  });
-
-  //Ocean Conditions
+  // Ocean Conditions
   const oceanTemp = ref({
     name: "Ocean Temperature (°C)",
     sliderValue: 27,
@@ -48,41 +34,76 @@ export const DataStore = defineStore("data", () => {
     sliderStep: 5,
   }); //% 0-100 slider
   const waterPH = ref({
-    name: "Water pH",
     sliderValue: 8.1,
     sliderMin: 7.6,
     sliderMax: 8.6,
     sliderStep: 0.1,
   }); // (acidity) 7.6-8.6 slider
-  const waterSalinity = ref({
-    name: "Water Salinity",
-    sliderValue: 8.1,
-    sliderMin: 33,
-    sliderMax: 36,
-    sliderStep: 0.1,
-  }); // slider for salinity, 33-36. Used to adjust the carbon equations
 
-  //invasive species
-  const crownOfThornsStarfish = ref({
-    population: 15,
-    species: "Invasive",
-    info: "blah blah blah blah blah",
-    isPresent: false,
-  });
-  const redLionfish = ref({
-    population: 20,
-    species: "Invasive",
-    info: "blah blah blah blah blah",
-    isPresent: false,
-  });
-
-  const selectedYear = ref({
-    name: "Current Year",
-    sliderValue: 0,
+  // Land Use
+  const logging = ref({
+    name: "Water pH",
+    sliderValue: 0.5,
     sliderMin: 0,
-    sliderMax: 100,
-    sliderStep: 1,
+    sliderMax: 1,
+    sliderStep: 0.01,
+  }); // 0-1 slider
+  const agriculture = ref({
+    sliderValue: 0.5,
+    sliderMin: 0,
+    sliderMax: 1,
+    sliderStep: 0.01,
+  }); // 0-1 slider
+  const sewage = ref({
+    sliderValue: 0.5,
+    sliderMin: 0,
+    sliderMax: 1,
+    sliderStep: 0.01,
+  }); // 0-1 slider
+
+  // Fishing
+  const netFishing = ref({
+    sliderValue: 0.5,
+    sliderMin: 0,
+    sliderMax: 1,
+    sliderStep: 0.01,
+  }); // 0-1 slider
+  const grouperFishing = ref({
+    sliderValue: 0.5,
+    sliderMin: 0,
+    sliderMax: 1,
+    sliderStep: 0.01,
+  }); // 0-1 slider
+  const snapperFishing = ref({
+    sliderValue: 0.5,
+    sliderMin: 0,
+    sliderMax: 1,
+    sliderStep: 0.01,
+  }); // 0-1 slider
+
+  // Disease
+  const blackBandDisease = ref({
+    sliderValue: 0.5,
+    sliderMin: 0,
+    sliderMax: 1,
+    sliderStep: 0.01,
   });
+  const whiteBandDisease = ref({
+    sliderValue: 0.5,
+    sliderMin: 0,
+    sliderMax: 1,
+    sliderStep: 0.01,
+  });
+  const urchinDisease = ref({
+    sliderValue: 0.5,
+    sliderMin: 0,
+    sliderMax: 1,
+    sliderStep: 0.01,
+  });
+
+  // Invasive Species
+  const crownOfThornsStarfish = ref(false)
+  const redLionfish = ref(false)
 
   return {
     logging,
@@ -92,13 +113,10 @@ export const DataStore = defineStore("data", () => {
     netFishing,
     blackBandDisease,
     whiteBandDisease,
-    grouperSpecies,
-    snapperSpecies,
-    seaUrchinSpecies,
+    urchinDisease,
     oceanTemp,
     stormSeverity,
     waterPH,
-    waterSalinity,
     crownOfThornsStarfish,
     redLionfish,
     selectedYear,
