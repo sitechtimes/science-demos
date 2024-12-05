@@ -2,7 +2,7 @@
 
 import { defineStore } from "pinia";
 import { DataStore } from "./DataStore";
-import { CalculatedResultsStore } from "./CalculatedResults";
+import { CalculatedResultsStore } from "./populationStore";
 import { CarbonStore } from "./CarbonStore";
 import { ref } from "vue";
 

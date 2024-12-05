@@ -4,6 +4,7 @@ import { defineStore } from "pinia";
 
 export const populationStore = defineStore("populationStore", () => {
   const species = ref({
+<<<<<<< Updated upstream
     algae: {
       population: 27,
       img: path + 'algae.png',
@@ -84,4 +85,21 @@ export const populationStore = defineStore("populationStore", () => {
   function setValue(type, value) {
     species[type] = value
   }
+=======
+    staghornCoral: {
+      population: 20,
+      species: "Invasive",
+      info: "blah blah blah blah blah",
+      isPresent: false,
+      history: {}
+    },
+    redLionfish: {
+      population: 20,
+      species: "Invasive",
+      info: "blah blah blah blah blah",
+      isPresent: false,
+      history: {}
+    }
+  })
+>>>>>>> Stashed changes
 });
