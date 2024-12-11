@@ -2,13 +2,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 
+
 public class fishManager : MonoBehaviour
 {
+
     public GameObject fishObject;
     private int count = 0;
-    // public static int fishProb;
+
     void Start()
     {
+        Dictionary<string, float> variables = new Dictionary<string, float>(){
+            {"storm",20f},
+            {"acidity",8.1f},
+        };
+        Debug.Log(variables["storm"]);
         StartCoroutine(SpawnFish());
     }
 
