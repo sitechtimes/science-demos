@@ -12,6 +12,6 @@ public class Fish : ScriptableObject
     public float waveDistance;
     public Vector3 scale;
     public int population;
-
+    public string desc;
 
 }

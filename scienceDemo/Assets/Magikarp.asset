@@ -19,3 +19,5 @@ MonoBehaviour:
   waveDistance: 15
   scale: {x: 1, y: 1, z: 1}
   population: 75
+  desc: 'For no reason, it jumps and splashes about, making it easy for predators
+    like PIDGEOTTO to catch it mid-jump. '

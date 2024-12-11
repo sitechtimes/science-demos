@@ -104,11 +104,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b258ed3659407134c812d9e8ed1a2fca, type: 2}
   - {fileID: 11400000, guid: 65fea03f491fb7d40bcb968fd4256d93, type: 2}
   sprite: {fileID: 477046759681479031}
-  p1text: {fileID: 0}
-  totalPopulation: 0
-  randChoice: 0
-  randNum: 0
-  cumulativePopulation: 0
+  trigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 497472912009924738, guid: 5c588853d2780984ca3e730624184b92, type: 3}
+        m_TargetAssemblyTypeName: infoCard, Assembly-CSharp
+        m_MethodName: displayInfo
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &472947143565418488
 BoxCollider2D:
   m_ObjectHideFlags: 0

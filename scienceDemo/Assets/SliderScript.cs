@@ -20,10 +20,11 @@ public class SliderScript : MonoBehaviour
         slideText.text = $"{Mathf.Round(slider.value)}%";   
         slider.maxValue = max;
         slider.minValue = min;
-        slider.value = startingValue;
+        slider.value = 8.2f;
         slider.onValueChanged.AddListener((v) =>
         {
             slider.value = Mathf.Round(v * 10)/10;
+            fishManager.variables[value] = slider.value;
             slideText.text = $"{slider.value}{unit}";   
         });
     }

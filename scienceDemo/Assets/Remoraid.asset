@@ -18,4 +18,6 @@ MonoBehaviour:
   waveSpeed: 10
   waveDistance: 20
   scale: {x: 1.5, y: 1.5, z: 1}
-  population: 10
+  population: 30
+  desc: 'Using its dorsal fin as a suction pad, it clings to a MANTINE''s underside
+    to scavenge for leftovers. '

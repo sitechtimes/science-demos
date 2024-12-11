@@ -19,3 +19,5 @@ MonoBehaviour:
   waveDistance: 5
   scale: {x: 2, y: 2, z: 1}
   population: 40
+  desc: "It is the shabbiest Pok\xE9mon of all. It forms in schools and lives at
+    the bottom of rivers."

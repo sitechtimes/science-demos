@@ -1,20 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;  
+using TMPro;
+using UnityEngine.UI;  
 public class fishScript : MonoBehaviour
 {   
     public List<Fish> fishList;  
     private Fish fish;
     public SpriteRenderer sprite;   
-    public TextMeshProUGUI p1text;
     private float sin;
     private float startPos;
-    public float totalPopulation;
-    public float randChoice;
-    public float randNum;
-    public int cumulativePopulation;
+    private float totalPopulation;
+    private float randChoice;
+    private float randNum;
+    private int cumulativePopulation;
+
     void Start(){
         sin = Random.value * 50;
         Destroy(gameObject, 15);
@@ -50,5 +50,5 @@ public class fishScript : MonoBehaviour
         void OnMouseDown()
        {
         Debug.Log(fish.name);
-       }    
+       }      
 }
