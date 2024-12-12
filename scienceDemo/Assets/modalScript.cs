@@ -9,11 +9,17 @@ public class modalScript : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI slideText;
+    public static string[] textInfo = new string[] {"sample","sample"};
     void Start()
     {
         titleText.text = "oyasumi";
         slideText.text = "Close your eyes and you'll leave this dream";
     }
+
+void Update(){
+    titleText.text = textInfo[0];
+    slideText.text = textInfo[1];
+}
 
     public void changeText(string[] textInfo){
         Debug.Log("eaaeaeeeeeeeeeeee");

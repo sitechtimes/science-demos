@@ -16,7 +16,7 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: e81fc51369f7da14aad2ede80fea5b6a, type: 3}
   speed: 3
   waveSpeed: 3
-  waveDistance: 15
+  waveDistance: 10
   scale: {x: 1, y: 1, z: 1}
   population: 75
   desc: 'For no reason, it jumps and splashes about, making it easy for predators

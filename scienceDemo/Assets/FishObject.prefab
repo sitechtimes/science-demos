@@ -106,19 +106,7 @@ MonoBehaviour:
   sprite: {fileID: 477046759681479031}
   switchText:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3165114813518300915, guid: 3ed31f1f57f05cf4c9f32cefae7ac042, type: 3}
-        m_TargetAssemblyTypeName: modalScript, Assembly-CSharp
-        m_MethodName: changeText
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!61 &472947143565418488
 BoxCollider2D:
   m_ObjectHideFlags: 0

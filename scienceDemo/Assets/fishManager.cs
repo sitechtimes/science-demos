@@ -14,6 +14,8 @@ public class fishManager : MonoBehaviour
             {"gabepower",0.0241f},
         };
 
+       public static int[] population;
+
     void Start()
     {
         // Debug.Log(variables["storm"]);
