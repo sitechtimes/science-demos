@@ -9,7 +9,6 @@ public class fishScript : MonoBehaviour
     public List<Fish> fishList;  
     private Fish fish;
     public SpriteRenderer sprite;   
-    private GameObject modal;
     private float sin;
     private float startPos;
     private float totalPopulation;
@@ -18,9 +17,7 @@ public class fishScript : MonoBehaviour
     private int cumulativePopulation;
     [SerializeField] private UnityEvent<string[]> switchText;
 
-void Awake(){
-    modal = GameObject.Find("Modal"); 
-}
+
     void Start(){
 
         sin = Random.value * 50;
@@ -63,7 +60,7 @@ void Awake(){
         if(!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()  ){
 
         modalScript.textInfo = new string[] {fish.name,fish.desc};  
-        modal.SetActive(true);
+        modalScript.modal.SetActive(true);
         } 
        }      
 }

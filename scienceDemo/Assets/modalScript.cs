@@ -9,23 +9,22 @@ public class modalScript : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI slideText;
-    public static string[] textInfo = new string[] {"sample","sample"};
-    void Start()
-    {
-        titleText.text = "oyasumi";
-        slideText.text = "Close your eyes and you'll leave this dream";
-    }
+    public static string[] textInfo = new string[] {"Click A Fish!",""};
+    public static GameObject modal;
 
 void Update(){
     titleText.text = textInfo[0];
     slideText.text = textInfo[1];
 }
+void Awake(){
+    modal = GameObject.Find("Modal"); 
+}
 
-    public void changeText(string[] textInfo){
-        Debug.Log("eaaeaeeeeeeeeeeee");
-        titleText.text = "sample";
-         Debug.Log(titleText.text);
-        slideText.text = textInfo[1];
-        Canvas.ForceUpdateCanvases();
-    }
+    // public void changeText(string[] textInfo){
+    //     Debug.Log("eaaeaeeeeeeeeeeee");
+    //     titleText.text = "sample";
+    //      Debug.Log(titleText.text);
+    //     slideText.text = textInfo[1];
+    //     Canvas.ForceUpdateCanvases();
+    // }
 }

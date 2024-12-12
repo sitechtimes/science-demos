@@ -103,6 +103,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9592d2df1d2eff147ac1d19dad7272f2, type: 2}
   - {fileID: 11400000, guid: b258ed3659407134c812d9e8ed1a2fca, type: 2}
   - {fileID: 11400000, guid: 65fea03f491fb7d40bcb968fd4256d93, type: 2}
+  modal: {fileID: 7108063559296022106, guid: 455d41b91f1551c489f65eff36907170, type: 3}
   sprite: {fileID: 477046759681479031}
   switchText:
     m_PersistentCalls:
