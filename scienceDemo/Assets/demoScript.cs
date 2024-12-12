@@ -12,13 +12,14 @@ public class demoScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI demoText;
     void Start()
     {
+        updateText();
+    }
+    public void updateText(){
+        text = "";
+        Debug.Log("ssr");
         foreach(var fish in fishList){
             text += $"{fish.name}: {fish.population}\n";
         }
         demoText.text = text;
     }
-    // void textUpdate()
-    // {
-        
-    // }
 }

@@ -14,7 +14,8 @@ public class fishScript : MonoBehaviour
     private float totalPopulation;
     private float randChoice;
     private float randNum;
-    private int cumulativePopulation;
+    private int cumulativePopulation;   
+    public int[] choiceArray = {};
     [SerializeField] private UnityEvent<string[]> switchText;
 
 
@@ -40,6 +41,17 @@ public class fishScript : MonoBehaviour
     }
 
     public Fish pickRandomFish(){
+        // for (int i = 0; i < fishList.Count; i++)
+        //     {
+        //         Debug.Log(i);
+        //         Debug.Log($"{i} is {fishList[i]}");
+        //         for (int q = 0; q < fishList[i].population; q++)
+        //     {
+        //         choiceArray.Add(fishList[i]);
+        //     }
+        //     }
+            
+        Debug.Log(choiceArray);
         totalPopulation = 0;
         foreach(var fish in fishList){
             totalPopulation += fish.population;

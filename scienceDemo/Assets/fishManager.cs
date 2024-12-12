@@ -7,6 +7,8 @@ public class fishManager : MonoBehaviour
 {
 
     public GameObject fishObject;
+    public GameObject algaeObject;
+    public List<Fish> fishList;
     private int count = 0;
     public static Dictionary<string, float> variables  = new Dictionary<string, float>(){
             {"storm",20f},
@@ -34,5 +36,9 @@ public class fishManager : MonoBehaviour
             count++;
             yield return new WaitForSeconds(Random.value);
         }
+    }
+
+    public void SpawnAlgae(){
+        Debug.Log("UEQIUHEFUHIFE");
     }
 }
