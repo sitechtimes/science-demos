@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;  
+using UnityEngine.UI; 
+using UnityEngine.Events;
 public class fishScript : MonoBehaviour
 {   
     public List<Fish> fishList;  
@@ -14,16 +15,21 @@ public class fishScript : MonoBehaviour
     private float randChoice;
     private float randNum;
     private int cumulativePopulation;
+    [SerializeField] private UnityEvent<string[]> switchText;
 
     void Start(){
         sin = Random.value * 50;
-        Destroy(gameObject, 15);
         startPos =((Random.value * 7.5f) - 3.75f);
-        fish = pickRandomFish();
+        fish = pickRandomFish();    
         transform.localScale = fish.scale * (1 - ((Random.value - .5f)/5));
         sprite.sprite = fish.image;
         sprite.sortingOrder = Random.Range(0,50);
        
+    }
+
+    public void OnBecameInvisible()
+    {
+        Destroy(gameObject); 
     }
     void Update()
     {
@@ -49,6 +55,8 @@ public class fishScript : MonoBehaviour
 
         void OnMouseDown()
        {
-        Debug.Log(fish.name);
+        // Debug.Log(fish.name);
+        // Debug.Log(fish.desc);
+        switchText.Invoke(new string[] {fish.name,fish.desc});    
        }      
 }

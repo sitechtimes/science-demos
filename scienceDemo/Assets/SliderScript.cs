@@ -16,11 +16,13 @@ public class SliderScript : MonoBehaviour
     [SerializeField] private string title;
     [SerializeField] private string value;
     void Start(){
-        titleText.text =$"{title}";
-        slideText.text = $"{Mathf.Round(slider.value)}%";   
+        titleText.text =$"{title}"; 
         slider.maxValue = max;
         slider.minValue = min;
-        slider.value = 8.2f;
+        slider.value = startingValue;
+        slideText.text = $"{slider.value}{unit}";  
+        fishManager.variables[value] = slider.value;
+        Debug.Log(fishManager.variables);
         slider.onValueChanged.AddListener((v) =>
         {
             slider.value = Mathf.Round(v * 10)/10;

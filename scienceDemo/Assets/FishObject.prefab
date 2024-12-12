@@ -104,12 +104,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b258ed3659407134c812d9e8ed1a2fca, type: 2}
   - {fileID: 11400000, guid: 65fea03f491fb7d40bcb968fd4256d93, type: 2}
   sprite: {fileID: 477046759681479031}
-  trigger:
+  switchText:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 497472912009924738, guid: 5c588853d2780984ca3e730624184b92, type: 3}
-        m_TargetAssemblyTypeName: infoCard, Assembly-CSharp
-        m_MethodName: displayInfo
+      - m_Target: {fileID: 3165114813518300915, guid: 3ed31f1f57f05cf4c9f32cefae7ac042, type: 3}
+        m_TargetAssemblyTypeName: modalScript, Assembly-CSharp
+        m_MethodName: changeText
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

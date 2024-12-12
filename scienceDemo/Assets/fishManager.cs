@@ -8,19 +8,16 @@ public class fishManager : MonoBehaviour
 
     public GameObject fishObject;
     private int count = 0;
-    public static Dictionary<string, float> variables;
+    public static Dictionary<string, float> variables  = new Dictionary<string, float>(){
+            {"storm",20f},
+            {"acidity",8.1f},
+            {"gabepower",0.0241f},
+        };
 
     void Start()
     {
-        variables = new Dictionary<string, float>(){
-            {"storm",20f},
-            {"acidity",8.1f},
-        };
-        Debug.Log(variables["storm"]);
+        // Debug.Log(variables["storm"]);
         StartCoroutine(SpawnFish());
-    }
-    void Update(){
-        Debug.Log(variables["storm"]);
     }
 
  IEnumerator SpawnFish()
