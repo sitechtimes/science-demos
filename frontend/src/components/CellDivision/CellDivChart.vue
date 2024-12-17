@@ -1,20 +1,88 @@
 <template>
-    <!-- <div class="chartType">
-            <SelectButton v-model="chartType" :options="['Population %', 'Population Count']" />
-        </div> -->
     <div>
-        <Chart type="line" :data="chartInfo.chartData" :options="chartOptions" class="h-[30rem]" />
+        <Chart type="scatter" :data="chartInfo.chartData" :options="chartOptions" class="h-[30rem]" />
     </div>
 </template>
 
 <script setup>
 import Chart from 'primevue/chart';
 import { ref, onMounted, watch } from "vue";
-import { setChartData, setChartOptions } from '@/Stores/chartDataOptions';
 import { useLayout } from '@/layout/composables/layout';
 import { toRef } from "vue";
 import { DataStore } from "@/Stores/DataStore";
 
+
+
+const setChartData = (currentYear) => { // move to store later with input options for current selected year & species data
+    return { // either data variable has data points for all organisms, or we have an input varoab;e for each of the datasets
+        datasets: [
+            {
+                label: '# of Cells',
+                data: [{ x: 0, y: 0 }, { x: 1, y: 1 }, { x: 2, y: 3 }],
+                fill: true,
+                borderColor: '#00aaaa',
+                borderWidth: 2,
+                pointRadius: 1
+            }
+        ]
+    };
+};
+
+const axesLabels = {
+    xAxis: ['Time (hours)', 'Time (days)'],
+};
+
+const setChartOptions = (chartTypeNum, doc) => { // return chart options
+    const chartOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+            legend: { // it's possible to make it more minimalistic by having 1 button to disable/enable multiple datasets
+                labels: {
+                    color: doc.textColor
+                },
+                position: 'bottom'
+            },
+            title: {
+                display: true,
+                text: 'Number of Cells Present',
+                color: doc.textColor
+            },
+        },
+        scales: {
+            x: {
+                type: 'linear',
+                ticks: {
+                    color: doc.textColorSecondary
+                },
+                grid: {
+                    color: doc.surfaceBorder
+                },
+                title: {
+                    display: true,
+                    text: axesLabels.xAxis[chartTypeNum], // axes names
+                    color: doc.textColor
+                }
+            },
+            y: {
+                ticks: {
+                    color: doc.textColorSecondary
+                },
+                grid: {
+                    color: doc.surfaceBorder
+                },
+                title: {
+                    display: true,
+                    text: 'Number of Cells',
+                    color: doc.textColor
+                },
+                type: 'linear',
+                position: 'left',
+            }
+        }
+    };
+    return chartOptions;
+}
 const dataStore = DataStore();
 const selectedYear = toRef(dataStore.selectedYear); // reactive source to watch
 

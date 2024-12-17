@@ -1,8 +1,8 @@
-
 <script setup>
 import { ref } from 'vue';
 import MiGameScene from '@/components/CellDivision/MiGameScene.vue'
 import MeiGameScene from '@/components/CellDivision/MeiGameScene.vue'
+import CellDivChart from '@/components/CellDivision/CellDivChart.vue';
 
 import SelectButton from 'primevue/selectbutton';
 const chartType = ref('Meiosis')
@@ -20,21 +20,40 @@ const chartType = ref('Meiosis')
 //nuclear membranes reform (two now) -> cell divides) --> Meiosis II(repeat meiosis I)
 </script>
 <template>
-    <div class="bg-surface-900 w-fit p-2 rounded">
+    <div class="sim-chart-container">
+        <div class="sim-container">
             <SelectButton v-model="chartType" :options="['Mitosis', 'Meiosis']" />
-        </div>
-    <div class="chart-slider-container">
-        <div class="chart-container">
             <div class="card" v-if="chartType === 'Mitosis'">
-                <MiGameScene/>
+                <MiGameScene />
             </div>
             <div class="card" v-if="chartType === 'Meiosis'">
-                <MeiGameScene/>
+                <MeiGameScene />
             </div>
+        </div>
+        <div class="chart-container">
+            <CellDivChart />
         </div>
     </div>
 </template>
 
 <style scoped>
+.sim-chart-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
 
+.sim-container {
+    width: 100%;
+}
+
+.chart-container {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .sim-chart-container {
+        grid-template-columns: 2fr 1fr;
+    }
+}
 </style>
