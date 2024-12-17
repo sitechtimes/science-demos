@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class newYear : MonoBehaviour
 {
     public GameObject fishHolder;
-    [SerializeField] private UnityEvent addPopData;
+    // [SerializeField] private UnityEvent addPopData;
     public void clicked(){
         Debug.Log(fishManager.variables);
         foreach(var variable in fishManager.variables){
@@ -16,6 +16,6 @@ public class newYear : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
-        addPopData.Invoke();
+        // addPopData.Invoke();
     }
 }

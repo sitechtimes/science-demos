@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 public class fishScript : MonoBehaviour
 {   
-    public List<Fish> fishList;  
     private Fish fish;
     public SpriteRenderer sprite;   
     private float sin;
@@ -14,7 +13,8 @@ public class fishScript : MonoBehaviour
     private float totalPopulation;
     private float randChoice;
     private float randNum;
-    private int cumulativePopulation;
+    private int cumulativePopulation;   
+    public int[] choiceArray = {};
     [SerializeField] private UnityEvent<string[]> switchText;
 
 
@@ -50,7 +50,7 @@ public class fishScript : MonoBehaviour
        
         if(randNum < cumulativePopulation){
             return fish;  
-        }
+        }           
     }
     return fishList[0];
     }

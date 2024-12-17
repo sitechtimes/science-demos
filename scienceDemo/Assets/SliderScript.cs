@@ -16,7 +16,7 @@ public class SliderScript : MonoBehaviour
     [SerializeField] private string title;
     [SerializeField] private string value;
     void Start(){
-        titleText.text =$"{title}"; 
+        titleText.text = $"{title}"; 
         slider.maxValue = max;
         slider.minValue = min;
         slider.value = startingValue;

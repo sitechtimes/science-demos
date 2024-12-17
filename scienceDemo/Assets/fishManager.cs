@@ -7,6 +7,7 @@ public class fishManager : MonoBehaviour
 {
 
     public GameObject fishObject;
+    public GameObject algaeObject;
     private int count = 0;
     public static Dictionary<string, float> variables  = new Dictionary<string, float>(){
             {"storm",20f},
@@ -32,7 +33,12 @@ public class fishManager : MonoBehaviour
             newFish.transform.SetParent(transform);
             newFish.name = $"Fish_{count}";  
             count++;
-            yield return new WaitForSeconds(Random.value);
+            // yield return new WaitForSeconds(Random.value);
+            yield return new WaitForSeconds(40);
         }
+    }
+
+    public void SpawnAlgae(){
+        Debug.Log("UEQIUHEFUHIFE");
     }
 }
