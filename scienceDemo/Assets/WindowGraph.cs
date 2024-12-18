@@ -18,13 +18,14 @@ public class WindowGraph : MonoBehaviour
     void Awake()
     {
         populations["Magikarp"] = new List<int[]>();  
+        populations["Feebas"] = new List<int[]>();  
         createGraph();
 
     }
 
     void Update(){
-        if(Input.GetKey("space")){
-        populations["Magikarp"].Add(new int[2] {count, Random.Range(-400, 400)});  
+        if(Input.GetKey("space")){ 
+        populations["Magikarp"].Add(new int[2] {count, Random.Range(-600, 600)});  
         createGraph();
         count++;
         Debug.Log(count);
@@ -50,6 +51,7 @@ public void createPoint(Vector2 anchoredPos){
     
     gameObject.transform.SetParent(graphContainer, false);
     gameObject.GetComponent<Image>().sprite = circleSprite;
+    gameObject.GetComponent<Image>().color = Color.red;
     RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
 
     Vector2 anchorMin = rectTransform.anchorMin;
@@ -78,7 +80,7 @@ public void createLine(Vector2 oldPoint, Vector2 newPoint){
         GameObject line = new GameObject("line", typeof(Image));
         line.transform.SetParent(graphContainer, false);
         RectTransform rectTransform = line.GetComponent<RectTransform>();
-        
+        line.GetComponent<Image>().color = Color.red;
                Vector2 anchorMin = rectTransform.anchorMin;
 Vector2 anchorMax = rectTransform.anchorMax;
 
