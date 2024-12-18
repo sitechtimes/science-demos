@@ -29,7 +29,7 @@ const setChartData = (currentYear) => { // move to store later with input option
 };
 
 const axesLabels = {
-    xAxis: ['Time (hours)', 'Time (days)'],
+    xAxis: ['Time (hours)', 'Time (days)'], // mitosis 60 min https://bionumbers.hms.harvard.edu/bionumber.aspx?s=n&v=4&id=112373 spermatogenesis 64 days https://www.aatbio.com/resources/faq-frequently-asked-questions/how-long-does-meiosis-take
 };
 
 const setChartOptions = (chartTypeNum, doc) => { // return chart options
