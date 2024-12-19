@@ -16,6 +16,13 @@ public class newYear : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
+        runCalcs();
+        WindowGraph.count++;
+        WindowGraph.populations["Magikarp"].Add(new int[2] {WindowGraph.count, (int)fishManager.variables["storm"]});  
         addPopData.Invoke();
+    }
+
+    public void runCalcs(){
+        Debug.Log("ea");
     }
 }

@@ -7,7 +7,7 @@ public class WindowGraph : MonoBehaviour
     [SerializeField] private RectTransform graphContainer;
     [SerializeField] private Sprite circleSprite;
     private Vector2 lastCircle;
-    private int count = 0;
+    public static int count = 0;
     public static Dictionary<string, List<int[]>> populations = new Dictionary<string, List<int[]>>();
 
     public static int[,] points = {
@@ -19,16 +19,16 @@ public class WindowGraph : MonoBehaviour
     {
         populations["Magikarp"] = new List<int[]>();  
         populations["Feebas"] = new List<int[]>();  
-        createGraph();
+        // createGraph();
+        // foreach (KeyValuePair<string, List<int[]>> pair in populations){
+        //     Debug.Log(pair.Value);
+        // }
 
     }
 
     void Update(){
-        if(Input.GetKey("space")){ 
-        populations["Magikarp"].Add(new int[2] {count, Random.Range(-600, 600)});  
+        if(Input.GetKeyDown("space")){ 
         createGraph();
-        count++;
-        Debug.Log(count);
         }
     }
 
@@ -42,7 +42,7 @@ public class WindowGraph : MonoBehaviour
         lastCircle = new Vector2(0,0);
              foreach (var point in populations["Magikarp"])
         {
-
+            Debug.Log("Magikarp");
             createPoint(new Vector2((((graphContainer.rect.width - 60)/count * point[0]) + 30 ) ,(point[1])));
         }
     }
