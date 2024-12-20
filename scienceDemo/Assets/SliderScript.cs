@@ -22,7 +22,7 @@ public class SliderScript : MonoBehaviour
         slider.value = startingValue;
         slideText.text = $"{slider.value}{unit}";  
         fishManager.variables[value] = slider.value;
-        Debug.Log(fishManager.variables);
+        // Debug.Log(fishManager.variables);
         slider.onValueChanged.AddListener((v) =>
         {
             slider.value = Mathf.Round(v * 10)/10;

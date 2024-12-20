@@ -8,13 +8,13 @@ public class fishManager : MonoBehaviour
 
     public GameObject fishObject;
     private int count = 0;
-    public static Dictionary<string, float> variables  = new Dictionary<string, float>(){
+    public static Dictionary<string, float> variables = new Dictionary<string, float>(){
             {"storm",20f},
             {"acidity",8.1f},
             {"gabepower",0.0241f},
         };
 
-       public static int[] population;
+    public static int[] population;
 
     void Start()
     {
@@ -22,15 +22,15 @@ public class fishManager : MonoBehaviour
         StartCoroutine(SpawnFish());
     }
 
- IEnumerator SpawnFish()
+    IEnumerator SpawnFish()
     {
         while (true)
         {
             // GameObject newFish = Instantiate(fishObject, new Vector3(10, (Random.value * 6) - 3, 0), Quaternion.identity);
-    
+
             GameObject newFish = Instantiate(fishObject, new Vector3(10, 3, 0), Quaternion.identity);
             newFish.transform.SetParent(transform);
-            newFish.name = $"Fish_{count}";  
+            newFish.name = $"Fish_{count}";
             count++;
             yield return new WaitForSeconds(Random.value);
         }
