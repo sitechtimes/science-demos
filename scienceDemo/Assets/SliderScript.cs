@@ -15,19 +15,20 @@ public class SliderScript : MonoBehaviour
     [SerializeField] private float startingValue;
     [SerializeField] private string title;
     [SerializeField] private string value;
-    void Start(){
-        titleText.text =$"{title}"; 
+    void Start()
+    {
+        titleText.text = $"{title}";
         slider.maxValue = max;
         slider.minValue = min;
         slider.value = startingValue;
-        slideText.text = $"{slider.value}{unit}";  
-        fishManager.variables[value] = slider.value;
+        slideText.text = $"{slider.value}{unit}";
+        newYear.variables[value] = slider.value;
         // Debug.Log(fishManager.variables);
         slider.onValueChanged.AddListener((v) =>
         {
-            slider.value = Mathf.Round(v * 10)/10;
-            fishManager.variables[value] = slider.value;
-            slideText.text = $"{slider.value}{unit}";   
+            slider.value = Mathf.Round(v * 10) / 10;
+            newYear.variables[value] = slider.value;
+            slideText.text = $"{slider.value}{unit}";
         });
     }
 }

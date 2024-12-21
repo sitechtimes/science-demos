@@ -98,16 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbfc7a245169a2b46b57e74e849a5eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishList:
+  fishes:
   - {fileID: 11400000, guid: f0fd849917ed34e4eb4059e4bb82cf00, type: 2}
   - {fileID: 11400000, guid: 9592d2df1d2eff147ac1d19dad7272f2, type: 2}
   - {fileID: 11400000, guid: b258ed3659407134c812d9e8ed1a2fca, type: 2}
   - {fileID: 11400000, guid: 65fea03f491fb7d40bcb968fd4256d93, type: 2}
-  modal: {fileID: 7108063559296022106, guid: 455d41b91f1551c489f65eff36907170, type: 3}
   sprite: {fileID: 477046759681479031}
-  switchText:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!61 &472947143565418488
 BoxCollider2D:
   m_ObjectHideFlags: 0

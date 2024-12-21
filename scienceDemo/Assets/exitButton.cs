@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class exitButton : MonoBehaviour
 {
-   public GameObject modal; 
+   public GameObject modal;
 
- public void click(){
-    modal.SetActive(false);
- }
+   public void click()
+   {
+      modal.SetActive(false);
+   }
 }
