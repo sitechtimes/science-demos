@@ -9,6 +9,7 @@ public class WindowGraph : MonoBehaviour
     private Vector2 lastCircle;
     public static int count = 0;
     private int index = 0;
+    public GameObject fishHolder;
     private Color[] colors = new Color[] { Color.red, Color.blue, Color.green, Color.white, Color.yellow, Color.black };
     public static Dictionary<string, List<int[]>> populations = new Dictionary<string, List<int[]>>();
     void Awake()
@@ -20,6 +21,10 @@ public class WindowGraph : MonoBehaviour
         populations["Magikarp"] = new List<int[]>();
         populations["Feebas"] = new List<int[]>();
         populations["Remoraid"] = new List<int[]>();
+        foreach (Transform child in fishHolder.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
         createGraph();
     }
 
@@ -34,8 +39,13 @@ public class WindowGraph : MonoBehaviour
         foreach (var key in populations.Keys)
         {
             foreach (var point in populations[key])
-            {
-                createPoint(new Vector2((((graphContainer.rect.width - 60) / (count - 1) * point[0]) + 30), (point[1] - 50) * 10));
+            {   
+                
+                // createPoint(new Vector2((count > 1) ? (((graphContainer.rect.width - 60) / (count - 1)) * point[0]) + 30 -graphContainer.rect.width * .5f : 30, (point[1] - 50) * 10));
+                float x = (count > 1) ? (((graphContainer.rect.width - 60) / (count - 1)) * point[0]) + 30 -graphContainer.rect.width * .5f : 30 -graphContainer.rect.width * .5f;
+                float y = ((graphContainer.rect.height * (point[1]/100f)) - graphContainer.rect.height * .5f) * .85f;
+                Debug.Log($"val is {point[1]}, y is {y}");
+                createPoint(new Vector2((int)x,(int)y));
             }
             lastCircle = new Vector2(0, 0);
             index++;
@@ -54,8 +64,8 @@ public class WindowGraph : MonoBehaviour
         anchorMin.x = graphContainer.anchorMin.x;
         anchorMax.x = graphContainer.anchorMax.x;
 
-        rectTransform.anchorMin = anchorMin;
-        rectTransform.anchorMax = anchorMax;
+        // rectTransform.anchorMin = anchorMin;
+        // rectTransform.anchorMax = anchorMax;
 
         rectTransform.anchoredPosition = anchoredPos;
 
@@ -80,8 +90,8 @@ public class WindowGraph : MonoBehaviour
         anchorMin.x = graphContainer.anchorMin.x;
         anchorMax.x = graphContainer.anchorMax.x;
 
-        rectTransform.anchorMin = anchorMin;
-        rectTransform.anchorMax = anchorMax;
+        // rectTransform.anchorMin = anchorMin;
+        // rectTransform.anchorMax = anchorMax;
 
         Vector2 direction = (oldPoint - newPoint).normalized;
         float distance = Vector2.Distance(oldPoint, newPoint);
