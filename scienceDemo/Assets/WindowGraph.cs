@@ -45,13 +45,13 @@ public class WindowGraph : MonoBehaviour
                 float x = (count > 1) ? (((graphContainer.rect.width - 60) / (count - 1)) * point[0]) + 30 -graphContainer.rect.width * .5f : 30 -graphContainer.rect.width * .5f;
                 float y = ((graphContainer.rect.height * (point[1]/100f)) - graphContainer.rect.height * .5f) * .85f;
                 Debug.Log($"val is {point[1]}, y is {y}");
-                createPoint(new Vector2((int)x,(int)y));
+                createPoint(new Vector2((int)x,(int)y), key);
             }
             lastCircle = new Vector2(0, 0);
             index++;
         }
     }
-    public void createPoint(Vector2 anchoredPos)
+    public void createPoint(Vector2 anchoredPos, string fishName)
     {
         GameObject gameObject = new GameObject($"{anchoredPos} point", typeof(Image));
         gameObject.transform.SetParent(graphContainer, false);
@@ -64,8 +64,8 @@ public class WindowGraph : MonoBehaviour
         anchorMin.x = graphContainer.anchorMin.x;
         anchorMax.x = graphContainer.anchorMax.x;
 
-        // rectTransform.anchorMin = anchorMin;
-        // rectTransform.anchorMax = anchorMax;
+        Debug.Log(fishName);
+        gameObject.tag = $"{fishName}Item";
 
         rectTransform.anchoredPosition = anchoredPos;
 
@@ -73,14 +73,15 @@ public class WindowGraph : MonoBehaviour
 
         if (lastCircle != new Vector2(0, 0))
         {
-            createLine(lastCircle, anchoredPos);
+            createLine(lastCircle, anchoredPos, fishName);
         }
         lastCircle = anchoredPos;
     }
 
-    public void createLine(Vector2 oldPoint, Vector2 newPoint)
+    public void createLine(Vector2 oldPoint, Vector2 newPoint, string fishName)
     {
         GameObject line = new GameObject("line", typeof(Image));
+        gameObject.tag = $"{fishName}Item";
         line.transform.SetParent(graphContainer, false);
         RectTransform rectTransform = line.GetComponent<RectTransform>();
         line.GetComponent<Image>().color = colors[index];
@@ -101,5 +102,20 @@ public class WindowGraph : MonoBehaviour
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         rectTransform.localRotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    void Update(){
+        if(Input.GetKey("r")){
+            GameObject[] objectsToHide = GameObject.FindGameObjectsWithTag("MagikarpItem");
+        foreach (GameObject obj in objectsToHide)
+        {
+            Debug.Log(obj);
+            Renderer renderer = obj.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.enabled = false; // Disable the renderer
+            }
+        }
+        }
     }
 }
