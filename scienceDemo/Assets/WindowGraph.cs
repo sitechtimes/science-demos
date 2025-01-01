@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class WindowGraph : MonoBehaviour
 {
     [SerializeField] private RectTransform graphContainer;
+    [SerializeField] private RectTransform holder;
     [SerializeField] private Sprite circleSprite;
     [SerializeField] private Sprite xAxisImage; 
     private Vector2 lastCircle;
@@ -31,14 +32,16 @@ public class WindowGraph : MonoBehaviour
 
     public void createGraph()
     {
-        foreach (Transform child in graphContainer)
+        foreach (Transform child in holder)
         {
-            Destroy(child.gameObject);
+            // if(child.tag != "Holder"){
+      Destroy(child.gameObject);
+            // }
         }
         lastCircle = new Vector2(0, 0);
         index = 0;
             for(int r = 0; r < populations["Magikarp"].Count; r++){
-            float x = (count > 1) ? (((graphContainer.rect.width - 60) / (count - 1)) * r) + 30 -graphContainer.rect.width * .5f : 30 -graphContainer.rect.width * .5f;
+            float x = (graphContainer.rect.width/10 * r) - graphContainer.rect.width * .5f;
             createAxisX(x);
         }
         foreach (var key in populations.Keys)
@@ -74,7 +77,7 @@ public class WindowGraph : MonoBehaviour
         rectTransform.anchoredPosition = new Vector2(x,0);
         rectTransform.localRotation = Quaternion.Euler(0, 0, 90);
 
-        
+        line.transform.SetParent(holder, true);
     }
     // public void createAxisY(float Y){
     //     GameObject line = new GameObject("line", typeof(Image));
@@ -117,6 +120,7 @@ public class WindowGraph : MonoBehaviour
             createLine(lastCircle, anchoredPos, fishName);
         }
         lastCircle = anchoredPos;
+                gameObject.transform.SetParent(holder, true);
     }
 
     public void createLine(Vector2 oldPoint, Vector2 newPoint, string fishName)
@@ -143,6 +147,7 @@ public class WindowGraph : MonoBehaviour
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         rectTransform.localRotation = Quaternion.Euler(0, 0, angle);
+        line.transform.SetParent(holder, true);
     }
 
     void Update(){
