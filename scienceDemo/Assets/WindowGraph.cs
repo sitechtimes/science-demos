@@ -20,6 +20,7 @@ public class WindowGraph : MonoBehaviour
         {
             { "MagikarpItem", true },
             { "FeebasItem", true },
+            { "RemoraidItem", true },
         };
 
     void Awake()
@@ -28,6 +29,7 @@ public class WindowGraph : MonoBehaviour
     }
     public void reset()
     {
+        Vector2 oPos = holder.localPosition;
         holder.localPosition = Vector3.zero;
         count = 0;
         populations["Magikarp"] = new List<int[]>();
@@ -38,7 +40,7 @@ public class WindowGraph : MonoBehaviour
 
         populations["Remoraid"] = new List<int[]>();
         populations["Remoraid"].Add(new int[2] { count, 40 });
-        showingInfo.Add("RemoraidItem", true);  
+        
         count++;
         // populations["Remoraid"] = new List<int[]>();
         foreach (Transform child in fishHolder.transform)
@@ -46,12 +48,20 @@ public class WindowGraph : MonoBehaviour
             GameObject.Destroy(child.gameObject);
         }
         createGraph();
+        holder.localPosition = Vector3.left;
     }
 
     public void createGraph()
     {
         holder.localPosition = Vector3.zero;
         foreach (Transform child in holder)
+        {
+            if (child.tag != "ActiveCheck" && child.tag != "test")
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        foreach (Transform child in axes)
         {
             if (child.tag != "ActiveCheck")
             {
@@ -109,7 +119,7 @@ public class WindowGraph : MonoBehaviour
         anchorMin.x = graphContainer.anchorMin.x;
         anchorMax.x = graphContainer.anchorMax.x;
 
-        rectTransform.sizeDelta = new Vector2(graphContainer.rect.height, 5);
+        rectTransform.sizeDelta = new Vector2(holder.rect.height, 5);
         rectTransform.anchoredPosition = new Vector2(x, 0);
         rectTransform.localRotation = Quaternion.Euler(0, 0, 90);
 
@@ -128,7 +138,7 @@ public class WindowGraph : MonoBehaviour
         anchorMax.x = graphContainer.anchorMax.x;
 
         rectTransform.sizeDelta = new Vector2(holder.rect.width, 5);
-        rectTransform.anchoredPosition = new Vector2(graphContainer.rect.width * 2 + graphContainer.rect.width / 10, y);
+        rectTransform.anchoredPosition = new Vector2(holder.rect.width*.5f, y);
 
         line.transform.SetParent(axes, true);
     }
@@ -205,6 +215,7 @@ public class WindowGraph : MonoBehaviour
                 Debug.Log(child.gameObject.activeSelf);
             }
         }
+        
         showingInfo[hideThis] = !showingInfo[hideThis];
     }
 }
