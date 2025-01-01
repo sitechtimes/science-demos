@@ -56,6 +56,11 @@ public class WindowGraph : MonoBehaviour
             createAxisX(x);
         }
         createAxisY(0);
+        int largest = populations
+            .SelectMany(kvp => kvp.Value) 
+            .SelectMany(arr => arr)
+            .Max();   
+            Debug.Log(largest);
         foreach (var key in populations.Keys)
         {
             Debug.Log(populations[key].Count);

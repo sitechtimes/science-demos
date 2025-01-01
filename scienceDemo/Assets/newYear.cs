@@ -25,8 +25,7 @@ public class newYear : MonoBehaviour
     }
     public void runCalcs(){
         // tempFactor();
-        // WindowGraph.populations["Magikarp"].Add(new int[2] { WindowGraph.count, (int)variables["storm"]});
-        Debug.Log(WindowGraph.populations["Magikarp"][WindowGraph.populations["Magikarp"].Count-1][1]);
+        WindowGraph.populations["Magikarp"].Add(new int[2] { WindowGraph.count, (int)(WindowGraph.populations["Magikarp"][WindowGraph.populations["Magikarp"].Count-1][1] * (1+ (variables["storm"]-50f)/100f))});
         // WindowGraph.populations["Feebas"].Add(new int[2] { WindowGraph.count, WindowGraph.populations["Feebas"][WindowGraph.populations["Feebas"].Count] * (int)(1+ (variables["storm"]-50)/100) });
         WindowGraph.count++;
     }
