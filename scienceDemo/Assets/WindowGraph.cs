@@ -7,8 +7,8 @@ public class WindowGraph : MonoBehaviour
 {
     [SerializeField] private RectTransform graphContainer;
     [SerializeField] private RectTransform holder;
+    [SerializeField] private RectTransform axes;
     [SerializeField] private Sprite circleSprite;
-    [SerializeField] private Sprite xAxisImage; 
     private Vector2 lastCircle;
     public static int count = 0;
     private int index = 0;
@@ -26,28 +26,36 @@ public class WindowGraph : MonoBehaviour
     {
         reset();
     }
-    public void reset(){
-        holder.localPosition  = Vector3.zero; 
+    public void reset()
+    {
+        holder.localPosition = Vector3.zero;
         count = 0;
         populations["Magikarp"] = new List<int[]>();
-        populations["Magikarp"].Add(new int[2] {count, 50 });
+        populations["Magikarp"].Add(new int[2] { count, 50 });
+        
+        populations["Feebas"] = new List<int[]>();
+        populations["Feebas"].Add(new int[2] { count, 20 });
+
+        populations["Remoraid"] = new List<int[]>();
+        populations["Remoraid"].Add(new int[2] { count, 40 });
+        showingInfo.Add("RemoraidItem", true);  
         count++;
-        // populations["Feebas"] = new List<int[]>();
         // populations["Remoraid"] = new List<int[]>();
         foreach (Transform child in fishHolder.transform)
         {
-    GameObject.Destroy(child.gameObject);    
+            GameObject.Destroy(child.gameObject);
         }
         createGraph();
     }
 
     public void createGraph()
-    {   
-         holder.localPosition  = Vector3.zero; 
+    {
+        holder.localPosition = Vector3.zero;
         foreach (Transform child in holder)
         {
-            if(child.tag != "ActiveCheck"){
-      Destroy(child.gameObject);
+            if (child.tag != "ActiveCheck")
+            {
+                Destroy(child.gameObject);
             }
         }
         lastCircle = new Vector2(0, 0);
@@ -58,43 +66,43 @@ public class WindowGraph : MonoBehaviour
         //     createAxisX(x);
         // }
         int r = 1;
-        while(holder.rect.width >= graphContainer.rect.width/10 * r){
-            float x = (graphContainer.rect.width/10 * r);
-            r++
+        while (holder.rect.width >= graphContainer.rect.width / 10 * r)
+        {
+            float x = (graphContainer.rect.width / 10 * r);
+            r++;
             createAxisX(x);
         }
-         for(int n = 0; n < 7; n++){
-            float y = (graphContainer.rect.height/7 * n) - graphContainer.rect.height * .5f;
+        for (int n = 0; n < 7; n++)
+        {
+            float y = (graphContainer.rect.height / 7 * n) - graphContainer.rect.height * .5f;
             createAxisY(y);
-         }
-        float largest = populations
-            .SelectMany(kvp => kvp.Value) 
-            .SelectMany(arr => arr)
-            .Max();   
-            Debug.Log($"largest is {largest}");
+        }
+        float largest = populations.SelectMany(kvp => kvp.Value).SelectMany(arr => arr).Max();
+        Debug.Log($"largest is {largest}");
         foreach (var key in populations.Keys)
         {
-            Debug.Log(populations[key].Count);
+            Debug.Log("key");
             foreach (var point in populations[key])
-            {   
-                
+            {
+
                 // createPoint(new Vector2((count > 1) ? (((graphContainer.rect.width - 60) / (count - 1)) * point[0]) + 30 -graphContainer.rect.width * .5f : 30, (point[1] - 50) * 10));
-                float x = (graphContainer.rect.width/10 * (point[0]+1));
-                float y = ((graphContainer.rect.height * (point[1]/largest)) - graphContainer.rect.height * .5f) * .85f;
+                float x = (graphContainer.rect.width / 10 * (point[0] + 1));
+                float y = ((graphContainer.rect.height * (point[1] / largest)) - graphContainer.rect.height * .5f) * .85f;
                 Debug.Log($"val is {point[1]}, y is {y}");
-                
-                createPoint(new Vector2((int)x,(int)y), key);
+
+                createPoint(new Vector2((int)x, (int)y), key);
             }
             lastCircle = new Vector2(0, 0);
             index++;
         }
     }
 
-    public void createAxisX(float x){
+    public void createAxisX(float x)
+    {
         GameObject line = new GameObject($"xAxis{x}", typeof(Image));
         line.transform.SetParent(graphContainer, false);
         RectTransform rectTransform = line.GetComponent<RectTransform>();
-        line.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.5f); 
+        line.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.5f);
         Vector2 anchorMin = rectTransform.anchorMin;
         Vector2 anchorMax = rectTransform.anchorMax;
 
@@ -102,16 +110,17 @@ public class WindowGraph : MonoBehaviour
         anchorMax.x = graphContainer.anchorMax.x;
 
         rectTransform.sizeDelta = new Vector2(graphContainer.rect.height, 5);
-        rectTransform.anchoredPosition = new Vector2(x,0);
+        rectTransform.anchoredPosition = new Vector2(x, 0);
         rectTransform.localRotation = Quaternion.Euler(0, 0, 90);
 
-        line.transform.SetParent(holder, true);
+        line.transform.SetParent(axes, true);
     }
-    public void createAxisY(float y){
+    public void createAxisY(float y)
+    {
         GameObject line = new GameObject($"yAxis{y}", typeof(Image));
         line.transform.SetParent(graphContainer, false);
         RectTransform rectTransform = line.GetComponent<RectTransform>();
-        line.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.5f); 
+        line.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.5f);
         Vector2 anchorMin = rectTransform.anchorMin;
         Vector2 anchorMax = rectTransform.anchorMax;
 
@@ -119,9 +128,9 @@ public class WindowGraph : MonoBehaviour
         anchorMax.x = graphContainer.anchorMax.x;
 
         rectTransform.sizeDelta = new Vector2(holder.rect.width, 5);
-        rectTransform.anchoredPosition = new Vector2(graphContainer.rect.width * 2 + graphContainer.rect.width/10,y);
+        rectTransform.anchoredPosition = new Vector2(graphContainer.rect.width * 2 + graphContainer.rect.width / 10, y);
 
-        line.transform.SetParent(holder, true);
+        line.transform.SetParent(axes, true);
     }
     public void createPoint(Vector2 anchoredPos, string fishName)
     {
@@ -149,7 +158,7 @@ public class WindowGraph : MonoBehaviour
         }
         lastCircle = anchoredPos;
         gameObject.transform.SetParent(holder, true);
-        gameObject.SetActive(showingInfo[$"{fishName}Item"]); 
+        gameObject.SetActive(showingInfo[$"{fishName}Item"]);
     }
 
     public void createLine(Vector2 oldPoint, Vector2 newPoint, string fishName)
@@ -165,9 +174,6 @@ public class WindowGraph : MonoBehaviour
         anchorMin.x = graphContainer.anchorMin.x;
         anchorMax.x = graphContainer.anchorMax.x;
 
-        // rectTransform.anchorMin = anchorMin;
-        // rectTransform.anchorMax = anchorMax;
-
         Vector2 direction = (oldPoint - newPoint).normalized;
         float distance = Vector2.Distance(oldPoint, newPoint);
 
@@ -177,23 +183,28 @@ public class WindowGraph : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         rectTransform.localRotation = Quaternion.Euler(0, 0, angle);
         line.transform.SetParent(holder, true);
-        
-        line.SetActive(showingInfo[$"{fishName}Item"]); 
+
+        line.SetActive(showingInfo[$"{fishName}Item"]);
     }
 
-    void Update(){
-  if(Input.GetKeyDown("q")){
-        hideOnGraph("MagikarpItem");
+    void Update()
+    {
+        if (Input.GetKeyDown("q"))
+        {
+            hideOnGraph("MagikarpItem");
+        }
     }
-}
 
-public void hideOnGraph(string hideThis){
-            foreach (Transform child in holder){
-                if(child.tag == hideThis || child.tag == "ActiveCheck"){
-                     child.gameObject.SetActive(!showingInfo[hideThis]); 
-                     Debug.Log(child.gameObject.activeSelf);
-                }
+    public void hideOnGraph(string hideThis)
+    {
+        foreach (Transform child in holder)
+        {
+            if (child.tag == hideThis || child.tag == "ActiveCheck")
+            {
+                child.gameObject.SetActive(!showingInfo[hideThis]);
+                Debug.Log(child.gameObject.activeSelf);
             }
-              showingInfo[hideThis] = !showingInfo[hideThis]; 
-}
+        }
+        showingInfo[hideThis] = !showingInfo[hideThis];
+    }
 }
