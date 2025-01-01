@@ -52,9 +52,15 @@ public class WindowGraph : MonoBehaviour
         }
         lastCircle = new Vector2(0, 0);
         index = 0;
-            for(int r = 1; r <= 100; r++){
-                // for(int r = 1; r <= populations["Magikarp"].Count; r++){
+        //     for(int r = 1; r <= 100; r++){
+        //         // for(int r = 1; r <= populations["Magikarp"].Count; r++){
+        //     float x = (graphContainer.rect.width/10 * r);
+        //     createAxisX(x);
+        // }
+        int r = 1;
+        while(holder.rect.width >= graphContainer.rect.width/10 * r){
             float x = (graphContainer.rect.width/10 * r);
+            r++
             createAxisX(x);
         }
          for(int n = 0; n < 7; n++){
@@ -113,7 +119,7 @@ public class WindowGraph : MonoBehaviour
         anchorMax.x = graphContainer.anchorMax.x;
 
         rectTransform.sizeDelta = new Vector2(holder.rect.width, 5);
-        rectTransform.anchoredPosition = new Vector2(graphContainer.rect.width,y);
+        rectTransform.anchoredPosition = new Vector2(graphContainer.rect.width * 2 + graphContainer.rect.width/10,y);
 
         line.transform.SetParent(holder, true);
     }
