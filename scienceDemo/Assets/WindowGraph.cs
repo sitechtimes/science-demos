@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 public class WindowGraph : MonoBehaviour
 {
     [SerializeField] private RectTransform graphContainer;
@@ -51,16 +52,20 @@ public class WindowGraph : MonoBehaviour
         }
         lastCircle = new Vector2(0, 0);
         index = 0;
-            for(int r = 1; r <= populations["Magikarp"].Count; r++){
+            for(int r = 1; r <= 100; r++){
+                // for(int r = 1; r <= populations["Magikarp"].Count; r++){
             float x = (graphContainer.rect.width/10 * r);
             createAxisX(x);
         }
-        createAxisY(0);
-        int largest = populations
+         for(int n = 0; n < 7; n++){
+            float y = (graphContainer.rect.height/7 * n) - graphContainer.rect.height * .5f;
+            createAxisY(y);
+         }
+        float largest = populations
             .SelectMany(kvp => kvp.Value) 
             .SelectMany(arr => arr)
             .Max();   
-            Debug.Log(largest);
+            Debug.Log($"largest is {largest}");
         foreach (var key in populations.Keys)
         {
             Debug.Log(populations[key].Count);
@@ -69,7 +74,7 @@ public class WindowGraph : MonoBehaviour
                 
                 // createPoint(new Vector2((count > 1) ? (((graphContainer.rect.width - 60) / (count - 1)) * point[0]) + 30 -graphContainer.rect.width * .5f : 30, (point[1] - 50) * 10));
                 float x = (graphContainer.rect.width/10 * (point[0]+1));
-                float y = ((graphContainer.rect.height * (point[1]/100f)) - graphContainer.rect.height * .5f) * .85f;
+                float y = ((graphContainer.rect.height * (point[1]/largest)) - graphContainer.rect.height * .5f) * .85f;
                 Debug.Log($"val is {point[1]}, y is {y}");
                 
                 createPoint(new Vector2((int)x,(int)y), key);
@@ -107,8 +112,8 @@ public class WindowGraph : MonoBehaviour
         anchorMin.x = graphContainer.anchorMin.x;
         anchorMax.x = graphContainer.anchorMax.x;
 
-        rectTransform.sizeDelta = new Vector2(graphContainer.rect.width, 5);
-        rectTransform.anchoredPosition = new Vector2(graphContainer.rect.width*.5f,100);
+        rectTransform.sizeDelta = new Vector2(holder.rect.width, 5);
+        rectTransform.anchoredPosition = new Vector2(graphContainer.rect.width,y);
 
         line.transform.SetParent(holder, true);
     }
