@@ -9,6 +9,8 @@ public class WindowGraph : MonoBehaviour
     [SerializeField] private RectTransform holder;
     [SerializeField] private RectTransform axes;
     [SerializeField] private Sprite circleSprite;
+    
+    [SerializeField] private GameObject labelTemplateX;
     private Vector2 lastCircle;
     public static int count = 0;
     private int index = 0;
@@ -21,6 +23,7 @@ public class WindowGraph : MonoBehaviour
             { "MagikarpItem", true },
             { "FeebasItem", true },
             { "RemoraidItem", true },
+            { "FinneonItem", true },
         };
 
     void Awake()
@@ -29,7 +32,6 @@ public class WindowGraph : MonoBehaviour
     }
     public void reset()
     {
-        Vector2 oPos = holder.localPosition;
         holder.localPosition = Vector3.zero;
         count = 0;
         populations["Magikarp"] = new List<int[]>();
@@ -40,6 +42,9 @@ public class WindowGraph : MonoBehaviour
 
         populations["Remoraid"] = new List<int[]>();
         populations["Remoraid"].Add(new int[2] { count, 40 });
+
+        populations["Finneon"] = new List<int[]>();
+        populations["Finneon"].Add(new int[2] { count, 80 });
         
         count++;
         // populations["Remoraid"] = new List<int[]>();
@@ -48,11 +53,12 @@ public class WindowGraph : MonoBehaviour
             GameObject.Destroy(child.gameObject);
         }
         createGraph();
-        holder.localPosition = Vector3.left;
+        // holder.localPosition = Vector3.left;
     }
 
     public void createGraph()
     {
+        Vector2 oPos = holder.localPosition;
         holder.localPosition = Vector3.zero;
         foreach (Transform child in holder)
         {
@@ -105,6 +111,7 @@ public class WindowGraph : MonoBehaviour
             lastCircle = new Vector2(0, 0);
             index++;
         }
+        holder.localPosition = oPos;
     }
 
     public void createAxisX(float x)
@@ -124,6 +131,12 @@ public class WindowGraph : MonoBehaviour
         rectTransform.localRotation = Quaternion.Euler(0, 0, 90);
 
         line.transform.SetParent(axes, true);
+
+        // RectTransform labelX = Instantiate(labelTemplateX).GetComponent<RectTransform>();
+        // labelX.SetParent(graphContainer);
+        // labelX.gameObject.SetActive(true);
+        // labelX.anchoredPosition = new Vector2(x, -20f);
+        // labelX.GetComponent<Text>().text = x.ToString();
     }
     public void createAxisY(float y)
     {
@@ -141,6 +154,7 @@ public class WindowGraph : MonoBehaviour
         rectTransform.anchoredPosition = new Vector2(holder.rect.width*.5f, y);
 
         line.transform.SetParent(axes, true);
+
     }
     public void createPoint(Vector2 anchoredPos, string fishName)
     {
@@ -195,15 +209,7 @@ public class WindowGraph : MonoBehaviour
         line.transform.SetParent(holder, true);
 
         line.SetActive(showingInfo[$"{fishName}Item"]);
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown("q"))
-        {
-            hideOnGraph("MagikarpItem");
-        }
-    }
+    }   
 
     public void hideOnGraph(string hideThis)
     {

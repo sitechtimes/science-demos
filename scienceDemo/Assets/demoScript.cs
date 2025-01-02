@@ -10,12 +10,17 @@ public class demoScript : MonoBehaviour
     private string text;
     public List<Fish> fishList;
     [SerializeField] private TextMeshProUGUI demoText;
-    void Start()
+
+    void Start(){
+        textUpdate();
+    }
+    public void textUpdate()
     {
+        demoText.text = "";
         foreach (var fish in fishList)
         {
-            text += $"{fish.name}: {fish.population}\n";
+            Debug.Log($"{(int)(WindowGraph.populations[fish.name][WindowGraph.populations[fish.name].Count-1][1])}");
+            demoText.text += $"{fish.name}: {(int)(WindowGraph.populations[fish.name][WindowGraph.populations[fish.name].Count-1][1])}\n";
         }
-        demoText.text = text;
     }
 }
