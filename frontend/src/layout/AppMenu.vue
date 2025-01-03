@@ -18,6 +18,13 @@ const model = ref([
                         { label: 'Coral Reefs and Abiotic Factors', icon: 'pi pi-fw pi-bookmark', to: '/apes/abioticcoral' },
                 ]
             },
+            {
+                label: 'Biology',
+                icon: 'pi pi-fw pi-bookmark',
+                items: [
+                        { label: 'Cell Division', icon: 'pi pi-fw pi-bookmark', to: '/bio/celldivision' },
+                ]
+            },
             /* {
                 label: '-- Science',
                 icon: 'pi pi-fw pi-bookmark',
