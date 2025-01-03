@@ -1,11 +1,17 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import MiGameScene from '@/components/CellDivision/MiGameScene.vue'
 import MeiGameScene from '@/components/CellDivision/MeiGameScene.vue'
 import CellDivChart from '@/components/CellDivision/CellDivChart.vue';
+import { cellDivStore } from '@/Stores/CellDivStore';
 
 import SelectButton from 'primevue/selectbutton';
-const chartType = ref('Meiosis')
+const chartType = ref('Mitosis')
+watch(chartType,
+    () => {
+        cellDivStore().clearGraph();
+    },
+)
 
 //mitosis:
 //'progress time' button will go to the next phase
@@ -31,7 +37,7 @@ const chartType = ref('Meiosis')
             </div>
         </div>
         <div class="chart-container">
-            <CellDivChart />
+            <CellDivChart v-model="chartType" />
         </div>
     </div>
 </template>

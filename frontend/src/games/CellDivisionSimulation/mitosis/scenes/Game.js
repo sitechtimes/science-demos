@@ -1,8 +1,10 @@
 import { EventBus } from "../EventBus";
 import { Scene } from "phaser";
+import { cellDivStore } from "@/Stores/CellDivStore";
 import Cell from "../Cell";
-import Textbox from "../Cell";
+// import Textbox from "../Cell"; // why is this not used?
 import { ref } from "vue";
+
 export const limit = ref(false);
 export class Game extends Scene {
   constructor() {
@@ -42,7 +44,8 @@ export class Game extends Scene {
             );
           }
           this.cells.forEach((cell) => cell.clearPopup());
-          console.log(this.time_in_cycle);
+          cellDivStore().addPoint();
+          // console.log(this.time_in_cycle);
           break;
         default:
           this.time_in_cycle++;
@@ -51,7 +54,8 @@ export class Game extends Scene {
             cell.setTexture("time" + this.time_in_cycle)
           );
           this.cells.forEach((cell) => cell.clearPopup());
-          console.log(this.time_in_cycle);
+          cellDivStore().addTime("mitosis");
+        // console.log(this.time_in_cycle);
       }
     }
     // console.log(this.time_in_cycle, this.year)
