@@ -6,10 +6,12 @@ import CellDivChart from '@/components/CellDivision/CellDivChart.vue';
 import { cellDivStore } from '@/Stores/CellDivStore';
 
 import SelectButton from 'primevue/selectbutton';
-const chartType = ref('Mitosis')
+const chartType = ref('Mitosis');
+const componentKey = ref(0);
 watch(chartType,
     () => {
         cellDivStore().clearGraph();
+        componentKey.value++
     },
 )
 
@@ -37,7 +39,7 @@ watch(chartType,
             </div>
         </div>
         <div class="chart-container">
-            <CellDivChart v-model="chartType" />
+            <CellDivChart :chartType="chartType" />
         </div>
     </div>
 </template>

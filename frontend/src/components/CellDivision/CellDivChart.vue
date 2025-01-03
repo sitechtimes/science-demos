@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Chart type="scatter" :data="chartInfo.chartData" :options="chartOptions" class="h-[30rem]" />
+        <Chart type="scatter" :data="chartData" :options="chartOptions" class="h-[30rem]" />
     </div>
 </template>
 
@@ -10,13 +10,12 @@ import { ref, onMounted, watch } from "vue";
 import { useLayout } from '@/layout/composables/layout';
 import { cellDivStore } from '@/Stores/CellDivStore';
 
-
-const setChartData = () => {
+const setChartData = () => { // return data options
     return {
         datasets: [
             {
                 label: '# of Cells',
-                data: cellDivStore().graphData,
+                data: cellDivStore().graphData, // pull data from store
                 fill: true,
                 borderColor: '#00aaaa',
                 borderWidth: 2,
@@ -26,16 +25,15 @@ const setChartData = () => {
     };
 };
 
-const axesLabels = {
-    xAxis: ['Time (hours)', 'Time (days)'], // mitosis 60 min https://bionumbers.hms.harvard.edu/bionumber.aspx?s=n&v=4&id=112373 spermatogenesis 64 days https://www.aatbio.com/resources/faq-frequently-asked-questions/how-long-does-meiosis-take
-};
+// mitosis 60 min https://bionumbers.hms.harvard.edu/bionumber.aspx?s=n&v=4&id=112373
+// spermatogenesis (sperm meiosis) 64 days https://www.aatbio.com/resources/faq-frequently-asked-questions/how-long-does-meiosis-take
 
-const setChartOptions = (chartTypeNum, doc) => { // return chart options
+const setChartOptions = (doc) => { // return chart options
     const chartOptions = {
         maintainAspectRatio: false,
         responsive: true,
         plugins: {
-            legend: { // it's possible to make it more minimalistic by having 1 button to disable/enable multiple datasets
+            legend: {
                 labels: {
                     color: doc.textColor
                 },
@@ -57,8 +55,8 @@ const setChartOptions = (chartTypeNum, doc) => { // return chart options
                     color: doc.surfaceBorder
                 },
                 title: {
-                    display: true,
-                    text: axesLabels.xAxis[chartTypeNum], // axes names
+                    display: true, // change x axsis name based on celldiv type
+                    text: props.chartType === 'Mitosis' ? "Time (hours)" : props.chartType === "Meiosis" ? "Time (Days)" : "time", // axes names
                     color: doc.textColor
                 }
             },
@@ -82,16 +80,14 @@ const setChartOptions = (chartTypeNum, doc) => { // return chart options
     return chartOptions;
 }
 
-const chartType = defineModel(); // track which dataset the user wants to see
+const props = defineProps(['chartType']); // pull charttype info from parent component
 
-const chartInfo = ref({
-    chartData: setChartData(),
-    currentGraph: 0
-});
+const chartData = ref();
 const chartOptions = ref();
 
 onMounted(() => {
-    chartOptions.value = setChartOptions(chartInfo.value.currentGraph, getStyles);
+    chartOptions.value = setChartOptions(getStyles);
+    chartData.value = setChartData();
 });
 
 function getStyles() { // obtain current theme colors for chart options
@@ -106,21 +102,9 @@ function getStyles() { // obtain current theme colors for chart options
     };
 }
 
-watch([useLayout().isDarkTheme, cellDivStore(), chartType], () => {
-    switch (chartType.value) {
-        case 'mitosis':
-            chartInfo.value.currentGraph = 0;
-            break;
-        case 'meiosis':
-            chartInfo.value.currentGraph = 1;
-            break;
-        default:
-            chartInfo.value.currentGraph = 0;
-    }
-    chartOptions.value = setChartOptions(chartInfo.value.currentGraph, getStyles());
-    chartInfo.value.chartData = setChartData();
-}, {
-    deep: true
+watch([useLayout().isDarkTheme, cellDivStore(), props.chartType], () => { // watch for changes
+    chartOptions.value = setChartOptions(getStyles());
+    chartData.value = setChartData();
 });
 </script>
 
