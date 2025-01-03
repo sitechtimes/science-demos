@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Modal
+  - RemoraidItem
+  - MagikarpItem
+  - FeebasItem
+  - FinneonItem
+  - ActiveCheck
   layers:
   - Default
   - TransparentFX
