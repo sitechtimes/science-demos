@@ -9,8 +9,6 @@ public class WindowGraph : MonoBehaviour
     [SerializeField] private RectTransform holder;
     [SerializeField] private RectTransform axes;
     [SerializeField] private Sprite circleSprite;
-    
-    [SerializeField] private GameObject labelTemplateX;
     private Vector2 lastCircle;
     public static int count = 0;
     private int index = 0;
@@ -20,7 +18,7 @@ public class WindowGraph : MonoBehaviour
 
     private Dictionary<string, bool> showingInfo = new Dictionary<string, bool>
         {
-            { "MagikarpItem", true },
+            { "YellowtailItem", true },
             { "FeebasItem", true },
             { "RemoraidItem", true },
             { "FinneonItem", true },
@@ -34,8 +32,8 @@ public class WindowGraph : MonoBehaviour
     {
         holder.localPosition = Vector3.zero;
         count = 0;
-        populations["Magikarp"] = new List<int[]>();
-        populations["Magikarp"].Add(new int[2] { count, 50 });
+        populations["Yellowtail"] = new List<int[]>();
+        populations["Yellowtail"].Add(new int[2] { count, 50 });
         
         populations["Feebas"] = new List<int[]>();
         populations["Feebas"].Add(new int[2] { count, 20 });
@@ -94,17 +92,17 @@ public class WindowGraph : MonoBehaviour
             createAxisY(y);
         }
         float largest = populations.SelectMany(kvp => kvp.Value).SelectMany(arr => arr).Max();
-        Debug.Log($"largest is {largest}");
+        // Debug.Log($"largest is {largest}");
         foreach (var key in populations.Keys)
         {
-            Debug.Log("key");
+            // Debug.Log("key");
             foreach (var point in populations[key])
             {
 
                 // createPoint(new Vector2((count > 1) ? (((graphContainer.rect.width - 60) / (count - 1)) * point[0]) + 30 -graphContainer.rect.width * .5f : 30, (point[1] - 50) * 10));
                 float x = (graphContainer.rect.width / 10 * (point[0] + 1));
                 float y = ((graphContainer.rect.height * (point[1] / largest)) - graphContainer.rect.height * .5f) * .85f;
-                Debug.Log($"val is {point[1]}, y is {y}");
+                // Debug.Log($"val is {point[1]}, y is {y}");
 
                 createPoint(new Vector2((int)x, (int)y), key);
             }
@@ -169,7 +167,7 @@ public class WindowGraph : MonoBehaviour
         anchorMin.x = graphContainer.anchorMin.x;
         anchorMax.x = graphContainer.anchorMax.x;
 
-        Debug.Log(fishName);
+        // Debug.Log(fishName);
         gameObject.tag = $"{fishName}Item";
 
         rectTransform.anchoredPosition = anchoredPos;
@@ -215,10 +213,11 @@ public class WindowGraph : MonoBehaviour
     {
         foreach (Transform child in holder)
         {
-            if (child.tag == hideThis || child.tag == "ActiveCheck")
+            if (child.tag == hideThis)
+            // if (child.tag == hideThis || child.tag == "ActiveCheck")
             {
                 child.gameObject.SetActive(!showingInfo[hideThis]);
-                Debug.Log(child.gameObject.activeSelf);
+                // Debug.Log(child.gameObject.activeSelf);
             }
         }
         

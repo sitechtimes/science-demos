@@ -19,7 +19,7 @@ public class demoScript : MonoBehaviour
         demoText.text = "";
         foreach (var fish in fishList)
         {
-            Debug.Log($"{(int)(WindowGraph.populations[fish.name][WindowGraph.populations[fish.name].Count-1][1])}");
+            // Debug.Log($"{(int)(WindowGraph.populations[fish.name][WindowGraph.populations[fish.name].Count-1][1])}");
             demoText.text += $"{fish.name}: {(int)(WindowGraph.populations[fish.name][WindowGraph.populations[fish.name].Count-1][1])}\n";
         }
     }
