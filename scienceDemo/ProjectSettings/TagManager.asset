@@ -10,6 +10,7 @@ TagManager:
   - FeebasItem
   - FinneonItem
   - ActiveCheck
+  - YellowtailItem
   layers:
   - Default
   - TransparentFX
