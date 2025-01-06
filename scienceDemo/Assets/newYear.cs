@@ -24,9 +24,9 @@ public class newYear : MonoBehaviour
         addPopData.Invoke();
     }
     public void runCalcs(){
-        float yellowtailRates = ((0.4f * (1f - variables["yellowtailFishing"]/100f) * tempFactor()));
-        Debug.Log(yellowtailRatese);
-        WindowGraph.populations["Yellowtail"].Add(new int[2] { WindowGraph.count, (int)(WindowGraph.populations["Yellowtail"][WindowGraph.populations["Yellowtail"].Count-1][1] * (1+ (variables["storm"]-50f)/100f))});
+        float yellowtailRates = 1f + ((0.4f * (1f - variables["yellowtailFishing"]/100f) * tempFactor()));
+        Debug.Log(yellowtailRates);
+        WindowGraph.populations["Yellowtail"].Add(new int[2] { WindowGraph.count, (int)(WindowGraph.populations["Yellowtail"][WindowGraph.populations["Yellowtail"].Count-1][1] * yellowtailRates)});
          WindowGraph.populations["Feebas"].Add(new int[2] { WindowGraph.count, (int)(WindowGraph.populations["Feebas"][WindowGraph.populations["Feebas"].Count-1][1] * (1+ (variables["storm"]-50f)/100f))});
          WindowGraph.populations["Remoraid"].Add(new int[2] { WindowGraph.count, Random.Range(10,120)});
           WindowGraph.populations["Finneon"].Add(new int[2] { WindowGraph.count, Random.Range(10,120)});
