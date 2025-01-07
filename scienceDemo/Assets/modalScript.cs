@@ -21,12 +21,4 @@ public class modalScript : MonoBehaviour
     {
         modal = GameObject.Find("Modal");
     }
-
-    // public void changeText(string[] textInfo){
-    //     Debug.Log("eaaeaeeeeeeeeeeee");
-    //     titleText.text = "sample";
-    //      Debug.Log(titleText.text);
-    //     slideText.text = textInfo[1];
-    //     Canvas.ForceUpdateCanvases();
-    // }
 }

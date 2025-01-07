@@ -22,34 +22,41 @@ public class WindowGraph : MonoBehaviour
     private Color[] colors = new Color[] { Color.red, Color.blue, Color.green, Color.white, Color.yellow, Color.black };
     public static Dictionary<string, List<int[]>> populations = new Dictionary<string, List<int[]>>();
 
-    private Dictionary<string, bool> showingInfo = new Dictionary<string, bool>
-        {
-            { "YellowtailItem", true },
-            { "FeebasItem", true },
-            { "RemoraidItem", true },
-            { "FinneonItem", true },
-        };
+    // public
 
-    void Awake()
+    private Dictionary<string, bool> showingInfo = new Dictionary<string, bool>();
+
+    void Start()
     {
-        // scrollRect.onValueChanged.AddListener(OnScrollRectChanged);
         reset();
     }
     public void reset()
     {
         holder.localPosition = Vector3.zero;
         count = 0;
-        populations["Yellowtail"] = new List<int[]>();
-        populations["Yellowtail"].Add(new int[2] { count, 50 });
+
+        foreach(Fish fish in fishScript.fishList){
+            populations[fish.name] = new List<int[]>();
+            showingInfo.Add( $"{fish.name}Item", true );
+        //             {
+        //     { "YellowtailItem", true },
+        //     { "FeebasItem", true },
+        //     { "RemoraidItem", true },
+        //     { "FinneonItem", true },
+        // };
+            populations[fish.name].Add(new int[2] { count, fish.population });
+        }
+        // populations["Yellowtail"] = new List<int[]>();
+        // populations["Yellowtail"].Add(new int[2] { count, 50 });
         
-        populations["Feebas"] = new List<int[]>();
-        populations["Feebas"].Add(new int[2] { count, 20 });
+        // populations["Feebas"] = new List<int[]>();
+        // populations["Feebas"].Add(new int[2] { count, 20 });
 
-        populations["Remoraid"] = new List<int[]>();
-        populations["Remoraid"].Add(new int[2] { count, 40 });
+        // populations["Remoraid"] = new List<int[]>();
+        // populations["Remoraid"].Add(new int[2] { count, 40 });
 
-        populations["Finneon"] = new List<int[]>();
-        populations["Finneon"].Add(new int[2] { count, 80 });
+        // populations["Finneon"] = new List<int[]>();
+        // populations["Finneon"].Add(new int[2] { count, 80 });
         
         count++;
         // populations["Remoraid"] = new List<int[]>();
@@ -109,17 +116,14 @@ public class WindowGraph : MonoBehaviour
             createNumberY(y,largest,n);
         }
         
-        // Debug.Log($"largest is {largest}");
         foreach (var key in populations.Keys)
         {
-            // Debug.Log("key");
             foreach (var point in populations[key])
             {
 
                 // createPoint(new Vector2((count > 1) ? (((graphContainer.rect.width - 60) / (count - 1)) * point[0]) + 30 -graphContainer.rect.width * .5f : 30, (point[1] - 50) * 10));
                 float x = (graphContainer.rect.width / 10 * (point[0] + 1));
                 float y = ((graphContainer.rect.height * (point[1] / largest)) - graphContainer.rect.height * .5f) * .85f;
-                // Debug.Log($"val is {point[1]}, y is {y}");
 
                 createPoint(new Vector2((int)x, (int)y), key);
             }
@@ -130,7 +134,6 @@ public class WindowGraph : MonoBehaviour
     }
 
 public void createNumberX(float x, float largest, int r){
-Debug.Log(x);
         GameObject textObject = Instantiate(textPrefab, holder);
 
         RectTransform textRect = textObject.GetComponent<RectTransform>();
@@ -142,18 +145,14 @@ Debug.Log(x);
             textRect.anchorMax = new Vector2(0, 0);
             
             TextMeshProUGUI text = textObject.GetComponent<TextMeshProUGUI>();    
-            Debug.Log(r);
             text.text = (r-1).ToString();
+            // textObject.transform.SetParent(xAxisHolder, true);
+            // text.text
 
 }
 
-// public void OnScrollRectChanged(Vector2 position){
-//     Debug.Log(holder.transform.position.x);
-//     xAxisHolder.transform.position = new Vector2(xAxisHolder.transform.position.x + holder.transform.position.x, xAxisHolder.transform.position.y);
 
-// }
     public void createNumberY(float y, float largest, int n){
-        Debug.Log(y);
         GameObject textObject = Instantiate(textPrefab, yAxisHolder);
 
         RectTransform textRect = textObject.GetComponent<RectTransform>();
@@ -165,7 +164,6 @@ Debug.Log(x);
             textRect.anchorMax = new Vector2(0.5f, 0);
             
             TextMeshProUGUI text = textObject.GetComponent<TextMeshProUGUI>();    
-            Debug.Log(largest * n/7f);
             text.text = (largest * (n + 1f)/7f).ToString("F1");
             
     }   
@@ -225,7 +223,6 @@ Debug.Log(x);
         anchorMin.x = graphContainer.anchorMin.x;
         anchorMax.x = graphContainer.anchorMax.x;
 
-        // Debug.Log(fishName);
         gameObject.tag = $"{fishName}Item";
 
         rectTransform.anchoredPosition = anchoredPos;
@@ -275,7 +272,7 @@ Debug.Log(x);
             // if (child.tag == hideThis || child.tag == "ActiveCheck")
             {
                 child.gameObject.SetActive(!showingInfo[hideThis]);
-                // Debug.Log(child.gameObject.activeSelf);
+
             }
         }
         
