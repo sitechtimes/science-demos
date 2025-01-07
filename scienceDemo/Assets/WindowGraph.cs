@@ -6,7 +6,7 @@ using System.Linq;
 using TMPro;
 public class WindowGraph : MonoBehaviour
 {
-    
+
     [SerializeField] private RectTransform graphContainer;
     [SerializeField] private RectTransform yAxisHolder;
     [SerializeField] private RectTransform xAxisHolder;
@@ -21,9 +21,6 @@ public class WindowGraph : MonoBehaviour
     public GameObject textPrefab;
     private Color[] colors = new Color[] { Color.red, Color.blue, Color.green, Color.white, Color.yellow, Color.black };
     public static Dictionary<string, List<int[]>> populations = new Dictionary<string, List<int[]>>();
-
-    // public
-
     private Dictionary<string, bool> showingInfo = new Dictionary<string, bool>();
 
     void Start()
@@ -35,37 +32,18 @@ public class WindowGraph : MonoBehaviour
         holder.localPosition = Vector3.zero;
         count = 0;
 
-        foreach(Fish fish in fishScript.fishList){
+        foreach (Fish fish in fishScript.fishList)
+        {
             populations[fish.name] = new List<int[]>();
-            showingInfo.Add( $"{fish.name}Item", true );
-        //             {
-        //     { "YellowtailItem", true },
-        //     { "FeebasItem", true },
-        //     { "RemoraidItem", true },
-        //     { "FinneonItem", true },
-        // };
+            showingInfo.Add($"{fish.name}Item", true);
             populations[fish.name].Add(new int[2] { count, fish.population });
         }
-        // populations["Yellowtail"] = new List<int[]>();
-        // populations["Yellowtail"].Add(new int[2] { count, 50 });
-        
-        // populations["Feebas"] = new List<int[]>();
-        // populations["Feebas"].Add(new int[2] { count, 20 });
-
-        // populations["Remoraid"] = new List<int[]>();
-        // populations["Remoraid"].Add(new int[2] { count, 40 });
-
-        // populations["Finneon"] = new List<int[]>();
-        // populations["Finneon"].Add(new int[2] { count, 80 });
-        
         count++;
-        // populations["Remoraid"] = new List<int[]>();
         foreach (Transform child in fishHolder.transform)
         {
             GameObject.Destroy(child.gameObject);
         }
         createGraph();
-        // holder.localPosition = Vector3.left;
     }
 
     public void createGraph()
@@ -86,7 +64,7 @@ public class WindowGraph : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
-            foreach (Transform child in yAxisHolder)
+        foreach (Transform child in yAxisHolder)
         {
             if (child.tag != "ActiveCheck")
             {
@@ -96,32 +74,26 @@ public class WindowGraph : MonoBehaviour
         lastCircle = new Vector2(0, 0);
         index = 0;
         float largest = populations.SelectMany(kvp => kvp.Value).SelectMany(arr => arr).Max();
-        //     for(int r = 1; r <= 100; r++){
-        //         // for(int r = 1; r <= populations["Magikarp"].Count; r++){
-        //     float x = (graphContainer.rect.width/10 * r);
-        //     createAxisX(x);
-        // }
+        
         int r = 1;
         while (holder.rect.width >= graphContainer.rect.width / 10 * r)
         {
             float x = (graphContainer.rect.width / 10 * r);
             r++;
             createAxisX(x);
-            createNumberX(x,largest,r);
+            createNumberX(x, largest, r);
         }
         for (int n = 1; n < 7; n++)
         {
             float y = (graphContainer.rect.height / 7 * n) - graphContainer.rect.height * .5f;
             createAxisY(y);
-            createNumberY(y,largest,n);
+            createNumberY(y, largest, n);
         }
-        
+
         foreach (var key in populations.Keys)
         {
             foreach (var point in populations[key])
             {
-
-                // createPoint(new Vector2((count > 1) ? (((graphContainer.rect.width - 60) / (count - 1)) * point[0]) + 30 -graphContainer.rect.width * .5f : 30, (point[1] - 50) * 10));
                 float x = (graphContainer.rect.width / 10 * (point[0] + 1));
                 float y = ((graphContainer.rect.height * (point[1] / largest)) - graphContainer.rect.height * .5f) * .85f;
 
@@ -133,40 +105,39 @@ public class WindowGraph : MonoBehaviour
         holder.localPosition = oPos;
     }
 
-public void createNumberX(float x, float largest, int r){
+    public void createNumberX(float x, float largest, int r)
+    {
         GameObject textObject = Instantiate(textPrefab, holder);
 
         RectTransform textRect = textObject.GetComponent<RectTransform>();
 
-            textRect.anchoredPosition = new Vector2(x, xAxisHolder.rect.height * .5f);
+        textRect.anchoredPosition = new Vector2(x, xAxisHolder.rect.height * .5f);
 
-            textRect.pivot = new Vector2(0.5f, 0.5f);
-            textRect.anchorMin = new Vector2(0, 0);
-            textRect.anchorMax = new Vector2(0, 0);
-            
-            TextMeshProUGUI text = textObject.GetComponent<TextMeshProUGUI>();    
-            text.text = (r-1).ToString();
-            // textObject.transform.SetParent(xAxisHolder, true);
-            // text.text
+        textRect.pivot = new Vector2(0.5f, 0.5f);
+        textRect.anchorMin = new Vector2(0, 0);
+        textRect.anchorMax = new Vector2(0, 0);
 
-}
+        TextMeshProUGUI text = textObject.GetComponent<TextMeshProUGUI>();
+        text.text = (r - 1).ToString();
+    }
 
 
-    public void createNumberY(float y, float largest, int n){
+    public void createNumberY(float y, float largest, int n)
+    {
         GameObject textObject = Instantiate(textPrefab, yAxisHolder);
 
         RectTransform textRect = textObject.GetComponent<RectTransform>();
 
-            textRect.anchoredPosition = new Vector2(0, y + yAxisHolder.rect.height * .5f);
+        textRect.anchoredPosition = new Vector2(0, y + yAxisHolder.rect.height * .5f);
 
-            textRect.pivot = new Vector2(0.5f, 0.5f);
-            textRect.anchorMin = new Vector2(0.5f, 0);
-            textRect.anchorMax = new Vector2(0.5f, 0);
-            
-            TextMeshProUGUI text = textObject.GetComponent<TextMeshProUGUI>();    
-            text.text = (largest * (n + 1f)/7f).ToString("F1");
-            
-    }   
+        textRect.pivot = new Vector2(0.5f, 0.5f);
+        textRect.anchorMin = new Vector2(0.5f, 0);
+        textRect.anchorMax = new Vector2(0.5f, 0);
+
+        TextMeshProUGUI text = textObject.GetComponent<TextMeshProUGUI>();
+        text.text = (largest * (n + 1f) / 7f).ToString("F1");
+
+    }
 
     public void createAxisX(float x)
     {
@@ -186,11 +157,6 @@ public void createNumberX(float x, float largest, int r){
 
         line.transform.SetParent(axes, true);
 
-        // RectTransform labelX = Instantiate(labelTemplateX).GetComponent<RectTransform>();
-        // labelX.SetParent(graphContainer);
-        // labelX.gameObject.SetActive(true);
-        // labelX.anchoredPosition = new Vector2(x, -20f);
-        // labelX.GetComponent<Text>().text = x.ToString();
     }
     public void createAxisY(float y)
     {
@@ -205,7 +171,7 @@ public void createNumberX(float x, float largest, int r){
         anchorMax.x = graphContainer.anchorMax.x;
 
         rectTransform.sizeDelta = new Vector2(holder.rect.width, 5);
-        rectTransform.anchoredPosition = new Vector2(holder.rect.width*.5f, y);
+        rectTransform.anchoredPosition = new Vector2(holder.rect.width * .5f, y);
 
         line.transform.SetParent(axes, true);
 
@@ -262,20 +228,19 @@ public void createNumberX(float x, float largest, int r){
         line.transform.SetParent(holder, true);
 
         line.SetActive(showingInfo[$"{fishName}Item"]);
-    }   
+    }
 
     public void hideOnGraph(string hideThis)
     {
         foreach (Transform child in holder)
         {
             if (child.tag == hideThis)
-            // if (child.tag == hideThis || child.tag == "ActiveCheck")
             {
                 child.gameObject.SetActive(!showingInfo[hideThis]);
 
             }
         }
-        
+
         showingInfo[hideThis] = !showingInfo[hideThis];
-    }
+     }
 }
