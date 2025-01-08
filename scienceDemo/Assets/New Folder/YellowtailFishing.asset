@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bd7d17dfcdf6724d880f5612a314cc0, type: 3}
-  m_Name: Storm
+  m_Name: YellowtailFishing
   m_EditorClassIdentifier: 
   unit: '%'
   min: 0
   max: 100
-  startingValue: 5
-  title: Storm Severity
-  value: storm
+  startingValue: 0
+  title: Yellowtail Fishing
+  value: yellowtailFishing

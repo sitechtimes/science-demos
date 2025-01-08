@@ -16,9 +16,10 @@ public class demoScript : MonoBehaviour
     }
     public void textUpdate()
     {
-        demoText.text = "";
+        demoText.text = "e";
         foreach (var fish in fishList)
         {
+            Debug.Log(WindowGraph.populations[fish.name][WindowGraph.populations[fish.name].Count-1][1]);
              demoText.text += $"{fish.name}: {(int)(WindowGraph.populations[fish.name][WindowGraph.populations[fish.name].Count-1][1])}\n";
         }
     }

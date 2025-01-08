@@ -31,10 +31,11 @@ public class WindowGraph : MonoBehaviour
     {
         holder.localPosition = Vector3.zero;
         count = 0;
-
+        showingInfo = new Dictionary<string, bool>();
         foreach (Fish fish in fishScript.fishList)
         {
             populations[fish.name] = new List<int[]>();
+           
             showingInfo.Add($"{fish.name}Item", true);
             populations[fish.name].Add(new int[2] { count, fish.population });
         }
@@ -118,6 +119,7 @@ public class WindowGraph : MonoBehaviour
         textRect.anchorMax = new Vector2(0, 0);
 
         TextMeshProUGUI text = textObject.GetComponent<TextMeshProUGUI>();
+        // text.fontSize = 56;
         text.text = (r - 1).ToString();
     }
 
@@ -135,7 +137,8 @@ public class WindowGraph : MonoBehaviour
         textRect.anchorMax = new Vector2(0.5f, 0);
 
         TextMeshProUGUI text = textObject.GetComponent<TextMeshProUGUI>();
-        text.text = (largest * (n + 1f) / 7f).ToString("F1");
+        text.fontSize = 48;
+        text.text = (largest * (n + 1f) / 7f).ToString("F0");
 
     }
 

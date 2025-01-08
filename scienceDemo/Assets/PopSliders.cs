@@ -20,7 +20,7 @@ public class SliderScript : MonoBehaviour
 
             objectRect.transform.localPosition -= new Vector3(0, xOffset, 0);
 
-            TextMeshProUGUI titleText = ((sliderObject.transform.Find("TitleText")).gameObject).GetComponent<TextMeshProUGUI>();
+                TextMeshProUGUI titleText = ((sliderObject.transform.Find("TitleText")).gameObject).GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI dataText = ((sliderObject.transform.Find("DataText")).gameObject).GetComponent<TextMeshProUGUI>();
             Slider controller = ((sliderObject.transform.Find("Controller")).gameObject).GetComponent<Slider>();
            
