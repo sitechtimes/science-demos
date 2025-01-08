@@ -27,6 +27,17 @@ const router = createRouter({
             ]
         },
         {
+            path:'/bio',
+            component: AppLayout,
+            children:[
+                {
+                    path: '/bio/celldivision',
+                    name: 'dashboard',
+                    component: () => import('@/views/pages/bio/Cell_Division.vue')
+                },
+            ]
+        },
+        {
             path: '/testphaser',
             component: () => import('@/components/CoralSimulation/GameScene.vue'),
             name: 'phaser'

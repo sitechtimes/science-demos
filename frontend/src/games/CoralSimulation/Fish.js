@@ -1,64 +1,22 @@
 import Phaser from 'phaser'
+import Organism from './organism'
 
-export default class Fish extends Phaser.Physics.Arcade.Sprite {
-  constructor( scene, x, y, texture, type ) {
-    super(scene, x, y, texture)
+export default class Fish extends Organism {
+  constructor(scene, x, y, type) {
+    super(scene, x, y, type)
+  }
 
-    scene.add.existing(this)
-    scene.physics.add.existing(this)
-
-    this.setScale(0.5).setInteractive()
-    this.on('pointerdown', () => {
-      if (this.popup) {
-        this.deletePopup()
-        this.popup = undefined
-      } else {
-        this.addPopup(scene, 'description', this.x, this.y, this)
+    update(scene) {
+      // if fish is not offscreen, move normall to the right
+      if(this.x < scene.scale.width + 100) {
+        this.x++
       }
-    })
+      else {
+      // if fish is offscreen, teleport to other side of screen
+          this.x = -100   
+      }
 
-    scene.events.on('update', () => { this.update(scene) })
-
-    this.textbox = new Textbox(scene)
-  }
-  update(scene) {
-    if(this.x < scene.scale.width) {
-      this.x++
-    }
-    else {
-        this.x = 0   
-    }
-    this.textbox.follow(this)
-  }
-  addPopup(scene, description, x, y, organism) {
-    this.textbox.setVisible(!this.textbox.visible)
-    this.textbox.text.setVisible(!this.textbox.text.visible)
-
-  }
-  deletePopup() {
-    this.popupContainer.destroy()
-  }
-}
-
-class Textbox extends Phaser.GameObjects.Sprite {
-  constructor(scene, x = 0, y = 0, texture = 'textbox') {
-    super(scene, x, y, texture)
-
-    scene.add.existing(this)
-    this.setVisible(false)
-    this.setScale(1.3)
-    
-    this.text = scene.add
-      .text(10, 10, 'text text text text text text text text text text text text')
-      .setColor('0x000000')
-    this.text.setWordWrapWidth(290, false)
-    this.text.setVisible(false)
-  }
-
-  follow(organism) {
-    this.setX(organism.x)
-    this.setY(organism.y - 100)
-    this.text.setX(organism.x - 140)
-    this.text.setY(organism.y - 120)
+      // move textbox with fish
+      this.textbox.follow(this)
   }
 }
