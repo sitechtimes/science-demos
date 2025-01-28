@@ -15,16 +15,16 @@ var CoralReef = function () {
       z, // 0, incremented on advanced year
       s, // arr algae positions
       h, // [400]
-      p, // [170]
-      b, // [315]
-      v, // [425]
+      p, // [170] arr sponge
+      b, // [315] arr staghorn
+      v, // [425] arr star coral
       f, // [145]
-      w, // [165]
-      C, // [135]
-      M, // [25]
-      y, // [16]
-      S, // [120]
-      x, // .push(1 * (5 * a).toFixed(ve)) Pe; checks if x is not null or undefined, and if it is not, it updates the last value of x to be 5 * a if l.checkBox1.getStatus() is true
+      w, // [165] arr parrotfish
+      C, // [135] arry angelfish
+      M, // [25] arr turtle
+      y, // [16] arr grouper
+      S, // [120] arr snapper
+      x, // huh is this lionfish// .push(1 * (5 * a).toFixed(ve)) Pe; checks if x is not null or undefined, and if it is not, it updates the last value of x to be 5 * a if l.checkBox1.getStatus() is true
       P, // push(1 * (5 * a).toFixed(ve)) Pe()
       I, // .push(1 * ((100 * h[e]).toFixed(ve))) Ue
       F, // .push(1 * ((100 * p[e]).toFixed(ve))) Ue
@@ -54,12 +54,12 @@ var CoralReef = function () {
       te, // arr organisms Array(e, a, 0, 0)
       oe, // null
       re, // ocean background opacity
-      se, // [0.21,0.28,0.11,0.27,8.25,5.4,2.4,0.48,11.6,0.25,1,5]
-      ne, // arr push 0 Y F
+      se, // divide by this number [t] to scale on graph [0.21,0.28,0.11,0.27,8.25,5.4,2.4,0.48,11.6,0.25,1,5]
+      ne, // arr push 0 Y F, operated on for graph coordinates
       ie, // arr with random num 0-3
       le, // arr with 0 and etc
       he, // animation timing
-      pe, // current time , elapsed since animation update
+      pe, // current time , elapsed since anima tion update
       de, // !1
       ge, // 685
       ce, // 655
@@ -158,7 +158,7 @@ var CoralReef = function () {
     function Pe(e) {
       // ***run all functions upon each year update
       var a, t, o, r, s;
-      Ee("coralReef"),
+      Ee("coralReef"), // animation
         z++,
         l.simulationInfo.setText("Year: " + z.toFixed(0)),
         Ge(),
