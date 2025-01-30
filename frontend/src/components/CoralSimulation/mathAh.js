@@ -1,5 +1,24 @@
-let te = []; // holds all species numbers
+let ne = []; // csv takes from these raw values
+let te = []; // holds all species numbers; te = { algae sponge staghorn star urchin parrot angel turtle grouper snapper lion thorns
 let i = []; // store plot data and text field data from var l
+let O,
+  Y,
+  F,
+  I,
+  R,
+  B,
+  k,
+  L,
+  X,
+  T,
+  D,
+  N,
+  h,
+  E,
+  w,
+  f = [];
+let z = 0;
+
 let l = {
   tabComp1: {},
   tabComp2: {},
@@ -58,6 +77,7 @@ let l = {
 };
 
 function currentArrVal() {
+  // Ge()
   // calculations 2
   var e, a;
   (te = new Object()),
@@ -106,6 +126,7 @@ function currentArrVal() {
 }
 
 function sediment1() {
+  // Je()
   // calculations
   return (
     (0.2 * i[3].obj.getValue() +
@@ -117,6 +138,7 @@ function sediment1() {
 }
 
 function sediment2() {
+  // Ke()
   //  calc
   return (
     1 -
@@ -125,6 +147,7 @@ function sediment2() {
 }
 
 function sediment3() {
+  // He()
   // calculations
   return (
     (0.6 * i[3].obj.getValue() +
@@ -136,6 +159,7 @@ function sediment3() {
 }
 
 function coralStress() {
+  // ea()
   // calc
   return (
     (sediment3() +
@@ -149,6 +173,7 @@ function coralStress() {
 }
 
 function waterTemp() {
+  // We
   // array of water temp effect on organism ?
   return [
     0.08, 0.13, 0.21, 0.32, 0.46, 0.6, 0.75, 0.88, 0.97, 1, 0.97, 0.88, 0.75,
@@ -157,6 +182,7 @@ function waterTemp() {
 }
 
 function phEffect() {
+  // Qe
   // calculations based on ph
   var e, a;
   return (
@@ -178,5 +204,137 @@ function phEffect() {
 }
 
 function iVal6() {
+  // aa
   return Number(i[6].obj.getValue());
+}
+
+function Pe(e) {
+  // ***run all functions upon each year update
+  var a, t, o, r, s;
+  z++, // advance current year but idk where it is defined
+    // l.simulationInfo.setText("Year: " + z.toFixed(0)),
+    currentArrVal(),
+    (ne = []).push(O),
+    ne.push(Y),
+    ne.push(F),
+    ne.push(I),
+    ne.push(R),
+    ne.push(B),
+    ne.push(k),
+    ne.push(L),
+    ne.push(X),
+    ne.push(T),
+    ne.push(D),
+    ne.push(N),
+    (s = []),
+    (o = h.length - 1),
+    (s = te.algae),
+    (a = h[o]), // takes last entry in h
+    (t = a + s[0] * a * (1 - a / E[o]) - (s[1] * a * (w[o] + 3 * f[o])) / 4),
+    h.push(1 * t.toFixed(4)),
+    (s = te.sponge),
+    (a = p[o]),
+    (t = a + s[0] * a * (1 - a / V[o]) - (s[1] * a * (C[o] + 2 * M[o])) / 2),
+    p.push(1 * t.toFixed(4)),
+    (s = te.staghorn),
+    (a = b[o]),
+    (t =
+      a * (1 - ta()) * (1 - ra() / 2) +
+      s[0] * a * (1 - ra()) * (1 - a / G[o]) -
+      (s[1] * a * P[o] + Ze() * a)),
+    b.push(1 * t.toFixed(4)),
+    (s = te.star),
+    (a = v[o]),
+    (t =
+      a * (1 - oa()) * (1 - sa() / 2) +
+      s[0] * a * (1 - sa()) * (1 - a / U[o]) -
+      (s[1] * a * P[o] + (Ze() * a) / 5)),
+    v.push(1 * t.toFixed(4)),
+    (s = te.urchin),
+    (a = f[o]),
+    (t = a * (1 - i[11].obj.getValue() / 100) + s[2] * a * h[o] - s[3] * a),
+    f.push(1 * t.toFixed(4)),
+    (s = te.parrot),
+    (a = w[o]),
+    (t = a + s[2] * a * h[o] - s[3] * a - (y[o] + S[o] + 5 * x[o]) * a * s[1]),
+    w.push(1 * t.toFixed(4)),
+    (s = te.angel),
+    (a = C[o]),
+    (t = a + s[2] * a * p[o] - s[3] * a - (y[o] + S[o] + 6 * x[o]) * a * s[1]),
+    C.push(1 * t.toFixed(4)),
+    (s = te.turtle),
+    (a = M[o]),
+    (t = a + s[2] * a * p[o] - s[3] * a),
+    M.push(1 * t.toFixed(4)),
+    (s = te.grouper),
+    (a = y[o]),
+    (t = a + s[2] * a * (w[o] + C[o] + S[o] / 3) - s[3] * a),
+    y.push(1 * t.toFixed(4)),
+    (s = te.snapper),
+    (a = S[o]),
+    (t =
+      a +
+      s[2] * a * (w[o] + C[o]) -
+      (s[3] * a * y[o]) / 10 -
+      (s[3] * x[o]) / 5),
+    S.push(1 * t.toFixed(4)),
+    (s = te.lion),
+    (a = x[o]),
+    (t = a + s[2] * a * (w[o] + C[o] + y[o] + S[o]) - s[3] * a),
+    x.push(1 * t.toFixed(4)),
+    (s = te.thorns),
+    (a = P[o]),
+    (t = a + s[2] * a * (b[o] + v[o]) - s[3] * a),
+    P.push(1 * t.toFixed(4)),
+    $e(),
+    (t = h[++o]),
+    (r = E[o]),
+    (h[o] = t < 0 ? 0 : r < t ? r : t),
+    (t = p[o]),
+    (r = V[o]),
+    (p[o] = t < 0 ? 0 : r < t ? r : t),
+    (t = b[o]),
+    (r = G[o]),
+    (b[o] = t < 0 ? 0 : r < t ? r : t),
+    (t = v[o]),
+    (r = U[o]),
+    (v[o] = t < 0 ? 0 : r < t ? r : t),
+    (t = f[o]),
+    (r = q[o]),
+    (f[o] = t < 0 ? 0 : r < t ? r : t),
+    (t = w[o]),
+    (r = H[o]),
+    (w[o] = t < 0 ? 0 : r < t ? r : t),
+    (t = C[o]),
+    (r = W[o]),
+    (C[o] = t < 0 ? 0 : r < t ? r : t),
+    (t = M[o]),
+    (r = Q[o]),
+    (M[o] = t < 0 ? 0 : r < t ? r : t),
+    (t = y[o]),
+    (r = J[o]),
+    (y[o] = t < 0 ? 0 : r < t ? r : t),
+    (t = S[o]),
+    (r = K[o]),
+    (S[o] = t < 0 ? 0 : r < t ? r : t),
+    (t = x[o]),
+    (r = Z[o]),
+    (x[o] = t < 0 ? 0 : r < t ? r : t),
+    (t = P[o]),
+    (r = ee[o]),
+    (P[o] = t < 0 ? 0 : r < t ? r : t),
+    Ue(),
+    qe(),
+    De(),
+    pa(),
+    ga("ParrotFish"),
+    ga("AngelFish"),
+    ga("SeaTurtle"),
+    ga("Grouper"),
+    ga("Snapper"),
+    ga("LionFish"),
+    _.myPond.drawCanvasGrass(),
+    de && _.myPond.drawCanvasFish(),
+    Ne("coralReef", 25),
+    h.length;
 }
