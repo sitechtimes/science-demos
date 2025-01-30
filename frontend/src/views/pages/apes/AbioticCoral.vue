@@ -5,7 +5,7 @@
     <div class="chart-slider-container">
         <div class="chart-container">
             <div class="card" v-if="chartType === 'Simulation'">
-                <GameScene/>
+                <unityScene/>
             </div>
             <div class="card" v-else>
                 <CoralChart v-model="chartType"/>
@@ -29,6 +29,7 @@ import SliderConditions from "@/components/CoralSimulation/SliderConditions.vue"
 import SliderYear from '@/components/CoralSimulation/SliderYear.vue';
 import GameScene from '@/components/CoralSimulation/GameScene.vue'
 import SelectButton from 'primevue/selectbutton';
+import unityScene from '@/components/CoralSimulation/unityScene.vue'
 
 const chartType = ref('Population %')
 </script>
