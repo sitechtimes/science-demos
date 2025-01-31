@@ -35,7 +35,9 @@ coverage
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
+# Ignore all Build folders EXCEPT public/Build
 [Bb]uild/
+!public/Build/
 [Bb]uilds/
 [Ll]ogs/
 [Uu]ser[Ss]ettings/

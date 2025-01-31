@@ -8,15 +8,13 @@
 import UnityWebgl from 'unity-webgl';
 import UnityVue from 'unity-webgl/vue';
 
+const cacheBuster = Date.now(); // Unique number each load
+
 const unityContext = new UnityWebgl({
-  loaderUrl:
-    'Build\Sciencedemowebgl.data.br',
-  dataUrl:
-    'Build\Sciencedemowebgl.data.br',
-  frameworkUrl:
-    'Build\Sciencedemowebgl.wasm.br',
-  codeUrl:
-    'Build\Sciencedemowebgl.loader.js',
+  loaderUrl: `/Build/Downloads.loader.js?v=${cacheBuster}`,
+  dataUrl: `/Build/Downloads.data?v=${cacheBuster}`,
+  frameworkUrl: `/Build/Downloads.framework.js?v=${cacheBuster}`,
+  codeUrl: `/Build/Downloads.wasm?v=${cacheBuster}`,
 });
 
 unityContext
