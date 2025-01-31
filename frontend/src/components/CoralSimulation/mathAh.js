@@ -325,16 +325,8 @@ function Pe(e) {
     (P[o] = t < 0 ? 0 : r < t ? r : t),
     Ue(),
     qe(),
-    De(),
+    De(), // stores independent var to display + if statements describing current simulation
     pa(),
-    ga("ParrotFish"),
-    ga("AngelFish"),
-    ga("SeaTurtle"),
-    ga("Grouper"),
-    ga("Snapper"),
-    ga("LionFish"),
-    _.myPond.drawCanvasGrass(),
-    de && _.myPond.drawCanvasFish(),
     Ne("coralReef", 25),
     h.length;
 }

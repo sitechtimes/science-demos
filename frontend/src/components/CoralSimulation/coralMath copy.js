@@ -1,5 +1,5 @@
-var CoralReef = function () {
-    var t, // checkbox status
+let CoralReef = function () {
+    let t, // checkbox status
       o, // arr of { id: "sliderComp1", obj: l.sliderComp1 }
       i, // arr of { id: "tField1", obj: l.tField1 }
       r, // data points for each plot
@@ -67,59 +67,9 @@ var CoralReef = function () {
       me, // default zoom level 3
       be, // same as ae but first letter capitalcapital keys
       ve = 4; // rounding to 4 decimal places
-    function fe(e) {
-      // mouse
-      _.myPond.mouseEvent(e);
-    }
-    function we(e) {
-      // graph changes
-      "0" == e.index
-        ? ($("#graphDiv").hide(), l.controlBtn.show(), $("#displayDiv").show())
-        : ($("#displayDiv").hide(), $("#graphDiv").show(), l.controlBtn.hide());
-    }
-    function Ce(e) {
-      // summary change
-      "0" == e.index
-        ? ($("#summaryDiv").hide(), $("#controlDiv").show())
-        : (De(), $("#controlDiv").hide(), $("#summaryDiv").show()),
-        l.conditions.setSelcetedIndex(l.conditions.getSelcetedIndex());
-    }
-    function Me(e) {
-      // control div visibility
-      var a;
-      0 == (a = Number(e.value))
-        ? ($("#controlDiv1").show(),
-          $("#controlDiv2").hide(),
-          $("#controlDiv3").hide(),
-          $("#controlDiv4").hide(),
-          $("#controlDiv5").hide())
-        : 1 == a
-          ? ($("#controlDiv1").hide(),
-            $("#controlDiv2").show(),
-            $("#controlDiv3").hide(),
-            $("#controlDiv4").hide(),
-            $("#controlDiv5").hide())
-          : 2 == a
-            ? ($("#controlDiv1").hide(),
-              $("#controlDiv2").hide(),
-              $("#controlDiv3").show(),
-              $("#controlDiv4").hide(),
-              $("#controlDiv5").hide())
-            : 3 == a
-              ? ($("#controlDiv1").hide(),
-                $("#controlDiv2").hide(),
-                $("#controlDiv3").hide(),
-                $("#controlDiv4").show(),
-                $("#controlDiv5").hide())
-              : ($("#controlDiv1").hide(),
-                $("#controlDiv2").hide(),
-                $("#controlDiv3").hide(),
-                $("#controlDiv4").hide(),
-                $("#controlDiv5").show());
-    }
     function ye(e) {
       // update slider values
-      for (var a = 0; a < 12; a++)
+      for (let a = 0; a < 12; a++)
         if (e.id == o[a].id) {
           Te(a, e.value);
           break;
@@ -127,37 +77,15 @@ var CoralReef = function () {
     }
     function Se(e) {
       // text fields
-      for (var a, t = 0; t < 12; t++)
+      for (let a, t = 0; t < 12; t++)
         if (e.id == i[t].id) {
           Le(t, (a = i[t].obj.getValue())), Te(t, a);
           break;
         }
     }
-    function xe(e) {
-      // icon resizing
-      "cameraIcon1" == e.id
-        ? exportToApiObj.exportImage({
-            x: globalResizeCalc(0),
-            y: globalResizeCalc(23),
-            width: globalResizeCalc(687),
-            height: globalResizeCalc(655),
-          })
-        : exportToApiObj.exportImage({
-            x: globalResizeCalc(15),
-            y: globalResizeCalc(50),
-            width: globalResizeCalc(672),
-            height: globalResizeCalc(620),
-          });
-    }
-    function je() {
-      // handle button
-      for (var e = 0; e < 12; e++)
-        o[e].obj.value(t[e]), i[e].obj.setValue(t[e]);
-      l.checkBox1.setStatus(t[12]), l.checkBox2.setStatus(t[13]), Oe(), Ye();
-    }
     function Pe(e) {
       // ***run all functions upon each year update
-      var a, t, o, r, s;
+      let a, t, o, r, s;
       Ee("coralReef"), // animation
         z++,
         l.simulationInfo.setText("Year: " + z.toFixed(0)),
@@ -290,9 +218,9 @@ var CoralReef = function () {
         Ne("coralReef", 25),
         h.length;
     }
-    function Ie(e) {
+    /* function Ie(e) {
       // export to csv
-      var a, t, o, r, s;
+      let a, t, o, r, s;
       (t = []),
         (o = []),
         (s = []),
@@ -315,9 +243,9 @@ var CoralReef = function () {
         t.push("Percentage data"),
         o.push("Year"),
         t.push("");
-      for (var n = 0; n < d.length; n++)
+      for (let n = 0; n < d.length; n++)
         d[n].obj.getStatus() && (o.push(r[n]), s.push(n), t.push(""));
-      for (var i = 0; i <= z; i++) {
+      for (let i = 0; i <= z; i++) {
         a.push(new Array()), a[i + 2].push(i.toString());
         for (n = 0; n < s.length; n++)
           a[i + 2].push((ne[s[n]][i] / se[s[n]]).toFixed(0) + "%");
@@ -328,7 +256,7 @@ var CoralReef = function () {
       for (i = 0; i <= z; i++)
         for (n = 0; n < s.length; n++) a[i + 2].push(ne[s[n]][i].toFixed(0));
       exportToApiObj.exportCSV(a);
-    }
+    } */
     function _e(e) {
       // reset everything
       if (
@@ -341,14 +269,14 @@ var CoralReef = function () {
         Ne("coralReef", 25),
         de)
       ) {
-        var a, t;
+        let a, t;
         0.1 < (t = ((a = new Date().getTime()) - pe) / 1e3) && (t = 0.1),
           (pe = a);
-        for (var o = 0; o < 6; o++) he[o] += t;
+        for (let o = 0; o < 6; o++) he[o] += t;
         ca(t), ua(t), ma(t), ba(t), va(t), fa(t), _.myPond.drawCanvasFish();
       }
     }
-    var Ae = !((r = this).init = function () {
+    let Ae = !((r = this).init = function () {
       // ** initial values
       (l = new SpineClass()),
         (_ = new VeinClass()),
@@ -496,11 +424,11 @@ var CoralReef = function () {
         se.push(0.25),
         se.push(1),
         se.push(5);
-      for (var e = 0; e < 12; e++)
+      for (let e = 0; e < 12; e++)
         o[e].obj.addEventListener("slide", ye),
           o[e].obj.addEventListener("change", ye),
           i[e].obj.addEventListener("change", Se);
-      for (var a = 0; a < 12; a++) t.push(Number(i[a].obj.getValue()));
+      for (let a = 0; a < 12; a++) t.push(Number(i[a].obj.getValue()));
       t.push(l.checkBox1.getStatus()), t.push(l.checkBox2.getStatus());
       for (a = 0; a < d.length; a++) d[a].obj.addEventListener("change", Fe);
       (s = z = 0),
@@ -546,7 +474,7 @@ var CoralReef = function () {
     });
     function ze(e, a) {
       // create message boxes for selected organism
-      var t;
+      let t;
       oe && $(oe).css({ "-webkit-filter": "", filter: "" }),
         "oceanAnimalSelected" == e
           ? ((oe = e.target),
@@ -650,19 +578,19 @@ var CoralReef = function () {
     }
     function Fe(e) {
       // mouseevents
-      for (var a, t = 0; t < d.length; t++)
+      for (let a, t = 0; t < d.length; t++)
         if (
           d[t].id == e.id &&
           (l.graph1.cleanAll(t), (a = []), d[t].obj.getStatus())
         ) {
-          for (var o = 0; o < ne[t].length; o++)
+          for (let o = 0; o < ne[t].length; o++)
             a.push({ x: o, y: ne[t][o] / se[t] });
           l.graph1.drawLines({ id: t, data: a, color: d[t].color });
         }
     }
     function Oe(e) {
       // updates selected organism
-      var a, t, o;
+      let a, t, o;
       if (
         ((a = l.checkBox1.getStatus() ? 1 : 0),
         x && (0 == (t = x.length) ? x.push(5 * a) : (x[t - 1] = 5 * a)),
@@ -670,7 +598,7 @@ var CoralReef = function () {
         d[10].obj.getStatus())
       ) {
         o = [];
-        for (var r = 0; r < ne[10].length; r++)
+        for (let r = 0; r < ne[10].length; r++)
           o.push({ x: r, y: ne[10][r] / se[10] });
         l.graph1.cleanAll(10),
           l.graph1.drawLines({ id: 10, data: o, color: d[10].color });
@@ -678,7 +606,7 @@ var CoralReef = function () {
     }
     function Ye(e) {
       // update slider values
-      var a, t;
+      let a, t;
       if (
         ((a = l.checkBox2.getStatus() ? 1 : 0),
         P &&
@@ -692,13 +620,13 @@ var CoralReef = function () {
         d[11].obj.getStatus())
       ) {
         dataArr = [];
-        for (var o = 0; o < ne[11].length; o++)
+        for (let o = 0; o < ne[11].length; o++)
           dataArr.push({ x: o, y: ne[11][o] / se[11] });
         l.graph1.cleanAll(11),
           l.graph1.drawLines({ id: 11, data: dataArr, color: d[11].color });
       }
     }
-    var Xe = "play";
+    let Xe = "play";
     function Re(e) {
       // play pause
       switch (((Xe = e.btnType), e.btnType)) {
@@ -779,7 +707,7 @@ var CoralReef = function () {
     }
     function a(e) {
       // change zoom level based on ue me
-      var a, t, o, r, s, n;
+      let a, t, o, r, s, n;
       if ("x" == e || null == e) {
         switch (ue) {
           case 1:
@@ -838,10 +766,10 @@ var CoralReef = function () {
     function Le(e, a) {
       o[e].obj.value(Number(a));
     }
-    var ke = "";
+    let ke = "";
     function De() {
-      // * stores independent var to display + if statements describing current simulation
-      var e, a, t;
+      // * stores independent let to display + if statements describing current simulation
+      let e, a, t;
       (t = i[1].obj.getValue()),
         (a = Y.length - 1),
         (e = "<center><b>Reef conditions</b></center>"),
@@ -911,7 +839,7 @@ var CoralReef = function () {
     function Ne(e, a) {
       // animation
       (ie = []), (le = []), (he = []), (pe = new Date().getTime());
-      for (var t = 0; t < 6; t++)
+      for (let t = 0; t < 6; t++)
         ie.push(3 * (0.5 - Math.random())), le.push(0), he.push(0);
       globalAnimClassObject.stop(e),
         globalAnimClassObject.start({
@@ -926,7 +854,7 @@ var CoralReef = function () {
     }
     function Ve() {
       // resets entire function, might have all starter values
-      var e, a;
+      let e, a;
       (z = 0),
         (ne = []),
         l.graph1.cleanAll(),
@@ -1007,7 +935,7 @@ var CoralReef = function () {
     }
     function $e() {
       // calculations 1
-      var e, a;
+      let e, a;
       (e = h.length - 1),
         E.push(1500),
         V.push(1 * Math.max(b[e] + v[e], 1).toFixed(ve)),
@@ -1026,7 +954,7 @@ var CoralReef = function () {
     }
     function Ge() {
       // calculations 2
-      var e, a;
+      let e, a;
       (te = new Object()),
         (e = 2.1 * Je() * (0.5 + 0.5 * Ke())),
         (a = 0.001),
@@ -1061,7 +989,7 @@ var CoralReef = function () {
     }
     function Ue() {
       // calculations 3
-      var e;
+      let e;
       (e = h.length - 1),
         I.push(1 * ((100 * h[e]) / 1500).toFixed(ve)),
         F.push(1 * ((100 * p[e]) / 1500).toFixed(ve)),
@@ -1078,12 +1006,12 @@ var CoralReef = function () {
     }
     function qe() {
       // draw graph
-      var e;
+      let e;
       l.graph1.cleanAll();
-      for (var a = 0; a < d.length; a++)
+      for (let a = 0; a < d.length; a++)
         if (d[a].obj.getStatus()) {
           e = [];
-          for (var t = 0; t < ne[a].length; t++)
+          for (let t = 0; t < ne[a].length; t++)
             e.push({ x: t, y: ne[a][t] / se[a] });
           l.graph1.drawLines({ id: a, data: e, color: d[a].color });
         }
@@ -1107,7 +1035,7 @@ var CoralReef = function () {
     }
     function Qe() {
       // calculations based on ph
-      var e, a;
+      let e, a;
       return (
         7.6 <= (a = i[2].obj.getValue()) && a < 7.7
           ? (e = 0.05)
@@ -1160,14 +1088,14 @@ var CoralReef = function () {
       return ((0.6 * i[9].obj.getValue()) / 100) * (0.2 + 0.8 * ea());
     }
     function ra() {
-      var e;
+      let e;
       return (
         (e = ((0.6 + 0.4 * ea()) * Math.exp(i[1].obj.getValue() - 27)) / 700),
         (e = Math.min(e, 1))
       );
     }
     function sa() {
-      var e;
+      let e;
       return (
         (e = ((0.6 + 0.4 * ea()) * Math.exp(i[1].obj.getValue() - 27)) / 1500),
         (e = Math.min(e, 1))
@@ -1183,7 +1111,7 @@ var CoralReef = function () {
       return 100 * Ke();
     }
     function ha() {
-      var e, a;
+      let e, a;
       return (
         (e = p.length - 1),
         (a =
@@ -1200,7 +1128,7 @@ var CoralReef = function () {
     function pa() {
       // calculates number of organisms to populate simulation (visual)
       !(function () {
-        var e, a, t, o, r, s, n, i, l, h, p, d, g, c, u, m, b;
+        let e, a, t, o, r, s, n, i, l, h, p, d, g, c, u, m, b;
         (d = {
           posX: 263.85,
           posY: 497.75,
@@ -1257,7 +1185,7 @@ var CoralReef = function () {
           }),
           (e = Math.round(I[I.length - 1] / 0.5)),
           (isNaN(e) || e < 0) && (e = 0);
-        var v = "algae1";
+        let v = "algae1";
         for (a = 0; a < e; a++);
         for (_.myPond.emptyMainArray("Algae"), a = 0; a < e; a++)
           0 == (r = a % 6)
@@ -1348,7 +1276,7 @@ var CoralReef = function () {
             (p = null);
       })(),
         (function () {
-          var e, a, t, o, r, s, n, i, l, h, p, d, g, c, u, m, b;
+          let e, a, t, o, r, s, n, i, l, h, p, d, g, c, u, m, b;
           (e = Math.round(F[F.length - 1])),
             (d = {
               posX: 392,
@@ -1399,7 +1327,7 @@ var CoralReef = function () {
               rotation: -10,
             }),
             (isNaN(e) || e < 0) && (e = 0);
-          var v = "sponge1";
+          let v = "sponge1";
           for (_.myPond.emptyMainArray("Sponge"), a = 0; a < e; a++)
             a % 6 == 0
               ? ((v = "sponge1"), (p = Object.create(d)))
@@ -1467,7 +1395,7 @@ var CoralReef = function () {
               (p = null);
         })(),
         (function () {
-          var e, a, t, o, r, s, n, i, l, h, p;
+          let e, a, t, o, r, s, n, i, l, h, p;
           (n = { posX: -37, posY: 412, scale: 0.53, rotation: -12.2 }),
             (i = { posX: 57, posY: 369, scale: 0.35, rotation: 5.2 }),
             (l = { posX: 255, posY: 387, scale: 0.5, rotation: 0 }),
@@ -1475,7 +1403,7 @@ var CoralReef = function () {
             (p = { posX: 450, posY: 251, scale: 0.362, rotation: -12.2 }),
             (e = Math.round(X[X.length - 1] / 125)),
             (isNaN(e) || e < 0) && (e = 0);
-          var d = "seaUrchin1";
+          let d = "seaUrchin1";
           for (_.myPond.emptyMainArray("SeaUrchin"), a = 0; a < e; a++)
             a % 5 == 0
               ? ((d = "seaUrchin2"), (s = Object.create(n)))
@@ -1512,13 +1440,13 @@ var CoralReef = function () {
               (s = null);
         })(),
         (function () {
-          var e, a, t, o, r, s, n, i, l;
+          let e, a, t, o, r, s, n, i, l;
           (n = { posX: 239, posY: 350, scale: 0.25, rotation: -20.2 }),
             (i = { posX: 395, posY: 395, scale: 0.35, rotation: 0.7 }),
             (l = { posX: 370, posY: 291, scale: 0.2, rotation: 10 }),
             (e = Math.round(N[N.length - 1] / 100)),
             (isNaN(e) || e < 0) && (e = 0);
-          var h = "starfish1";
+          let h = "starfish1";
           for (_.myPond.emptyMainArray("Starfish"), a = 0; a < e; a++)
             a % 3 == 0
               ? ((h = "starfish1"), (s = Object.create(n)))
@@ -1551,7 +1479,7 @@ var CoralReef = function () {
               (s = null);
         })(),
         (function () {
-          var e,
+          let e,
             a,
             t,
             o,
@@ -1584,7 +1512,7 @@ var CoralReef = function () {
             (e = Math.round(O[O.length - 1])),
             (y = 1.29),
             (isNaN(e) || e < 0) && (e = 0);
-          var S = "staghornCoral1";
+          let S = "staghornCoral1";
           for (
             _.myPond.emptyMainArray("StaghornCoral1"),
               _.myPond.emptyMainArray("StaghornCoral2"),
@@ -1741,7 +1669,7 @@ var CoralReef = function () {
                     ),
               A.push(c),
               (u = c = null);
-          var x = Math.abs(
+          let x = Math.abs(
               _.myPond.getPositionArray("StaghornCoral1").length - 1
             ),
             j = Math.abs(
@@ -1768,7 +1696,7 @@ var CoralReef = function () {
                 );
           for (r = s; r < s + a; r++)
             if (1 * A[(P = r)].getNumber() == 1) {
-              var I = _.myPond.getPositionArray("StaghornCoral1").length;
+              let I = _.myPond.getPositionArray("StaghornCoral1").length;
               (P = I <= P ? P % I : P),
                 _.myPond.updateMainArrayValue(
                   "StaghornCoral1",
@@ -1776,7 +1704,7 @@ var CoralReef = function () {
                   gizmoImageObj["staghornCoral1Bleached.png"]
                 );
             } else {
-              var I = _.myPond.getPositionArray("StaghornCoral2").length;
+              let I = _.myPond.getPositionArray("StaghornCoral2").length;
               (P = I <= P ? P % I : P),
                 _.myPond.updateMainArrayValue(
                   "StaghornCoral2",
@@ -1798,7 +1726,7 @@ var CoralReef = function () {
                 );
         })(),
         (function () {
-          var e, a, t, o, r, s, n, i, l, h, p, d, g, c, u, m, b, v, f, w, C;
+          let e, a, t, o, r, s, n, i, l, h, p, d, g, c, u, m, b, v, f, w, C;
           (m = { posX: -35, posY: 303, scale: 0.27, rotation: -8.5 }),
             (b = { posX: 70, posY: 287, scale: 0.25, rotation: -8.5 }),
             (v = { posX: 287, posY: 273, scale: 0.17, rotation: 0 }),
@@ -1809,7 +1737,7 @@ var CoralReef = function () {
             1.35,
             1.29,
             (isNaN(e) || e < 0) && (e = 0);
-          var M = "starCoral1";
+          let M = "starCoral1";
           for (
             _.myPond.emptyMainArray("StarCoral1"),
               _.myPond.emptyMainArray("StarCoral2"),
@@ -1957,7 +1885,7 @@ var CoralReef = function () {
                     ),
               j.push(c),
               (u = c = null);
-          var y = _.myPond.getPositionArray("StarCoral1").length - 1,
+          let y = _.myPond.getPositionArray("StarCoral1").length - 1,
             S = _.myPond.getPositionArray("StarCoral2").length - 1,
             x = 0;
           (o = y + S),
@@ -2016,7 +1944,7 @@ var CoralReef = function () {
     }
     function da(e) {
       // calculate population density
-      var a, t;
+      let a, t;
       switch (e) {
         case "parrotfish":
           (t = R.length), (a = R[t - 1] / 2500);
@@ -2041,13 +1969,13 @@ var CoralReef = function () {
     }
     function ga(e) {
       // also density calculations but comparing to base value
-      var a,
+      let a,
         t,
         o,
         r = Math.round(((1.2 * (ge + 225)) / be[e]) * da(e.toLowerCase())),
         s = "";
       _.myPond.emptyMainArray(e);
-      for (var n = 0; n < r; n++) {
+      for (let n = 0; n < r; n++) {
         "ParrotFish" == e
           ? ((s = "parrotfish"), 0.35 + 0.02 * (Math.random() - 0.5))
           : "AngelFish" == e
@@ -2078,7 +2006,7 @@ var CoralReef = function () {
           Math.random() < 0.5 && (o = -o),
           t < globalResizeCalc(100) && (t = globalResizeCalc(100)),
           t > globalResizeCalc(450) && (t = globalResizeCalc(450));
-        var i = {
+        let i = {
           posX: a,
           posY: t,
           scaleX: o,
@@ -2103,7 +2031,7 @@ var CoralReef = function () {
     }
     function ca(e) {
       // parrotfish animation
-      var a, t, o, r;
+      let a, t, o, r;
       if (
         ((r = R.length - 1),
         (a = R[r]),
@@ -2144,17 +2072,17 @@ var CoralReef = function () {
           )),
           _.myPond.disposeFish("ParrotFish");
         for (
-          var s = _.myPond.getPositionArray("ParrotFish"), n = 0;
+          let s = _.myPond.getPositionArray("ParrotFish"), n = 0;
           n < s.length;
           n++
         ) {
-          var i,
+          let i,
             l = (i = s[n].pos).posX,
             h = i.posY;
           if (0 <= i.scaleX) {
             (l -= Math.cos((i.rotation / 180) * Math.PI) * e * t),
               (h -= Math.sin((i.rotation / 180) * Math.PI) * e * t);
-            var p = "left";
+            let p = "left";
           } else {
             (l += Math.cos((i.rotation / 180) * Math.PI) * e * t),
               (h -= Math.sin((i.rotation / 180) * Math.PI) * e * t);
@@ -2180,7 +2108,7 @@ var CoralReef = function () {
     }
     function ua(e) {
       // angelfish animation
-      var a, t, o, r, s;
+      let a, t, o, r, s;
       if (
         ((s = B.length - 1),
         (a = B[s]),
@@ -2221,17 +2149,17 @@ var CoralReef = function () {
             "AngelFish"
           ));
         for (
-          var n = _.myPond.getPositionArray("AngelFish"), i = 0;
+          let n = _.myPond.getPositionArray("AngelFish"), i = 0;
           i < n.length;
           i++
         ) {
-          var l,
+          let l,
             h = (l = n[i].pos).posX,
             p = l.posY;
           if (0 <= l.scaleX) {
             (h -= Math.cos((l.rotation / 180) * Math.PI) * e * t),
               (p -= Math.sin((l.rotation / 180) * Math.PI) * e * t);
-            var d = "left";
+            let d = "left";
           } else {
             (h += Math.cos((l.rotation / 180) * Math.PI) * e * t),
               (p -= Math.sin((l.rotation / 180) * Math.PI) * e * t);
@@ -2258,7 +2186,7 @@ var CoralReef = function () {
     }
     function ma(e) {
       // grouper animation
-      var a, t, o, r, s;
+      let a, t, o, r, s;
       if (
         ((r = L.length - 1),
         (a = L[r]),
@@ -2302,17 +2230,17 @@ var CoralReef = function () {
             "Grouper"
           ));
         for (
-          var n = _.myPond.getPositionArray("Grouper"), i = 0;
+          let n = _.myPond.getPositionArray("Grouper"), i = 0;
           i < n.length;
           i++
         ) {
-          var l,
+          let l,
             h = (l = n[i].pos).posX,
             p = l.posY;
           if (0 <= l.scaleX) {
             (h -= Math.cos((l.rotation / 180) * Math.PI) * e * t),
               (p -= Math.sin((l.rotation / 180) * Math.PI) * e * t);
-            var d = "left";
+            let d = "left";
           } else {
             (h += Math.cos((l.rotation / 180) * Math.PI) * e * t),
               (p -= Math.sin((l.rotation / 180) * Math.PI) * e * t);
@@ -2339,7 +2267,7 @@ var CoralReef = function () {
     }
     function ba(e) {
       // snapper animation
-      var a, t, o, r, s;
+      let a, t, o, r, s;
       if (
         ((s = k.length - 1),
         (a = k[s]),
@@ -2381,17 +2309,17 @@ var CoralReef = function () {
             "Snapper"
           ));
         for (
-          var n = _.myPond.getPositionArray("Snapper"), i = 0;
+          let n = _.myPond.getPositionArray("Snapper"), i = 0;
           i < n.length;
           i++
         ) {
-          var l,
+          let l,
             h = (l = n[i].pos).posX,
             p = l.posY;
           if (0 <= l.scaleX) {
             (h -= Math.cos((l.rotation / 180) * Math.PI) * e * t),
               (p -= Math.sin((l.rotation / 180) * Math.PI) * e * t);
-            var d = "left";
+            let d = "left";
           } else {
             (h += Math.cos((l.rotation / 180) * Math.PI) * e * t),
               (p -= Math.sin((l.rotation / 180) * Math.PI) * e * t);
@@ -2418,7 +2346,7 @@ var CoralReef = function () {
     }
     function va(e) {
       // lionfish animation
-      var a, t, o, r;
+      let a, t, o, r;
       if (
         ((r = D.length - 1),
         (a = D[r]),
@@ -2462,17 +2390,17 @@ var CoralReef = function () {
             "LionFish"
           ));
         for (
-          var s = _.myPond.getPositionArray("LionFish"), n = 0;
+          let s = _.myPond.getPositionArray("LionFish"), n = 0;
           n < s.length;
           n++
         ) {
-          var i,
+          let i,
             l = (i = s[n].pos).posX,
             h = i.posY;
           if (0 <= i.scaleX) {
             (l -= Math.cos((i.rotation / 180) * Math.PI) * e * t),
               (h -= Math.sin((i.rotation / 180) * Math.PI) * e * t);
-            var p = "left";
+            let p = "left";
           } else {
             (l += Math.cos((i.rotation / 180) * Math.PI) * e * t),
               (h -= Math.sin((i.rotation / 180) * Math.PI) * e * t);
@@ -2499,7 +2427,7 @@ var CoralReef = function () {
     }
     function fa(e) {
       // turtle animation
-      var a, t, o, r;
+      let a, t, o, r;
       if (
         ((r = T.length - 1),
         (a = T[r]),
@@ -2544,17 +2472,17 @@ var CoralReef = function () {
             "SeaTurtle"
           ));
         for (
-          var s = _.myPond.getPositionArray("SeaTurtle"), n = 0;
+          let s = _.myPond.getPositionArray("SeaTurtle"), n = 0;
           n < s.length;
           n++
         ) {
-          var i,
+          let i,
             l = (i = s[n].pos).posX,
             h = i.posY;
           if (0 <= i.scaleX) {
             (l -= Math.cos((i.rotation / 180) * Math.PI) * e * t),
               (h -= Math.sin((i.rotation / 180) * Math.PI) * e * t);
-            var p = "left";
+            let p = "left";
           } else {
             (l += Math.cos((i.rotation / 180) * Math.PI) * e * t),
               (h -= Math.sin((i.rotation / 180) * Math.PI) * e * t);
@@ -2580,20 +2508,20 @@ var CoralReef = function () {
       }
     }
     (this.globalAnimationCallback = function (e) {
-      var a, t;
+      let a, t;
       if (
         (0.1 < (t = ((a = new Date().getTime()) - pe) / 1e3) && (t = 0.1),
         (pe = a),
         !de)
       ) {
-        for (var o = 0; o < 6; o++) he[o] += t;
+        for (let o = 0; o < 6; o++) he[o] += t;
         ca(t), ua(t), ma(t), ba(t), va(t), fa(t), _.myPond.drawCanvasFish();
       }
     }),
       enableConsole(!0);
-    var wa = void 0;
+    let wa = void 0;
     (this.getter = function () {
-      var e = new Object();
+      let e = new Object();
       return (
         (e.caption = "GizmoObject"),
         (e.common = !1),
@@ -2640,7 +2568,7 @@ var CoralReef = function () {
         (e.values._coefMatrix = te),
         (e.values._isPaused = de),
         (e.values.currentPopulation = (function () {
-          var e, a, t, o, r;
+          let e, a, t, o, r;
           (e = new Array()),
             (a = []),
             (t = []),
@@ -2664,23 +2592,23 @@ var CoralReef = function () {
             a.push("Percentage data"),
             t.push("Year"),
             a.push("");
-          for (var s = 0; s < d.length; s++)
+          for (let s = 0; s < d.length; s++)
             t.push(o[s]), r.push(s), a.push("");
-          for (var n = 0; n <= z; n++) {
+          for (let n = 0; n <= z; n++) {
             e.push(new Array());
-            for (var s = 0; s < r.length; s++)
+            for (let s = 0; s < r.length; s++)
               e[n + 2].push(1 * (ne[r[s]][n] / se[r[s]]).toFixed(0));
             e[n + 2].push("");
           }
           t.push(""), a.push("Raw data");
-          for (var s = 0; s < r.length; s++) t.push(o[r[s]]);
-          for (var n = 0; n <= z; n++)
-            for (var s = 0; s < r.length; s++)
+          for (let s = 0; s < r.length; s++) t.push(o[r[s]]);
+          for (let n = 0; n <= z; n++)
+            for (let s = 0; s < r.length; s++)
               e[n + 2].push(1 * ne[r[s]][n].toFixed(0));
-          for (var i = e.pop(), l = [], h = [], p = 0, n = 0; n < 12; n++)
+          for (let i = e.pop(), l = [], h = [], p = 0, n = 0; n < 12; n++)
             l.push({ name: o[p], percentage: i[n] }), p++;
           p = 0;
-          for (var n = 13; n < 25; n++)
+          for (let n = 13; n < 25; n++)
             h.push({ name: o[p], number: i[n] }), p++;
           return { percentage: l, rawData: h };
         })()),
@@ -2704,7 +2632,7 @@ var CoralReef = function () {
       );
     }),
       (this.setter = function (e) {
-        var a = "" + Xe;
+        let a = "" + Xe;
         Re({ btnType: "reset" }),
           Re({ btnType: a }),
           e.values &&
@@ -2778,9 +2706,9 @@ var CoralReef = function () {
   },
   gizmoImageObj = {};
 function initializeGizmo(a) {
-  var t = new CoralReef();
+  let t = new CoralReef();
   $.ajaxSetup({ async: !1 }), $.ajaxSetup({ async: !0 });
-  var o = [
+  let o = [
       "algae1.png",
       "algae1_Shadow.png",
       "algae2.png",
@@ -2924,7 +2852,7 @@ function initializeGizmo(a) {
   })();
 }
 function fmtOutput(e, a) {
-  var t,
+  let t,
     o,
     r = "",
     s = "",
@@ -2945,8 +2873,8 @@ function fmtOutput(e, a) {
       (t = parseInt(t / 1e3));
   return (r = s + r), 0 < a && (r += n.substr(1, a + 1)), r;
 }
-var OceanBackground = function (e) {
-    var a;
+let OceanBackground = function (e) {
+    let a;
     function t(e) {
       "mousedown" == e.type || "touchstart" == e.type
         ? (a.trigger("blankLayerClicked"),
@@ -2981,7 +2909,7 @@ var OceanBackground = function (e) {
       });
   },
   AlgaeClass = function (e, a) {
-    var t, o;
+    let t, o;
     (t = 1),
       (o = 0),
       (this.reArrange = function (e) {
@@ -2998,7 +2926,7 @@ var OceanBackground = function (e) {
       });
   },
   AngelFish = function (e) {
-    var a, t, o, r, s;
+    let a, t, o, r, s;
     (o = 0.35),
       (r = Math.abs(o)),
       (s = 0),
@@ -3015,7 +2943,7 @@ var OceanBackground = function (e) {
         return { posX: a, posY: t, scaleX: o, scaleY: r, rotation: s };
       }),
       (this.bottomY = function () {
-        var e;
+        let e;
         return (
           (e = s < 0 ? 900 * -Math.sin((s / 180) * Math.PI) : 0),
           t + 125 * r + 65 + e
@@ -3024,7 +2952,7 @@ var OceanBackground = function (e) {
       (this.updateImageOrder = function (e) {});
   },
   Grouper = function (e) {
-    var a, t, o, r, s, n;
+    let a, t, o, r, s, n;
     (o = 0.35),
       (r = Math.abs(o)),
       (n = s = 0),
@@ -3041,7 +2969,7 @@ var OceanBackground = function (e) {
         return { posX: a, posY: t, scaleX: o, scaleY: r, rotation: s };
       }),
       (this.bottomY = function () {
-        var e;
+        let e;
         return (
           (e = s < 0 ? 900 * -Math.sin((s / 180) * Math.PI) : 0),
           t + 125 * r + 65 + e
@@ -3055,7 +2983,7 @@ var OceanBackground = function (e) {
       });
   },
   ParrotFish = function (e) {
-    var a, t, o, r, s;
+    let a, t, o, r, s;
     (o = 0.35),
       (r = Math.abs(o)),
       (s = 0),
@@ -3072,7 +3000,7 @@ var OceanBackground = function (e) {
         return { posX: a, posY: t, scaleX: o, scaleY: r, rotation: s };
       }),
       (this.bottomY = function () {
-        var e;
+        let e;
         return (
           (e = s < 0 ? 900 * -Math.sin((s / 180) * Math.PI) : 0),
           t + 125 * r + 65 + e
@@ -3080,7 +3008,7 @@ var OceanBackground = function (e) {
       });
   },
   LionFish = function (e) {
-    var a, t, o, r, s;
+    let a, t, o, r, s;
     (o = 0.35),
       (r = Math.abs(o)),
       (a = s = 0),
@@ -3096,7 +3024,7 @@ var OceanBackground = function (e) {
         return { posX: a, posY: t, scaleX: o, scaleY: r, rotation: s };
       }),
       (this.bottomY = function () {
-        var e;
+        let e;
         return (
           (e = s < 0 ? 1e3 * -Math.sin((s / 180) * Math.PI) : 0),
           t + 309 * r + 120 + e
@@ -3105,7 +3033,7 @@ var OceanBackground = function (e) {
       (this.updateImageOrder = function (e) {});
   },
   Snapper = function (e) {
-    var a, t, o, r, s;
+    let a, t, o, r, s;
     (o = -0.35),
       (r = Math.abs(o)),
       (s = 0),
@@ -3121,7 +3049,7 @@ var OceanBackground = function (e) {
         return { posX: a, posY: t, scaleX: o, scaleY: r, rotation: s };
       }),
       (this.bottomY = function () {
-        var e;
+        let e;
         return (
           (e = s < 0 ? 900 * -Math.sin((s / 180) * Math.PI) : 0),
           t + 100 * r + 65 + e
@@ -3130,14 +3058,14 @@ var OceanBackground = function (e) {
       (this.updateImageOrder = function (e) {});
   },
   XButtonClass = function () {
-    var t,
+    let t,
       o = { x: 0, y: 0, width: 19, height: 19 };
     function r(e) {
       ("mousedown" != e.type && "touchstart" != e.type) ||
         (t.trigger("xBtnClicked"), audioPlayerObj.playAudio("down"));
     }
     (this.init = function (e) {
-      for (var a in e) o[a] = e[a];
+      for (let a in e) o[a] = e[a];
       (t = $("<div/>")).css({
         background:
           "url(" + gizmoImageObj["xButton.png"].src + ") 0 0 no-repeat",
@@ -3165,7 +3093,7 @@ var OceanBackground = function (e) {
       });
   },
   SeaTurtle = function (e) {
-    var a, t, o, r, s;
+    let a, t, o, r, s;
     (o = 0.9),
       (r = Math.abs(o)),
       (s = 0),
@@ -3181,7 +3109,7 @@ var OceanBackground = function (e) {
         return { posX: a, posY: t, scaleX: o, scaleY: r, rotation: s };
       }),
       (this.bottomY = function () {
-        var e;
+        let e;
         return (
           (e = s < 0 ? 900 * -Math.sin((s / 180) * Math.PI) : 0),
           t + 125 * r + 65 + e
@@ -3190,7 +3118,7 @@ var OceanBackground = function (e) {
       (this.updateImageOrder = function (e) {});
   },
   SeaUrchin = function (e, a) {
-    var t, o, r, s;
+    let t, o, r, s;
     1 == e ? (130, (t = 137)) : (125, (t = 131)),
       (o = 0.3),
       (s = 0),
@@ -3209,7 +3137,7 @@ var OceanBackground = function (e) {
       });
   },
   SpongeClass = function (e, a) {
-    var t, o, r, s;
+    let t, o, r, s;
     1 == e ? (157, (t = 239)) : (113, (t = 132)),
       (r = 450),
       (s = 0),
@@ -3228,7 +3156,7 @@ var OceanBackground = function (e) {
       });
   },
   StarfishClass = function (e, a) {
-    var t, o, r, s;
+    let t, o, r, s;
     1 == e ? (169, (t = 132)) : (150, (t = 102)),
       (o = 450),
       (r = 0.5),
@@ -3246,7 +3174,7 @@ var OceanBackground = function (e) {
       });
   },
   StaghornCoral = function (e, a) {
-    var t,
+    let t,
       o,
       r,
       s,
@@ -3277,7 +3205,7 @@ var OceanBackground = function (e) {
       });
   },
   StarCoral = function (e, a) {
-    var t,
+    let t,
       o,
       r,
       s,
@@ -3308,7 +3236,7 @@ var OceanBackground = function (e) {
       });
   },
   PondClass = function () {
-    var o,
+    let o,
       u = {
         width: 50,
         height: 50,
@@ -3376,7 +3304,7 @@ var OceanBackground = function (e) {
       },
       r = this;
     this.init = function (e) {
-      for (var a in e) u[a] = e[a];
+      for (let a in e) u[a] = e[a];
       (u.width = globalResizeCalc(u.width)),
         (u.height = globalResizeCalc(u.height)),
         (u.left = globalResizeCalc(u.left)),
@@ -3443,7 +3371,7 @@ var OceanBackground = function (e) {
                 .addClass("Above"),
               u.target.append(u.canvasAbove));
         })();
-      var t = gConfig.paths.gRoot + "js/seaTurtle.json";
+      let t = gConfig.paths.gRoot + "js/seaTurtle.json";
       $.ajaxSetup({ async: !1 }),
         $.getJSON(t, function (e) {
           (o = e.frames),
@@ -3458,7 +3386,7 @@ var OceanBackground = function (e) {
         }),
         $.ajaxSetup({ async: !0 }),
         (function () {
-          for (var e, a, t = new Image(), o = 0; o < u.imageArr.length; o++)
+          for (let e, a, t = new Image(), o = 0; o < u.imageArr.length; o++)
             (a = e = null),
               (e = document.createElement("canvas")),
               (a = e.getContext("2d")),
@@ -3502,9 +3430,9 @@ var OceanBackground = function (e) {
               (p[u.imageArr[o].split(".png")[0]] = { canvas: e, context: a });
         })();
     };
-    var p = {};
+    let p = {};
     function s(e) {
-      var a, t, o, r, s, n;
+      let a, t, o, r, s, n;
       if (
         ((a = e),
         (t = u.ctxBelow.getImageData(a.x, a.y, 1, 1).data),
@@ -3517,7 +3445,7 @@ var OceanBackground = function (e) {
           "#000000" == s)
       )
         return !1;
-      for (var i = m.length - 1; 0 <= i; i--)
+      for (let i = m.length - 1; 0 <= i; i--)
         if (
           m[i].x <= e.x &&
           m[i].x + m[i].width >= e.x &&
@@ -3525,7 +3453,7 @@ var OceanBackground = function (e) {
           m[i].y + m[i].height >= e.y &&
           1 == m[i].zIndex
         ) {
-          var l = e.x - m[i].x,
+          let l = e.x - m[i].x,
             h = e.y - m[i].y;
           if (d(m[i], l, h)) return { Arr: m[i], type: "grass" };
         }
@@ -3552,7 +3480,7 @@ var OceanBackground = function (e) {
         }
     }
     function d(e, a, t) {
-      var o = p[e.imgName].canvas,
+      let o = p[e.imgName].canvas,
         r = p[e.imgName].context,
         s = o.width / e.width,
         n = o.height / e.height,
@@ -3568,13 +3496,13 @@ var OceanBackground = function (e) {
       u[e] = a;
     }),
       (this.mouseEvent = function (e) {
-        var a;
+        let a;
         if (
           ($("#canvas_touchPad").css({ cursor: "default" }),
           "mousedown" == e.type)
         ) {
-          for (var t in ((a = s(e)), u.mainObj))
-            for (var o in u.mainObj[t]) u.mainObj[t][o].isSelected = !1;
+          for (let t in ((a = s(e)), u.mainObj))
+            for (let o in u.mainObj[t]) u.mainObj[t][o].isSelected = !1;
           a
             ? ((u.mainObj[a.Arr.arrayIndex.mainIndex][
                 a.Arr.arrayIndex.positionIndex
@@ -3594,11 +3522,11 @@ var OceanBackground = function (e) {
               $("#canvas_touchPad").css({ cursor: "default" });
       }),
       (this.update = function (e) {
-        for (var a in e) u[a] = e[a];
+        for (let a in e) u[a] = e[a];
       }),
       (this.disposeFish = function (e) {
         if (u.mainObj[e])
-          for (var a in u.mainObj[e])
+          for (let a in u.mainObj[e])
             (u.mainObj[e][a].pos.posX + u.mainObj[e][a].src.width <=
               globalResizeCalc(-200) ||
               u.mainObj[e][a].pos.posX >=
@@ -3622,7 +3550,7 @@ var OceanBackground = function (e) {
       (this.updateMainArray = function (e, a) {
         u.mainObj[a].push(e);
       });
-    var m = new Array();
+    let m = new Array();
     (this.drawCanvasGrass = function () {
       (m = []),
         (u.canvasBelow.width = u.canvasBelow.width),
@@ -3633,23 +3561,23 @@ var OceanBackground = function (e) {
           u.canvasMiddleShadow.width,
           u.canvasMiddleShadow.height
         );
-      var e = new Image(),
+      let e = new Image(),
         a = [];
-      for (var t in u.mainObj)
-        for (var o in u.mainObj[t])
+      for (let t in u.mainObj)
+        for (let o in u.mainObj[t])
           if ("grass" == u.mainObj[t][o].type) {
-            var r = u.mainObj[t][o];
+            let r = u.mainObj[t][o];
             (r.arrayIndex = { mainIndex: t, positionIndex: o }), a.push(r);
           }
-      var s,
+      let s,
         n,
         i,
         l,
         h = (function (e) {
-          var a;
+          let a;
           e = e.slice(0);
-          for (var t = 0; t < e.length; t++)
-            for (var o = 0; o < e.length; o++)
+          for (let t = 0; t < e.length; t++)
+            for (let o = 0; o < e.length; o++)
               if (
                 (globalResizeCalc(e[t].src.height),
                 Math.abs(e[t].pos.scale),
@@ -3658,13 +3586,13 @@ var OceanBackground = function (e) {
                 Math.abs(e[o].pos.scale),
                 e[o].pos.posY + globalResizeCalc(e[o].src.height) / 2 < a)
               ) {
-                var r = e[t];
+                let r = e[t];
                 (e[t] = e[o]), (e[o] = r);
               }
           return e;
         })(a);
-      for (var o in h) {
-        var p = 0;
+      for (let o in h) {
+        let p = 0;
         if (
           ((e.src = h[o].src.src),
           (e.width =
@@ -3677,11 +3605,11 @@ var OceanBackground = function (e) {
           (l = n - e.height / 2),
           h[o].isSelected)
         ) {
-          var d = new Image();
+          let d = new Image();
           "Starfish" == h[o].arrayIndex.mainIndex
             ? (d.src = gizmoImageObj[h[o].imgName + "_Shadow.png"].src)
             : (d.src = gizmoImageObj[f(h[o].arrayIndex.mainIndex)].src);
-          var g = i + globalResizeCalc(10) * Math.abs(h[o].pos.scale),
+          let g = i + globalResizeCalc(10) * Math.abs(h[o].pos.scale),
             c = l + globalResizeCalc(10) * Math.abs(h[o].pos.scale);
           u.ctxBelow.drawImage(d, g, c, e.width, e.height);
         }
@@ -3704,8 +3632,8 @@ var OceanBackground = function (e) {
       }
     }),
       (this.getSelectedSpecies = function () {
-        for (var e in u.mainObj)
-          for (var a in u.mainObj[e])
+        for (let e in u.mainObj)
+          for (let a in u.mainObj[e])
             if (u.mainObj[e][a].isSelected) return u.mainObj[e][a].arrayIndex;
       }),
       (this.setSelectedSpecies = function (e) {
@@ -3713,7 +3641,7 @@ var OceanBackground = function (e) {
           ((u.mainObj[e.mainIndex][1 * e.positionIndex].isSelected = !0),
           u.oceanAnimalSelected("oceanAnimalSelected", e.mainIndex));
       });
-    var c = new Array(),
+    let c = new Array(),
       b = new Image(),
       v = 0;
     function f(e) {
@@ -3764,18 +3692,18 @@ var OceanBackground = function (e) {
           u.canvasMiddle.width,
           u.canvasMiddle.height
         );
-      var e,
+      let e,
         a,
         t,
         o,
         r = [];
-      for (var s in u.mainObj)
-        for (var n in u.mainObj[s])
+      for (let s in u.mainObj)
+        for (let n in u.mainObj[s])
           if ("fish" == u.mainObj[s][n].type) {
-            var i = u.mainObj[s][n];
+            let i = u.mainObj[s][n];
             (i.arrayIndex = { mainIndex: s, positionIndex: n }), r.push(i);
           }
-      for (var n in r) {
+      for (let n in r) {
         if (
           ((b.src = r[n].src.src),
           "turtle" == r[n].pos.name
@@ -3802,7 +3730,7 @@ var OceanBackground = function (e) {
             "right" == r[n].direction
               ? 1811 - u.turtleSprite[v].x
               : u.turtleSprite[v].x;
-        var h = r[n].imgName;
+        let h = r[n].imgName;
         "right" == r[n].direction && (h += "_r"),
           "turtle" == r[n].pos.name
             ? (r[n].isSelected &&
@@ -3864,10 +3792,10 @@ var OceanBackground = function (e) {
               }));
       }
     };
-    var w = new Image();
+    let w = new Image();
     function C(e, a, t, o, r, s, n, i) {
       (w.src = gizmoImageObj[f(i)].src), u.ctxMiddleShadow.save();
-      var l = globalResizeCalc(5),
+      let l = globalResizeCalc(5),
         h = globalResizeCalc(5);
       "right" == s &&
         (u.ctxMiddleShadow.translate(a + o / 2, t + r / 2),
