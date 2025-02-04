@@ -4,10 +4,10 @@
         </div>
     <div class="chart-slider-container">
         <div class="chart-container">
-            <div class="card" v-if="chartType === 'Simulation'">
+            <div class="card" v-show="chartType === 'Simulation'">
                 <UnityScene/>
             </div>
-            <div class="card" v-else>
+            <div class="card" v-show="chartType !== 'Simulation'">
                 <CoralChart v-model="chartType"/>
             </div>
         </div>
