@@ -45,32 +45,21 @@ let CoralReef = function () {
     ee, // ee.push(1 * (b[e] + v[e]).toFixed(4)) $e sum staghorn and star coral
     // ae, // used by ga for pop,density {parrotfish: 60,angelfish: 60,turtle: 24,grouper: 33.3 * 1.2,snapper: 80.16,lionfish: 60,}
     te, // arr organisms Array(e, a, 0, 0)
-    oe, // null
     // re, // ocean background opacity
     se, // divide by this number [t] to scale on graph [0.21,0.28,0.11,0.27,8.25,5.4,2.4,0.48,11.6,0.25,1,5]
     ne, // arr push 0 Y F, operated on for graph coordinates
     // ie, // arr with random num 0-3
     // le, // arr with 0 and etc
-    he, // animation timing
     pe, // current time , elapsed since anima tion update
     de, // !1, whether or not demo is paused
     ge, // 685
     ce, // 655
     be = 4; // same as ae but first letter capitalcapital keys
   // rounding to 4 decimal places
-  function ye(e) {
-    // update slider values
-    for (let a = 0; a < 12; a++)
-      if (e.id == o[a].id) {
-        Te(a, e.value);
-        break;
-      }
-  }
   function Pe(e) {
     // ***run all functions upon each year update
     let a, t, o, r, s;
-    Ee("coralReef"), // animation
-      z++,
+    z++,
       l.simulationInfo.setText("Year: " + z.toFixed(0)),
       Ge(),
       (ne = []).push(O),
@@ -241,8 +230,7 @@ let CoralReef = function () {
   function _e(e) {
     // reset everything
     if (
-      (Ee("coralReef"),
-      (z = 0),
+      ((z = 0),
       Ve(),
       l.simulationInfo.setText("Year: " + z.toFixed(0)),
       De(),
@@ -253,23 +241,19 @@ let CoralReef = function () {
       let a, t;
       0.1 < (t = ((a = new Date().getTime()) - pe) / 1e3) && (t = 0.1),
         (pe = a);
-      for (let o = 0; o < 6; o++) he[o] += t;
-      ca(t), ua(t), ma(t), ba(t), va(t), fa(t), _.myPond.drawCanvasFish();
     }
   }
   let Ae = !((r = this).init = function () {
     // ** initial values
-    (l = new SpineClass()),
-      (_ = new VeinClass()),
-      $("#graphDiv").hide(),
+    $("#graphDiv").hide(),
       $("#summaryDiv").hide(),
-      l.tabComp1.addEventListener("change", we),
-      l.tabComp2.addEventListener("change", Ce),
-      l.touchPad.addEventListener("mouseEvent", fe),
-      l.conditions.addEventListener("onIndxSelect", Me),
-      l.resetBtn.addEventListener("click", je),
-      l.advanceBtn.addEventListener("click", Pe),
-      l.restartBtn.addEventListener("click", _e),
+      l.tabComp1.addEventListener("change", we), // graph change
+      l.tabComp2.addEventListener("change", Ce), // summary change
+      l.touchPad.addEventListener("mouseEvent", fe), // mouse change
+      l.conditions.addEventListener("onIndxSelect", Me), // div visibility
+      l.resetBtn.addEventListener("click", je), // handle button
+      l.advanceBtn.addEventListener("click", Pe), // runs the main function when year is advanced
+      l.restartBtn.addEventListener("click", _e), // reset everything
       l.exprtBtn.addEventListener("click", Ie),
       l.controlBtn.addEventListener("click", Re),
       l.cameraIcon1.addEventListener("click", xe),
@@ -446,117 +430,12 @@ let CoralReef = function () {
       (ce = 655),
       (re = new OceanBackground("#displayDiv")).setOpacity(1 - Ke() - 0.3),
       Ve(),
-      (oe = null),
       (de = !1),
       setTimeout(function () {
         Be({ panType: "panxy", btnType: "reset" });
       }, 50),
       Ne("coralReef", 25);
   });
-  function ze(e, a) {
-    // create message boxes for selected organism
-    let t;
-    oe && $(oe).css({ "-webkit-filter": "", filter: "" }),
-      "oceanAnimalSelected" == e
-        ? ((oe = e.target),
-          (t = D.length - 1),
-          (Ae = !1),
-          "Algae" == a
-            ? l.mssgBox.setLabelText(
-                GlobalTextObj.algaeIntr +
-                  " Current percentage cover: " +
-                  I[t].toFixed(0) +
-                  "%."
-              )
-            : "AngelFish" == a
-              ? l.mssgBox.setLabelText(
-                  GlobalTextObj.angelfishIntr +
-                    " Current population: " +
-                    B[t].toFixed(0) +
-                    "."
-                )
-              : "Grouper" == a
-                ? l.mssgBox.setLabelText(
-                    GlobalTextObj.grouperIntr +
-                      " Current population: " +
-                      L[t].toFixed(0) +
-                      "."
-                  )
-                : "ParrotFish" == a
-                  ? l.mssgBox.setLabelText(
-                      GlobalTextObj.prrtfishIntr +
-                        " Current population: " +
-                        R[t].toFixed(0) +
-                        "."
-                    )
-                  : "LionFish" == a
-                    ? l.mssgBox.setLabelText(
-                        GlobalTextObj.lionfishIntr +
-                          " Current population: " +
-                          D[t].toFixed(0) +
-                          "."
-                      )
-                    : "Snapper" == a
-                      ? l.mssgBox.setLabelText(
-                          GlobalTextObj.snapperIntr +
-                            " Current population: " +
-                            k[t].toFixed(0) +
-                            "."
-                        )
-                      : "SeaTurtle" == a
-                        ? l.mssgBox.setLabelText(
-                            GlobalTextObj.turtleIntr +
-                              " Current population: " +
-                              T[t].toFixed(0) +
-                              "."
-                          )
-                        : "SeaUrchin" == a
-                          ? l.mssgBox.setLabelText(
-                              GlobalTextObj.seaUrchinIntr +
-                                " Current population: " +
-                                X[t].toFixed(0) +
-                                "."
-                            )
-                          : "Sponge" == a
-                            ? l.mssgBox.setLabelText(
-                                GlobalTextObj.spongeIntr +
-                                  " Current percentage cover: " +
-                                  F[t].toFixed(0) +
-                                  "%."
-                              )
-                            : "Starfish" == a
-                              ? l.mssgBox.setLabelText(
-                                  GlobalTextObj.starfishIntr +
-                                    " Current population: " +
-                                    N[t].toFixed(0) +
-                                    "."
-                                )
-                              : "StaghornCoral1" == a || "StaghornCoral2" == a
-                                ? l.mssgBox.setLabelText(
-                                    GlobalTextObj.staghornCoralIntr +
-                                      " Current percentage cover: " +
-                                      O[t].toFixed(0) +
-                                      "%."
-                                  )
-                                : ("StarCoral1" != a && "StarCoral2" != a) ||
-                                  l.mssgBox.setLabelText(
-                                    GlobalTextObj.starCoralIntr +
-                                      " Current percentage cover: " +
-                                      Y[t].toFixed(0) +
-                                      "%."
-                                  ),
-          l.mssgBox.show(),
-          _.xButton.show(),
-          (wa = _.myPond.getSelectedSpecies()))
-        : "xBtnClicked" == e.type
-          ? ((Ae = !0), l.mssgBox.hide(), _.xButton.hide(), (wa = void 0))
-          : "blankLayerClicked" == e &&
-            ((oe = null),
-            l.mssgBox.setLabelText(
-              "<br><center>Select an organism to learn more about it.</center>"
-            ),
-            (wa = void 0));
-  }
   function Fe(e) {
     // mouseevents
     for (let a, t = 0; t < d.length; t++)
