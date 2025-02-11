@@ -3,7 +3,7 @@ let CoralReef = function () {
     o, // arr of { id: "sliderComp1", obj: l.sliderComp1 }
     i, // arr of { id: "tField1", obj: l.tField1 }
     l, // stores dom manipulation
-    _, // mypond
+    // _, // mypond
     d, // arr of { id: "plotStaghorn", obj: l.plotStaghorn, color: "#CC0033" }
     z, // 0, incremented on advanced year
     s, // arr algae positions
@@ -51,12 +51,12 @@ let CoralReef = function () {
     // ie, // arr with random num 0-3
     // le, // arr with 0 and etc
     pe, // current time , elapsed since anima tion update
-    de, // !1, whether or not demo is paused
+    // de, // !1, whether or not demo is paused
     ge, // 685
     ce, // 655
     be = 4; // same as ae but first letter capitalcapital keys
   // rounding to 4 decimal places
-  function Pe(e) {
+  function updateYear(e) {
     // ***run all functions upon each year update
     let a, t, o, r, s;
     z++,
@@ -183,8 +183,7 @@ let CoralReef = function () {
       ga("Grouper"),
       ga("Snapper"),
       ga("LionFish"),
-      _.myPond.drawCanvasGrass(),
-      de && _.myPond.drawCanvasFish(),
+      de,
       Ne("coralReef", 25),
       h.length;
   }
@@ -227,11 +226,11 @@ let CoralReef = function () {
         for (n = 0; n < s.length; n++) a[i + 2].push(ne[s[n]][i].toFixed(0));
       exportToApiObj.exportCSV(a);
     } */
-  function _e(e) {
+  function restartGame(e) {
     // reset everything
     if (
       ((z = 0),
-      Ve(),
+      resetNumbers(),
       l.simulationInfo.setText("Year: " + z.toFixed(0)),
       De(),
       ze("blankLayerClicked"),
@@ -245,102 +244,27 @@ let CoralReef = function () {
   }
   let Ae = !((r = this).init = function () {
     // ** initial values
-    $("#graphDiv").hide(),
-      $("#summaryDiv").hide(),
-      l.tabComp1.addEventListener("change", we), // graph change
-      l.tabComp2.addEventListener("change", Ce), // summary change
-      l.touchPad.addEventListener("mouseEvent", fe), // mouse change
-      l.conditions.addEventListener("onIndxSelect", Me), // div visibility
-      l.resetBtn.addEventListener("click", je), // handle button
-      l.advanceBtn.addEventListener("click", Pe), // runs the main function when year is advanced
-      l.restartBtn.addEventListener("click", _e), // reset everything
-      l.exprtBtn.addEventListener("click", Ie),
-      l.controlBtn.addEventListener("click", Re),
-      l.cameraIcon1.addEventListener("click", xe),
-      l.cameraIcon2.addEventListener("click", xe),
-      l.graphCntrl1.addEventListener("onevent", Be),
-      l.checkBox1.addEventListener("change", Oe),
-      l.checkBox2.addEventListener("change", Ye),
-      l.controlBtn.setDisable("play"),
+    // l.tabComp1.addEventListener("change", we), // graph change
+    // l.tabComp2.addEventListener("change", Ce), // summary change
+    // l.touchPad.addEventListener("mouseEvent", fe), // mouse change
+    // l.conditions.addEventListener("onIndxSelect", Me), // div visibility
+    // l.resetBtn.addEventListener("click", je), // handle button
+    l.advanceBtn.addEventListener("click", Pe), // runs the main function when year is advanced
+      l.restartBtn.addEventListener("click", restartGame), // reset everything
+      l.exprtBtn.addEventListener("click", Ie), // export as csv
+      // l.controlBtn.addEventListener("click", Re), // play pause
+      // l.cameraIcon1.addEventListener("click", xe), // cam change
+      // l.cameraIcon2.addEventListener("click", xe), // cam change
+      // l.graphCntrl1.addEventListener("onevent", Be), // pan zoom
+      // l.checkBox1.addEventListener("change", Oe), // update selected organism ->
+      // l.checkBox2.addEventListener("change", Ye), // update slider values
+      // l.controlBtn.setDisable("play"),
       (o = []),
       (i = []),
       (d = []),
       (t = []),
       (se = []),
       (ne = []),
-      l.sliderComp1.addEventListener("visibilityChanged", function (e) {
-        l.slider1Title[e.show ? "show" : "hide"]();
-      }),
-      l.sliderComp2.addEventListener("visibilityChanged", function (e) {
-        l.slider2Title[e.show ? "show" : "hide"]();
-      }),
-      l.sliderComp3.addEventListener("visibilityChanged", function (e) {
-        l.slider3Title[e.show ? "show" : "hide"]();
-      }),
-      l.sliderComp4.addEventListener("visibilityChanged", function (e) {
-        l.slider4Title[e.show ? "show" : "hide"]();
-      }),
-      l.sliderComp5.addEventListener("visibilityChanged", function (e) {
-        l.slider5Title[e.show ? "show" : "hide"]();
-      }),
-      l.sliderComp6.addEventListener("visibilityChanged", function (e) {
-        l.slider6Title[e.show ? "show" : "hide"]();
-      }),
-      l.sliderComp7.addEventListener("visibilityChanged", function (e) {
-        l.slider7Title[e.show ? "show" : "hide"]();
-      }),
-      l.sliderComp8.addEventListener("visibilityChanged", function (e) {
-        l.slider8Title[e.show ? "show" : "hide"]();
-      }),
-      l.sliderComp9.addEventListener("visibilityChanged", function (e) {
-        l.slider9Title[e.show ? "show" : "hide"]();
-      }),
-      l.sliderComp10.addEventListener("visibilityChanged", function (e) {
-        l.slider10Title[e.show ? "show" : "hide"]();
-      }),
-      l.sliderComp11.addEventListener("visibilityChanged", function (e) {
-        l.slider11Title[e.show ? "show" : "hide"]();
-      }),
-      l.sliderComp12.addEventListener("visibilityChanged", function (e) {
-        l.slider12Title[e.show ? "show" : "hide"]();
-      }),
-      l.tField1.addEventListener("isShown", function (e) {
-        l.slider1Unit[e.show ? "show" : "hide"]();
-      }),
-      l.tField2.addEventListener("isShown", function (e) {
-        l.slider2Unit[e.show ? "show" : "hide"]();
-      }),
-      l.tField4.addEventListener("isShown", function (e) {
-        l.slider4Unit[e.show ? "show" : "hide"]();
-      }),
-      l.tField5.addEventListener("isShown", function (e) {
-        l.slider5Unit[e.show ? "show" : "hide"]();
-      }),
-      l.tField6.addEventListener("isShown", function (e) {
-        l.slider6Unit[e.show ? "show" : "hide"]();
-      }),
-      l.tField7.addEventListener("isShown", function (e) {
-        l.slider7Unit[e.show ? "show" : "hide"]();
-      }),
-      l.tField8.addEventListener("isShown", function (e) {
-        l.slider8Unit[e.show ? "show" : "hide"]();
-      }),
-      l.tField9.addEventListener("isShown", function (e) {
-        l.slider9Unit[e.show ? "show" : "hide"]();
-      }),
-      l.tField10.addEventListener("isShown", function (e) {
-        l.slider10Unit[e.show ? "show" : "hide"]();
-      }),
-      l.tField11.addEventListener("isShown", function (e) {
-        l.slider11Unit[e.show ? "show" : "hide"]();
-      }),
-      l.tField12.addEventListener("isShown", function (e) {
-        l.slider12Unit[e.show ? "show" : "hide"]();
-      }),
-      l.graph1.addEventListener("isShown", function (e) {
-        l.graphXLabel[e.show ? "show" : "hide"](),
-          l.graphYLabel[e.show ? "show" : "hide"]();
-      }),
       o.push({ id: "sliderComp1", obj: l.sliderComp1 }),
       o.push({ id: "sliderComp2", obj: l.sliderComp2 }),
       o.push({ id: "sliderComp3", obj: l.sliderComp3 }),
@@ -398,10 +322,6 @@ let CoralReef = function () {
     for (a = 0; a < d.length; a++) d[a].obj.addEventListener("change", Fe);
     (s = z = 0),
       10,
-      _.myPond.addEventListener("oceanAnimalSelected", ze),
-      _.myPond.addEventListener("blankLayerClicked", ze),
-      $("#displayDiv").bind("xBtnClicked", ze),
-      $("#displayDiv").css({ overflow: "hidden" }),
       (A = []),
       (j = []),
       [],
@@ -428,43 +348,10 @@ let CoralReef = function () {
       }),
       (ge = 685),
       (ce = 655),
-      (re = new OceanBackground("#displayDiv")).setOpacity(1 - Ke() - 0.3),
-      Ve(),
-      (de = !1),
-      setTimeout(function () {
-        Be({ panType: "panxy", btnType: "reset" });
-      }, 50),
+      resetNumbers(),
       Ne("coralReef", 25);
   });
-  function Fe(e) {
-    // mouseevents
-    for (let a, t = 0; t < d.length; t++)
-      if (
-        d[t].id == e.id &&
-        (l.graph1.cleanAll(t), (a = []), d[t].obj.getStatus())
-      ) {
-        for (let o = 0; o < ne[t].length; o++)
-          a.push({ x: o, y: ne[t][o] / se[t] });
-        l.graph1.drawLines({ id: t, data: a, color: d[t].color });
-      }
-  }
-  function Oe(e) {
-    // updates selected organism
-    let a, t, o;
-    if (
-      ((a = l.checkBox1.getStatus() ? 1 : 0),
-      x && (0 == (t = x.length) ? x.push(5 * a) : (x[t - 1] = 5 * a)),
-      D && (0 == (t = D.length) ? D.push(20 * a) : (D[t - 1] = 20 * a)),
-      d[10].obj.getStatus())
-    ) {
-      o = [];
-      for (let r = 0; r < ne[10].length; r++)
-        o.push({ x: r, y: ne[10][r] / se[10] });
-      l.graph1.cleanAll(10),
-        l.graph1.drawLines({ id: 10, data: o, color: d[10].color });
-    }
-  }
-  function Ye(e) {
+  /* function Ye(e) {
     // update values for invasive
     let a, t;
     if (
@@ -485,7 +372,7 @@ let CoralReef = function () {
       l.graph1.cleanAll(11),
         l.graph1.drawLines({ id: 11, data: dataArr, color: d[11].color });
     }
-  }
+  } */
   let ke = "";
   function De() {
     // * stores independent let to display + if statements describing current simulation
@@ -494,7 +381,7 @@ let CoralReef = function () {
       (a = Y.length - 1),
       (e = "<center><b>Reef conditions</b></center>"),
       (e += "<br>Storm severity: " + i[0].obj.getValue() + "%"),
-      (e += "<br>Ocean temperature: " + i[1].obj.getValue() + " 掳C"),
+      (e += "<br>Ocean temperature: " + i[1].obj.getValue() + " °C"),
       (e += "<br>Ocean pH: " + i[2].obj.getValue()),
       (e += "<br>Sediment load: " + na().toFixed(0) + " ppt"),
       (e += "<br>Nutrient load: " + ia().toFixed(0) + " ppt"),
@@ -555,7 +442,7 @@ let CoralReef = function () {
       (e += "</b>"),
       l.summaryMssg.setText(e);
   }
-  function Ve() {
+  function resetNumbers() {
     // resets entire function, might have all starter values
     let e, a;
     (z = 0),
@@ -633,8 +520,7 @@ let CoralReef = function () {
       ga("Grouper"),
       ga("Snapper"),
       ga("LionFish"),
-      _.myPond.drawCanvasGrass();
-    h.length;
+      h.length;
   }
   function $e() {
     // calculations 1
@@ -859,7 +745,7 @@ let CoralReef = function () {
       o,
       r = Math.round(((1.2 * (ge + 225)) / be[e]) * da(e.toLowerCase())),
       s = "";
-    _.myPond.emptyMainArray(e);
+    // _.myPond.emptyMainArray(e);
     for (let n = 0; n < r; n++) {
       "ParrotFish" == e
         ? ((s = "parrotfish"), 0.35 + 0.02 * (Math.random() - 0.5))
@@ -899,30 +785,9 @@ let CoralReef = function () {
         0 < a &&
           a < ge &&
           ((a = 0.8 * Math.random() * ge),
-          (t = (0.2 + 0.55 * Math.random()) * ce)),
-        _.myPond.updateMainArray(
-          {
-            src: gizmoImageObj[s + ".png"],
-            pos: i,
-            type: "fish",
-            imgName: s,
-          },
-          e
-        );
+          (t = (0.2 + 0.55 * Math.random()) * ce));
     }
   }
-  (this.globalAnimationCallback = function (e) {
-    let a, t;
-    if (
-      (0.1 < (t = ((a = new Date().getTime()) - pe) / 1e3) && (t = 0.1),
-      (pe = a),
-      !de)
-    ) {
-      for (let o = 0; o < 6; o++) he[o] += t;
-      ca(t), ua(t), ma(t), ba(t), va(t), fa(t), _.myPond.drawCanvasFish();
-    }
-  }),
-    enableConsole(!0);
   let wa = void 0;
   (this.getter = function () {
     let e = new Object();
@@ -1038,7 +903,7 @@ let CoralReef = function () {
       Re({ btnType: "reset" }),
         Re({ btnType: a }),
         e.values &&
-          (_e(),
+          (restartGame(),
           (z = e.values.years),
           (de = e.values._isPaused),
           (de = "" + Xe != "play"),
@@ -1088,21 +953,11 @@ let CoralReef = function () {
           ga("Grouper"),
           ga("Snapper"),
           ga("LionFish"),
-          _.myPond.setSelectedSpecies(e.values.currentIdentity),
-          _.myPond.drawCanvasGrass(),
-          _.myPond.drawCanvasFish(),
           qe(),
           l.simulationInfo.setText("Year: " + z.toFixed(0)),
           De(),
           (wa = e.values.currentIdentity),
-          Ae
-            ? (l.mssgBox.hide(), _.xButton.hide())
-            : (l.mssgBox.show(), _.xButton.show()),
           (ke = e.values.healthOfCoral)),
-        getterSetter.isFromReset &&
-          (l.mssgBox.show(), _.xButton.show(), (Ae = !1));
-    }),
-    (this.getCaption = function () {
-      return "GizmoObject";
+        getterSetter.isFromReset && (l.mssgBox.show(), (Ae = !1));
     });
 };
