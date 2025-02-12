@@ -1,3 +1,7 @@
+// make function shorter
+// inputs -> current slider values
+// outputs -> organism populations for this year (push into), current environments
+
 let CoralReef = function () {
   let t, // checkbox status
     o, // arr of { id: "sliderComp1", obj: l.sliderComp1 }
@@ -47,7 +51,7 @@ let CoralReef = function () {
     te, // arr organisms Array(e, a, 0, 0)
     // re, // ocean background opacity
     se, // divide by this number [t] to scale on graph [0.21,0.28,0.11,0.27,8.25,5.4,2.4,0.48,11.6,0.25,1,5]
-    ne, // arr push 0 Y F, operated on for graph coordinates
+    allPopulationValues, // ne //arr push, operated on for graph coordinates/csv export
     // ie, // arr with random num 0-3
     // le, // arr with 0 and etc
     pe, // current time , elapsed since anima tion update
@@ -56,24 +60,24 @@ let CoralReef = function () {
     ce, // 655
     be = 4; // same as ae but first letter capitalcapital keys
   // rounding to 4 decimal places
-  function updateYear(e) {
+  function advanceYear(e) {
     // ***run all functions upon each year update
     let a, t, o, r, s;
     z++,
       l.simulationInfo.setText("Year: " + z.toFixed(0)),
       Ge(),
-      (ne = []).push(O),
-      ne.push(Y),
-      ne.push(F),
-      ne.push(I),
-      ne.push(R),
-      ne.push(B),
-      ne.push(k),
-      ne.push(L),
-      ne.push(X),
-      ne.push(T),
-      ne.push(D),
-      ne.push(N),
+      (allPopulationValues = []).push(O),
+      allPopulationValues.push(Y),
+      allPopulationValues.push(F),
+      allPopulationValues.push(I),
+      allPopulationValues.push(R),
+      allPopulationValues.push(B),
+      allPopulationValues.push(k),
+      allPopulationValues.push(L),
+      allPopulationValues.push(X),
+      allPopulationValues.push(T),
+      allPopulationValues.push(D),
+      allPopulationValues.push(N),
       (s = []),
       (o = h.length - 1),
       (s = te.algae),
@@ -217,13 +221,13 @@ let CoralReef = function () {
       for (let i = 0; i <= z; i++) {
         a.push(new Array()), a[i + 2].push(i.toString());
         for (n = 0; n < s.length; n++)
-          a[i + 2].push((ne[s[n]][i] / se[s[n]]).toFixed(0) + "%");
+          a[i + 2].push((allPopulationValues[s[n]][i] / se[s[n]]).toFixed(0) + "%");
         a[i + 2].push("");
       }
       o.push(""), t.push("Raw data");
       for (n = 0; n < s.length; n++) o.push(r[s[n]]);
       for (i = 0; i <= z; i++)
-        for (n = 0; n < s.length; n++) a[i + 2].push(ne[s[n]][i].toFixed(0));
+        for (n = 0; n < s.length; n++) a[i + 2].push(allPopulationValues[s[n]][i].toFixed(0));
       exportToApiObj.exportCSV(a);
     } */
   function restartGame(e) {
@@ -233,8 +237,6 @@ let CoralReef = function () {
       resetNumbers(),
       l.simulationInfo.setText("Year: " + z.toFixed(0)),
       De(),
-      ze("blankLayerClicked"),
-      Ne("coralReef", 25),
       de)
     ) {
       let a, t;
@@ -249,7 +251,7 @@ let CoralReef = function () {
     // l.touchPad.addEventListener("mouseEvent", fe), // mouse change
     // l.conditions.addEventListener("onIndxSelect", Me), // div visibility
     // l.resetBtn.addEventListener("click", je), // handle button
-    l.advanceBtn.addEventListener("click", Pe), // runs the main function when year is advanced
+    l.advanceBtn.addEventListener("click", advanceYear), // runs the main function when year is advanced
       l.restartBtn.addEventListener("click", restartGame), // reset everything
       l.exprtBtn.addEventListener("click", Ie), // export as csv
       // l.controlBtn.addEventListener("click", Re), // play pause
@@ -264,7 +266,7 @@ let CoralReef = function () {
       (d = []),
       (t = []),
       (se = []),
-      (ne = []),
+      (allPopulationValues = []),
       o.push({ id: "sliderComp1", obj: l.sliderComp1 }),
       o.push({ id: "sliderComp2", obj: l.sliderComp2 }),
       o.push({ id: "sliderComp3", obj: l.sliderComp3 }),
@@ -313,10 +315,6 @@ let CoralReef = function () {
       se.push(0.25),
       se.push(1),
       se.push(5);
-    for (let e = 0; e < 12; e++)
-      o[e].obj.addEventListener("slide", ye),
-        o[e].obj.addEventListener("change", ye),
-        i[e].obj.addEventListener("change", Se);
     for (let a = 0; a < 12; a++) t.push(Number(i[a].obj.getValue()));
     t.push(l.checkBox1.getStatus()), t.push(l.checkBox2.getStatus());
     for (a = 0; a < d.length; a++) d[a].obj.addEventListener("change", Fe);
@@ -367,8 +365,8 @@ let CoralReef = function () {
       d[11].obj.getStatus())
     ) {
       dataArr = [];
-      for (let o = 0; o < ne[11].length; o++)
-        dataArr.push({ x: o, y: ne[11][o] / se[11] });
+      for (let o = 0; o < allPopulationValues[11].length; o++)
+        dataArr.push({ x: o, y: allPopulationValues[11][o] / se[11] });
       l.graph1.cleanAll(11),
         l.graph1.drawLines({ id: 11, data: dataArr, color: d[11].color });
     }
@@ -446,7 +444,7 @@ let CoralReef = function () {
     // resets entire function, might have all starter values
     let e, a;
     (z = 0),
-      (ne = []),
+      (allPopulationValues = []),
       l.graph1.cleanAll(),
       (me = ue = 3),
       (p = []),
@@ -498,18 +496,18 @@ let CoralReef = function () {
       (K = []),
       (Z = []),
       (ee = []),
-      ne.push(O),
-      ne.push(Y),
-      ne.push(F),
-      ne.push(I),
-      ne.push(R),
-      ne.push(B),
-      ne.push(k),
-      ne.push(L),
-      ne.push(X),
-      ne.push(T),
-      ne.push(D),
-      ne.push(N),
+      allPopulationValues.push(O),
+      allPopulationValues.push(Y),
+      allPopulationValues.push(F),
+      allPopulationValues.push(I),
+      allPopulationValues.push(R),
+      allPopulationValues.push(B),
+      allPopulationValues.push(k),
+      allPopulationValues.push(L),
+      allPopulationValues.push(X),
+      allPopulationValues.push(T),
+      allPopulationValues.push(D),
+      allPopulationValues.push(N),
       $e(),
       Ge(),
       Ue(),
@@ -600,8 +598,8 @@ let CoralReef = function () {
     for (let a = 0; a < d.length; a++)
       if (d[a].obj.getStatus()) {
         e = [];
-        for (let t = 0; t < ne[a].length; t++)
-          e.push({ x: t, y: ne[a][t] / se[a] });
+        for (let t = 0; t < allPopulationValues[a].length; t++)
+          e.push({ x: t, y: allPopulationValues[a][t] / se[a] });
         l.graph1.drawLines({ id: a, data: e, color: d[a].color });
       }
   }
@@ -797,7 +795,7 @@ let CoralReef = function () {
       (e.componentname = "CoralReef"),
       (e.values = {}),
       (e.values.years = z),
-      (e.values.dataObj = ne),
+      (e.values.dataObj = allPopulationValues),
       (e.values._algae = h),
       (e.values._sponge = p),
       (e.values._staghorn = b),
@@ -865,14 +863,16 @@ let CoralReef = function () {
         for (let n = 0; n <= z; n++) {
           e.push(new Array());
           for (let s = 0; s < r.length; s++)
-            e[n + 2].push(1 * (ne[r[s]][n] / se[r[s]]).toFixed(0));
+            e[n + 2].push(
+              1 * (allPopulationValues[r[s]][n] / se[r[s]]).toFixed(0)
+            );
           e[n + 2].push("");
         }
         t.push(""), a.push("Raw data");
         for (let s = 0; s < r.length; s++) t.push(o[r[s]]);
         for (let n = 0; n <= z; n++)
           for (let s = 0; s < r.length; s++)
-            e[n + 2].push(1 * ne[r[s]][n].toFixed(0));
+            e[n + 2].push(1 * allPopulationValues[r[s]][n].toFixed(0));
         for (let i = e.pop(), l = [], h = [], p = 0, n = 0; n < 12; n++)
           l.push({ name: o[p], percentage: i[n] }), p++;
         p = 0;
@@ -908,7 +908,7 @@ let CoralReef = function () {
           (de = e.values._isPaused),
           (de = "" + Xe != "play"),
           (Ae = e.values.informationClosed),
-          (ne = e.values.dataObj),
+          (allPopulationValues = e.values.dataObj),
           (h = e.values._algae),
           (p = e.values._sponge),
           (b = e.values._staghorn),
