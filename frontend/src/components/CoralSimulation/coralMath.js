@@ -3,7 +3,7 @@
 // outputs -> organism populations for this year (push into), current environments
 
 let CoralReef = function () {
-  let algalCapacity, algaePopulation, algaePositions, angelfishCapacity, angelfishPopulation, crownOfThornsCapacity, crownOfThornsPopulation, currentTimeElapsed, currentYear, domElements, grouperCapacity, grouperPopulation, invasiveSpeciesPresent, lionfishCapacity, lionfishPopulation, maxAlgaeCapacity, parrotfishCapacity, parrotfishPopulation, seaUrchinCapacity, seaUrchinPopulation, simulationInfoMax, simulationInfoMin, simulationInfoText, snapperCapacity, snapperPopulation, spongeCapacity, spongePopulation, staghornCoralCapacity, staghornCoralPopulation, starCoralCapacity, starCoralPopulation, totalPopulationValues, turtleCapacity, turtlePopulation;
+  let algaePopulation, algaePositions, angelfishCapacity, angelfishPopulation, crownOfThornsCapacity, crownOfThornsPopulation, currentTimeElapsed, currentYear, domElements, grouperCapacity, grouperPopulation, invasiveSpeciesPresent, lionfishCapacity, lionfishPopulation, maxAlgaeCapacity, parrotfishCapacity, parrotfishPopulation, seaUrchinCapacity, seaUrchinPopulation, simulationInfoMax, simulationInfoMin, simulationInfoText, snapperCapacity, snapperPopulation, spongeCapacity, spongePopulation, staghornCoralCapacity, staghornCoralPopulation, starCoralCapacity, starCoralPopulation, totalPopulationValues, turtleCapacity, turtlePopulation;
   // Function to advance the year
   function advanceYear(e) {
     // ***run all functions upon each year update
@@ -37,19 +37,16 @@ let CoralReef = function () {
       };
     }
 
-    // Update algae population
     let algaeGrowth = algaePopulation[lastAlgaeIndex];
     let algaeImpactFactors = getImpactFactors(parrotfishPopulation, 3 * seaUrchinPopulation[lastAlgaeIndex]);
     algaeGrowthRate = calculateGrowthRate(algaeGrowth, algaePositions, maxAlgaeCapacity[lastAlgaeIndex], algaeImpactFactors);
     updatePopulation(algaePopulation, algaeGrowthRate);
 
-    // Update sponge population
     let spongeGrowth = spongePopulation[lastAlgaeIndex];
     let spongeImpactFactors = getImpactFactors(angelfishPopulation, 2 * turtlePopulation[lastAlgaeIndex]);
     spongeGrowthRate = calculateGrowthRate(spongeGrowth, algaePositions, spongeCapacity[lastAlgaeIndex], spongeImpactFactors);
     updatePopulation(spongePopulation, spongeGrowthRate);
 
-    // Update staghorn coral population
     let staghornCoralGrowth = staghornCoralPopulation[lastAlgaeIndex];
     let staghornCoralImpactFactors = {
       algalImpact: calculateAlgalImpact(),
@@ -59,7 +56,6 @@ let CoralReef = function () {
     staghornCoralGrowthRate = calculateGrowthRate(staghornCoralGrowth, algaePositions, staghornCoralCapacity[lastAlgaeIndex], staghornCoralImpactFactors);
     updatePopulation(staghornCoralPopulation, staghornCoralGrowthRate);
 
-    // Update star coral population
     let starCoralGrowth = starCoralPopulation[lastAlgaeIndex];
     let starCoralImpactFactors = {
       algalImpact: calculateAlgalImpact(),
@@ -69,53 +65,45 @@ let CoralReef = function () {
     starCoralGrowthRate = calculateGrowthRate(starCoralGrowth, algaePositions, starCoralCapacity[lastAlgaeIndex], starCoralImpactFactors);
     updatePopulation(starCoralPopulation, starCoralGrowthRate);
 
-    // Update sea urchin population
     let seaUrchinGrowth = seaUrchinPopulation[lastAlgaeIndex];
     let seaUrchinGrowthRate = seaUrchinGrowth * (1 - textFields[11].obj.getValue() / 100) +
       algaePositions[2] * seaUrchinGrowth * algaePopulation[lastAlgaeIndex] -
       algaePositions[3] * seaUrchinGrowth;
     updatePopulation(seaUrchinPopulation, parseFloat(seaUrchinGrowthRate.toFixed(4)));
 
-    // Update parrotfish population
     let parrotfishGrowth = parrotfishPopulation[lastAlgaeIndex];
     let parrotfishGrowthRate = parrotfishGrowth + algaePositions[2] * parrotfishGrowth * algaePopulation[lastAlgaeIndex] -
       algaePositions[3] * parrotfishGrowth -
       (grouperPopulation[lastAlgaeIndex] + snapperPopulation[lastAlgaeIndex] + 5 * lionfishPopulation[lastAlgaeIndex]) * parrotfishGrowth * algaePositions[1];
     updatePopulation(parrotfishPopulation, parseFloat(parrotfishGrowthRate.toFixed(4)));
 
-    // Update angelfish population
     let angelfishGrowth = angelfishPopulation[lastAlgaeIndex];
     let angelfishGrowthRate = angelfishGrowth + algaePositions[2] * angelfishGrowth * spongePopulation[lastAlgaeIndex] -
       algaePositions[3] * angelfishGrowth -
       (grouperPopulation[lastAlgaeIndex] + snapperPopulation[lastAlgaeIndex] + 6 * lionfishPopulation[lastAlgaeIndex]) * angelfishGrowth * algaePositions[1];
     updatePopulation(angelfishPopulation, parseFloat(angelfishGrowthRate.toFixed(4)));
 
-    // Update turtle population
     let turtleGrowth = turtlePopulation[lastAlgaeIndex];
     let turtleGrowthRate = turtleGrowth + algaePositions[2] * turtleGrowth * spongePopulation[lastAlgaeIndex] -
       algaePositions[3] * turtleGrowth;
     updatePopulation(turtlePopulation, parseFloat(turtleGrowthRate.toFixed(4)));
 
-    // Update grouper population
     let grouperGrowth = grouperPopulation[lastAlgaeIndex];
     let grouperGrowthRate = grouperGrowth + algaePositions[2] * grouperGrowth * (parrotfishPopulation[lastAlgaeIndex] + angelfishPopulation[lastAlgaeIndex] + snapperPopulation[lastAlgaeIndex] / 3) -
       algaePositions[3] * grouperGrowth;
     updatePopulation(grouperPopulation, parseFloat(grouperGrowthRate.toFixed(4)));
 
-    // Update snapper population
     let snapperGrowth = snapperPopulation[lastAlgaeIndex];
     let snapperGrowthRate = snapperGrowth + algaePositions[2] * snapperGrowth * (parrotfishPopulation[lastAlgaeIndex] + angelfishPopulation[lastAlgaeIndex]) -
       (algaePositions[3] * snapperGrowth * grouperPopulation[lastAlgaeIndex]) / 10 -
       (algaePositions[3] * lionfishPopulation[lastAlgaeIndex]) / 5;
     updatePopulation(snapperPopulation, parseFloat(snapperGrowthRate.toFixed(4)));
 
-    // Update lionfish population
     let lionfishGrowth = lionfishPopulation[lastAlgaeIndex];
     let lionfishGrowthRate = lionfishGrowth + algaePositions[2] * lionfishGrowth * (parrotfishPopulation[lastAlgaeIndex] + angelfishPopulation[lastAlgaeIndex] + grouperPopulation[lastAlgaeIndex] + snapperPopulation[lastAlgaeIndex]) -
       algaePositions[3] * lionfishGrowth;
     updatePopulation(lionfishPopulation, parseFloat(lionfishGrowthRate.toFixed(4)));
 
-    // Update crown of thorns population
     let crownOfThornsGrowth = crownOfThornsPopulation[lastAlgaeIndex];
     let crownOfThornsGrowthRate = crownOfThornsGrowth + algaePositions[2] * crownOfThornsGrowth * (staghornCoralPopulation[lastAlgaeIndex] + starCoralPopulation[lastAlgaeIndex]) -
       algaePositions[3] * crownOfThornsGrowth;
