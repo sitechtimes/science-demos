@@ -1,6 +1,7 @@
 <template>
     <div>
-        <Plotly :data="chartData" :layout="chartOptions" :key="componentKey" />
+        <Plotly :data="chartData" :layout="chartOptions" :config="{ displayModeBar: false, responsive: true }"
+            :key="componentKey" />
     </div>
 </template>
 
@@ -98,7 +99,8 @@ function setChartData() {
             marker: {
                 color: '#cc0234',
             },
-            mode: 'lines+markers'
+            mode: 'lines+markers',
+            legendgroup: 'coral'
         },
         {
             name: 'Stoplight parrotfish',
@@ -107,7 +109,8 @@ function setChartData() {
             marker: {
                 color: '#0b0bce',
             },
-            mode: 'lines+markers'
+            mode: 'lines+markers',
+            legendgroup: 'herbivore'
         },
         {
             name: 'Long-spined sea urchin',
@@ -116,7 +119,8 @@ function setChartData() {
             marker: {
                 color: '#ff48ff',
             },
-            mode: 'lines+markers'
+            mode: 'lines+markers',
+            legendgroup: 'herbivore'
         },
         {
             name: 'Boulder star coral',
@@ -125,7 +129,8 @@ function setChartData() {
             marker: {
                 color: '#686868',
             },
-            mode: 'lines+markers'
+            mode: 'lines+markers',
+            legendgroup: 'coral'
         },
         /*         {
                     name: 'Queen angelfish',
@@ -134,7 +139,8 @@ function setChartData() {
                     marker: {
                         color: '#a348a3',
                     },
-                    mode: 'lines+markers'
+                    mode: 'lines+markers',
+                    legendgroup: 'predatory fish'
                 },
                 {
                     name: 'Hawksbill sea turtle',
@@ -143,7 +149,8 @@ function setChartData() {
                     marker: {
                         color: '#ff9a34',
                     },
-                    mode: 'lines+markers'
+                    mode: 'lines+markers',
+                    legendgroup: 'keystone'
                 },
                 {
                     name: 'Sponges',
@@ -152,7 +159,8 @@ function setChartData() {
                     marker: {
                         color: '#ffce9d',
                     },
-                    mode: 'lines+markers'
+                    mode: 'lines+markers',
+                    legendgroup: 'filter feeder'
                 },
                 {
                     name: 'Yellowtail snapper',
@@ -161,7 +169,8 @@ function setChartData() {
                     marker: {
                         color: '#ffce9d',
                     },
-                    mode: 'lines+markers'
+                    mode: 'lines+markers',
+                    legendgroup: 'predatory fish'
                 }, */
         {
             name: 'Red lionfish',
@@ -170,7 +179,8 @@ function setChartData() {
             marker: {
                 color: '#ffce9d',
             },
-            mode: 'lines+markers'
+            mode: 'lines+markers',
+            legendgroup: 'invasive'
         },
         {
             name: 'Algae',
@@ -179,7 +189,8 @@ function setChartData() {
             marker: {
                 color: '#11cf70',
             },
-            mode: 'lines+markers'
+            mode: 'lines+markers',
+            legendgroup: 'primary producers'
         },
         /*         {
                     name: 'Nassau grouper',
@@ -188,7 +199,8 @@ function setChartData() {
                     marker: {
                         color: '#9d9d3c',
                     },
-                    mode: 'lines+markers'
+                    mode: 'lines+markers',
+            legendgroup: 'predatory fish'
                 }, */
         {
             name: 'Crown-of-thorns starfish',
@@ -197,7 +209,8 @@ function setChartData() {
             marker: {
                 color: '#cfcf6f',
             },
-            mode: 'lines+markers'
+            mode: 'lines+markers',
+            legendgroup: 'invasive'
         }
     ]
     return data;

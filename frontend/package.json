@@ -13,6 +13,7 @@
         "chartjs": "^0.3.24",
         "phaser": "^3.85.2",
         "pinia": "^2.2.2",
+        "plotly.js-dist": "^2.35.2",
         "primeicons": "^6.0.1",
         "primevue": "^4.0.6",
         "vue": "^3.4.34",
