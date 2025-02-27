@@ -175,72 +175,43 @@ let CoralReef = function () {
   let healthSummary = "";
 
   function updateSimulationInfo() {
-    // * stores independent let to display + if statements describing current simulation
-    let stormSeverity, oceanTemperature, oceanPH;
-    (oceanTemperature = textFields[1].obj.getValue()),
-      (stormSeverity = totalPopulationValues.length - 1),
-      (healthSummary = "<center><b>Reef conditions</b></center>"),
-      (healthSummary += "<br>Storm severity: " + textFields[0].obj.getValue() + "%"),
-      (healthSummary += "<br>Ocean temperature: " + oceanTemperature + " °C"),
-      (healthSummary += "<br>Ocean pH: " + textFields[2].obj.getValue()),
-      (healthSummary += "<br>Sediment load: " + calculateSedimentLoad().toFixed(0) + " ppt"),
-      (healthSummary += "<br>Nutrient load: " + calculateNutrientLoad().toFixed(0) + " ppt"),
-      (healthSummary += "<br>Water clarity: " + calculateWaterClarity().toFixed(0) + "%"),
-      (healthSummary += "<br>Coral cover: " + (staghornCoralPopulation[stormSeverity] + starCoralPopulation[stormSeverity]).toFixed(0) + "%"),
-      (healthSummary += "<br>Coral stress: " + (100 * calculateCoralStress()).toFixed(0) + "%"),
-      (healthSummary += "<br>Total fish species: " + calculateTotalFishSpecies().toFixed(0)),
-      (healthSummary += "<br><br><br><center><b>Summary</center><br>"),
-      (healthSummary = ""),
-      25 <= oceanTemperature &&
-      oceanTemperature <= 29 &&
-      7.9 <= textFields[2].obj.getValue() &&
-      0 == textFields[9].obj.getValue() &&
-      calculateCoralStress() < 0.1 &&
-      400 < calculateTotalFishSpecies() &&
-      40 < staghornCoralPopulation[stormSeverity] + starCoralPopulation[stormSeverity] &&
-      ((healthSummary +=
-        "Coral reef is healthy, with no bleaching or disease. Fish diversity is high. "),
-        (healthSummary +=
-          "Coral reef is healthy, with no bleaching or disease. Fish diversity is high. ")),
-      40 <= staghornCoralPopulation[stormSeverity] + starCoralPopulation[stormSeverity]
-        ? ((healthSummary += "Coral cover is high. "), (healthSummary += "Coral cover is high. "))
-        : 20 <= staghornCoralPopulation[stormSeverity] + starCoralPopulation[stormSeverity] &&
-        ((healthSummary += "Coral cover is medium. "), (healthSummary += "Coral cover is medium. ")),
-      staghornCoralPopulation[stormSeverity] + starCoralPopulation[stormSeverity] < 20 &&
-      ((healthSummary += "Coral cover is low. "), (healthSummary += "Coral cover is low. ")),
-      20 < spongePopulation[stormSeverity] &&
-      ((healthSummary += "Sponge cover is high. "), (healthSummary += "Sponge cover is high. ")),
-      0 < textFields[9].obj.getValue() &&
-      ((healthSummary += "Black-band disease is present. "),
-        (healthSummary += "Black-band disease is present. ")),
-      0 < textFields[10].obj.getValue() &&
-      ((healthSummary += "White-band disease is present. "),
-        (healthSummary += "White-band disease is present. ")),
-      0 < textFields[11].obj.getValue() &&
-      ((healthSummary += "Sea urchin disease is present. "),
-        (healthSummary += "Sea urchin disease is present. ")),
-      calculateTotalFishSpecies() < 200 &&
-      ((healthSummary += "Fish diversity is low. "), (healthSummary += "Fish diversity is low. ")),
-      0 < lionfishPopulation[stormSeverity] &&
-      ((healthSummary += "Lionfish are present. "), (healthSummary += "Lionfish are present. ")),
-      0 < crownOfThornsPopulation[stormSeverity] &&
-      ((healthSummary += "Crown-of-thorns starfish are present. "),
-        (healthSummary += "Crown-of-thorns starfish are present. ")),
-      50 < algaePopulation[stormSeverity] &&
-      ((healthSummary += "Algae cover is high. "), (healthSummary += "Algae cover is high. ")),
-      0.2 < calculateCoralStress() &&
-      ((healthSummary += "Bleaching is occurring due to high temperatures. "),
-        (healthSummary += "Bleaching is occurring due to high temperatures. ")),
-      textFields[2].obj.getValue() < 7.9 &&
-      ((healthSummary += "pH is low. "), (healthSummary += "pH is low. ")),
-      staghornCoralPopulation[stormSeverity] < 0.1 &&
-      ((healthSummary += "Staghorn coral has died out. "),
-        (healthSummary += "Staghorn coral has died out. ")),
-      starCoralPopulation[stormSeverity] < 0.1 &&
-      ((healthSummary += "Star coral has died out. "),
-        (healthSummary += "Star coral has died out. ")),
-      (healthSummary += "</b>"),
-      domElements.summaryMessage.setText(healthSummary);
+
+    let healthSummary = "<center><b>Reef conditions</b></center>";
+    healthSummary += "<br>Storm severity: " + textFields[0].obj.getValue() + "%";
+    healthSummary += "<br>Ocean temperature: " + oceanTemperature + " °C";
+
+    if (isReefHealthy()) {
+      healthSummary += "Coral reef is healthy, with no bleaching or disease. Fish diversity is high. ";
+    } else {
+      assessCoralCover();
+      assessDiseases();
+      assessFishDiversity();
+    }
+
+    healthSummary += "</b>";
+    domElements.summaryMessage.setText(healthSummary);
+
+    function isReefHealthy() {
+      return (
+        25 <= oceanTemperature && oceanTemperature <= 29 &&
+        7.9 <= textFields[2].obj.getValue() &&
+        0 == textFields[9].obj.getValue() &&
+        calculateCoralStress() < 0.1 &&
+        400 < calculateTotalFishSpecies() &&
+        40 < staghornCoralPopulation[stormSeverity] + starCoralPopulation[stormSeverity]
+      );
+    }
+
+    function assessCoralCover() {
+      const totalCoral = staghornCoralPopulation[stormSeverity] + starCoralPopulation[stormSeverity];
+      if (totalCoral >= 40) {
+        healthSummary += "Coral cover is high. ";
+      } else if (totalCoral >= 20) {
+        healthSummary += "Coral cover is medium. ";
+      } else {
+        healthSummary += "Coral cover is low. ";
+      }
+    }
   }
 
 
@@ -459,8 +430,6 @@ let CoralReef = function () {
           (scale = species), (randomValue = 0.35 + 0.05 * (Math.random() - 0.5));
           break;
         case "Snapper":
-          (scale = species), (randomValue = 0.3 + 0.035 * (Math.random() - 0.5));
-          break;
         case "LionFish":
           (scale = species), (randomValue = 0.3 + 0.035 * (Math.random() - 0.5));
           break;
