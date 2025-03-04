@@ -2,20 +2,7 @@
 // inputs -> current slider values
 // outputs -> organism populations for this year (push into), current environments
 
-import {
-  Organism, //constructor for all organisms (these classes are human made comments btw :) )
-  Algae,
-  Sponge,
-  Coral,  //constructor for all corals 
-  Fish, //constructor for all fish
-  Parrotfish,
-  Angelfish,
-  SeaCreature, //constructor for all seacreatures
-  SeaUrchin,
-  CrownOfThorns,
-  StaghornCoral,
-  StarCoral
-} from './coralMathClass.js';
+import {Algae, Sponge, Parrotfish, Angelfish, SeaUrchin, CrownOfThorns, StaghornCoral, StarCoral} from './coralMathClass.js';
 
 let CoralReef = function () {
   this.algae = new Algae();
@@ -24,12 +11,11 @@ let CoralReef = function () {
   this.starCoral = new StarCoral();
   this.parrotfish = new Parrotfish();
   this.angelfish = new Angelfish();
-  this.seaUrchin = new SeaUrchin(); // New instance for Sea Urchin
-  this.crownOfThorns = new CrownOfThorns(); // New instance for Crown of Thorns
+  this.seaUrchin = new SeaUrchin(); 
+  this.crownOfThorns = new CrownOfThorns(); 
 
   function advanceYear() {
     currentYear++;
-    domElements.simulationInfo.setText("Year: " + currentYear.toFixed(0));
     
     this.algae.updatePopulation();
     this.sponge.updatePopulation();
@@ -43,7 +29,6 @@ let CoralReef = function () {
     // Update capacities if needed
     updateCapacities();
     drawGraphs();
-    updateSimulationInfo();
   }
 
   function restartGame() {
@@ -51,7 +36,6 @@ let CoralReef = function () {
     if (
       ((currentYear = 0),
         resetPopulationValues(),
-        domElements.simulationInfo.setText("Year: " + currentYear.toFixed(0)),
         updateSimulationInfo())
     ) {
       let currentTime;
@@ -61,45 +45,21 @@ let CoralReef = function () {
   }
 
   let initialize = !((r = this).init = function () {
-    domElements.advanceBtn.addEventListener("click", advanceYear), // runs the main function when year is advanced
-      domElements.restartBtn.addEventListener("click", restartGame), // reset everything
-      domElements.exportBtn.addEventListener("click", exportToCSV), // export as csv
-      (invasiveSpeciesPresent = []),
-      sliderComponents = [{ id: "sliderComp1", obj: domElements.sliderComp1 }, { id: "sliderComp2", obj: domElements.sliderComp2 }, { id: "sliderComp3", obj: domElements.sliderComp3 }, { id: "sliderComp4", obj: domElements.sliderComp4 }, { id: "sliderComp5", obj: domElements.sliderComp5 }, { id: "sliderComp6", obj: domElements.sliderComp6 }, { id: "sliderComp7", obj: domElements.sliderComp7 }, { id: "sliderComp8", obj: domElements.sliderComp8 }, { id: "sliderComp9", obj: domElements.sliderComp9 }, { id: "sliderComp10", obj: domElements.sliderComp10 }, { id: "sliderComp11", obj: domElements.sliderComp11 }, { id: "sliderComp12", obj: domElements.sliderComp12 }];
-    textFields = [{ id: "tField1", obj: domElements.tField1 }, { id: "tField2", obj: domElements.tField2 }, { id: "tField3", obj: domElements.tField3 }, { id: "tField4", obj: domElements.tField4 }, { id: "tField5", obj: domElements.tField5 }, { id: "tField6", obj: domElements.tField6 }, { id: "tField7", obj: domElements.tField7 }, { id: "tField8", obj: domElements.tField8 }, { id: "tField9", obj: domElements.tField9 }, { id: "tField10", obj: domElements.tField10 }, { id: "tField11", obj: domElements.tField11 }, { id: "tField12", obj: domElements.tField12 }];
-    coralPlots = [{ id: "plotStaghorn", obj: domElements.plotStaghorn, color: "#CC0033" }, { id: "plotStarCoral", obj: domElements.plotStarCoral, color: "#666666" }, { id: "plotSponge", obj: domElements.plotSponge, color: "#FFCC99" }, { id: "plotAlgae", obj: domElements.plotAlgae, color: "#00CC66" }, { id: "plotParrotfish", obj: domElements.plotParrotfish, color: "#0000CC" }, { id: "plotAngelfish", obj: domElements.plotAngelfish, color: "#993399" }, { id: "plotSnapper", obj: domElements.plotSnapper, color: "#CC9966" }, { id: "plotGrouper", obj: domElements.plotGrouper, color: "#999933" }, { id: "plotUrchin", obj: domElements.plotUrchin, color: "#FF33FF" }, { id: "plotTurtle", obj: domElements.plotTurtle, color: "#FF9933" }, { id: "plotLionfish", obj: domElements.plotLionfish, color: "#00CCCC" }, { id: "plotCrownOfThorns", obj: domElements.plotCrownOfThorns, color: "#CCCC66" }];
+
     totalPopulationValues = [0.21, 0.28, 0.11, 0.27, 8.25, 5.4, 2.4, 0.48, 11.6, 0.25, 1, 5];
-
-    for (let index = 0; index < 12; index++) invasiveSpeciesPresent.push(Number(textFields[index].obj.getValue()));
-    invasiveSpeciesPresent.push(domElements.checkBox1.getStatus(), domElements.checkBox2.getStatus());
-
-    for (let index = 0; index < coralPlots.length; index++) coralPlots[index].obj.addEventListener("change", updateGraph);
-
     algaePositions = currentYear = 0
-    simulationInfoText = []
-    simulationInfoMax = []
-    simulationInfoMin = []
-    simulationInfoText = []
-    simulationInfoMax = []
-    simulationInfoMin = []
-    initialPopulationValues = {
-      parrotfish: 60,
-      angelfish: 60,
-      turtle: 24,
-      grouper: 33.3 * 1.2,
-      snapper: 80.16,
-      lionfish: 60,
-    }
-    initialPopulationValuesCapitalized = {
-      ParrotFish: 60,
-      AngelFish: 60,
-      SeaTurtle: 24,
-      Grouper: 33.3 * 1.2,
-      Snapper: 80.16,
-      LionFish: 60,
-    }
     simulationInfoMax = 685
     simulationInfoMin = 655
+
+    initialPopulationValues = {
+      parrotfish: this.partofish.population,
+      angelfish: this.angelfish.population,
+      turtle: this.turtle.population,
+      grouper: this.grouper.population,
+      snapper: this.snapper.population,
+      lionfish: this.lionfish.population,
+    }
+
     resetPopulationValues(),
       updateGraph();
   });
@@ -120,7 +80,6 @@ let CoralReef = function () {
     }
 
     healthSummary += "</b>";
-    domElements.summaryMessage.setText(healthSummary);
 
     function isReefHealthy() {
       return (
@@ -149,7 +108,6 @@ let CoralReef = function () {
     // Reset all population values and initialize with starter values
     currentYear = 0;
     totalPopulationValues = [];
-    domElements.graph1.cleanAll();
 
     const initialPopulations = {
       algae: 400,
@@ -185,8 +143,6 @@ let CoralReef = function () {
 
     totalPopulationValues.push(...Object.values(populations));
 
-    updateGraph();
-    updateSimulationInfo();
   }
 
   function updateCapacities(lastIndex) {
@@ -207,20 +163,6 @@ let CoralReef = function () {
       snapperCapacity.push(1 * Math.min((spongePopulation[lastIndex] + staghornCoralPopulation[lastIndex] + starCoralPopulation[lastIndex]) / 2, 400).toFixed(4)),
       lionfishCapacity.push(100),
       crownOfThornsCapacity.push(1 * (staghornCoralPopulation[lastIndex] + starCoralPopulation[lastIndex]).toFixed(4));
-  }
-
-  function drawGraphs() {
-    // draw graph
-    let graphData;
-    domElements.graph1.cleanAll();
-    for (let index = 0; index < coralPlots.length; index++) {
-      if (coralPlots[index].obj.getStatus()) {
-        graphData = [];
-        for (let yearIndex = 0; yearIndex < totalPopulationValues[index].length; yearIndex++)
-          graphData.push({ x: yearIndex, y: totalPopulationValues[index][yearIndex] / totalPopulationValues[index] });
-        domElements.graph1.drawLines({ id: index, data: graphData, color: coralPlots[index].color });
-      }
-    }
   }
 
   function calculateAlgalImpact() {
@@ -341,7 +283,7 @@ let CoralReef = function () {
     let calculatedDensity,
       randomValue,
       positionX,
-      positionY = Math.round(((1.2 * (simulationInfoMax + 225)) / initialPopulationValuesCapitalized[species]) * calculatePopulationDensity(species.toLowerCase())),
+      positionY = Math.round(((1.2 * (simulationInfoMax + 225)) / initialPopulationValues[species]) * calculatePopulationDensity(species.toLowerCase())),
       scale = "";
 
     for (let index = 0; index < positionY; index++) {
@@ -393,155 +335,4 @@ let CoralReef = function () {
       }
     }
   }
-
-  let undefinedVariable = void 0;
-
-  (this.getter = function () {
-    let returnObject = new Object();
-    return (
-      (returnObject.caption = "GizmoObject"),
-      (returnObject.common = !1),
-      (returnObject.componentname = "CoralReef"),
-      (returnObject.values = {}),
-      (returnObject.values.years = currentYear),
-      (returnObject.values.dataObj = totalPopulationValues),
-      (returnObject.values._algae = this.algae.population),
-      (returnObject.values._sponge = this.sponge.population),
-      (returnObject.values._staghorn = this.staghornCoral.population),
-      (returnObject.values._star = this.starCoral.population),
-      (returnObject.values._urchin = this.seaUrchin.population), // Updated for Sea Urchin
-      (returnObject.values._parrot = this.parrotfish.population),
-      (returnObject.values._angel = this.angelfish.population),
-      (returnObject.values._turtle = this.turtle.population),
-      (returnObject.values._grouper = this.grouper.population),
-      (returnObject.values._snapper = this.snapper.population),
-      (returnObject.values._lion = this.lionfish.population),
-      (returnObject.values._thorns = this.crownOfThorns.population), // Updated for Crown of Thorns
-      (returnObject.values._algaeCap = this.algae.capacity),
-      (returnObject.values._spongeCap = this.sponge.capacity),
-      (returnObject.values._staghornCap = this.staghornCoral.capacity),
-      (returnObject.values._starCap = this.starCoral.capacity),
-      (returnObject.values._urchinCap = this.seaUrchin.capacity),
-      (returnObject.values._parrotCap = this.parrotfish.capacity),
-      (returnObject.values._angelCap = this.angelfish.capacity),
-      (returnObject.values._turtleCap = this.turtle.capacity),
-      (returnObject.values._grouperCap = this.grouper.capacity),
-      (returnObject.values._snapperCap = this.snapper.capacity),
-      (returnObject.values._lionCap = this.lionfish.capacity),
-      (returnObject.values._thornsCap = this.crownOfThorns.capacity),
-      (returnObject.values._coefMatrix = coefficientMatrix),
-      (returnObject.values._isPaused = isPaused),
-      (returnObject.values.currentPopulation = (function () {
-        let populationData, percentageData, rawData, speciesNames, speciesIndex;
-        (populationData = new Array()),
-          (percentageData = []),
-          (rawData = []),
-          (speciesNames = [
-            "Staghorn coral",
-            "Boulder star coral",
-            "Sponges",
-            "Algae",
-            "Stoplight parrotfish",
-            "Queen angelfish",
-            "Yellowtail snapper",
-            "Nassau grouper",
-            "Long-spined sea urchin",
-            "Hawkbill sea turtle",
-            "Red lionfish",
-            "Crown-of-thorns starfish",
-          ]),
-          populationData.push(percentageData),
-          populationData.push(rawData),
-          percentageData.push("Percentage data"),
-          rawData.push("Year"),
-          percentageData.push("");
-        for (let index = 0; index < coralPlots.length; index++) rawData.push(speciesNames[index]), speciesIndex.push(index), percentageData.push("");
-        for (let yearIndex = 0; yearIndex <= currentYear; yearIndex++) {
-          populationData.push(new Array());
-          for (let index = 0; index < speciesIndex.length; index++)
-            populationData[yearIndex + 2].push(
-              1 * (totalPopulationValues[speciesIndex[index]][yearIndex] / totalPopulationValues[speciesIndex[index]]).toFixed(0)
-            );
-          populationData[yearIndex + 2].push("");
-        }
-        rawData.push(""), percentageData.push("Raw data");
-        for (let index = 0; index < speciesIndex.length; index++) rawData.push(speciesNames[speciesIndex[index]]);
-        for (let yearIndex = 0; yearIndex <= currentYear; yearIndex++)
-          for (let index = 0; index < speciesIndex.length; index++)
-            populationData[yearIndex + 2].push(1 * totalPopulationValues[speciesIndex[index]][yearIndex].toFixed(0));
-        for (let lastEntry = populationData.pop(), percentageList = [], rawDataList = [], speciesCounter = 0, index = 0; index < 12; index++)
-          percentageList.push({ name: speciesNames[speciesCounter], percentage: lastEntry[index] }), speciesCounter++;
-        speciesCounter = 0;
-        for (let index = 13; index < 25; index++) rawDataList.push({ name: speciesNames[speciesCounter], number: lastEntry[index] }), speciesCounter++;
-        return { percentage: percentageList, rawData: rawDataList };
-      })()),
-      (returnObject.values.healthOfCoral = healthSummary),
-      (speciesIndex = starCoralPopulation.length - 1),
-      (returnObject.values.StormSeverity = 1 * textFields[0].obj.getValue()),
-      (returnObject.values.OceanTemperature = 1 * textFields[1].obj.getValue()),
-      (returnObject.values.OceanpH = 1 * textFields[2].obj.getValue()),
-      (returnObject.values.SedimentLoad = 1 * calculateSedimentLoad().toFixed(0)),
-      (returnObject.values.NutrientLoad = 1 * calculateNutrientLoad().toFixed(0)),
-      (returnObject.values.WaterClarity = 1 * calculateWaterClarity().toFixed(0)),
-      (returnObject.values.CoralCover = 1 * (staghornCoralPopulation[speciesIndex] + starCoralPopulation[speciesIndex]).toFixed(0)),
-      (returnObject.values.CoralStress = 1 * (100 * calculateCoralStress()).toFixed(0)),
-      (returnObject.values.TotalFishSpecies = 1 * calculateTotalFishSpecies().toFixed(0)),
-      (returnObject.values.currentIdentity = undefinedVariable),
-      (returnObject.values.informationClosed = isInformationClosed),
-      (returnObject.settable = !0),
-      (returnObject.enabled = !0),
-      (returnObject.visible = !0),
-      returnObject
-    );
-  }),
-
-  (this.setter = function (inputObject) {
-    let buttonType = "" + buttonState;
-    resetSimulation({ btnType: "reset" }),
-      resetSimulation({ btnType: buttonType }),
-      inputObject.values &&
-      (restartGame(),
-        (currentYear = inputObject.values.years),
-        (isPaused = inputObject.values._isPaused),
-        (isPaused = "" + buttonState != "play"),
-        (isInformationClosed = inputObject.values.informationClosed),
-        (totalPopulationValues = inputObject.values.dataObj),
-        (this.algae.population = inputObject.values._algae),
-        (this.sponge.population = inputObject.values._sponge),
-        (this.staghornCoral.population = inputObject.values._staghorn),
-        (this.starCoral.population = inputObject.values._star),
-        (this.seaUrchin.population = inputObject.values._urchin), // Updated for Sea Urchin
-        (this.parrotfish.population = inputObject.values._parrot),
-        (this.angelfish.population = inputObject.values._angel),
-        (this.turtle.population = inputObject.values._turtle),
-        (this.grouper.population = inputObject.values._grouper),
-        (this.snapper.population = inputObject.values._snapper),
-        (this.lionfish.population = inputObject.values._lion),
-        (this.crownOfThorns.population = inputObject.values._thorns), // Updated for Crown of Thorns
-        (this.algae.capacity = inputObject.values._algaeCap),
-        (this.sponge.capacity = inputObject.values._spongeCap),
-        (this.staghornCoral.capacity = inputObject.values._staghornCap),
-        (this.starCoral.capacity = inputObject.values._starCap),
-        (this.seaUrchin.capacity = inputObject.values._urchinPop),
-        (this.parrotfish.capacity = inputObject.values._parrotPop),
-        (this.angelfish.capacity = inputObject.values._angelPop),
-        (this.turtle.capacity = inputObject.values._turtleCap),
-        (this.grouper.capacity = inputObject.values._grouperCap),
-        (this.snapper.capacity = inputObject.values._snapperCap),
-        (this.lionfish.capacity = inputObject.values._lionCap),
-        (this.crownOfThorns.capacity = inputObject.values._thornsCap),
-        (coefficientMatrix = inputObject.values._coefMatrix),
-        updatePopulationData(),
-        calculateSpeciesPopulation("ParrotFish"),
-        calculateSpeciesPopulation("AngelFish"),
-        calculateSpeciesPopulation("SeaTurtle"),
-        calculateSpeciesPopulation("Grouper"),
-        calculateSpeciesPopulation("Snapper"),
-        calculateSpeciesPopulation("LionFish"),
-        drawGraphs(),
-        domElements.simulationInfo.setText("Year: " + currentYear.toFixed(0)),
-        updateSimulationInfo(),
-        (undefinedVariable = inputObject.values.healthOfCoral)),
-      getterSetter.isFromReset && (domElements.messageBox.show(), (isInformationClosed = !1));
-  });
 };
