@@ -2,11 +2,15 @@
     <div class="chart-slider-container">
         <div class="chart-container">
             <div class="card p-0">
-                <PlotlyChart :data="chartData" :layout="chartOptions" :key="componentKey" />
+                <PlotlyChart :data="chartData" :layout="chartOptions" :config="{ displayModeBar: false }"
+                    :key="componentKey" />
             </div>
 
         </div>
         <div class="slider-container">
+            <InputNumber />
+            <InputNumber />
+            <InputNumber />
             <div class="card">
                 <SliderConditions />
             </div>
@@ -20,6 +24,7 @@ import { useLayout } from '@/layout/composables/layout';
 import SliderConditions from "@/components/CoralSimulation/SliderConditions.vue";
 import PlotlyChart from '@/components/PlotlyChart.vue';
 import soilData from '@/components/SoilType/soilData';
+import InputNumber from "primevue/inputnumber";
 // import SelectButton from 'primevue/selectbutton'; // keeping this for future use as switching between chart and soil type preview?
 
 const colors = ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9', '#bc80bd', '#ccebc5', '#ffed6f'];
@@ -79,6 +84,7 @@ function setChartOptions(styles) { // set chart styles
         title: "Soil Types",
         plot_bgcolor: styles.surfaceCard,
         paper_bgcolor: styles.surfaceCard,
+        showlegend: false,
         margin: { // should change to computed margin
             t: 50,
             b: 50,
