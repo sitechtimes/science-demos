@@ -50,9 +50,9 @@ export const DataStore = defineStore("data", () => {
     name: "Current Year",
     sliderValue: 0,
     sliderMin: 0,
-    sliderMax: 1,
-    sliderStep: 0.01,
-  }); // 0-1 slider
+    sliderMax: 100,
+    sliderStep: 1,
+  }); // 0-100 slider
 
   const agriculture = ref({
     sliderValue: 0.5,
@@ -112,10 +112,10 @@ export const DataStore = defineStore("data", () => {
   const redLionfish = ref(false);
 
   return {
-    logging,
+    //logging,
     agriculture,
     sewage,
-    fishing,
+    //fishing,
     netFishing,
     blackBandDisease,
     whiteBandDisease,
@@ -123,10 +123,10 @@ export const DataStore = defineStore("data", () => {
     oceanTemp,
     stormSeverity,
     waterPH,
-    waterSalinity,
+    //waterSalinity,
     // crownOfThornsStarfish,
     // redLionfish,
     selectedYear,
-    organisms,
+    //organisms,
   };
 });
