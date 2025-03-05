@@ -45,6 +45,8 @@ export const populationStore = defineStore("populationStore", () => {
 
     // i got lazy
     lionfishCapacity.push(100);
+
+    return base;
   });
 
   const crownOfThornsStarfish = ref({
@@ -57,9 +59,9 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const crownOfThornsCapacity = computed(() => {
-    crownOfThornsCapacity.push(
-      staghornCoralPopulation[index] + starCoralPopulation[index].toFixed(4)
-    );
+    let base = staghornCoralPopulation[index] + starCoralPopulation[index];
+    crownOfThornsCapacity.push(base.toFixed(4));
+    return base;
   });
 
   const hawksbillSeaTurtle = ref({
@@ -94,6 +96,7 @@ export const populationStore = defineStore("populationStore", () => {
         starCoralPopulation[index]) /
       10;
     grouperCapacity.push(Math.min(base, 50).toFixed(4));
+    return base;
   });
 
   const queenAngelfish = ref({
@@ -112,6 +115,7 @@ export const populationStore = defineStore("populationStore", () => {
         starCoralPopulation[index]) /
       3;
     queenAngelfish.value.maxCapacity.push(base).toFixed(4);
+    return base;
   });
 
   const redLionfish = ref({
@@ -132,12 +136,9 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const spongeCapacity = computed(() => {
-    sponge.value.maxCapacity.push(
-      Math.max(
-        staghornCoralPopulation[index] + starCoralPopulation[index],
-        1
-      ).toFixed(4)
-    );
+    let base = staghornCoralPopulation[index] + starCoralPopulation[index];
+    sponge.value.maxCapacity.push(Math.max(base, 1).toFixed(4));
+    return base;
   });
 
   const spotlightParrotfish = ref({
@@ -153,6 +154,7 @@ export const populationStore = defineStore("populationStore", () => {
     let base =
       (staghornCoralPopulation[index] + starCoralPopulation[index]) / 2;
     spotlightParrotfish.value.maxCapacity.push(Math.min(base, 450).toFixed(4));
+    return base;
   });
 
   const yellowtailSnapper = ref({
@@ -171,6 +173,7 @@ export const populationStore = defineStore("populationStore", () => {
         starCoralPopulation[index]) /
       2;
     snapperCapacity.push(Math.min(base, 400).toFixed(4));
+    return base;
   });
 
   // math vars
@@ -218,13 +221,14 @@ export const populationStore = defineStore("populationStore", () => {
     );
   });
 
-  const pHImpact = computed(() => {
-    if (
-      dataStore.waterpH.sliderValue === undefined ||
-      dataStore.waterpH.sliderValue === null
-    )
-      return null;
+  const waterTempEffect = computed(() => {
+    return [
+      0.08, 0.13, 0.21, 0.32, 0.46, 0.6, 0.75, 0.88, 0.97, 1, 0.97, 0.88, 0.75,
+      0.6, 0.46, 0.32, 0.21, 0.13, 0.08,
+    ][Math.round(dataStore.oceanTemp.sliderValue - 18)];
+  });
 
+  const pHImpact = computed(() => {
     const thresholds = [7.7, 7.8, 7.9, 8.0, 8.1, Infinity]; // Upper bounds
     const impactValues = [0.05, 0.11, 0.23, 0.42, 0.69, 1]; // Corresponding values
 
@@ -262,6 +266,7 @@ export const populationStore = defineStore("populationStore", () => {
     index,
     totalOrganisms,
     algalImpact,
+    waterTempEffect,
     pHImpact,
   };
 });
