@@ -35,9 +35,78 @@ let CoralReef = function () {
     this.seaUrchin.updatePopulation();
     this.crownOfThorns.updatePopulation();
 
-    // Update capacities if needed
-    updateCapacities();
+    let algaeGrowthRate, spongeGrowthRate, staghornCoralGrowthRate, starCoralGrowthRate;
+    currentYear++;
+    domElements.simulationInfo.setText("Year: " + currentYear.toFixed(0));
+    updatePopulationValues();
+    totalPopulationValues = [staghornCoralPopulation, starCoralPopulation, spongePopulation, algaePopulation, parrotfishPopulation, angelfishPopulation, snapperPopulation, turtlePopulation, lionfishPopulation, crownOfThornsPopulation];
+    
+    // Update algae population
+    algaePositions = [];
+    let lastAlgaeIndex = algaePopulation.length - 1;
+    let algaeGrowth = algaePopulation[lastAlgaeIndex];
+    algaeGrowthRate = algaePositions[0] * algaeGrowth * (1 - algaeGrowth / maxAlgaeCapacity[lastAlgaeIndex]) - (algaePositions[1] * algaeGrowth * (parrotfishPopulation[lastAlgaeIndex] + 3 * seaUrchinPopulation[lastAlgaeIndex])) / 4;
+    algaePopulation.push(1 * algaeGrowthRate.toFixed(4));
+
+    // Update sponge population
+    spongeGrowthRate = spongePopulation[lastAlgaeIndex];
+    spongeGrowthRate = spongeGrowthRate + algaePositions[0] * spongeGrowthRate * (1 - spongeGrowthRate / spongeCapacity[lastAlgaeIndex]) - (algaePositions[1] * spongeGrowthRate * (angelfishPopulation[lastAlgaeIndex] + 2 * turtlePopulation[lastAlgaeIndex])) / 2;
+    spongePopulation.push(1 * spongeGrowthRate.toFixed(4));
+
+    // Update staghorn coral population
+    staghornCoralGrowthRate = staghornCoralPopulation[lastAlgaeIndex];
+    staghornCoralGrowthRate = staghornCoralGrowthRate * (1 - calculateAlgalImpact()) * (1 - calculateSpongeImpact() / 2) + algaePositions[0] * staghornCoralGrowthRate * (1 - calculateSpongeImpact()) * (1 - staghornCoralGrowthRate / staghornCoralCapacity[lastAlgaeIndex]) - (algaePositions[1] * staghornCoralGrowthRate * crownOfThornsPopulation[lastAlgaeIndex] + calculateCrownOfThornsImpact() * staghornCoralGrowthRate);
+    staghornCoralPopulation.push(1 * staghornCoralGrowthRate.toFixed(4));
+
+    // Update star coral population
+    starCoralGrowthRate = starCoralPopulation[lastAlgaeIndex];
+    starCoralGrowthRate = starCoralGrowthRate * (1 - calculateAlgalImpact()) * (1 - calculateSpongeImpact() / 2) + algaePositions[0] * starCoralGrowthRate * (1 - calculateSpongeImpact()) * (1 - starCoralGrowthRate / starCoralCapacity[lastAlgaeIndex]) - (algaePositions[1] * starCoralGrowthRate * crownOfThornsPopulation[lastAlgaeIndex] + (calculateCrownOfThornsImpact() * starCoralGrowthRate) / 5);
+    starCoralPopulation.push(1 * starCoralGrowthRate.toFixed(4));
+
+    // Update sea urchin population
+    let seaUrchinGrowthRate = seaUrchinPopulation[lastAlgaeIndex];
+    seaUrchinGrowthRate = seaUrchinGrowthRate * (1 - textFields[11].obj.getValue() / 100) + algaePositions[2] * seaUrchinGrowthRate * algaePopulation[lastAlgaeIndex] - algaePositions[3] * seaUrchinGrowthRate;
+    seaUrchinPopulation.push(1 * seaUrchinGrowthRate.toFixed(4));
+
+    // Update parrotfish population
+    let parrotfishGrowthRate = parrotfishPopulation[lastAlgaeIndex];
+    parrotfishGrowthRate = parrotfishGrowthRate + algaePositions[2] * parrotfishGrowthRate * algaePopulation[lastAlgaeIndex] - algaePositions[3] * parrotfishGrowthRate - (grouperPopulation[lastAlgaeIndex] + snapperPopulation[lastAlgaeIndex] + 5 * lionfishPopulation[lastAlgaeIndex]) * parrotfishGrowthRate * algaePositions[1];
+    parrotfishPopulation.push(1 * parrotfishGrowthRate.toFixed(4));
+
+    // Update angelfish population
+    let angelfishGrowthRate = angelfishPopulation[lastAlgaeIndex];
+    angelfishGrowthRate = angelfishGrowthRate + algaePositions[2] * angelfishGrowthRate * spongePopulation[lastAlgaeIndex] - algaePositions[3] * angelfishGrowthRate - (grouperPopulation[lastAlgaeIndex] + snapperPopulation[lastAlgaeIndex] + 6 * lionfishPopulation[lastAlgaeIndex]) * angelfishGrowthRate * algaePositions[1];
+    angelfishPopulation.push(1 * angelfishGrowthRate.toFixed(4));
+
+    // Update turtle population
+    let turtleGrowthRate = turtlePopulation[lastAlgaeIndex];
+    turtleGrowthRate = turtleGrowthRate + algaePositions[2] * turtleGrowthRate * spongePopulation[lastAlgaeIndex] - algaePositions[3] * turtleGrowthRate;
+    turtlePopulation.push(1 * turtleGrowthRate.toFixed(4));
+
+    // Update grouper population
+    let grouperGrowthRate = grouperPopulation[lastAlgaeIndex];
+    grouperGrowthRate = grouperGrowthRate + algaePositions[2] * grouperGrowthRate * (parrotfishPopulation[lastAlgaeIndex] + angelfishPopulation[lastAlgaeIndex] + snapperPopulation[lastAlgaeIndex] / 3) - algaePositions[3] * grouperGrowthRate;
+    grouperPopulation.push(1 * grouperGrowthRate.toFixed(4));
+
+    // Update snapper population
+    let snapperGrowthRate = snapperPopulation[lastAlgaeIndex];
+    snapperGrowthRate = snapperGrowthRate + algaePositions[2] * snapperGrowthRate * (parrotfishPopulation[lastAlgaeIndex] + angelfishPopulation[lastAlgaeIndex]) - (algaePositions[3] * snapperGrowthRate * grouperPopulation[lastAlgaeIndex]) / 10 - (algaePositions[3] * lionfishPopulation[lastAlgaeIndex]) / 5;
+    snapperPopulation.push(1 * snapperGrowthRate.toFixed(4));
+
+    // Update lionfish population
+    let lionfishGrowthRate = lionfishPopulation[lastAlgaeIndex];
+    lionfishGrowthRate = lionfishGrowthRate + algaePositions[2] * lionfishGrowthRate * (parrotfishPopulation[lastAlgaeIndex] + angelfishPopulation[lastAlgaeIndex] + grouperPopulation[lastAlgaeIndex] + snapperPopulation[lastAlgaeIndex]) - algaePositions[3] * lionfishGrowthRate;
+    lionfishPopulation.push(1 * lionfishGrowthRate.toFixed(4));
+
+    // Update crown of thorns population
+    let crownOfThornsGrowthRate = crownOfThornsPopulation[lastAlgaeIndex];
+    crownOfThornsGrowthRate = crownOfThornsGrowthRate + algaePositions[2] * crownOfThornsGrowthRate * (staghornCoralPopulation[lastAlgaeIndex] + starCoralPopulation[lastAlgaeIndex]) - algaePositions[3] * crownOfThornsGrowthRate;
+    crownOfThornsPopulation.push(1 * crownOfThornsGrowthRate.toFixed(4));
+
+    // Update capacities and limits
+    updateCapacities(lastAlgaeIndex);
     drawGraphs();
+    updateSimulationInfo();
   }
 
   function restartGame() {
