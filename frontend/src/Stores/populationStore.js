@@ -252,7 +252,7 @@ export const populationStore = defineStore("populationStore", () => {
     spotlightParrotfish,
     staghornCoral,
     yellowtailSnapper,
-    //computed vars
+    //computed species vars
     coralCapacity,
     crownOfThornsCapacity,
     nassauGrouperCapacity,
