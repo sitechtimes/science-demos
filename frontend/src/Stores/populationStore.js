@@ -180,7 +180,7 @@ export const populationStore = defineStore("populationStore", () => {
 
   const currentYear = ref(0); // wherever you trigger the simulation, please add a for loop to increment currentYear by 1
   const index = computed(() => {
-    return currentYear.value - 1 || 0;
+    return currentYear.value - 2 || 0;
   });
 
   const totalOrganisms = computed(() => {
@@ -198,6 +198,23 @@ export const populationStore = defineStore("populationStore", () => {
       staghornCoral.population[index] +
       yellowtailSnapper.population[index]
     );
+  });
+
+  const finalPopulations = computed(() => {
+    return {
+      algae: algae.value.population[index],
+      boulderStarCoral: boulderStarCoral.value.population[index],
+      crownOfThornsStarfish: crownOfThornsStarfish.value.population[index],
+      hawksbillSeaTurtle: hawksbillSeaTurtle.value.population[index],
+      longSpinedUrchin: longSpinedUrchin.value.population[index],
+      nassauGrouper: nassauGrouper.value.population[index],
+      queenAngelfish: queenAngelfish.value.population[index],
+      redLionfish: redLionfish.value.population[index],
+      sponge: sponge.value.population[index],
+      spotlightParrotfish: spotlightParrotfish.value.population[index],
+      staghornCoral: staghornCoral.value.population[index],
+      yellowtailSnapper: yellowtailSnapper.value.population[index],
+    };
   });
 
   const populationDensities = computed(() => {
@@ -262,11 +279,13 @@ export const populationStore = defineStore("populationStore", () => {
     yellowtailSnapperCapacity,
     // math vars
     currentYear,
-    populationDensities,
     index,
-    totalOrganisms,
     algalImpact,
     waterTempEffect,
     pHImpact,
+    // here you go angelina :D
+    totalOrganisms,
+    finalPopulations,
+    populationDensities,
   };
 });
