@@ -54,19 +54,16 @@ export const populationStore = defineStore("populationStore", () => {
   // Species objects and corresponding capacities
   const algae = ref({
     description: "blah blah blah blah blah",
-    history: {},
     maxCapacity: [],
     population: [27],
   });
   const boulderStarCoral = ref({
     description: "blah blah blah blah blah",
-    history: {},
     maxCapacity: [],
     population: [28],
   });
   const staghornCoral = ref({
     description: "blah blah blah blah blah",
-    history: {},
     maxCapacity: [],
     population: [21],
   });
@@ -89,7 +86,6 @@ export const populationStore = defineStore("populationStore", () => {
 
   const crownOfThornsStarfish = ref({
     description: "blah blah blah blah blah",
-    history: {},
     maxCapacity: [],
     population: [0],
   });
@@ -102,19 +98,16 @@ export const populationStore = defineStore("populationStore", () => {
 
   const hawksbillSeaTurtle = ref({
     description: "blah blah blah blah blah",
-    history: {},
     maxCapacity: [],
     population: [25],
   });
   const longSpinedUrchin = ref({
     description: "blah blah blah blah blah",
-    history: {},
     maxCapacity: [],
     population: [1160],
   });
   const nassauGrouper = ref({
     description: "blah blah blah blah blah",
-    history: {},
     maxCapacity: [],
     population: [48],
   });
@@ -131,7 +124,6 @@ export const populationStore = defineStore("populationStore", () => {
 
   const queenAngelfish = ref({
     description: "blah blah blah blah blah",
-    history: {},
     maxCapacity: [],
     population: [480],
   });
@@ -148,13 +140,11 @@ export const populationStore = defineStore("populationStore", () => {
 
   const redLionfish = ref({
     description: "blah blah blah blah blah",
-    history: {},
     maxCapacity: [],
     population: [0],
   });
   const sponge = ref({
     description: "blah blah blah blah blah",
-    history: {},
     maxCapacity: [],
     population: [11],
   });
@@ -167,7 +157,6 @@ export const populationStore = defineStore("populationStore", () => {
 
   const spotlightParrotfish = ref({
     description: "blah blah blah blah blah",
-    history: {},
     maxCapacity: [],
     population: [825],
   });
@@ -181,7 +170,6 @@ export const populationStore = defineStore("populationStore", () => {
 
   const yellowtailSnapper = ref({
     description: "blah blah blah blah blah",
-    history: {},
     maxCapacity: [],
     population: [240],
   });
