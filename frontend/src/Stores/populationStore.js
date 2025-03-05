@@ -9,7 +9,7 @@ export const populationStore = defineStore("populationStore", () => {
 
   // Species objects and corresponding capacities
   const algae = ref({
-    population: 27,
+    initialPopulation: 27,
     img: path + "algae.png",
     description: "blah blah blah blah blah",
     history: {},
@@ -17,7 +17,7 @@ export const populationStore = defineStore("populationStore", () => {
     population: [] || 1,
   });
   const boulderStarCoral = ref({
-    population: 28,
+    initialPopulation: 28,
     img: path + "boulderStarCoral.png",
     description: "blah blah blah blah blah",
     history: {},
@@ -25,7 +25,7 @@ export const populationStore = defineStore("populationStore", () => {
     population: [] || 1,
   });
   const staghornCoral = ref({
-    population: 21,
+    initialPopulation: 21,
     img: path + "staghornCoral.png",
     description: "blah blah blah blah blah",
     history: {},
@@ -50,7 +50,7 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const crownOfThornsStarfish = ref({
-    population: 0,
+    initialPopulation: 0,
     img: path + "crownOfThornsStarfish.png",
     description: "blah blah blah blah blah",
     history: {},
@@ -65,7 +65,7 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const hawksbillSeaTurtle = ref({
-    population: 25,
+    initialPopulation: 25,
     img: path + "hawksbillSeaTurtle.png",
     description: "blah blah blah blah blah",
     history: {},
@@ -73,7 +73,7 @@ export const populationStore = defineStore("populationStore", () => {
     population: [] || 1,
   });
   const longSpinedUrchin = ref({
-    population: 1160,
+    initialPopulation: 1160,
     img: path + "longSpinedUrchin.png",
     description: "blah blah blah blah blah",
     history: {},
@@ -81,7 +81,7 @@ export const populationStore = defineStore("populationStore", () => {
     population: [] || 1,
   });
   const nassauGrouper = ref({
-    population: 48,
+    initialPopulation: 48,
     img: path + "nassauGrouper.png",
     description: "blah blah blah blah blah",
     history: {},
@@ -100,7 +100,7 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const queenAngelfish = ref({
-    population: 480,
+    initialPopulation: 480,
     img: path + "queenAngelfish.png",
     description: "blah blah blah blah blah",
     history: {},
@@ -119,7 +119,7 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const redLionfish = ref({
-    population: 0,
+    initialPopulation: 0,
     img: path + "redLionfish.png",
     description: "blah blah blah blah blah",
     history: {},
@@ -127,7 +127,7 @@ export const populationStore = defineStore("populationStore", () => {
     population: [] || 1,
   });
   const sponge = ref({
-    population: 11,
+    initialPopulation: 11,
     img: path + "sponge.png",
     description: "blah blah blah blah blah",
     history: {},
@@ -142,7 +142,7 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const spotlightParrotfish = ref({
-    population: 825,
+    initialPopulation: 825,
     img: path + "spotlightParrotfish.png",
     description: "blah blah blah blah blah",
     history: {},
@@ -158,7 +158,7 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const yellowtailSnapper = ref({
-    population: 240,
+    initialPopulation: 240,
     img: path + "yellowtailSnapper.png",
     description: "blah blah blah blah blah",
     history: {},
