@@ -233,7 +233,7 @@ export const populationStore = defineStore("populationStore", () => {
     const impactValues = [0.05, 0.11, 0.23, 0.42, 0.69, 1]; // Corresponding values
 
     const index = thresholds.findIndex(
-      (threshold) => dataStore.waterpH.sliderValue < threshold
+      (threshold) => dataStore.waterPH.sliderValue < threshold
     );
     return impactValues[index];
   });
