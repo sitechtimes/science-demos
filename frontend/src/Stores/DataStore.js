@@ -23,68 +23,6 @@ export const DataStore = defineStore("data", () => {
   //Keystone Species
 
   const path = "/src/games/CoralSimulation/images/";
-  const organisms = ref({
-    algae: {
-      population: 27,
-      img: path + "algae.png",
-      description: "blah blah blah blah blah",
-    },
-    boulderStarCoral: {
-      population: 28,
-      img: path + "boulderStarCoral.png",
-      description: "blah blah blah blah blah",
-    },
-    crownOfThornsStarfish: {
-      population: 0,
-      img: path + "crownOfThornsStarfish.png",
-      description: "blah blah blah blah blah",
-    },
-    hawksbillSeaTurtle: {
-      population: 25,
-      img: path + "hawksbillSeaTurtle.png",
-      description: "blah blah blah blah blah",
-    },
-    longSpinedUrchin: {
-      population: 1160,
-      img: path + "longSpinedUrchin.png",
-      description: "blah blah blah blah blah",
-    },
-    nassauGrouper: {
-      population: 48,
-      img: path + "nassauGrouper.png",
-      description: "blah blah blah blah blah",
-    },
-    queenAngelfish: {
-      population: 480,
-      img: path + "queenAngelfish.png",
-      description: "blah blah blah blah blah",
-    },
-    redLionfish: {
-      population: 0,
-      img: path + "redLionfish.png",
-      description: "blah blah blah blah blah",
-    },
-    sponge: {
-      population: 11,
-      img: path + "sponge.png",
-      description: "blah blah blah blah blah",
-    },
-    spotlightParrotfish: {
-      population: 825,
-      img: path + "spotlightParrotfish.png",
-      description: "blah blah blah blah blah",
-    },
-    staghornCoral: {
-      population: 21,
-      img: path + "staghornCoral.png",
-      description: "blah blah blah blah blah",
-    },
-    yellowtailSnapper: {
-      population: 240,
-      img: path + "yellowtailSnapper.png",
-      description: "blah blah blah blah blah",
-    },
-  });
 
   //Ocean Conditions
   const oceanTemp = ref({
@@ -108,16 +46,14 @@ export const DataStore = defineStore("data", () => {
     sliderStep: 0.1,
   }); // (acidity) 7.6-8.6 slider
 
-  //invasive species
-
   const selectedYear = ref({
     name: "Current Year",
     sliderValue: 0,
-
     sliderMin: 0,
     sliderMax: 1,
     sliderStep: 0.01,
   }); // 0-1 slider
+
   const agriculture = ref({
     sliderValue: 0.5,
     sliderMin: 0,
