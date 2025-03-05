@@ -7,23 +7,64 @@ import { DataStore } from "./DataStore";
 export const populationStore = defineStore("populationStore", () => {
   const dataStore = DataStore();
 
+  // function
+
+  const resetSimulation = () => {
+    currentYear.value = 0;
+    algae.value.population.splice(1, algae.value.population.length);
+    boulderStarCoral.value.population.splice(
+      1,
+      boulderStarCoral.value.population.length
+    );
+    crownOfThornsStarfish.value.population.splice(
+      1,
+      crownOfThornsStarfish.value.population.length
+    );
+    hawksbillSeaTurtle.value.population.splice(
+      1,
+      hawksbillSeaTurtle.value.population.length
+    );
+    longSpinedUrchin.value.population.splice(
+      1,
+      longSpinedUrchin.value.population.length
+    );
+    nassauGrouper.value.population.splice(
+      1,
+      nassauGrouper.value.population.length
+    );
+    queenAngelfish.value.population.splice(
+      1,
+      queenAngelfish.value.population.length
+    );
+    redLionfish.value.population.splice(1, redLionfish.value.population.length);
+    sponge.value.population.splice(1, sponge.value.population.length);
+    spotlightParrotfish.value.population.splice(
+      1,
+      spotlightParrotfish.value.population.length
+    );
+    staghornCoral.value.population.splice(
+      1,
+      staghornCoral.value.population.length
+    );
+    yellowtailSnapper.value.population.splice(
+      1,
+      yellowtailSnapper.value.population.length
+    );
+  };
   // Species objects and corresponding capacities
   const algae = ref({
-    img: path + "algae.png",
     description: "blah blah blah blah blah",
     history: {},
     maxCapacity: [],
     population: [27],
   });
   const boulderStarCoral = ref({
-    img: path + "boulderStarCoral.png",
     description: "blah blah blah blah blah",
     history: {},
     maxCapacity: [],
     population: [28],
   });
   const staghornCoral = ref({
-    img: path + "staghornCoral.png",
     description: "blah blah blah blah blah",
     history: {},
     maxCapacity: [],
@@ -47,7 +88,6 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const crownOfThornsStarfish = ref({
-    img: path + "crownOfThornsStarfish.png",
     description: "blah blah blah blah blah",
     history: {},
     maxCapacity: [],
@@ -61,21 +101,18 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const hawksbillSeaTurtle = ref({
-    img: path + "hawksbillSeaTurtle.png",
     description: "blah blah blah blah blah",
     history: {},
     maxCapacity: [],
     population: [25],
   });
   const longSpinedUrchin = ref({
-    img: path + "longSpinedUrchin.png",
     description: "blah blah blah blah blah",
     history: {},
     maxCapacity: [],
     population: [1160],
   });
   const nassauGrouper = ref({
-    img: path + "nassauGrouper.png",
     description: "blah blah blah blah blah",
     history: {},
     maxCapacity: [],
@@ -93,7 +130,6 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const queenAngelfish = ref({
-    img: path + "queenAngelfish.png",
     description: "blah blah blah blah blah",
     history: {},
     maxCapacity: [],
@@ -111,14 +147,12 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const redLionfish = ref({
-    img: path + "redLionfish.png",
     description: "blah blah blah blah blah",
     history: {},
     maxCapacity: [],
     population: [0],
   });
   const sponge = ref({
-    img: path + "sponge.png",
     description: "blah blah blah blah blah",
     history: {},
     maxCapacity: [],
@@ -132,7 +166,6 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const spotlightParrotfish = ref({
-    img: path + "spotlightParrotfish.png",
     description: "blah blah blah blah blah",
     history: {},
     maxCapacity: [],
@@ -147,7 +180,6 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const yellowtailSnapper = ref({
-    img: path + "yellowtailSnapper.png",
     description: "blah blah blah blah blah",
     history: {},
     maxCapacity: [],
