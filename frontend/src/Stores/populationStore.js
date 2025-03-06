@@ -238,11 +238,53 @@ export const populationStore = defineStore("populationStore", () => {
 
   const algalImpact = computed(() => {
     return (
-      (0.6 * textFields[3].obj.getValue() +
-        0.3 * textFields[5].obj.getValue() +
-        0.05 * textFields[4].obj.getValue() +
-        0.05 * textFields[0].obj.getValue()) /
+      (0.6 * textFields[3].obj.getValue() + //
+        0.3 * textFields[5].obj.getValue() + //
+        0.05 * textFields[4].obj.getValue() + //
+        0.05 * textFields[0].obj.getValue()) / //
       100
+    );
+  });
+
+  const coralHealthImpact = computed(() => {
+    // calculations for coral health
+    return (
+      (0.2 * textFields[3].obj.getValue() +
+        0.4 * textFields[5].obj.getValue() +
+        0.3 * textFields[4].obj.getValue()) /
+        100 +
+      0.1
+    );
+  });
+
+  const coralStress = computed(() => {
+    // calculate coral stress
+    return (
+      (algalImpact.value +
+        coralHealthImpact.value +
+        algaePositions / 100 +
+        nutrientLoad.value / 100 +
+        3 * (1 - waterTempEffect.value) +
+        3 * (1 - pHImpact.value)) /
+      10
+    );
+  });
+
+  const sedimentLoad = computed(() => {
+    return 500 * algalImpact.value;
+  });
+
+  const nutrientLoad = computed(() => {
+    return 40 * coralHealthImpact.value;
+  });
+
+  const waterClarity = computed(() => {
+    return (
+      100 *
+      (1 -
+        (0.5 * algalImpact.value +
+          0.4 * coralHealthImpact.value +
+          (0.1 * textFields[0].obj.getValue()) / 100))
     );
   });
 
@@ -289,6 +331,11 @@ export const populationStore = defineStore("populationStore", () => {
     currentYear,
     index,
     algalImpact,
+    coralHealthImpact,
+    coralStress,
+    sedimentLoad,
+    nutrientLoad,
+    waterClarity,
     waterTempEffect,
     pHImpact,
     // here you go angelina :D
