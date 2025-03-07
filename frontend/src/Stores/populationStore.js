@@ -238,10 +238,10 @@ export const populationStore = defineStore("populationStore", () => {
 
   const algalImpact = computed(() => {
     return (
-      (0.6 * textFields[3].obj.getValue() + //
-        0.3 * textFields[5].obj.getValue() + //
-        0.05 * textFields[4].obj.getValue() + //
-        0.05 * textFields[0].obj.getValue()) / //
+      //(0.6 * textFields[3].obj.getValue() + // logging
+      (0.3 * dataStore.agriculture.sliderValue +
+        0.05 * dataStore.sewage.sliderValue +
+        0.05 * dataStore.stormSeverity.sliderValue) / //
       100
     );
   });
@@ -249,9 +249,9 @@ export const populationStore = defineStore("populationStore", () => {
   const coralHealthImpact = computed(() => {
     // calculations for coral health
     return (
-      (0.2 * textFields[3].obj.getValue() +
-        0.4 * textFields[5].obj.getValue() +
-        0.3 * textFields[4].obj.getValue()) /
+      //0.2 * textFields[3].obj.getValue() + logging
+      (0.4 * dataStore.agriculture.sliderValue +
+        0.3 * dataStore.sewage.sliderValue) /
         100 +
       0.1
     );
@@ -262,7 +262,7 @@ export const populationStore = defineStore("populationStore", () => {
     return (
       (algalImpact.value +
         coralHealthImpact.value +
-        algaePositions / 100 +
+        algaePositions / 100 + // no clue what this is
         nutrientLoad.value / 100 +
         3 * (1 - waterTempEffect.value) +
         3 * (1 - pHImpact.value)) /
@@ -284,7 +284,7 @@ export const populationStore = defineStore("populationStore", () => {
       (1 -
         (0.5 * algalImpact.value +
           0.4 * coralHealthImpact.value +
-          (0.1 * textFields[0].obj.getValue()) / 100))
+          (0.1 * dataStore.stormSeverity.sliderValue) / 100))
     );
   });
 
