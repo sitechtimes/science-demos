@@ -8,9 +8,9 @@
 
         </div>
         <div class="slider-container">
-            <InputNumber />
-            <InputNumber />
-            <InputNumber />
+            <InputNumber v-model="point1" />
+            <InputNumber v-model="point2" />
+            <InputNumber v-model="point3" />
             <div class="card">
                 <SliderConditions />
             </div>
@@ -45,7 +45,7 @@ watch([useLayout().isDarkTheme,/*  should watch the point change too */], () => 
     // console.log('watched')
 });
 
-function makeAxis(title, styles) {
+function makeAxis(title, styles) { // styling for ternary plot
     return {
         title: {
             text: title
@@ -62,7 +62,7 @@ function makeAxis(title, styles) {
     };
 }
 
-function getStyles() { // obtain current theme colors for chart options
+function getStyles() { // obtain current theme colors for chart options to change with theme
     const documentStyle = getComputedStyle(document.documentElement);
     return {
         textColor: documentStyle.getPropertyValue('--p-text-color'),
@@ -100,6 +100,10 @@ function setChartOptions(styles) { // set chart styles
     return layout;
 }
 
+const point1 = ref(0);
+const point2 = ref(0);
+const point3 = ref(0);
+
 function setChartData(rawData, point) { // var point is to store the user current selected value for soil
     const data = Object.keys(rawData).map(function (k, i) {
         let pts = rawData[k];
@@ -118,6 +122,7 @@ function setChartData(rawData, point) { // var point is to store the user curren
             hoveron: 'fills+points'
         };
     });
+    const pointData = { a: 75, b: 25, c: 0, label: 'your soil type' };
     return data;
 }
 </script>
