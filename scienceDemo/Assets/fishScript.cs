@@ -19,7 +19,9 @@ public class fishScript : MonoBehaviour
     // [SerializeField] private UnityEvent<string[]> switchText;
 
     void Awake(){
-fishList = fishes;
+fishList.Clear();
+
+    fishList.AddRange(fishes);
     }
     void Start()
     {
