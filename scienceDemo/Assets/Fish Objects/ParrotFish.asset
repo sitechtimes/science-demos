@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d97d64193a392b146b3b5a04222fb443, type: 3}
-  m_Name: Feebas
+  m_Name: ParrotFish
   m_EditorClassIdentifier: 
-  name: Feebas
-  image: {fileID: 21300000, guid: 6d205206d1ad2194387bb8b1ae745c46, type: 3}
-  speed: 2
-  waveSpeed: 5
-  waveDistance: 5
-  scale: {x: 2, y: 2, z: 1}
-  population: 40
-  desc: "It is the shabbiest Pok\xE9mon of all. It forms in schools and lives at
-    the bottom of rivers."
+  name: ParrotFish
+  image: {fileID: 21300000, guid: dda78ecf4f7bfc241bdb7e1bff90cb58, type: 3}
+  speed: 3
+  waveSpeed: 1
+  waveDistance: 1
+  scale: {x: 0.1, y: 0.1, z: 0.1}
+  population: 100
+  desc: klsdflkgfddkgf

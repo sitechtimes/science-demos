@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d97d64193a392b146b3b5a04222fb443, type: 3}
-  m_Name: Yellowtail
+  m_Name: SeaTurtle
   m_EditorClassIdentifier: 
-  name: Yellowtail
-  image: {fileID: 21300000, guid: e81fc51369f7da14aad2ede80fea5b6a, type: 3}
+  name: SeaTurtle
+  image: {fileID: 21300000, guid: 0cca41c60efc20347a7f1899fb8e0a81, type: 3}
   speed: 3
-  waveSpeed: 2
-  waveDistance: 10
-  scale: {x: 1, y: 1, z: 1}
-  population: 75
-  desc: 'For no reason, it jumps and splashes about, making it easy for predators
-    like PIDGEOTTO to catch it mid-jump. '
+  waveSpeed: 1
+  waveDistance: 1
+  scale: {x: 0.1, y: 0.1, z: 0.1}
+  population: 100
+  desc: DKFSLGDKFGDF

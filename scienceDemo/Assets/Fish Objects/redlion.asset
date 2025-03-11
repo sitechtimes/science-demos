@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: redlion
   image: {fileID: 21300000, guid: 805426e8923f49e428539d19e4e533e0, type: 3}
-  speed: 5
-  waveSpeed: 5
-  waveDistance: 5
+  speed: 3
+  waveSpeed: 1
+  waveDistance: 1
   scale: {x: 0.1, y: 0.1, z: 0.1}
   population: 100
   desc: kelfgsdlgdf

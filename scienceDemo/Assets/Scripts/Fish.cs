@@ -5,13 +5,20 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Fish", menuName = "Fish")]
 public class Fish : ScriptableObject
 {
-    public new string name;
+    [Header("Basic Information")]
+    public new string name; 
     public Sprite image;
+
+    [Header("Movement Properties")]
     public float speed;
     public float waveSpeed;
     public float waveDistance;
-    public Vector3 scale;
-    public int population;
-    public string desc;
 
+    [Header("Appearance")]
+    public Vector3 scale;
+
+    [Header("Population and Description")]
+    public int population;
+    [TextArea]
+    public string desc;
 }
