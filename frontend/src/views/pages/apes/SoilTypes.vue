@@ -33,11 +33,15 @@ const chartOptions = ref();
 const chartData = ref();
 const componentKey = ref(0); // idk why the layout isn't refreshing without this
 
+const point1 = ref(22);
+const point2 = ref(20);
+const point3 = ref(52);
+
 onBeforeMount(() => { // load data and set chart options
     chartOptions.value = setChartOptions(getStyles());
     chartData.value = setChartData(soilData);
 });
-watch([useLayout().isDarkTheme,/*  should watch the point change too */], () => {
+watch([useLayout().isDarkTheme, point1, point2, point3], () => {
     // rerender with different axes if chart type changed
     chartData.value = setChartData(soilData);
     chartOptions.value = setChartOptions(getStyles());
@@ -100,12 +104,8 @@ function setChartOptions(styles) { // set chart styles
     return layout;
 }
 
-const point1 = ref(0);
-const point2 = ref(0);
-const point3 = ref(0);
-
-function setChartData(rawData, point) { // var point is to store the user current selected value for soil
-    const data = Object.keys(rawData).map(function (k, i) {
+function setChartData(rawData) { // var point is to store the user current selected value for soil
+    const soilPlot = Object.keys(rawData).map(function (k, i) {
         let pts = rawData[k];
         pts = pts.concat(pts[0]);
 
@@ -122,8 +122,22 @@ function setChartData(rawData, point) { // var point is to store the user curren
             hoveron: 'fills+points'
         };
     });
-    const pointData = { a: 75, b: 25, c: 0, label: 'your soil type' };
-    return data;
+    soilPlot.push({
+        "type": "scatterternary",
+        "mode": "markers",
+        "text": ["your soil type"],
+        "a": [point1.value],
+        "b": [point2.value],
+        "c": [point3.value],
+        marker: {
+            symbol: 100,
+            color: '#DB7365',
+            size: 14,
+            line: { width: 2 }
+        },
+        "hoveron": "fills+points"
+    })
+    return soilPlot;
 }
 </script>
 
