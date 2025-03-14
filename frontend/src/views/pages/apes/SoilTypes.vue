@@ -8,11 +8,12 @@
 
         </div>
         <div class="slider-container">
-            <InputNumber v-model="point1" />
-            <InputNumber v-model="point2" />
-            <InputNumber v-model="point3" />
+
             <div class="card">
-                <SliderConditions />
+                <h2>create your soil type</h2>
+                <Slider v-model="point1" />
+                <Slider v-model="point2" />
+                <Slider v-model="point3" />
             </div>
         </div>
     </div>
@@ -21,10 +22,9 @@
 <script setup>
 import { onBeforeMount, ref, watch } from "vue";
 import { useLayout } from '@/layout/composables/layout';
-import SliderConditions from "@/components/CoralSimulation/SliderConditions.vue";
 import PlotlyChart from '@/components/PlotlyChart.vue';
 import soilData from '@/components/SoilType/soilData';
-import InputNumber from "primevue/inputnumber";
+import Slider from 'primevue/slider';
 // import SelectButton from 'primevue/selectbutton'; // keeping this for future use as switching between chart and soil type preview?
 
 const colors = ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9', '#bc80bd', '#ccebc5', '#ffed6f'];
@@ -32,6 +32,26 @@ const colors = ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462'
 const chartOptions = ref();
 const chartData = ref();
 const componentKey = ref(0); // idk why the layout isn't refreshing without this
+
+const soilPoints = ref([{
+    "name": "clay",
+    "sliderValue": 50,
+    "sliderMin": 0,
+    "sliderMax": 100,
+    "sliderStep": 1
+}, {
+    "name": "sand",
+    "sliderValue": 50,
+    "sliderMin": 0,
+    "sliderMax": 100,
+    "sliderStep": 1
+}, {
+    "name": "silt",
+    "sliderValue": 50,
+    "sliderMin": 0,
+    "sliderMax": 100,
+    "sliderStep": 1
+}]);
 
 const point1 = ref(22);
 const point2 = ref(20);
