@@ -9,11 +9,21 @@
         </div>
         <div class="slider-container">
 
-            <div class="card">
+            <div class="card flex flex-col space-y-4">
                 <h2>create your soil type</h2>
-                <Slider v-model="point1" />
-                <Slider v-model="point2" />
-                <Slider v-model="point3" />
+                <div>
+                    <span id="Clay">Clay</span>
+                    <Slider v-model="point1" aria-label="Clay" />
+                </div>
+                <div>
+                    <span id="Sand">Sand</span>
+                    <Slider v-model="point2" aria-label="Sand" />
+                </div>
+                <div>
+                    <span id="Silt">Silt</span>
+                    <Slider v-model="point3" aria-label="Silt" />
+                </div>
+
             </div>
         </div>
     </div>
@@ -25,6 +35,7 @@ import { useLayout } from '@/layout/composables/layout';
 import PlotlyChart from '@/components/PlotlyChart.vue';
 import soilData from '@/components/SoilType/soilData';
 import Slider from 'primevue/slider';
+import { symbol } from "d3";
 // import SelectButton from 'primevue/selectbutton'; // keeping this for future use as switching between chart and soil type preview?
 
 const colors = ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9', '#bc80bd', '#ccebc5', '#ffed6f'];
@@ -33,29 +44,9 @@ const chartOptions = ref();
 const chartData = ref();
 const componentKey = ref(0); // idk why the layout isn't refreshing without this
 
-const soilPoints = ref([{
-    "name": "clay",
-    "sliderValue": 50,
-    "sliderMin": 0,
-    "sliderMax": 100,
-    "sliderStep": 1
-}, {
-    "name": "sand",
-    "sliderValue": 50,
-    "sliderMin": 0,
-    "sliderMax": 100,
-    "sliderStep": 1
-}, {
-    "name": "silt",
-    "sliderValue": 50,
-    "sliderMin": 0,
-    "sliderMax": 100,
-    "sliderStep": 1
-}]);
-
-const point1 = ref(22);
-const point2 = ref(20);
-const point3 = ref(52);
+const point1 = ref(50);
+const point2 = ref(50);
+const point3 = ref(50);
 
 onBeforeMount(() => { // load data and set chart options
     chartOptions.value = setChartOptions(getStyles());
@@ -151,9 +142,10 @@ function setChartData(rawData) { // var point is to store the user current selec
         "c": [point3.value],
         marker: {
             symbol: 100,
-            color: '#DB7365',
-            size: 14,
-            line: { width: 2 }
+            color: '#fdff',
+            size: 20,
+            line: { width: 5 },
+            symbol: "hexagon-dot"
         },
         "hoveron": "fills+points"
     })
