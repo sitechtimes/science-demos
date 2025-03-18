@@ -48,10 +48,15 @@ public class FishScript : MonoBehaviour
     private void MoveFish()
     {
         sin += Time.deltaTime;
-        float newY = startPos + (Mathf.Sin(sin * fish.waveSpeed) / fish.waveDistance);
-        transform.position += new Vector3(-Time.deltaTime * fish.speed, newY - transform.position.y, 0);
-    }
 
+        float newY = startPos + (Mathf.Sin(sin * fish.waveSpeed) / fish.waveDistance);
+
+        Vector3 newPosition = transform.position;
+        newPosition.x -= fish.speed * Time.deltaTime; 
+        newPosition.y = newY; 
+
+        transform.position = newPosition;
+    }
     public Fish PickRandomFish()
     {
         totalPopulation = 0;
