@@ -8,26 +8,29 @@
 
         </div>
         <div class="slider-container">
-            <div class="card flex flex-col space-y-4">
-                <h2>create your soil type</h2>
-                <div>
-                    <span id="Clay">Clay</span>
-                    <Slider v-model="point1" aria-label="Clay" />
-                </div>
-                <div>
-                    <span id="Sand">Sand</span>
-                    <Slider v-model="point2" aria-label="Sand" />
-                </div>
-                <div>
-                    <span id="Silt">Silt</span>
-                    <Slider v-model="point3" aria-label="Silt" />
-                </div>
-
-            </div>
-            <div class="card">
-                <p>your soil type:</p>
-                <p>{{ normalizeTernary([point1, point2, point3]) }}</p>
-            </div>
+            <Card>
+                <template #title>create your soil type</template>
+                <template #content>
+                    <div>
+                        <span id="Clay">Clay</span>
+                        <Slider v-model="point1" aria-label="Clay" />
+                    </div>
+                    <div>
+                        <span id="Sand">Sand</span>
+                        <Slider v-model="point2" aria-label="Sand" />
+                    </div>
+                    <div>
+                        <span id="Silt">Silt</span>
+                        <Slider v-model="point3" aria-label="Silt" />
+                    </div>
+                </template>
+            </Card>
+            <Card>
+                <template #title>your soil:</template>
+                <template #content>
+                    <p v-for="item in findSoilType()">{{ item }}</p>
+                </template>
+            </Card>
         </div>
     </div>
 </template>
@@ -38,6 +41,7 @@ import { useLayout } from '@/layout/composables/layout';
 import PlotlyChart from '@/components/PlotlyChart.vue';
 import soilData from '@/components/SoilType/soilData';
 import Slider from 'primevue/slider';
+import Card from "primevue/card";
 // import SelectButton from 'primevue/selectbutton'; // keeping this for future use as switching between chart and soil type preview?
 
 const colors = ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9', '#bc80bd', '#ccebc5', '#ffed6f'];
@@ -46,13 +50,13 @@ const chartOptions = ref();
 const chartData = ref();
 const componentKey = ref(0); // idk why the layout isn't refreshing without this
 
-const point1 = ref(50);
-const point2 = ref(50);
-const point3 = ref(50);
+const point1 = ref(50); // clay
+const point2 = ref(50); // sand
+const point3 = ref(50); // silt
 
-function normalizeTernary(dataPoints) {
+function normalizeTernary(a, b, c) {
     // Calculate the sum of the data points
-    const total = dataPoints.reduce((a, b) => a + b, 0);
+    const total = a + b + c;
 
     // Check if the total is zero to avoid division by zero
     if (total === 0) {
@@ -60,9 +64,39 @@ function normalizeTernary(dataPoints) {
     }
 
     // Normalize each data point
-    const normalizedPoints = dataPoints.map(point => (point / total * 100).toFixed(2));
+    const normalizedPoints = [a, b, c].map(point => (point / total * 100).toFixed(2));
 
     return normalizedPoints;
+}
+
+function isPointInPolygon(point, vertices) { // checks that the point falls into a given part of plot
+    let x = point[0]; // Using clay as x-coordinate
+    let y = point[1]; // Using sand as y-coordinate
+    let inside = false;
+
+    for (let i = 0, j = vertices.length - 1; i < vertices.length; j = i++) {
+        const v1 = vertices[i];
+        const v2 = vertices[j];
+
+        const intersect = ((v1.sand > y) !== (v2.sand > y)) &&
+            (x < (v2.clay - v1.clay) * (y - v1.sand) / (v2.sand - v1.sand) + v1.clay);
+        if (intersect) inside = !inside;
+    }
+
+    return inside;
+}
+
+function findSoilType() { // loops through all the points and checks
+    const userPoints = normalizeTernary(point1.value, point2.value, point3.value);
+    for (const [soilType, vertices] of Object.entries(soilData)) {
+        if (isPointInPolygon(userPoints, vertices)) {
+            return [`clay composition: ${userPoints[0]}%`,
+            `sand composition: ${userPoints[1]}%`,
+            ` silt composition: ${userPoints[2]}%`,
+            `soil type: ${soilType}`];
+        }
+    }
+    return null; // Point is not in any soil type
 }
 
 onBeforeMount(() => { // load data and set chart options
