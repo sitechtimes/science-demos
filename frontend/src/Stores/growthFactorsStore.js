@@ -91,7 +91,56 @@ export const growthFactorsStore = defineStore("growth", () => {
     bycatchRisk: 0,
   });
 
+  const grouperStats = computed(() => {
+    const grouperFishingImpact = (0 + 1.6 * 0) / 800; //first 0 stands for fishing impact, second 0 stands for grouperfishing slider
+    return {
+      growthRate: 0.002,
+      mortalityRate: 0.0004 + grouperFishingImpact,
+      apexPredatorBonus: 0.12,
+      nurseryHabitat: 0,
+    };
+  });
+
+  const snapperStats = computed(() => {
+    const snapperFishingImpact = (0 + 0.9 * 0) / 300; //first 0 stands for fishing impact, second 0 stands for snapperfishing slider
+    return {
+      growthRate: 0.00049,
+      mortalityRate: 0.002 + snapperFishingImpact,
+      schoolSizeEffect: 0.0542,
+      reefComplexityFactor: 0,
+    };
+  });
+
+  const lionfishStats = computed(() => {
+    return {
+      growthRate: 0.0015,
+      mortalityRate: 0.1 + 0 / 300, //0 stands for fishing pressure
+      preyNaivete: 0,
+      habitatGeneralization: 0,
+    };
+  });
+
+  const crownOfThornsSstats = computed(() => {
+    return {
+      growthRate: 0.011 * popStore.nutrientLoad, // Nutrient-driven outbreaks
+      mortalityRate: 0.1,
+      coralPreference: 0,
+      larvalDispersal: 0,
+    };
+  });
+
   return {
     algaeStats,
+    spongeStats,
+    staghornCoralStats,
+    starCoralStats,
+    urchinStats,
+    parrotFishStats,
+    angelFishStats,
+    seaTurtleStats,
+    grouperStats,
+    snapperStats,
+    lionfishStats,
+    crownOfThornsSstats,
   };
 });
