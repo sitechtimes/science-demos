@@ -8,7 +8,6 @@
 
         </div>
         <div class="slider-container">
-
             <div class="card flex flex-col space-y-4">
                 <h2>create your soil type</h2>
                 <div>
@@ -25,6 +24,10 @@
                 </div>
 
             </div>
+            <div class="card">
+                <p>your soil type:</p>
+                <p>{{ normalizeTernary([point1, point2, point3]) }}</p>
+            </div>
         </div>
     </div>
 </template>
@@ -35,11 +38,10 @@ import { useLayout } from '@/layout/composables/layout';
 import PlotlyChart from '@/components/PlotlyChart.vue';
 import soilData from '@/components/SoilType/soilData';
 import Slider from 'primevue/slider';
-import { symbol } from "d3";
 // import SelectButton from 'primevue/selectbutton'; // keeping this for future use as switching between chart and soil type preview?
 
 const colors = ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9', '#bc80bd', '#ccebc5', '#ffed6f'];
-
+// replace these colors with sth more soil like ngl
 const chartOptions = ref();
 const chartData = ref();
 const componentKey = ref(0); // idk why the layout isn't refreshing without this
@@ -47,6 +49,21 @@ const componentKey = ref(0); // idk why the layout isn't refreshing without this
 const point1 = ref(50);
 const point2 = ref(50);
 const point3 = ref(50);
+
+function normalizeTernary(dataPoints) {
+    // Calculate the sum of the data points
+    const total = dataPoints.reduce((a, b) => a + b, 0);
+
+    // Check if the total is zero to avoid division by zero
+    if (total === 0) {
+        return [0, 0, 0];
+    }
+
+    // Normalize each data point
+    const normalizedPoints = dataPoints.map(point => (point / total * 100).toFixed(2));
+
+    return normalizedPoints;
+}
 
 onBeforeMount(() => { // load data and set chart options
     chartOptions.value = setChartOptions(getStyles());
