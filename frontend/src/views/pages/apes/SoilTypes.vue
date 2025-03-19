@@ -5,7 +5,24 @@
                 <PlotlyChart :data="chartData" :layout="chartOptions" :config="{ displayModeBar: false }"
                     :key="componentKey" />
             </div>
-
+            <div class="card p-0">
+                <!-- <PlotlyChart :data="[{
+                    x: ['your soil'],
+                    y: [point1],
+                    name: 'clay proportion',
+                    type: 'bar'
+                }, {
+                    x: ['your soil'],
+                    y: [point2],
+                    name: 'sand proportion',
+                    type: 'bar'
+                }, {
+                    x: ['your soil'],
+                    y: [point3],
+                    name: 'silt proportion',
+                    type: 'bar'
+                }]" :config="{ displayModeBar: false }" :layout="{ barmode: 'stack' }" /> -->
+            </div>
         </div>
         <div class="slider-container">
             <Card>
@@ -28,7 +45,7 @@
             <Card>
                 <template #title>your soil:</template>
                 <template #content>
-                    <p v-for="item in findSoilType()">{{ item }}</p>
+                    <p v-for="item in findSoilType(point1, point2, point3)">{{ item }}</p>
                 </template>
             </Card>
         </div>
@@ -40,12 +57,26 @@ import { onBeforeMount, ref, watch } from "vue";
 import { useLayout } from '@/layout/composables/layout';
 import PlotlyChart from '@/components/PlotlyChart.vue';
 import soilData from '@/components/SoilType/soilData';
+import findSoilType from "@/components/SoilType/pointCalcs";
 import Slider from 'primevue/slider';
 import Card from "primevue/card";
 // import SelectButton from 'primevue/selectbutton'; // keeping this for future use as switching between chart and soil type preview?
 
-const colors = ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9', '#bc80bd', '#ccebc5', '#ffed6f'];
-// replace these colors with sth more soil like ngl
+const colors = [
+    '#FFFFFF', // sand
+    '#FFF0CC', // loamy sand
+    '#D2B48C', // sandy loam
+    '#FFC080', // sandy clay loam
+    '#663300', // sandy clay
+    '#452B1F', // clay
+    '#FF9900', // clay loam
+    '#5C514A', // silty clay
+    '#786C3B', // silty clay loam
+    '#C0C0C0', // silty loam
+    '#C2C5B5', // silt
+    '#A0522D', // loam
+];
+
 const chartOptions = ref();
 const chartData = ref();
 const componentKey = ref(0); // idk why the layout isn't refreshing without this
@@ -54,61 +85,18 @@ const point1 = ref(50); // clay
 const point2 = ref(50); // sand
 const point3 = ref(50); // silt
 
-function normalizeTernary(a, b, c) {
-    // Calculate the sum of the data points
-    const total = a + b + c;
-
-    // Check if the total is zero to avoid division by zero
-    if (total === 0) {
-        return [0, 0, 0];
-    }
-
-    // Normalize each data point
-    const normalizedPoints = [a, b, c].map(point => (point / total * 100).toFixed(2));
-
-    return normalizedPoints;
-}
-
-function isPointInPolygon(point, vertices) { // checks that the point falls into a given part of plot
-    let x = point[0]; // Using clay as x-coordinate
-    let y = point[1]; // Using sand as y-coordinate
-    let inside = false;
-
-    for (let i = 0, j = vertices.length - 1; i < vertices.length; j = i++) {
-        const v1 = vertices[i];
-        const v2 = vertices[j];
-
-        const intersect = ((v1.sand > y) !== (v2.sand > y)) &&
-            (x < (v2.clay - v1.clay) * (y - v1.sand) / (v2.sand - v1.sand) + v1.clay);
-        if (intersect) inside = !inside;
-    }
-
-    return inside;
-}
-
-function findSoilType() { // loops through all the points and checks
-    const userPoints = normalizeTernary(point1.value, point2.value, point3.value);
-    for (const [soilType, vertices] of Object.entries(soilData)) {
-        if (isPointInPolygon(userPoints, vertices)) {
-            return [`clay composition: ${userPoints[0]}%`,
-            `sand composition: ${userPoints[1]}%`,
-            ` silt composition: ${userPoints[2]}%`,
-            `soil type: ${soilType}`];
-        }
-    }
-    return null; // Point is not in any soil type
-}
-
-onBeforeMount(() => { // load data and set chart options
-    chartOptions.value = setChartOptions(getStyles());
-    chartData.value = setChartData(soilData);
-});
-watch([useLayout().isDarkTheme, point1, point2, point3], () => {
+function renderChanges() {
     // rerender with different axes if chart type changed
     chartData.value = setChartData(soilData);
     chartOptions.value = setChartOptions(getStyles());
     componentKey.value++;
-    // console.log('watched')
+}
+
+onBeforeMount(() => { // load data and set chart options
+    renderChanges();
+});
+watch([useLayout().isDarkTheme, point1, point2, point3], () => {
+    renderChanges();
 });
 
 function makeAxis(title, styles) { // styling for ternary plot
