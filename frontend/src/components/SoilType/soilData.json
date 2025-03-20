@@ -1,292 +1,344 @@
 {
-	"sand":[
-		{
-			"clay":0,
-			"sand":100,
-			"silt":0
-		},
-		{
-			"clay":10,
-			"sand":90,
-			"silt":0
-		},
-		{
-			"clay":0,
-			"sand":90,
-			"silt":10
-		}
+	"sand": [
+	  {
+		"clay": 0,
+		"sand": 100,
+		"silt": 0,
+		"color": "#FFFFFF"
+	  },
+	  {
+		"clay": 10,
+		"sand": 90,
+		"silt": 0,
+		"color": "#FFFFFF"
+	  },
+	  {
+		"clay": 0,
+		"sand": 90,
+		"silt": 10,
+		"color": "#FFFFFF"
+	  }
 	],
-	"loamy sand":[
-		
-		{
-			"clay":0,
-			"sand":90,
-			"silt":10
-		},
-		{
-			"clay":10,
-			"sand":90,
-			"silt":0
-		},
-		{
-			"clay":15,
-			"sand":85,
-			"silt":0
-		},
-		{
-			"clay":0,
-			"sand":70,
-			"silt":30
-		}
+	"loamy sand": [
+	  {
+		"clay": 0,
+		"sand": 90,
+		"silt": 10,
+		"color": "#FFF0CC"
+	  },
+	  {
+		"clay": 10,
+		"sand": 90,
+		"silt": 0,
+		"color": "#FFF0CC"
+	  },
+	  {
+		"clay": 15,
+		"sand": 85,
+		"silt": 0,
+		"color": "#FFF0CC"
+	  },
+	  {
+		"clay": 0,
+		"sand": 70,
+		"silt": 30,
+		"color": "#FFF0CC"
+	  }
 	],
-	"sandy loam":[
-		{
-			"clay":0,
-			"sand":70,
-			"silt":30
-		},
-		{
-			"clay":15,
-			"sand":85,
-			"silt":0
-		},
-		{
-			"clay":20,
-			"sand":80,
-			"silt":0
-		},
-		{
-			"clay":20,
-			"sand":53,
-			"silt":32
-		},
-		{
-			"clay":5,
-			"sand":53,
-			"silt":42
-		},
-		{
-			"clay":5,
-			"sand":45,
-			"silt":50
-		},
-		{
-			"clay":0,
-			"sand":50,
-			"silt":50
-		}
+	"sandy loam": [
+	  {
+		"clay": 0,
+		"sand": 70,
+		"silt": 30,
+		"color": "#D2B48C"
+	  },
+	  {
+		"clay": 15,
+		"sand": 85,
+		"silt": 0,
+		"color": "#D2B48C"
+	  },
+	  {
+		"clay": 20,
+		"sand": 80,
+		"silt": 0,
+		"color": "#D2B48C"
+	  },
+	  {
+		"clay": 20,
+		"sand": 53,
+		"silt": 32,
+		"color": "#D2B48C"
+	  },
+	  {
+		"clay": 5,
+		"sand": 53,
+		"silt": 42,
+		"color": "#D2B48C"
+	  },
+	  {
+		"clay": 5,
+		"sand": 45,
+		"silt": 50,
+		"color": "#D2B48C"
+	  },
+	  {
+		"clay": 0,
+		"sand": 50,
+		"silt": 50,
+		"color": "#D2B48C"
+	  }
 	],
-	"sandy clay loam":[
-		{
-			"clay":20,
-			"sand":80,
-			"silt":0
-		},
-		{
-			"clay":35,
-			"sand":65,
-			"silt":0
-		},
-		{
-			"clay":35,
-			"sand":45,
-			"silt":20
-		},
-		{
-			"clay":28,
-			"sand":45,
-			"silt":27
-		},
-		{
-			"clay":20,
-			"sand":53,
-			"silt":32
-		}
+	"sandy clay loam": [
+	  {
+		"clay": 20,
+		"sand": 80,
+		"silt": 0,
+		"color": "#FFC080"
+	  },
+	  {
+		"clay": 35,
+		"sand": 65,
+		"silt": 0,
+		"color": "#FFC080"
+	  },
+	  {
+		"clay": 35,
+		"sand": 45,
+		"silt": 20,
+		"color": "#FFC080"
+	  },
+	  {
+		"clay": 28,
+		"sand": 45,
+		"silt": 27,
+		"color": "#FFC080"
+	  },
+	  {
+		"clay": 20,
+		"sand": 53,
+		"silt": 32,
+		"color": "#FFC080"
+	  }
 	],
-	"sandy clay":[
-		{
-			"clay":35,
-			"sand":65,
-			"silt":0
-		},
-		{
-			"clay":35,
-			"sand":45,
-			"silt":20
-		},
-		{
-			"clay":55,
-			"sand":45,
-			"silt":0
-		}],
-	"clay":[
-		{
-			"clay":55,
-			"sand":45,
-			"silt":0
-		},
-		{
-			"clay":100,
-			"sand":0,
-			"silt":0
-		},
-		{
-			"clay":60,
-			"sand":0,
-			"silt":40
-		},
-		{
-			"clay":40,
-			"sand":20,
-			"silt":40
-		},
-		{
-			"clay":40,
-			"sand":45,
-			"silt":15
-		}
+	"sandy clay": [
+	  {
+		"clay": 35,
+		"sand": 65,
+		"silt": 0,
+		"color": "#663300"
+	  },
+	  {
+		"clay": 35,
+		"sand": 45,
+		"silt": 20,
+		"color": "#663300"
+	  },
+	  {
+		"clay": 55,
+		"sand": 45,
+		"silt": 0,
+		"color": "#663300"
+	  }
 	],
-	"clay loam":[
-		{
-			"clay":40,
-			"sand":45,
-			"silt":15
-		},
-		{
-			"clay":40,
-			"sand":20,
-			"silt":40
-		},
-		{
-			"clay":28,
-			"sand":20,
-			"silt":52
-		},
-		{
-			"clay":28,
-			"sand":45,
-			"silt":27
-		}
+	"clay": [
+	  {
+		"clay": 55,
+		"sand": 45,
+		"silt": 0,
+		"color": "#452B1F"
+	  },
+	  {
+		"clay": 100,
+		"sand": 0,
+		"silt": 0,
+		"color": "#452B1F"
+	  },
+	  {
+		"clay": 60,
+		"sand": 0,
+		"silt": 40,
+		"color": "#452B1F"
+	  },
+	  {
+		"clay": 40,
+		"sand": 20,
+		"silt": 40,
+		"color": "#452B1F"
+	  },
+	  {
+		"clay": 40,
+		"sand": 45,
+		"silt": 15,
+		"color": "#452B1F"
+	  }
 	],
-	"silty clay":[
-		{
-			"clay":60,
-			"sand":0,
-			"silt":40
-		},
-		{
-			"clay":40,
-			"sand":0,
-			"silt":60
-		},
-		{
-			"clay":40,
-			"sand":20,
-			"silt":40
-		}
+	"clay loam": [
+	  {
+		"clay": 40,
+		"sand": 45,
+		"silt": 15,
+		"color": "#FF9900"
+	  },
+	  {
+		"clay": 40,
+		"sand": 20,
+		"silt": 40,
+		"color": "#FF9900"
+	  },
+	  {
+		"clay": 28,
+		"sand": 20,
+		"silt": 52,
+		"color": "#FF9900"
+	  },
+	  {
+		"clay": 28,
+		"sand": 45,
+		"silt": 27,
+		"color": "#FF9900"
+	  }
 	],
-	"silty clay loam":[
-		{
-			"clay":28,
-			"sand":0,
-			"silt":72
-		},
-		{
-			"clay":28,
-			"sand":20,
-			"silt":52
-		},
-		{
-			"clay":40,
-			"sand":20,
-			"silt":40
-		},
-		{
-			"clay":40,
-			"sand":0,
-			"silt":60
-		}
+	"silty clay": [
+	  {
+		"clay": 60,
+		"sand": 0,
+		"silt": 40,
+		"color": "#5C514A"
+	  },
+	  {
+		"clay": 40,
+		"sand": 0,
+		"silt": 60,
+		"color": "#5C514A"
+	  },
+	  {
+		"clay": 40,
+		"sand": 20,
+		"silt": 40,
+		"color": "#5C514A"
+	  }
 	],
-	"silty loam":[
-		{
-			"clay":0,
-			"sand":50,
-			"silt":50
-		},
-		{
-			"clay":28,
-			"sand":22,
-			"silt":50
-		},
-		{
-			"clay":28,
-			"sand":0,
-			"silt":72
-		},
-		{
-			"clay":12,
-			"sand":0,
-			"silt":88
-		},
-		{
-			"clay":12,
-			"sand":8,
-			"silt":80
-		},
-		{
-			"clay":0,
-			"sand":20,
-			"silt":80
-		}
+	"silty clay loam": [
+	  {
+		"clay": 28,
+		"sand": 0,
+		"silt": 72,
+		"color": "#786C3B"
+	  },
+	  {
+		"clay": 28,
+		"sand": 20,
+		"silt": 52,
+		"color": "#786C3B"
+	  },
+	  {
+		"clay": 40,
+		"sand": 20,
+		"silt": 40,
+		"color": "#786C3B"
+	  },
+	  {
+		"clay": 40,
+		"sand": 0,
+		"silt": 60,
+		"color": "#786C3B"
+	  }
 	],
-	"silt":[
-		{
-			"clay":0,
-			"sand":0,
-			"silt":100
-		},
-		{
-			"clay":0,
-			"sand":20,
-			"silt":80
-		},
-		{
-			"clay":12,
-			"sand":8,
-			"silt":80
-		},
-		{
-			"clay":12,
-			"sand":0,
-			"silt":88
-		}
-		
+	"silty loam": [
+	  {
+		"clay": 0,
+		"sand": 50,
+		"silt": 50,
+		"color": "#C0C0C0"
+	  },
+	  {
+		"clay": 28,
+		"sand": 22,
+		"silt": 50,
+		"color": "#C0C0C0"
+	  },
+	  {
+		"clay": 28,
+		"sand": 0,
+		"silt": 72,
+		"color": "#C0C0C0"
+	  },
+	  {
+		"clay": 12,
+		"sand": 0,
+		"silt": 88,
+		"color": "#C0C0C0"
+	  },
+	  {
+		"clay": 12,
+		"sand": 8,
+		"silt": 80,
+		"color": "#C0C0C0"
+	  },
+	  {
+		"clay": 0,
+		"sand": 20,
+		"silt": 80,
+		"color": "#C0C0C0"
+	  }
 	],
-	"loam":[
-		{
-			"clay":28,
-			"sand":45,
-			"silt":27
-		},
-		{
-			"clay":28,
-			"sand":22,
-			"silt":50
-		},
-		{
-			"clay":5,
-			"sand":45,
-			"silt":50
-		},
-		{
-			"clay":5,
-			"sand":53,
-			"silt":42
-		},
-		{
-			"clay":20,
-			"sand":53,
-			"silt":32
-		}
+	"silt": [
+	  {
+		"clay": 0,
+		"sand": 0,
+		"silt": 100,
+		"color": "#C2C5B5"
+	  },
+	  {
+		"clay": 0,
+		"sand": 20,
+		"silt": 80,
+		"color": "#C2C5B5"
+	  },
+	  {
+		"clay": 12,
+		"sand": 8,
+		"silt": 80,
+		"color": "#C2C5B5"
+	  },
+	  {
+		"clay": 12,
+		"sand": 0,
+		"silt": 88,
+		"color": "#C2C5B5"
+	  }
+	],
+	"loam": [
+	  {
+		"clay": 28,
+		"sand": 45,
+		"silt": 27,
+		"color": "#A0522D"
+	  },
+	  {
+		"clay": 28,
+		"sand": 22,
+		"silt": 50,
+		"color": "#A0522D"
+	  },
+	  {
+		"clay": 5,
+		"sand": 45,
+		"silt": 50,
+		"color": "#A0522D"
+	  },
+	  {
+		"clay": 5,
+		"sand": 53,
+		"silt": 42,
+		"color": "#A0522D"
+	  },
+	  {
+		"clay": 20,
+		"sand": 53,
+		"silt": 32,
+		"color": "#A0522D"
+	  }
 	]
-}
+  }
