@@ -41,6 +41,33 @@ function findSoilType(point1, point2, point3) {
         ` silt composition: ${userPoints[2]}%`,
         `soil type: ${soilType}`,
       ];
+    } else if (userPoints[1] === 0 && userPoints[2] === 0) {
+      return [
+        `clay composition: 100%`,
+        `sand composition: 0%`,
+        ` silt composition: 0%`,
+        `soil type: clay`,
+      ];
+    } else if (userPoints[2] === 0) {
+      const soilTypes = [
+        { range: [0, 10], type: "sand" },
+        { range: [10, 15], type: "loamy sand" },
+        { range: [15, 20], type: "sandy loam" },
+        { range: [20, 35], type: "sandy clay loam" },
+        { range: [35, 55], type: "sandy clay" },
+        { range: [55, 100], type: "clay" },
+      ];
+
+      const soilScore = userPoints[0];
+      const type = soilTypes.find(
+        (st) => soilScore >= st.range[0] && soilScore < st.range[1]
+      ).type;
+      return [
+        `clay composition: ${userPoints[0]}%`,
+        `sand composition: ${userPoints[1]}%`,
+        ` silt composition: ${userPoints[2]}%`,
+        `soil type: ${type}`,
+      ];
     }
   }
   return null; // Point is not in any soil type
