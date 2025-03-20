@@ -3,9 +3,11 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { DataStore } from "./DataStore";
+import { growthFactorsStore } from "./growthFactorsStore";
 
 export const populationStore = defineStore("populationStore", () => {
   const dataStore = DataStore();
+  const statStore = growthFactorsStore();
 
   // function
 
@@ -54,14 +56,66 @@ export const populationStore = defineStore("populationStore", () => {
   // Species objects and corresponding capacities
   const algae = ref({
     description: "blah blah blah blah blah",
-    maxCapacity: [],
+    maxCapacity: 1500,
     population: [27],
   });
+
+  const algaeCapacity = ref(1500);
+
+  const algaePopulation = computed(() => {
+    let additivePop =
+      algae.value.population[index] +
+      statStore.algaeStats.growthRate *
+        algae.value.population[index] *
+        (1 - algae.value.population[index] / algaeCapacity.value);
+    let subtractivePop =
+      (statStore.algaeStats.mortalityRate *
+        algae.value.population[index] *
+        (spotlightParrotfish.value.population[index] +
+          3 * longSpinedUrchin.value.population[index])) /
+      4;
+    let newPopulation = additivePop - subtractivePop;
+    algae.value.population.push(
+      parseFloat(newPopulation.toFixed(decimalPrecision))
+    );
+    return newPopulation;
+  });
+
+  const sponge = ref({
+    description: "blah blah blah blah blah",
+    maxCapacity: [],
+    population: [11],
+  });
+
+  const spongeCapacity = computed(() => {
+    let base = staghornCoralPopulation[index] + starCoralPopulation[index];
+    sponge.value.maxCapacity.push(Math.max(base, 1).toFixed(4));
+    return base;
+  });
+
+  const spongePopulation = computed(() => {
+    let additivePop =
+      sponge.value.population[index] +
+      statStore.spongeStats.growthRate *
+        sponge.value.population[index] *
+        (1 - sponge.value.population[index] / spongeCapacity.value);
+    let subtractivePop =
+      (statStore.spongeStats.mortalityRate *
+        sponge.value.population[index] *
+        (queenAngelfish.value.population[index] +
+          2 * hawksbillSeaTurtle.value.population[index])) /
+      2;
+    let newPopulation = additivePop - subtractivePop;
+    sponge.value.population.push(parseFloat(newPopulation.toFixed(4)));
+    return newPopulation;
+  });
+
   const boulderStarCoral = ref({
     description: "blah blah blah blah blah",
     maxCapacity: [],
     population: [28],
   });
+
   const staghornCoral = ref({
     description: "blah blah blah blah blah",
     maxCapacity: [],
@@ -142,17 +196,6 @@ export const populationStore = defineStore("populationStore", () => {
     description: "blah blah blah blah blah",
     maxCapacity: [],
     population: [0],
-  });
-  const sponge = ref({
-    description: "blah blah blah blah blah",
-    maxCapacity: [],
-    population: [11],
-  });
-
-  const spongeCapacity = computed(() => {
-    let base = staghornCoralPopulation[index] + starCoralPopulation[index];
-    sponge.value.maxCapacity.push(Math.max(base, 1).toFixed(4));
-    return base;
   });
 
   const spotlightParrotfish = ref({
