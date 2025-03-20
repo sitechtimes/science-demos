@@ -117,23 +117,19 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const staghornCoralPopulation = computed(() => {
-    currentSpeciesParams = speciesGrowthParams.staghorn;
-    currentPopulation = staghornCoralPopulation[previousYearIndex];
     newPopulation =
-      currentPopulation *
-        (1 - calculateWhiteBandDisease()) *
-        (1 - calculateCoralBleaching() / 2) +
-      currentSpeciesParams.growthRate *
-        currentPopulation *
-        (1 - calculateCoralBleaching()) *
-        (1 - currentPopulation / staghornCarryingCapacity[previousYearIndex]) -
-      (currentSpeciesParams.mortalityRate *
-        currentPopulation *
-        crownOfThornsPopulation[previousYearIndex] +
-        calculateStormSeverity() * currentPopulation);
-    staghornCoralPopulation.push(
-      parseFloat(newPopulation.toFixed(decimalPrecision))
-    );
+      staghornCoralPopulation[index] *
+        (1 - whiteBandDisease) *
+        (1 - coralBleaching / 2) +
+      statStore.staghornCoralStats.growthRate *
+        staghornCoralPopulation[index] *
+        (1 - coralBleaching) *
+        (1 - staghornCoralPopulation[index] / staghornCarryingCapacity[index]) -
+      (statStore.staghornCoralStats.mortalityRate *
+        staghornCoralPopulation[index] *
+        crownOfThornsPopulation[index] +
+        calculateStormSeverity() * staghornCoralPopulation[index]);
+    staghornCoralPopulation.push(parseFloat(newPopulation.toFixed(4)));
 
     let additivePop = staghornCoral.value.population[index];
   });
@@ -370,6 +366,90 @@ export const populationStore = defineStore("populationStore", () => {
     return impactValues[index];
   });
 
+  const whiteBandDisease = computed(() => {
+    // Calculate disease prevalence based on environmental stress
+    const baseStressLevel =
+      (sedimentLoad +
+        nutrientLoad +
+        currentStressLevel / 100 + //current stress level doesnt exist
+        3 * (1 - waterClarity)) /
+      10;
+
+    // Temperature-dependent outbreak probability
+    const temperatureFactor =
+      Math.exp(dataStore.oceanTemp.sliderValue - 27) / 700;
+
+    // Combine factors with current disease status
+    const diseasePrevalence =
+      (0.6 + 0.4 * baseStressLevel) *
+      Math.min(temperatureFactor, 1) *
+      (dataStore.whiteBandDisease.sliderValue / 100);
+
+    return Math.min(diseasePrevalence, 1); // Cap at 100% prevalence
+  });
+
+  const blackBandDisease = computed(() => {
+    // Base stress calculation combines chronic environmental factors
+    const environmentalStress =
+      (sedimentLoad +
+        nutrientLoad +
+        currentCoralStressLevel * 0.8 + //current coral stress doesnt eist
+        2 * (1 - waterClarity)) /
+      10;
+
+    // Temperature modulates disease progression rate
+    const thermalEffect = Math.exp(dataStore.oceanTemp.sliderValue - 27) / 1500;
+
+    // Combine factors with human-controlled disease presence
+    const diseaseSpread =
+      (0.6 + 0.4 * environmentalStress) *
+      Math.min(thermalEffect, 1) *
+      (dataStore.blackBandDisease.sliderValue / 100);
+
+    return Math.min(diseaseSpread, 1); // Maximum 100% prevalence
+  });
+
+  const coralBleaching = computed(() => {
+    // Calculate thermal stress component
+    const thermalStressExponent = dataStore.oceanTemp.sliderValue - 27;
+    const thermalStressFactor = Math.exp(thermalStressExponent) / 700;
+
+    // Combine environmental stress factors
+    const environmentalStress =
+      (sedimentLoad +
+        nutrientLoad +
+        currentCoralStressLevel / 100 + //current coral stress level doesnt exist
+        3 * (1 - waterClarity)) /
+      10;
+
+    // Calculate bleaching probability with temperature emphasis
+    const bleachingProbability =
+      (0.6 + 0.4 * environmentalStress) * Math.min(thermalStressFactor, 1);
+
+    return Math.min(bleachingProbability, 1); // Cap at 100% bleaching
+  });
+
+  const starCoralBleaching = computed(() => {
+    // Star corals have higher thermal tolerance but are more sediment-sensitive
+    const thermalStressExponent = dataStore.oceanTemp.sliderValue - 28; // 28°C baseline
+    const thermalStressFactor = Math.exp(thermalStressExponent) / 1500; // Slower rise than staghorn
+
+    // Environmental stress components
+    const sedimentStress = sedimentLoad * 1.2; // 20% more sediment sensitive
+    const combinedStress =
+      (sedimentStress +
+        nutrientLoad +
+        currentCoralStressLevel / 100 + // current coral stress level doesnt exist
+        2 * (1 - waterClarity)) /
+      10;
+
+    // Bleaching probability calculation
+    const bleachingProbability =
+      (0.5 + 0.5 * combinedStress) * Math.min(thermalStressFactor, 1);
+
+    return Math.min(bleachingProbability, 1); // Maximum 100% bleaching
+  });
+
   return {
     // species objects
     algae,
@@ -384,7 +464,7 @@ export const populationStore = defineStore("populationStore", () => {
     spotlightParrotfish,
     staghornCoral,
     yellowtailSnapper,
-    //computed species vars
+    //computed species capacities
     coralCapacity,
     crownOfThornsCapacity,
     nassauGrouperCapacity,
@@ -392,6 +472,10 @@ export const populationStore = defineStore("populationStore", () => {
     spongeCapacity,
     spotlightParrotfishCapacity,
     yellowtailSnapperCapacity,
+    //computed species populations
+    algaePopulation,
+    spongePopulation,
+    staghornCoralPopulation,
     // math vars
     currentYear,
     index,
@@ -403,6 +487,10 @@ export const populationStore = defineStore("populationStore", () => {
     waterClarity,
     waterTempEffect,
     pHImpact,
+    whiteBandDisease,
+    blackBandDisease,
+    coralBleaching,
+    starCoralBleaching,
     // here you go angelina :D
     totalOrganisms,
     finalPopulations,
