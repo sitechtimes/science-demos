@@ -110,16 +110,38 @@ export const populationStore = defineStore("populationStore", () => {
     return newPopulation;
   });
 
-  const boulderStarCoral = ref({
-    description: "blah blah blah blah blah",
-    maxCapacity: [],
-    population: [28],
-  });
-
   const staghornCoral = ref({
     description: "blah blah blah blah blah",
     maxCapacity: [],
     population: [21],
+  });
+
+  const staghornCoralPopulation = computed(() => {
+    currentSpeciesParams = speciesGrowthParams.staghorn;
+    currentPopulation = staghornCoralPopulation[previousYearIndex];
+    newPopulation =
+      currentPopulation *
+        (1 - calculateWhiteBandDisease()) *
+        (1 - calculateCoralBleaching() / 2) +
+      currentSpeciesParams.growthRate *
+        currentPopulation *
+        (1 - calculateCoralBleaching()) *
+        (1 - currentPopulation / staghornCarryingCapacity[previousYearIndex]) -
+      (currentSpeciesParams.mortalityRate *
+        currentPopulation *
+        crownOfThornsPopulation[previousYearIndex] +
+        calculateStormSeverity() * currentPopulation);
+    staghornCoralPopulation.push(
+      parseFloat(newPopulation.toFixed(decimalPrecision))
+    );
+
+    let additivePop = staghornCoral.value.population[index];
+  });
+
+  const boulderStarCoral = ref({
+    description: "blah blah blah blah blah",
+    maxCapacity: [],
+    population: [28],
   });
 
   const coralCapacity = computed(() => {
