@@ -1,27 +1,14 @@
 <template>
+    <SelectButton v-model="displayType" :options="['the jar test', 'ternary plot']" />
     <div class="chart-slider-container">
         <div class="chart-container">
-            <div class="card p-0">
-                <PlotlyChart :data="chartData" :layout="chartOptions" :config="{ displayModeBar: false }"
-                    :key="componentKey" />
+            <div class="card p-0" v-if="displayType === 'ternary plot'">
+                <PlotlyChart :data="chartData.soilPlot" :layout="chartOptions.ternaryLayout"
+                    :config="{ displayModeBar: false }" :key="componentKey" />
             </div>
-            <div class="card p-0">
-                <!-- <PlotlyChart :data="[{
-                    x: ['your soil'],
-                    y: [point1],
-                    name: 'clay proportion',
-                    type: 'bar'
-                }, {
-                    x: ['your soil'],
-                    y: [point2],
-                    name: 'sand proportion',
-                    type: 'bar'
-                }, {
-                    x: ['your soil'],
-                    y: [point3],
-                    name: 'silt proportion',
-                    type: 'bar'
-                }]" :config="{ displayModeBar: false }" :layout="{ barmode: 'stack' }" /> -->
+            <div class="card p-0" v-if="displayType === 'the jar test'">
+                <PlotlyChart :data="chartData.soilProportion" :config="{ displayModeBar: false }"
+                    :layout="chartOptions.proportionLayout" :key="componentKey" />
             </div>
         </div>
         <div class="slider-container">
@@ -48,6 +35,16 @@
                     <p v-for="item in findSoilType(point1, point2, point3)">{{ item }}</p>
                 </template>
             </Card>
+            <Card v-if="displayType === 'the jar test'">
+                <template #title>the jar test</template>
+                <template #content>
+                    <p>If you mix soil with water in a container and let it settle, it will form layers. </p>
+                    <p>At the bottom, you will find the sand layer, which forms in about 1 minute. </p>
+                    <p>The middle layer formed will be silt, forming in about 2 hours. </p>
+                    <p>The top layer will be clay, forming in about 48 hours. </p>
+                    <p>anything left at the top is water. </p>
+                </template>
+            </Card>
         </div>
     </div>
 </template>
@@ -60,7 +57,7 @@ import { findSoilType, setChartData } from "@/components/SoilType/soilCalcs";
 import setChartOptions from "@/components/SoilType/chartOptions";
 import Slider from 'primevue/slider';
 import Card from "primevue/card";
-// import SelectButton from 'primevue/selectbutton'; // keeping this for future use as switching between chart and soil type preview?
+import SelectButton from 'primevue/selectbutton';
 
 const chartOptions = ref();
 const chartData = ref();
@@ -69,6 +66,7 @@ const componentKey = ref(0); // idk why the layout isn't refreshing without this
 const point1 = ref(50); // clay
 const point2 = ref(50); // sand
 const point3 = ref(50); // silt
+const displayType = ref('the jar test')
 
 function renderChanges() {
     // rerender with different axes if chart type changed

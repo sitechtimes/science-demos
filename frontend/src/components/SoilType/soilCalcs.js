@@ -69,6 +69,11 @@ function findSoilType(point1, point2, point3) {
 }
 
 function setChartData(point1, point2, point3) {
+  const normalizedPoints = normalizeTernary(
+    point1.value,
+    point2.value,
+    point3.value
+  );
   const soilPlot = Object.keys(soilData).map(function (k, i) {
     let pts = soilData[k];
     pts = pts.concat(pts[0]);
@@ -95,9 +100,9 @@ function setChartData(point1, point2, point3) {
     type: "scatterternary",
     mode: "markers",
     text: ["your soil type"],
-    a: [point1.value],
-    b: [point2.value],
-    c: [point3.value],
+    a: [normalizedPoints[0]],
+    b: [normalizedPoints[1]],
+    c: [normalizedPoints[2]],
     marker: {
       symbol: 100,
       color: "#fdff",
@@ -107,7 +112,41 @@ function setChartData(point1, point2, point3) {
     },
     hoveron: "fills+points",
   });
-  return soilPlot;
+  const soilProportion = [
+    {
+      x: ["your soil"],
+      y: [normalizedPoints[1]],
+      width: [0.4],
+      name: "sand proportion",
+      type: "bar",
+      marker: { color: "#FFFFFF", line: { width: 2 } },
+    },
+    {
+      x: ["your soil"],
+      y: [normalizedPoints[2]],
+      width: [0.4],
+      name: "silt proportion",
+      type: "bar",
+      marker: { color: "#C2C5B5", line: { width: 2 } },
+    },
+    {
+      x: ["your soil"],
+      y: [normalizedPoints[0]],
+      width: [0.4],
+      name: "clay proportion",
+      type: "bar",
+      marker: { color: "#452B1F", line: { width: 2 } },
+    },
+    {
+      x: ["your soil"],
+      y: [20],
+      width: [0.4],
+      name: "water",
+      type: "bar",
+      marker: { color: "#c4f5ff", line: { width: 2 } },
+    },
+  ];
+  return { soilPlot, soilProportion };
 }
 
 export { findSoilType, setChartData };

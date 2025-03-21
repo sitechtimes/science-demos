@@ -19,16 +19,9 @@ function makeAxis(title, styles) {
 function setChartOptions(styles) {
   // set chart styles
   const layout = {
-    ternary: {
-      sum: 100,
-      aaxis: makeAxis("Clay", styles),
-      baxis: makeAxis("Sand", styles),
-      caxis: makeAxis("Silt", styles),
-    },
     title: "Soil Types",
     plot_bgcolor: styles.surfaceCard,
     paper_bgcolor: styles.surfaceCard,
-    showlegend: false,
     margin: {
       // should change to computed margin
       t: 50,
@@ -42,7 +35,21 @@ function setChartOptions(styles) {
       family: styles.font,
     },
   };
-  return layout;
+  const ternaryLayout = {
+    ternary: {
+      sum: 100,
+      aaxis: makeAxis("Clay", styles),
+      baxis: makeAxis("Sand", styles),
+      caxis: makeAxis("Silt", styles),
+    },
+    ...layout,
+    showlegend: false,
+  };
+  const proportionLayout = {
+    barmode: "stack",
+    ...layout,
+  };
+  return { ternaryLayout, proportionLayout };
 }
 
 export default setChartOptions;
