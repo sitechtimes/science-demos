@@ -120,7 +120,7 @@ export const populationStore = defineStore("populationStore", () => {
         staghornCoral.value.population[index] *
         crownOfThornsStarfish.value.population[index] +
         stormSeverity * staghornCoral.value.population[index]);
-    staghornCoralPopulation.push(parseFloat(newPopulation.toFixed(4)));
+    staghornCoral.value.population.push(parseFloat(newPopulation.toFixed(4)));
     return newPopulation;
   });
 
@@ -169,8 +169,10 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const crownOfThornsCapacity = computed(() => {
-    let base = staghornCoralPopulation[index] + starCoralPopulation[index];
-    crownOfThornsCapacity.push(base.toFixed(4));
+    let base =
+      staghornCoral.value.population[index] +
+      boulderStarCoral.value.population[index];
+    crownOfThornsStarfish.value.maxCapacity.push(base.toFixed(4));
     return base;
   });
 
