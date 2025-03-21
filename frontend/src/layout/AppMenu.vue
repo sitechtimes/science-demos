@@ -15,14 +15,15 @@ const model = ref([
                 label: 'Environmental Science',
                 icon: 'pi pi-fw pi-bookmark',
                 items: [
-                        { label: 'Coral Reefs and Abiotic Factors', icon: 'pi pi-fw pi-bookmark', to: '/apes/abioticcoral' },
+                    { label: 'Coral Reefs and Abiotic Factors', icon: 'pi pi-fw pi-bookmark', to: '/apes/abioticcoral' },
+                    { label: 'Soil Types', icon: 'pi pi-fw pi-bookmark', to: '/apes/soiltypes' },
                 ]
             },
             {
                 label: 'Biology',
                 icon: 'pi pi-fw pi-bookmark',
                 items: [
-                        { label: 'Cell Division', icon: 'pi pi-fw pi-bookmark', to: '/bio/celldivision' },
+                    { label: 'Cell Division', icon: 'pi pi-fw pi-bookmark', to: '/bio/celldivision' },
                 ]
             },
             /* {
