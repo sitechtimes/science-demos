@@ -162,6 +162,27 @@ export const populationStore = defineStore("populationStore", () => {
     );
   });
 
+  const longSpinedUrchin = ref({
+    description: "blah blah blah blah blah",
+    maxCapacity: [],
+    population: [1160],
+  });
+
+  const longSpinedUrchinPopulation = computed(() => {
+    currentSpeciesParams = speciesGrowthParams.urchin;
+    currentPopulation = urchinPopulation[previousYearIndex];
+    newPopulation =
+      currentPopulation *
+        (1 - interfaceElements.urchinDiseaseSlider.getValue() / 100) +
+      currentSpeciesParams.growthRate *
+        currentPopulation *
+        algaePopulation[previousYearIndex] -
+      currentSpeciesParams.mortalityRate * currentPopulation;
+    urchinPopulation.push(parseFloat(newPopulation.toFixed(decimalPrecision)));
+
+    let additivePop = longSpinedUrchin.value.population[index];
+  });
+
   const crownOfThornsStarfish = ref({
     description: "blah blah blah blah blah",
     maxCapacity: [],
@@ -180,11 +201,6 @@ export const populationStore = defineStore("populationStore", () => {
     description: "blah blah blah blah blah",
     maxCapacity: [],
     population: [25],
-  });
-  const longSpinedUrchin = ref({
-    description: "blah blah blah blah blah",
-    maxCapacity: [],
-    population: [1160],
   });
   const nassauGrouper = ref({
     description: "blah blah blah blah blah",
