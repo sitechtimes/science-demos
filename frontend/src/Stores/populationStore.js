@@ -13,45 +13,23 @@ export const populationStore = defineStore("populationStore", () => {
 
   const resetSimulation = () => {
     currentYear.value = 0;
-    algae.value.population.splice(1, algae.value.population.length);
-    boulderStarCoral.value.population.splice(
-      1,
-      boulderStarCoral.value.population.length
-    );
-    crownOfThornsStarfish.value.population.splice(
-      1,
-      crownOfThornsStarfish.value.population.length
-    );
-    hawksbillSeaTurtle.value.population.splice(
-      1,
-      hawksbillSeaTurtle.value.population.length
-    );
-    longSpinedUrchin.value.population.splice(
-      1,
-      longSpinedUrchin.value.population.length
-    );
-    nassauGrouper.value.population.splice(
-      1,
-      nassauGrouper.value.population.length
-    );
-    queenAngelfish.value.population.splice(
-      1,
-      queenAngelfish.value.population.length
-    );
-    redLionfish.value.population.splice(1, redLionfish.value.population.length);
-    sponge.value.population.splice(1, sponge.value.population.length);
-    spotlightParrotfish.value.population.splice(
-      1,
-      spotlightParrotfish.value.population.length
-    );
-    staghornCoral.value.population.splice(
-      1,
-      staghornCoral.value.population.length
-    );
-    yellowtailSnapper.value.population.splice(
-      1,
-      yellowtailSnapper.value.population.length
-    );
+    [
+      algae,
+      boulderStarCoral,
+      crownOfThornsStarfish,
+      hawksbillSeaTurtle,
+      longSpinedUrchin,
+      nassauGrouper,
+      queenAngelfish,
+      redLionfish,
+      sponge,
+      spotlightParrotfish,
+      staghornCoral,
+      yellowtailSnapper,
+    ].forEach((species) => {
+      species.value.population.splice(1, species.value.population.length);
+      species.value.maxCapacity.splice(1, species.value.population.length);
+    });
   };
   // Species objects and corresponding capacities
   const algae = ref({
@@ -116,22 +94,34 @@ export const populationStore = defineStore("populationStore", () => {
     population: [21],
   });
 
+  const staghornCoralCapacity = computed(() => {
+    const staghornSpace =
+      1500 -
+      (algae.value.population[index] +
+        sponge.value.population[index] +
+        boulderStarCoral.value.population[index]);
+    staghornCoral.value.maxCapacity.push(
+      parseFloat(Math.max(staghornSpace, 1).toFixed(4))
+    );
+  });
+
   const staghornCoralPopulation = computed(() => {
-    newPopulation =
-      staghornCoralPopulation[index] *
+    let newPopulation =
+      staghornCoral.value.population[index] *
         (1 - whiteBandDisease) *
         (1 - coralBleaching / 2) +
       statStore.staghornCoralStats.growthRate *
-        staghornCoralPopulation[index] *
+        staghornCoral.value.population[index] *
         (1 - coralBleaching) *
-        (1 - staghornCoralPopulation[index] / staghornCarryingCapacity[index]) -
+        (1 -
+          staghornCoral.value.population[index] /
+            staghornCoral.value.maxCapacity[index]) -
       (statStore.staghornCoralStats.mortalityRate *
-        staghornCoralPopulation[index] *
-        crownOfThornsPopulation[index] +
-        calculateStormSeverity() * staghornCoralPopulation[index]);
+        staghornCoral.value.population[index] *
+        crownOfThornsStarfish.value.population[index] +
+        stormSeverity * staghornCoral.value.population[index]);
     staghornCoralPopulation.push(parseFloat(newPopulation.toFixed(4)));
-
-    let additivePop = staghornCoral.value.population[index];
+    return newPopulation;
   });
 
   const boulderStarCoral = ref({
@@ -140,20 +130,36 @@ export const populationStore = defineStore("populationStore", () => {
     population: [28],
   });
 
-  const coralCapacity = computed(() => {
-    let base =
+  const boulderStarCoralCapacity = computed(() => {
+    let starCoralSpace =
       1500 -
       (algae.population[index] +
         boulderStarCoral.population[index] +
         staghornCoral.population[index]);
-    staghornCoral.value.maxCapacity.push(1 * Math.max(base, 1).toFixed(4));
-    starCoral.value.maxCapacity.push(1 * Math.max(base, 1).toFixed(4));
-    algae.value.maxCapacity.push(1500);
+    starCoral.value.maxCapacity.push(
+      1 * Math.max(starCoralSpace, 1).toFixed(4)
+    );
+    return starCoralSpace;
+  });
 
-    // i got lazy
-    lionfishCapacity.push(100);
-
-    return base;
+  const boulderStarCoralPopulation = computed(() => {
+    let newPopulation =
+      boulderStarCoral.value.population[index] *
+        (1 - blackBandDisease) *
+        (1 - starCoralBleaching / 2) +
+      statStore.starCoralStats.growthRate *
+        boulderStarCoral.value.population[index] *
+        (1 - starCoralBleaching) *
+        (1 -
+          boulderStarCoral.value.population[index] /
+            boulderStarCoral.value.maxCapacity[index]) -
+      (statStore.starCoralStats.mortalityRate *
+        boulderStarCoral.value.population[index] *
+        crownOfThornsStarfish.value.population[index] +
+        (stormSeverity * boulderStarCoral.value.population[index]) / 5);
+    boulderStarCoral.value.population.push(
+      parseFloat(newPopulation.toFixed(4))
+    );
   });
 
   const crownOfThornsStarfish = ref({
@@ -212,9 +218,11 @@ export const populationStore = defineStore("populationStore", () => {
 
   const redLionfish = ref({
     description: "blah blah blah blah blah",
-    maxCapacity: [],
+    maxCapacity: 100,
     population: [0],
   });
+
+  const redLionfishCapacity = ref(100);
 
   const spotlightParrotfish = ref({
     description: "blah blah blah blah blah",
@@ -249,7 +257,9 @@ export const populationStore = defineStore("populationStore", () => {
 
   const currentYear = ref(0); // wherever you trigger the simulation, please add a for loop to increment currentYear by 1
   const index = computed(() => {
-    return currentYear.value - 2 || 0;
+    let previousYear = currentYear.value - 2;
+    previousYear < 0 ? (previousYear = 0) : previousYear;
+    return previousYear;
   });
 
   const totalOrganisms = computed(() => {
