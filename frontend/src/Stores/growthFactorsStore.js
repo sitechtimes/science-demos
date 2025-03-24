@@ -4,9 +4,7 @@ import { defineStore } from "pinia";
 import { populationStore } from "./populationStore";
 import { ref, computed } from "vue";
 
-const dataStore = dataStore();
-
-export const growthFactorsStore = defineStore("growth", () => {
+export const growthFactorsStore = defineStore("growthFactorsStore", () => {
   const popStore = populationStore();
 
   const algaeStats = computed(() => {
