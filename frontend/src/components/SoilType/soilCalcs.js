@@ -81,15 +81,9 @@ function setChartData(point1, point2, point3) {
       type: "scatterternary",
       mode: "lines",
       name: k,
-      a: pts.map(function (d) {
-        return d.clay;
-      }),
-      b: pts.map(function (d) {
-        return d.sand;
-      }),
-      c: pts.map(function (d) {
-        return d.silt;
-      }),
+      a: pts.map((d) => d.clay),
+      b: pts.map((d) => d.sand),
+      c: pts.map((d) => d.silt),
       line: { color: "#444" },
       fill: "toself",
       fillcolor: pts[0].color,

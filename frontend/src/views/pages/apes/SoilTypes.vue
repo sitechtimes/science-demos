@@ -17,22 +17,23 @@
                 <template #content>
                     <div>
                         <span id="Clay">Clay</span>
-                        <Slider v-model="point1" aria-label="Clay" />
+                        <Slider v-model="clayPoint" aria-label="Clay" />
                     </div>
                     <div>
                         <span id="Sand">Sand</span>
-                        <Slider v-model="point2" aria-label="Sand" />
+                        <Slider v-model="sandPoint" aria-label="Sand" />
                     </div>
                     <div>
                         <span id="Silt">Silt</span>
-                        <Slider v-model="point3" aria-label="Silt" />
+                        <Slider v-model="siltPoint" aria-label="Silt" />
                     </div>
                 </template>
             </Card>
             <Card>
                 <template #title>your soil:</template>
                 <template #content>
-                    <p v-for="item in findSoilType(point1, point2, point3)">{{ item }}</p>
+                    <p v-for="(item, index) in findSoilType(clayPoint, sandPoint, siltPoint)" :key="index">{{ item }}
+                    </p>
                 </template>
             </Card>
             <Card v-if="displayType === 'the jar test'">
@@ -63,14 +64,14 @@ const chartOptions = ref();
 const chartData = ref();
 const componentKey = ref(0); // idk why the layout isn't refreshing without this
 
-const point1 = ref(50); // clay
-const point2 = ref(50); // sand
-const point3 = ref(50); // silt
+const clayPoint = ref(50);
+const sandPoint = ref(50);
+const siltPoint = ref(50);
 const displayType = ref('the jar test')
 
 function renderChanges() {
     // rerender with different axes if chart type changed
-    chartData.value = setChartData(point1, point2, point3);
+    chartData.value = setChartData(clayPoint, sandPoint, siltPoint);
     chartOptions.value = setChartOptions(getStyles());
     componentKey.value++;
 }
@@ -78,7 +79,7 @@ function renderChanges() {
 onBeforeMount(() => { // load data and set chart options before mount to avoid Invalid prop on load  
     renderChanges();
 });
-watch([useLayout().isDarkTheme, point1, point2, point3], () => {
+watch([useLayout().isDarkTheme, clayPoint, sandPoint, siltPoint], () => {
     renderChanges();
 });
 
