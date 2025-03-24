@@ -27,7 +27,6 @@ import { ref } from 'vue';
 import CoralChart from '@/components/CoralSimulation/CoralChart.vue';
 import SliderConditions from "@/components/CoralSimulation/SliderConditions.vue";
 import SliderYear from '@/components/CoralSimulation/SliderYear.vue';
-import GameScene from '@/components/CoralSimulation/GameScene.vue'
 import SelectButton from 'primevue/selectbutton';
 import UnityScene from '@/components/CoralSimulation/unityScene.vue';
 
