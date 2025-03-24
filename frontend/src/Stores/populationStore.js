@@ -281,11 +281,55 @@ export const populationStore = defineStore("populationStore", () => {
     return base;
   });
 
+  const crownOfThornsPopulation = computed(() => {
+    let additivePop =
+      crownOfThornsStarfish.value.population[index] +
+      statStore.crownOfThornsStats.growthRate *
+        crownOfThornsStarfish.value.population[index] *
+        (staghornCoral.value.population[index] +
+          boulderStarCoral.value.population[index]);
+    let subtractivePop =
+      statStore.crownOfThornsStats.mortalityRate *
+      crownOfThornsStarfish.value.population[index];
+    let newPopulation = additivePop - subtractivePop;
+    crownOfThornsStarfish.value.population.push(
+      parseFloat(newPopulation.toFixed(4))
+    );
+    return newPopulation;
+  });
+
   const hawksbillSeaTurtle = ref({
     description: "blah blah blah blah blah",
     maxCapacity: [],
     population: [25],
   });
+
+  const hawksbillSeaTurtleCapacity = computed(() => {
+    let base =
+      (sponge.value.population[index] +
+        staghornCoral.value.population[index] +
+        starCoral.value.population[index]) /
+      10;
+    hawksbillSeaTurtle.value.maxCapacity.push(Math.min(base, 40).toFixed(4));
+    return base;
+  });
+
+  const hawksbillSeaTurtlePopulation = computed(() => {
+    let additivePop =
+      hawksbillSeaTurtle.value.population[index] +
+      statStore.hawksbillSeaTurtleStats.growthRate *
+        hawksbillSeaTurtle.value.population[index] *
+        sponge.value.population[index];
+    let subtractivePop =
+      statStore.hawksbillSeaTurtleStats.mortalityRate *
+      hawksbillSeaTurtle.value.population[index];
+    let newPopulation = additivePop - subtractivePop;
+    hawksbillSeaTurtle.value.population.push(
+      parseFloat(newPopulation.toFixed(4))
+    );
+    return newPopulation;
+  });
+
   const nassauGrouper = ref({
     description: "blah blah blah blah blah",
     maxCapacity: [],
@@ -302,6 +346,23 @@ export const populationStore = defineStore("populationStore", () => {
     return base;
   });
 
+  const nassauGrouperPopulation = computed(() => {
+    let additivePop =
+      nassauGrouper.value.population[index] +
+      statStore.grouperStats.growthRate *
+        nassauGrouper.value.population[index] *
+        (parrotFish.value.population[index] +
+          queenAngelfish.value.population[index] +
+          yellowtailSnapper.value.population[index] / 3);
+    let subtractivePop =
+      statStore.grouperStats.mortalityRate *
+      nassauGrouper.value.population[index] *
+      (1 + 0 / 100); //0 stands for fishing pressure slider thing
+    let newPopulation = additivePop - subtractivePop;
+    nassauGrouper.value.population.push(parseFloat(newPopulation.toFixed(4)));
+    return newPopulation;
+  });
+
   const redLionfish = ref({
     description: "blah blah blah blah blah",
     maxCapacity: 100,
@@ -309,6 +370,38 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const redLionfishCapacity = ref(100);
+
+  const redLionfishPopulation = computed(() => {
+    currentSpeciesParams = speciesGrowthParams.lion;
+    currentPopulation = lionfishPopulation[previousYearIndex];
+    newPopulation =
+      currentPopulation +
+      currentSpeciesParams.growthRate *
+        currentPopulation *
+        (parrotfishPopulation[previousYearIndex] +
+          angelfishPopulation[previousYearIndex] +
+          grouperPopulation[previousYearIndex] +
+          snapperPopulation[previousYearIndex]) -
+      currentSpeciesParams.mortalityRate * currentPopulation;
+    lionfishPopulation.push(
+      parseFloat(newPopulation.toFixed(decimalPrecision))
+    );
+
+    let additivePop =
+      redLionfish.value.population[index] +
+      statStore.redLionfishStats.growthRate *
+        redLionfish.value.population[index] *
+        (parrotFish.value.population[index] +
+          queenAngelfish.value.population[index] +
+          nassauGrouper.value.population[index] +
+          yellowtailSnapper.value.population[index]);
+    let subtractivePop =
+      statStore.redLionfishStats.mortalityRate *
+      redLionfish.value.population[index];
+    let newPopulation = additivePop - subtractivePop;
+    redLionfish.value.population.push(parseFloat(newPopulation.toFixed(4)));
+    return newPopulation;
+  });
 
   const yellowtailSnapper = ref({
     description: "blah blah blah blah blah",
@@ -324,6 +417,39 @@ export const populationStore = defineStore("populationStore", () => {
       2;
     snapperCapacity.push(Math.min(base, 400).toFixed(4));
     return base;
+  });
+
+  const yellowtailSnapperPopulation = computed(() => {
+    currentSpeciesParams = speciesGrowthParams.snapper;
+    currentPopulation = snapperPopulation[previousYearIndex];
+    newPopulation =
+      currentPopulation +
+      currentSpeciesParams.growthRate *
+        currentPopulation *
+        (parrotfishPopulation[previousYearIndex] +
+          angelfishPopulation[previousYearIndex]) -
+      currentSpeciesParams.mortalityRate *
+        currentPopulation *
+        (grouperPopulation[previousYearIndex] / 10 +
+          lionfishPopulation[previousYearIndex] / 5);
+    snapperPopulation.push(parseFloat(newPopulation.toFixed(decimalPrecision)));
+
+    let additivePop =
+      yellowtailSnapper.value.population[index] +
+      statStore.snapperStats.growthRate *
+        yellowtailSnapper.value.population[index] *
+        (spotlightParrotfish.value.population[index] +
+          queenAngelfish.value.population[index]);
+    let subtractivePop =
+      statStore.snapperStats.mortalityRate *
+      yellowtailSnapper.value.population[index] *
+      (nassauGrouper.value.population[index] / 10 +
+        redLionfish.value.population[index] / 5);
+    let newPopulation = additivePop - subtractivePop;
+    yellowtailSnapper.value.population.push(
+      parseFloat(newPopulation.toFixed(4))
+    );
+    return newPopulation;
   });
 
   // math vars

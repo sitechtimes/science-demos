@@ -118,7 +118,7 @@ export const growthFactorsStore = defineStore("growthFactorsStore", () => {
     };
   });
 
-  const crownOfThornsSstats = computed(() => {
+  const crownOfThornsStats = computed(() => {
     return {
       growthRate: 0.011 * popStore.nutrientLoad, // Nutrient-driven outbreaks
       mortalityRate: 0.1,
@@ -139,6 +139,6 @@ export const growthFactorsStore = defineStore("growthFactorsStore", () => {
     grouperStats,
     snapperStats,
     lionfishStats,
-    crownOfThornsSstats,
+    crownOfThornsStats,
   };
 });
