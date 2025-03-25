@@ -66,7 +66,9 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const spongeCapacity = computed(() => {
-    let base = staghornCoralPopulation[index] + starCoralPopulation[index];
+    let base =
+      staghornCoral.value.population[index] +
+      boulderStarCoral.value.population[index];
     sponge.value.maxCapacity.push(Math.max(base, 1).toFixed(4));
     return base;
   });
@@ -308,7 +310,7 @@ export const populationStore = defineStore("populationStore", () => {
     let base =
       (sponge.value.population[index] +
         staghornCoral.value.population[index] +
-        starCoral.value.population[index]) /
+        boulderStarCoral.value.population[index]) /
       10;
     hawksbillSeaTurtle.value.maxCapacity.push(Math.min(base, 40).toFixed(4));
     return base;
@@ -338,11 +340,11 @@ export const populationStore = defineStore("populationStore", () => {
 
   const nassauGrouperCapacity = computed(() => {
     let base =
-      (spongePopulation[index] +
-        staghornCoralPopulation[index] +
-        starCoralPopulation[index]) /
+      (sponge.value.population[index] +
+        staghornCoral.value.population[index] +
+        boulderStarCoral.value.population[index]) /
       10;
-    grouperCapacity.push(Math.min(base, 50).toFixed(4));
+    nassauGrouper.value.capacity.push(Math.min(base, 50).toFixed(4));
     return base;
   });
 
@@ -372,21 +374,6 @@ export const populationStore = defineStore("populationStore", () => {
   const redLionfishCapacity = ref(100);
 
   const redLionfishPopulation = computed(() => {
-    currentSpeciesParams = speciesGrowthParams.lion;
-    currentPopulation = lionfishPopulation[previousYearIndex];
-    newPopulation =
-      currentPopulation +
-      currentSpeciesParams.growthRate *
-        currentPopulation *
-        (parrotfishPopulation[previousYearIndex] +
-          angelfishPopulation[previousYearIndex] +
-          grouperPopulation[previousYearIndex] +
-          snapperPopulation[previousYearIndex]) -
-      currentSpeciesParams.mortalityRate * currentPopulation;
-    lionfishPopulation.push(
-      parseFloat(newPopulation.toFixed(decimalPrecision))
-    );
-
     let additivePop =
       redLionfish.value.population[index] +
       statStore.redLionfishStats.growthRate *
@@ -411,29 +398,15 @@ export const populationStore = defineStore("populationStore", () => {
 
   const yellowtailSnapperCapacity = computed(() => {
     let base =
-      (spongePopulation[index] +
-        staghornCoralPopulation[index] +
-        starCoralPopulation[index]) /
+      (sponge.value.population[index] +
+        staghornCoral.value.population[index] +
+        boulderStarCoral.value.population[index]) /
       2;
-    snapperCapacity.push(Math.min(base, 400).toFixed(4));
+    yellowtailSnapper.value.capacity.push(Math.min(base, 400).toFixed(4));
     return base;
   });
 
   const yellowtailSnapperPopulation = computed(() => {
-    currentSpeciesParams = speciesGrowthParams.snapper;
-    currentPopulation = snapperPopulation[previousYearIndex];
-    newPopulation =
-      currentPopulation +
-      currentSpeciesParams.growthRate *
-        currentPopulation *
-        (parrotfishPopulation[previousYearIndex] +
-          angelfishPopulation[previousYearIndex]) -
-      currentSpeciesParams.mortalityRate *
-        currentPopulation *
-        (grouperPopulation[previousYearIndex] / 10 +
-          lionfishPopulation[previousYearIndex] / 5);
-    snapperPopulation.push(parseFloat(newPopulation.toFixed(decimalPrecision)));
-
     let additivePop =
       yellowtailSnapper.value.population[index] +
       statStore.snapperStats.growthRate *
@@ -674,17 +647,31 @@ export const populationStore = defineStore("populationStore", () => {
     staghornCoral,
     yellowtailSnapper,
     //computed species capacities
-    coralCapacity,
+    algaeCapacity,
+    boulderStarCoralCapacity,
+    hawksbillSeaTurtleCapacity,
     crownOfThornsCapacity,
     nassauGrouperCapacity,
     queenAngelfishCapacity,
     spongeCapacity,
     spotlightParrotfishCapacity,
     yellowtailSnapperCapacity,
+    redLionfishCapacity,
+    staghornCoralCapacity,
+    longSpinedUrchinCapacity,
     //computed species populations
     algaePopulation,
     spongePopulation,
     staghornCoralPopulation,
+    boulderStarCoralPopulation,
+    longSpinedUrchinPopulation,
+    spotlightParrotfishPopulation,
+    queenAngelfishPopulation,
+    crownOfThornsPopulation,
+    hawksbillSeaTurtlePopulation,
+    nassauGrouperPopulation,
+    redLionfishPopulation,
+    yellowtailSnapperPopulation,
     // math vars
     currentYear,
     index,
