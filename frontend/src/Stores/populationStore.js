@@ -691,5 +691,6 @@ export const populationStore = defineStore("populationStore", () => {
     totalOrganisms,
     finalPopulations,
     populationDensities,
+    resetSimulation,
   };
 });
