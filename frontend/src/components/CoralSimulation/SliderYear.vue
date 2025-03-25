@@ -2,7 +2,23 @@
 import { DataStore } from "@/Stores/DataStore";
 
 const dataStore = DataStore();
+
 dataStore.selectedYear = 0;
+function incrementYear() {
+  if (dataStore.selectedYear < 100) {
+    dataStore.selectedYear++;
+  }
+}
+
+function decrementYear() {
+  if (dataStore.selectedYear < 100) {
+    dataStore.selectedYear--;
+  }
+}
+
+function updateYear(){
+  unityContext.sendMessage('GameObject', 'ReceiveRole', dataStore.selectedYear) //need to update the context this was js the default in the documentation
+}
 </script>
 
 <template>
@@ -11,23 +27,31 @@ dataStore.selectedYear = 0;
     <div class="flex items-center gap-2">
       <input
         type="number"
-        disabled
         v-model="dataStore.selectedYear"
-        class="w-20 text-center border rounded-lg p-2 text-lg"
+        class="w-20 text-center border rounded-lg p-2 text-lg [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
       />
       <button
         type="button"
-        @click="dataStore.selectedYear--"
+        @click="decrementYear()"
         class="button px-3 py-1 border rounded-lg text-lg"
       >
         -
       </button>
       <button
         type="button"
-        @click="dataStore.selectedYear++"
-        class=" button px-3 py-1 border rounded-lg  text-lg"
+        @click="incrementYear()"
+        class="button px-3 py-1 border rounded-lg text-lg"
       >
         +
+      </button>
+    </div>
+    <div>
+      <button
+        type="button"
+        @click="updateYear()"
+        class="button px-3 py-1 border rounded-lg text-lg"
+      >
+        Update Year
       </button>
     </div>
   </form>

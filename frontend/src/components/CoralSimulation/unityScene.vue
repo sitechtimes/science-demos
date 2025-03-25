@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 800px; height: 600px; border: 1px solid #f00">
+    <div style="width: 800px; height: 600px;">
     <UnityVue :unity="unityContext" tabindex="0" />
   </div>
 </template>
