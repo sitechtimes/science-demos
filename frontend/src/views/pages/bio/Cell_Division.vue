@@ -3,7 +3,7 @@ import { ref, watch } from 'vue';
 import MiGameScene from '@/components/CellDivision/MiGameScene.vue'
 import MeiGameScene from '@/components/CellDivision/MeiGameScene.vue'
 import CellDivChart from '@/components/CellDivision/CellDivChart.vue';
-import { cellDivStore } from '@/Stores/CellDivStore';
+import { cellDivStore } from '@/Stores/celldiv/CellDivStore';
 
 import SelectButton from 'primevue/selectbutton';
 const chartType = ref('Mitosis');
@@ -61,7 +61,7 @@ watch(chartType,
 
 @media (min-width: 768px) {
     .sim-chart-container {
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 }
 </style>

@@ -1,6 +1,6 @@
 import { EventBus } from "../EventBus";
 import { Scene } from "phaser";
-import { cellDivStore } from "@/Stores/CellDivStore";
+import { cellDivStore } from "@/Stores/celldiv/CellDivStore";
 import Cell from "../Cell";
 // import Textbox from "../Cell"; // why is this not used?
 import { ref } from "vue";
