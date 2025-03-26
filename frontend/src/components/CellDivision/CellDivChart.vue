@@ -26,7 +26,8 @@ const setChartData = () => { // return data options
 // mitosis 60 min https://bionumbers.hms.harvard.edu/bionumber.aspx?s=n&v=4&id=112373
 // spermatogenesis (sperm meiosis) 64 days https://www.aatbio.com/resources/faq-frequently-asked-questions/how-long-does-meiosis-take
 
-const setChartOptions = (styles) => { // return chart options
+const setChartOptions = (styles, cellType) => { // return chart options
+    console.log('asdgasdgaw', cellType)
     const chartOptions = {
         "title": "Number of Cells",
         plot_bgcolor: styles.surfaceCard,
@@ -44,7 +45,7 @@ const setChartOptions = (styles) => { // return chart options
         },
         xaxis: {
             title: {
-                text: 'time (hours)' // make ternary based on chart type, hours/days
+                text: cellType === 'Mitosis' ? 'time (hours)' : cellType === 'Meiosis' ? 'time (days)' : 'undefined'
             },
             zeroline: false
         },
@@ -65,7 +66,7 @@ const chartOptions = ref();
 const componentKey = ref(0);
 
 onMounted(() => {
-    chartOptions.value = setChartOptions(getStyles);
+    chartOptions.value = setChartOptions(getStyles(), props.chartType);
     chartData.value = setChartData();
     componentKey.value++;
 });
@@ -82,7 +83,7 @@ function getStyles() { // obtain current theme colors for chart options to chang
 }
 
 watch([useLayout().isDarkTheme, cellDivStore(), props.chartType], () => { // watch for changes
-    chartOptions.value = setChartOptions(getStyles());
+    chartOptions.value = setChartOptions(getStyles(), props.chartType);
     chartData.value = setChartData();
     componentKey.value++;
 });

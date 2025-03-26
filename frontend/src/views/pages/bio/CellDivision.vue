@@ -39,7 +39,7 @@ watch(chartType,
             </div>
         </div>
         <div class="chart-container">
-            <CellDivChart :chartType="chartType" />
+            <CellDivChart :chartType="chartType" :key="componentKey" />
         </div>
     </div>
 </template>
