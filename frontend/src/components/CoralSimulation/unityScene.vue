@@ -1,12 +1,12 @@
 <template>
-    <div style="width: 800px; height: 600px;">
+  <div class="width: 800px; height: 600px;">
     <UnityVue :unity="unityContext" tabindex="0" />
   </div>
 </template>
 
 <script setup>
-import UnityWebgl from 'unity-webgl';
-import UnityVue from 'unity-webgl/vue';
+import UnityWebgl from "unity-webgl";
+import UnityVue from "unity-webgl/vue";
 
 const cacheBuster = Date.now(); // Unique number each load
 
@@ -18,13 +18,12 @@ const unityContext = new UnityWebgl({
 });
 
 unityContext
-  .on('progress', (p) => console.log('loading :', p))
-  .on('mounted', () => console.log('unity mounted ...'))
-  .on('debug', (msg) => console.log('unity debug', msg));
+  .on("progress", (p) => console.log("loading :", p))
+  .on("mounted", () => console.log("unity mounted ..."))
+  .on("debug", (msg) => console.log("unity debug", msg));
 
-unityContext.addUnityListener('gameStart', (msg) => {
+unityContext.addUnityListener("gameStart", (msg) => {
   alert(msg);
-  console.log('gameStart : ', msg);
+  console.log("gameStart : ", msg);
 });
-
 </script>
