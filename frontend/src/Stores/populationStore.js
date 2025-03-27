@@ -673,7 +673,7 @@ export const populationStore = defineStore("populationStore", () => {
     return Math.min(bleachingProbability, 1); // Maximum 100% bleaching
   });
 
-  watch(currentYear.value, () => {
+  watch(currentYear, () => {
     //populations
     algaePopulation();
     spongePopulation();
@@ -715,8 +715,9 @@ export const populationStore = defineStore("populationStore", () => {
     spotlightParrotfish,
     staghornCoral,
     yellowtailSnapper,
-    //computed species capacities
+    //species capacity calculation functions
     algaeCapacity,
+    redLionfishCapacity,
     boulderStarCoralCapacity,
     hawksbillSeaTurtleCapacity,
     crownOfThornsCapacity,
@@ -725,10 +726,9 @@ export const populationStore = defineStore("populationStore", () => {
     spongeCapacity,
     spotlightParrotfishCapacity,
     yellowtailSnapperCapacity,
-    redLionfishCapacity,
     staghornCoralCapacity,
     longSpinedUrchinCapacity,
-    //computed species populations
+    //species population calculation functions
     algaePopulation,
     spongePopulation,
     staghornCoralPopulation,
