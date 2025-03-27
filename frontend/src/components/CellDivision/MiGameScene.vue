@@ -46,7 +46,7 @@ watch(limit, async (newLimit) => {
 </script>
 
 <template>
-  <PhaserGame ref="phaserRef" @current-active-scene="currentScene" />
+  <PhaserGame ref="phaserRef" />
   <div>
     <div v-if="limit">
       <Button @click="handleRestart">Restart</Button>
