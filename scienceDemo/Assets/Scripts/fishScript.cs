@@ -81,12 +81,20 @@ public class FishScript : MonoBehaviour
         return fishList[0];
     }
 
-    void OnMouseDown()
+  void OnMouseDown()
+{
+    if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
     {
-        if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-        {
-            modalScript.textInfo = new string[] { fish.name, fish.desc };
-            modalScript.modal.SetActive(true);
-        }
+        Debug.Log("Mouse clicked on fish object.");
+        modalScript.textInfo = new string[] { fish.name, fish.desc };
+        modalScript.modal.SetActive(true);
+        
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        mousePosition.z = 0; // Adjust this value based on your UI setup
+        
+        modalScript.modal.transform.position = mousePosition;
+        Debug.Log("Modal position set to: " + mousePosition);
     }
+}
 }
