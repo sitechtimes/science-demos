@@ -1,7 +1,7 @@
 //This store is for storing calculated results
 
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { DataStore } from "./DataStore";
 import { growthFactorsStore } from "./growthFactorsStore";
 
@@ -28,7 +28,9 @@ export const populationStore = defineStore("populationStore", () => {
       yellowtailSnapper,
     ].forEach((species) => {
       species.value.population.splice(1, species.value.population.length);
-      species.value.maxCapacity.splice(1, species.value.population.length);
+      if (species.value.maxCapacity === Array) {
+        species.value.maxCapacity.splice(1, species.value.population.length);
+      }
     });
   };
   // Species objects and corresponding capacities
@@ -40,7 +42,7 @@ export const populationStore = defineStore("populationStore", () => {
 
   const algaeCapacity = ref(1500);
 
-  const algaePopulation = computed(() => {
+  const algaePopulation = () => {
     let additivePop =
       algae.value.population[index] +
       statStore.algaeStats.growthRate *
@@ -58,7 +60,7 @@ export const populationStore = defineStore("populationStore", () => {
     );
     algae.value.population.push(parseFloat(newPopulation.toFixed(4)));
     return newPopulation;
-  });
+  };
 
   const sponge = ref({
     description: "blah blah blah blah blah",
@@ -66,15 +68,15 @@ export const populationStore = defineStore("populationStore", () => {
     population: [11],
   });
 
-  const spongeCapacity = computed(() => {
+  const spongeCapacity = () => {
     let base =
       staghornCoral.value.population[index] +
       boulderStarCoral.value.population[index];
     sponge.value.maxCapacity.push(Math.max(base, 1).toFixed(4));
     return base;
-  });
+  };
 
-  const spongePopulation = computed(() => {
+  const spongePopulation = () => {
     let additivePop =
       sponge.value.population[index] +
       statStore.spongeStats.growthRate *
@@ -86,10 +88,13 @@ export const populationStore = defineStore("populationStore", () => {
         (queenAngelfish.value.population[index] +
           2 * hawksbillSeaTurtle.value.population[index])) /
       2;
-    let newPopulation = Math.min(additivePop - subtractivePop, spongeCapacity);
+    let newPopulation = Math.min(
+      additivePop - subtractivePop,
+      sponge.value.maxCapacity[index]
+    );
     sponge.value.population.push(parseFloat(newPopulation.toFixed(4)));
     return newPopulation;
-  });
+  };
 
   const staghornCoral = ref({
     description: "blah blah blah blah blah",
@@ -97,7 +102,7 @@ export const populationStore = defineStore("populationStore", () => {
     population: [21],
   });
 
-  const staghornCoralCapacity = computed(() => {
+  const staghornCoralCapacity = () => {
     const staghornSpace =
       1500 -
       (algae.value.population[index] +
@@ -106,9 +111,9 @@ export const populationStore = defineStore("populationStore", () => {
     staghornCoral.value.maxCapacity.push(
       parseFloat(Math.max(staghornSpace, 1).toFixed(4))
     );
-  });
+  };
 
-  const staghornCoralPopulation = computed(() => {
+  const staghornCoralPopulation = () => {
     let newPopulation =
       staghornCoral.value.population[index] *
         (1 - whiteBandDisease) *
@@ -124,10 +129,14 @@ export const populationStore = defineStore("populationStore", () => {
         crownOfThornsStarfish.value.population[index] +
         stormSeverity * staghornCoral.value.population[index]);
     staghornCoral.value.population.push(
-      parseFloat(Math.min(newPopulation, staghornCoralCapacity).toFixed(4))
+      parseFloat(
+        Math.min(newPopulation, staghornCoral.value.maxCapacity[index]).toFixed(
+          4
+        )
+      )
     );
     return newPopulation;
-  });
+  };
 
   const boulderStarCoral = ref({
     description: "blah blah blah blah blah",
@@ -135,7 +144,7 @@ export const populationStore = defineStore("populationStore", () => {
     population: [28],
   });
 
-  const boulderStarCoralCapacity = computed(() => {
+  const boulderStarCoralCapacity = () => {
     let starCoralSpace =
       1500 -
       (algae.population[index] +
@@ -145,9 +154,9 @@ export const populationStore = defineStore("populationStore", () => {
       1 * Math.max(starCoralSpace, 1).toFixed(4)
     );
     return starCoralSpace;
-  });
+  };
 
-  const boulderStarCoralPopulation = computed(() => {
+  const boulderStarCoralPopulation = () => {
     let newPopulation =
       boulderStarCoral.value.population[index] *
         (1 - blackBandDisease) *
@@ -163,9 +172,14 @@ export const populationStore = defineStore("populationStore", () => {
         crownOfThornsStarfish.value.population[index] +
         (stormSeverity * boulderStarCoral.value.population[index]) / 5);
     boulderStarCoral.value.population.push(
-      parseFloat(Math.min(newPopulation, boulderStarCoralCapacity).toFixed(4))
+      parseFloat(
+        Math.min(
+          newPopulation,
+          boulderStarCoral.value.maxCapacity[index]
+        ).toFixed(4)
+      )
     );
-  });
+  };
 
   const longSpinedUrchin = ref({
     description: "blah blah blah blah blah",
@@ -173,7 +187,7 @@ export const populationStore = defineStore("populationStore", () => {
     population: [1160],
   });
 
-  const longSpinedUrchinCapacity = computed(() => {
+  const longSpinedUrchinCapacity = () => {
     let urchinCapacity =
       (staghornCoral.value.population[index] +
         boulderStarCoral.value.population[index]) /
@@ -182,9 +196,9 @@ export const populationStore = defineStore("populationStore", () => {
       parseFloat(urchinCapacity.toFixed(4))
     );
     return urchinCapacity;
-  });
+  };
 
-  const longSpinedUrchinPopulation = computed(() => {
+  const longSpinedUrchinPopulation = () => {
     let additivePop =
       longSpinedUrchin.value.population[index] * (1 - 0 / 100) + // 0 stands for a disease slider
       statStore.urchinStats.growthRate *
@@ -196,13 +210,13 @@ export const populationStore = defineStore("populationStore", () => {
 
     let newPopulation = Math.min(
       additivePop - subtractivePop,
-      longSpinedUrchinCapacity
+      longSpinedUrchin.value.maxCapacity[index]
     );
     longSpinedUrchin.value.population.push(
       parseFloat(newPopulation.toFixed(4))
     );
     return newPopulation;
-  });
+  };
 
   const spotlightParrotfish = ref({
     description: "blah blah blah blah blah",
@@ -210,16 +224,16 @@ export const populationStore = defineStore("populationStore", () => {
     population: [825],
   });
 
-  const spotlightParrotfishCapacity = computed(() => {
+  const spotlightParrotfishCapacity = () => {
     let base =
       (staghornCoral.value.population[index] +
         boulderStarCoral.value.population[index]) /
       2;
     spotlightParrotfish.value.maxCapacity.push(Math.min(base, 450).toFixed(4));
     return base;
-  });
+  };
 
-  const spotlightParrotfishPopulation = computed(() => {
+  const spotlightParrotfishPopulation = () => {
     let additivePop =
       spotlightParrotfish.value.population +
       statStore.parrotFishStats.growthRate *
@@ -235,13 +249,13 @@ export const populationStore = defineStore("populationStore", () => {
         statStore.parrotFishStats.predationRate;
     let newPopulation = Math.min(
       additivePop - subtractivePop,
-      spotlightParrotfishCapacity
+      spotlightParrotfish.value.maxCapacity[index]
     );
     spotlightParrotfish.value.population.push(
       parseFloat(newPopulation.toFixed(4))
     );
     return newPopulation;
-  });
+  };
 
   const queenAngelfish = ref({
     description: "blah blah blah blah blah",
@@ -249,7 +263,7 @@ export const populationStore = defineStore("populationStore", () => {
     population: [480],
   });
 
-  const queenAngelfishCapacity = computed(() => {
+  const queenAngelfishCapacity = () => {
     let base =
       (sponge.value.population[index] +
         staghornCoral.value.population[index] +
@@ -257,29 +271,29 @@ export const populationStore = defineStore("populationStore", () => {
       3;
     queenAngelfish.value.maxCapacity.push(base).toFixed(4);
     return base;
-  });
+  };
 
-  const queenAngelfishPopulation = computed(() => {
+  const queenAngelfishPopulation = () => {
     let additivePop =
       queenAngelfish.value.population[index] +
-      statStore.queenAngelfishStats.growthRate *
+      statStore.angelFishStats.growthRate *
         queenAngelfish.value.population[index] *
         sponge.value.population[index];
     let subtractivePop =
-      statStore.queenAngelfishStats.mortalityRate *
+      statStore.angelFishStats.mortalityRate *
         queenAngelfish.value.population[index] -
       (nassauGrouper.value.population[index] +
         yellowtailSnapper.value.population[index] +
         6 * redLionfish.value.population[index]) *
         queenAngelfish.value.population[index] *
-        statStore.queenAngelfishStats.predationRate;
+        statStore.angelFishStats.predationRate;
     let newPopulation = Math.min(
       additivePop - subtractivePop,
-      queenAngelfishCapacity
+      queenAngelfish.value.maxCapacity[index]
     );
     queenAngelfish.value.population.push(parseFloat(newPopulation.toFixed(4)));
     return newPopulation;
-  });
+  };
 
   const crownOfThornsStarfish = ref({
     description: "blah blah blah blah blah",
@@ -287,15 +301,15 @@ export const populationStore = defineStore("populationStore", () => {
     population: [0],
   });
 
-  const crownOfThornsCapacity = computed(() => {
+  const crownOfThornsCapacity = () => {
     let base =
       staghornCoral.value.population[index] +
       boulderStarCoral.value.population[index];
     crownOfThornsStarfish.value.maxCapacity.push(base.toFixed(4));
     return base;
-  });
+  };
 
-  const crownOfThornsPopulation = computed(() => {
+  const crownOfThornsPopulation = () => {
     let additivePop =
       crownOfThornsStarfish.value.population[index] +
       statStore.crownOfThornsStats.growthRate *
@@ -307,13 +321,13 @@ export const populationStore = defineStore("populationStore", () => {
       crownOfThornsStarfish.value.population[index];
     let newPopulation = Math.min(
       additivePop - subtractivePop,
-      crownOfThornsCapacity
+      crownOfThornsStarfish.value.maxCapacity[index]
     );
     crownOfThornsStarfish.value.population.push(
       parseFloat(newPopulation.toFixed(4))
     );
     return newPopulation;
-  });
+  };
 
   const hawksbillSeaTurtle = ref({
     description: "blah blah blah blah blah",
@@ -321,7 +335,7 @@ export const populationStore = defineStore("populationStore", () => {
     population: [25],
   });
 
-  const hawksbillSeaTurtleCapacity = computed(() => {
+  const hawksbillSeaTurtleCapacity = () => {
     let base =
       (sponge.value.population[index] +
         staghornCoral.value.population[index] +
@@ -329,9 +343,9 @@ export const populationStore = defineStore("populationStore", () => {
       10;
     hawksbillSeaTurtle.value.maxCapacity.push(Math.min(base, 40).toFixed(4));
     return base;
-  });
+  };
 
-  const hawksbillSeaTurtlePopulation = computed(() => {
+  const hawksbillSeaTurtlePopulation = () => {
     let additivePop =
       hawksbillSeaTurtle.value.population[index] +
       statStore.hawksbillSeaTurtleStats.growthRate *
@@ -342,13 +356,13 @@ export const populationStore = defineStore("populationStore", () => {
       hawksbillSeaTurtle.value.population[index];
     let newPopulation = Math.min(
       additivePop - subtractivePop,
-      hawksbillSeaTurtleCapacity
+      hawksbillSeaTurtle.value.maxCapacity[index]
     );
     hawksbillSeaTurtle.value.population.push(
       parseFloat(newPopulation.toFixed(4))
     );
     return newPopulation;
-  });
+  };
 
   const nassauGrouper = ref({
     description: "blah blah blah blah blah",
@@ -356,7 +370,7 @@ export const populationStore = defineStore("populationStore", () => {
     population: [48],
   });
 
-  const nassauGrouperCapacity = computed(() => {
+  const nassauGrouperCapacity = () => {
     let base =
       (sponge.value.population[index] +
         staghornCoral.value.population[index] +
@@ -364,9 +378,9 @@ export const populationStore = defineStore("populationStore", () => {
       10;
     nassauGrouper.value.capacity.push(Math.min(base, 50).toFixed(4));
     return base;
-  });
+  };
 
-  const nassauGrouperPopulation = computed(() => {
+  const nassauGrouperPopulation = () => {
     let additivePop =
       nassauGrouper.value.population[index] +
       statStore.grouperStats.growthRate *
@@ -380,11 +394,11 @@ export const populationStore = defineStore("populationStore", () => {
       (1 + 0 / 100); //0 stands for fishing pressure slider thing
     let newPopulation = Math.min(
       additivePop - subtractivePop,
-      nassauGrouperCapacity
+      nassauGrouper.value.maxCapacity[index]
     );
     nassauGrouper.value.population.push(parseFloat(newPopulation.toFixed(4)));
     return newPopulation;
-  });
+  };
 
   const redLionfish = ref({
     description: "blah blah blah blah blah",
@@ -394,25 +408,25 @@ export const populationStore = defineStore("populationStore", () => {
 
   const redLionfishCapacity = ref(100);
 
-  const redLionfishPopulation = computed(() => {
+  const redLionfishPopulation = () => {
     let additivePop =
       redLionfish.value.population[index] +
-      statStore.redLionfishStats.growthRate *
+      statStore.lionfishStats.growthRate *
         redLionfish.value.population[index] *
         (parrotFish.value.population[index] +
           queenAngelfish.value.population[index] +
           nassauGrouper.value.population[index] +
           yellowtailSnapper.value.population[index]);
     let subtractivePop =
-      statStore.redLionfishStats.mortalityRate *
+      statStore.lionfishStats.mortalityRate *
       redLionfish.value.population[index];
     let newPopulation = Math.min(
       additivePop - subtractivePop,
-      redLionfishCapacity
+      redLionfish.value.maxCapacity[index]
     );
     redLionfish.value.population.push(parseFloat(newPopulation.toFixed(4)));
     return newPopulation;
-  });
+  };
 
   const yellowtailSnapper = ref({
     description: "blah blah blah blah blah",
@@ -420,7 +434,7 @@ export const populationStore = defineStore("populationStore", () => {
     population: [240],
   });
 
-  const yellowtailSnapperCapacity = computed(() => {
+  const yellowtailSnapperCapacity = () => {
     let base =
       (sponge.value.population[index] +
         staghornCoral.value.population[index] +
@@ -428,9 +442,9 @@ export const populationStore = defineStore("populationStore", () => {
       2;
     yellowtailSnapper.value.capacity.push(Math.min(base, 400).toFixed(4));
     return base;
-  });
+  };
 
-  const yellowtailSnapperPopulation = computed(() => {
+  const yellowtailSnapperPopulation = () => {
     let additivePop =
       yellowtailSnapper.value.population[index] +
       statStore.snapperStats.growthRate *
@@ -444,13 +458,13 @@ export const populationStore = defineStore("populationStore", () => {
         redLionfish.value.population[index] / 5);
     let newPopulation = Math.min(
       additivePop - subtractivePop,
-      yellowtailSnapperCapacity
+      yellowtailSnapper.value.maxCapacity[index]
     );
     yellowtailSnapper.value.population.push(
       parseFloat(newPopulation.toFixed(4))
     );
     return newPopulation;
-  });
+  };
 
   // math vars
 
@@ -657,6 +671,34 @@ export const populationStore = defineStore("populationStore", () => {
       (0.5 + 0.5 * combinedStress) * Math.min(thermalStressFactor, 1);
 
     return Math.min(bleachingProbability, 1); // Maximum 100% bleaching
+  });
+
+  watch(currentYear.value, () => {
+    //populations
+    algaePopulation();
+    spongePopulation();
+    staghornCoralPopulation();
+    boulderStarCoralPopulation();
+    longSpinedUrchinPopulation();
+    spotlightParrotfishPopulation();
+    queenAngelfishPopulation();
+    crownOfThornsPopulation();
+    hawksbillSeaTurtlePopulation();
+    nassauGrouperPopulation();
+    redLionfishPopulation();
+    yellowtailSnapperPopulation();
+    //capacities
+    spongeCapacity();
+    staghornCoralCapacity();
+    boulderStarCoralCapacity();
+    longSpinedUrchinCapacity();
+    spotlightParrotfishCapacity();
+    queenAngelfishCapacity();
+    crownOfThornsCapacity();
+    hawksbillSeaTurtleCapacity();
+    nassauGrouperCapacity();
+    redLionfishCapacity();
+    yellowtailSnapperCapacity();
   });
 
   return {
