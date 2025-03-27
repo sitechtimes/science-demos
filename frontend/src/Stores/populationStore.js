@@ -81,7 +81,7 @@ export const populationStore = defineStore("populationStore", () => {
       sponge.value.population[index] +
       statStore.spongeStats.growthRate *
         sponge.value.population[index] *
-        (1 - sponge.value.population[index] / spongeCapacity.value);
+        (1 - sponge.value.population[index] / sponge.value.maxCapacity[index]);
     let subtractivePop =
       (statStore.spongeStats.mortalityRate *
         sponge.value.population[index] *
