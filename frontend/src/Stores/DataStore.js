@@ -113,13 +113,7 @@ export const DataStore = defineStore("data", () => {
 
   //invasive species
 
-  const selectedYear = ref({
-    name: "Current Year",
-    sliderValue: 0,
-    sliderMin: 0,
-    sliderMax: 100,
-    sliderStep: 1,
-  });
+  const selectedYear = ref(0);
 
   return {
     logging,

@@ -3,7 +3,6 @@ import { DataStore } from "@/Stores/DataStore";
 
 const dataStore = DataStore();
 
-dataStore.selectedYear = 0;
 function incrementYear() {
   if (dataStore.selectedYear < 100) {
     dataStore.selectedYear++;
