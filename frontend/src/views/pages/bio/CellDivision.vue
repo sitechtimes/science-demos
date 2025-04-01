@@ -69,7 +69,7 @@ watch(chartType,
     width: 100%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 950px) {
     .sim-chart-container {
         grid-template-columns: 2fr 1fr;
     }
