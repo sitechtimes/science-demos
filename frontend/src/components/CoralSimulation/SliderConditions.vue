@@ -3,9 +3,11 @@ import SliderInput from "../input_components/SliderInput.vue";
 import { DataStore } from "@/Stores/DataStore";
 import { CarbonStore } from "@/Stores/CarbonStore";
 import { ref } from "vue";
+import { populationStore } from "@/Stores/populationStore";
 
 const dataStore = DataStore();
 const carbonStore = CarbonStore();
+const popStore = populationStore();
 const sliderVariables = ref(["oceanTemp", "stormSeverity", "waterPH"]);
 // if we do include more conditions we will have to include a selectbutton or dropdown to switch between
 </script>
@@ -17,5 +19,7 @@ const sliderVariables = ref(["oceanTemp", "stormSeverity", "waterPH"]);
     </div>
     <!-- return to original settings button here? will need store to have default value -->
     {{ carbonStore.temperatureKelvins }}
+
+    <input type="text" v-model="popStore.currentYear" />
   </div>
 </template>
