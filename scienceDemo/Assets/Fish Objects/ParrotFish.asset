@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: ParrotFish
   image: {fileID: 21300000, guid: dda78ecf4f7bfc241bdb7e1bff90cb58, type: 3}
-  speed: 3
+  speed: 5
   waveSpeed: 1
   waveDistance: 1
   scale: {x: 0.1, y: 0.1, z: 0.1}

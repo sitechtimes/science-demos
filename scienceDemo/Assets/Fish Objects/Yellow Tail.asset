@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: YellowTail
   image: {fileID: 21300000, guid: 84d80cf0b50336d4f893b5d22c1284e0, type: 3}
-  speed: 3
+  speed: 5
   waveSpeed: 1
   waveDistance: 1
   scale: {x: 0.1, y: 0.1, z: 0.1}

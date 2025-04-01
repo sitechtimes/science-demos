@@ -91,7 +91,7 @@ public class FishScript : MonoBehaviour
         
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        mousePosition.z = 0; // Adjust this value based on your UI setup
+        mousePosition.z = 0;
         
         modalScript.modal.transform.position = mousePosition;
         Debug.Log("Modal position set to: " + mousePosition);
