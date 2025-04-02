@@ -12,7 +12,7 @@ import PlotlyChart from "@/components/PlotlyChart.vue"
 import { ref, toRef, onBeforeMount, watch } from "vue";
 import { useLayout } from '@/layout/composables/layout';
 import { cellDivStore } from '@/Stores/celldiv/CellDivStore';
-import { setChartOptions, setChartData } from '@/components/CellDivision/chartoptions'
+import { setChartOptions, setChartData } from '@/components/CellDivision/chartOptions.js'
 
 const props = defineProps({ chartType: String }); // pull charttype info from parent component
 
