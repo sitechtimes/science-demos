@@ -2,7 +2,7 @@
 import SliderInput from "../input_components/SliderInput.vue";
 import { DataStore } from "@/Stores/DataStore";
 import { CarbonStore } from "@/Stores/CarbonStore";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { populationStore } from "@/Stores/populationStore";
 
 const dataStore = DataStore();
