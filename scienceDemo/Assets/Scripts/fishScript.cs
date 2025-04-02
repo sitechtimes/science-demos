@@ -7,7 +7,6 @@ public class FishScript : MonoBehaviour
     public List<Fish> fishes = new List<Fish>();
     private Fish fish;
     public SpriteRenderer sprite;
-
     private float sin;
     private float startPos;
     private float totalPopulation;
@@ -52,8 +51,8 @@ public class FishScript : MonoBehaviour
         float newY = startPos + (Mathf.Sin(sin * fish.waveSpeed) / fish.waveDistance);
 
         Vector3 newPosition = transform.position;
-        newPosition.x -= fish.speed * Time.deltaTime; 
-        newPosition.y = newY; 
+        newPosition.x -= fish.speed * Time.deltaTime;
+        newPosition.y = newY;
 
         transform.position = newPosition;
     }
@@ -81,20 +80,41 @@ public class FishScript : MonoBehaviour
         return fishList[0];
     }
 
-  void OnMouseDown()
-{
-    if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+    void OnMouseDown()
     {
+        // Check if the pointer is over a UI element
+
         Debug.Log("Mouse clicked on fish object.");
         modalScript.textInfo = new string[] { fish.name, fish.desc };
         modalScript.modal.SetActive(true);
-        
+
+        // Get the mouse position in screen space
         Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        mousePosition.z = 0;
-        
-        modalScript.modal.transform.position = mousePosition;
-        Debug.Log("Modal position set to: " + mousePosition);
+
+        // Convert the mouse position to a RectTransform position
+        RectTransform rectTransform = modalScript.modal.GetComponent<RectTransform>();
+        Vector2 anchoredPosition;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            rectTransform.parent.GetComponent<RectTransform>(), // Parent RectTransform (Canvas)
+            mousePosition,
+            null, // Use null for the main camera if the canvas is in Screen Space - Overlay
+            out anchoredPosition
+        );
+
+        // Set the modal's anchored position
+        rectTransform.anchoredPosition = anchoredPosition;
+
+        Debug.Log("Modal position set to: " + rectTransform.anchoredPosition);
+
+
+
     }
 }
-}
+
+
+
+
+    
+
+/* Staghorn coral	Boulder star coral	Sponges	Algae	Stoplight parrotfish	Queen angelfish	Yellowtail snapper	Nassau grouper	Long-spined sea urchin	Hawkbill sea turtle	Red lionfish	Crown-of-thorns starfish
+21	28	11	27	825	540	240	48	1160	25	0	0*/
