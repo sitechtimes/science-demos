@@ -68,7 +68,7 @@ export const growthFactorsStore = defineStore("growthFactorsStore", () => {
     return {
       growthRate: 0.001,
       mortalityRate: 0.0015 + 0 / 100, // 0 stands for fishing pressure
-      grazingEfficiency: 0.094,
+      predationRate: 0.094,
       spawningSuccess: 0,
     };
   });
@@ -77,7 +77,7 @@ export const growthFactorsStore = defineStore("growthFactorsStore", () => {
     return {
       growthRate: 0.0011, // Sponge consumption efficiency
       mortalityRate: 0.0014 + (0.71 * 0) / 100, // 0 stands for fishing pressure
-      habitatPreference: 0.02,
+      predationRate: 0.02,
       larvalSurvival: 0,
     };
   });
