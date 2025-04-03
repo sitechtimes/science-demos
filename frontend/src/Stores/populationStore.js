@@ -64,7 +64,7 @@ export const populationStore = defineStore("populationStore", () => {
 
   const sponge = ref({
     description: "blah blah blah blah blah",
-    maxCapacity: [11],
+    maxCapacity: [1100],
     population: [11],
   });
 
@@ -100,7 +100,7 @@ export const populationStore = defineStore("populationStore", () => {
 
   const staghornCoral = ref({
     description: "blah blah blah blah blah",
-    maxCapacity: [21],
+    maxCapacity: [1434],
     population: [21],
   });
 
@@ -128,10 +128,10 @@ export const populationStore = defineStore("populationStore", () => {
             staghornCoral.value.maxCapacity[index.value]);
     let subtractivePop =
       statStore.staghornCoralStats.mortalityRate *
-        staghornCoral.value.population[index.value] *
-        crownOfThornsStarfish.value.population[index.value] +
-      dataStore.stormSeverity.sliderValue *
-        staghornCoral.value.population[index.value];
+      staghornCoral.value.population[index.value] *
+      (crownOfThornsStarfish.value.population[index.value] +
+        (dataStore.stormSeverity.sliderValue / 100) *
+          staghornCoral.value.population[index.value]);
 
     let newPopulation = additivePop - subtractivePop;
     staghornCoral.value.population.push(
@@ -144,7 +144,7 @@ export const populationStore = defineStore("populationStore", () => {
 
   const boulderStarCoral = ref({
     description: "blah blah blah blah blah",
-    maxCapacity: [28],
+    maxCapacity: [1441],
     population: [28],
   });
 
@@ -172,7 +172,7 @@ export const populationStore = defineStore("populationStore", () => {
       (statStore.starCoralStats.mortalityRate *
         boulderStarCoral.value.population[index.value] *
         crownOfThornsStarfish.value.population[index.value] +
-        (dataStore.stormSeverity.sliderValue *
+        ((dataStore.stormSeverity.sliderValue / 100) *
           boulderStarCoral.value.population[index.value]) /
           5);
     boulderStarCoral.value.population.push(
@@ -466,18 +466,18 @@ export const populationStore = defineStore("populationStore", () => {
 
   const totalOrganisms = computed(() => {
     return (
-      algae.population[index.value] +
-      boulderStarCoral.population[index.value] +
-      crownOfThornsStarfish.population[index.value] +
-      hawksbillSeaTurtle.population[index.value] +
-      longSpinedUrchin.population[index.value] +
-      nassauGrouper.population[index.value] +
-      queenAngelfish.population[index.value] +
-      redLionfish.population[index.value] +
-      sponge.population[index.value] +
-      spotlightParrotfish.population[index.value] +
-      staghornCoral.population[index.value] +
-      yellowtailSnapper.population[index.value]
+      algae.value.population[index.value] +
+      boulderStarCoral.value.population[index.value] +
+      crownOfThornsStarfish.value.population[index.value] +
+      hawksbillSeaTurtle.value.population[index.value] +
+      longSpinedUrchin.value.population[index.value] +
+      nassauGrouper.value.population[index.value] +
+      queenAngelfish.value.population[index.value] +
+      redLionfish.value.population[index.value] +
+      sponge.value.population[index.value] +
+      spotlightParrotfish.value.population[index.value] +
+      staghornCoral.value.population[index.value] +
+      yellowtailSnapper.value.population[index.value]
     );
   });
 
@@ -719,6 +719,23 @@ export const populationStore = defineStore("populationStore", () => {
     console.log("lionfish", redLionfish.value.maxCapacity);
     console.log("snappercap", yellowtailSnapper.value.maxCapacity);
     console.log("year", index.value);
+
+    console.log("ENV VARS");
+    console.log("algalImpact", algalImpact.value);
+    console.log("coralHealthImpact", coralHealthImpact.value);
+    console.log("coralStress", coralStress.value);
+    console.log("sedimentLoad", sedimentLoad.value);
+    console.log("nutrientLoad", nutrientLoad.value);
+    console.log("waterClarity", waterClarity.value);
+    console.log("waterTempEffect", waterTempEffect.value);
+    console.log("pHImpact", pHImpact.value);
+    console.log("whiteBandDisease", whiteBandDisease.value);
+    console.log("blackBandDisease", blackBandDisease.value);
+    console.log("coralBleaching", coralBleaching.value);
+    console.log("starCoralBleaching", starCoralBleaching.value);
+    console.log("totalOrganisms", totalOrganisms.value);
+    console.log("finalPopulations", finalPopulations.value);
+    console.log("populationDensities", populationDensities.value);
     console.log("END OF YEAR");
   });
 
