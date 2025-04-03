@@ -587,7 +587,7 @@ export const populationStore = defineStore("populationStore", () => {
       (sedimentLoad.value +
         nutrientLoad.value +
         //currentStressLevel / 100 + //current stress level doesnt exist
-        3 * (1 - waterClarity.value)) /
+        3 * (1 - waterClarity.value / 100)) /
       10;
 
     // Temperature-dependent outbreak probability
@@ -609,7 +609,7 @@ export const populationStore = defineStore("populationStore", () => {
       (sedimentLoad.value +
         nutrientLoad.value +
         //currentCoralStressLevel * 0.8 + //current coral stress doesnt eist
-        2 * (1 - waterClarity.value)) /
+        2 * (1 - waterClarity.value / 100)) /
       10;
 
     // Temperature modulates disease progression rate
@@ -634,7 +634,7 @@ export const populationStore = defineStore("populationStore", () => {
       (sedimentLoad.value +
         nutrientLoad.value +
         //currentCoralStressLevel / 100 + //current coral stress level doesnt exist
-        3 * (1 - waterClarity.value)) /
+        3 * (1 - waterClarity.value / 100)) /
       10;
 
     // Calculate bleaching probability with temperature emphasis
@@ -655,7 +655,7 @@ export const populationStore = defineStore("populationStore", () => {
       (sedimentStress +
         nutrientLoad.value +
         //currentCoralStressLevel / 100 + // current coral stress level doesnt exist
-        2 * (1 - waterClarity.value)) /
+        2 * (1 - waterClarity.value / 100)) /
       10;
 
     // Bleaching probability calculation
