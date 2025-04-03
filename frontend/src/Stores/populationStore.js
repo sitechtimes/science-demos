@@ -169,13 +169,13 @@ export const populationStore = defineStore("populationStore", () => {
         boulderStarCoral.value.population[index.value] *
         (1 - starCoralBleaching.value) *
         (1 -
-          boulderStarCoral.value.population[index] /
-            boulderStarCoral.value.maxCapacity[index]) -
+          boulderStarCoral.value.population[index.value] /
+            boulderStarCoral.value.maxCapacity[index.value]) -
       (statStore.starCoralStats.mortalityRate *
-        boulderStarCoral.value.population[index] *
-        crownOfThornsStarfish.value.population[index] +
+        boulderStarCoral.value.population[index.value] *
+        crownOfThornsStarfish.value.population[index.value] +
         (dataStore.stormSeverity.sliderValue *
-          boulderStarCoral.value.population[index]) /
+          boulderStarCoral.value.population[index.value]) /
           5);
     boulderStarCoral.value.population.push(
       parseFloat(
@@ -710,6 +710,7 @@ export const populationStore = defineStore("populationStore", () => {
 
     console.log(algae.value.population);
     console.log(yellowtailSnapper.value.maxCapacity);
+    console.log(index.value);
   });
 
   return {
