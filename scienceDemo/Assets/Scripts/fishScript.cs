@@ -5,6 +5,7 @@ public class FishScript : MonoBehaviour
 {
     public static List<Fish> fishList = new List<Fish>();
     public List<Fish> fishes = new List<Fish>();
+    
     private Fish fish;
     public SpriteRenderer sprite;
 
@@ -18,12 +19,20 @@ public class FishScript : MonoBehaviour
     {
         fishList.Clear();
         fishList.AddRange(fishes);
+        foreach (var fish in fishes)
+        {
+            Debug.Log($"Fish Name: {fish.name}, Population: {fish.population}");
+        }
+
     }
 
     void Start()
     {
+
         InitializeFish();
+
     }
+
 
     private void InitializeFish()
     {
@@ -52,8 +61,8 @@ public class FishScript : MonoBehaviour
         float newY = startPos + (Mathf.Sin(sin * fish.waveSpeed) / fish.waveDistance);
 
         Vector3 newPosition = transform.position;
-        newPosition.x -= fish.speed * Time.deltaTime; 
-        newPosition.y = newY; 
+        newPosition.x -= fish.speed * Time.deltaTime;
+        newPosition.y = newY;
 
         transform.position = newPosition;
     }
@@ -81,20 +90,20 @@ public class FishScript : MonoBehaviour
         return fishList[0];
     }
 
-  void OnMouseDown()
-{
-    if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+    void OnMouseDown()
     {
-        Debug.Log("Mouse clicked on fish object.");
-        modalScript.textInfo = new string[] { fish.name, fish.desc };
-        modalScript.modal.SetActive(true);
-        
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        mousePosition.z = 0;
-        
-        modalScript.modal.transform.position = mousePosition;
-        Debug.Log("Modal position set to: " + mousePosition);
+        if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("Mouse clicked on fish object.");
+            modalScript.textInfo = new string[] { fish.name, fish.desc };
+            modalScript.modal.SetActive(true);
+
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            mousePosition.z = 0;
+
+            modalScript.modal.transform.position = mousePosition;
+            Debug.Log("Modal position set to: " + mousePosition);
+        }
     }
-}
 }

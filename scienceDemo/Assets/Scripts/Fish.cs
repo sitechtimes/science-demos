@@ -21,4 +21,10 @@ public class Fish : ScriptableObject
     public int population;
     [TextArea]
     public string desc;
+
+    [Header("Spawn Properties")]
+ 
+    public int initialPopulation;
+
+    public float spawnSpeed;  
 }
