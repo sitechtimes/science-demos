@@ -10,7 +10,9 @@ export const growthFactorsStore = defineStore("growthFactorsStore", () => {
   const algaeStats = computed(() => {
     return {
       growthRate:
-        2.1 * popStore.nutrientLoad * (0.5 + 0.5 * popStore.waterClarity),
+        2.1 *
+        popStore.nutrientLoad *
+        (0.5 + (0.5 * popStore.waterClarity) / 100),
       mortalityRate: 0.001,
       competitionFactor: 0,
       symbiosisFactor: 0,
@@ -30,11 +32,12 @@ export const growthFactorsStore = defineStore("growthFactorsStore", () => {
   const staghornCoralStats = computed(() => {
     return {
       growthRate:
-        0.3 *
-        (1 - popStore.coralStress) *
-        popStore.waterTempEffect *
-        popStore.pHImpact *
-        popStore.waterClarity *
+        ((0.3 *
+          (1 - popStore.coralStress) *
+          popStore.waterTempEffect *
+          popStore.pHImpact *
+          popStore.waterClarity) /
+          100) *
         (1 - 0.5 * popStore.sedimentLoad),
       mortalityRate: 0.002,
       bleachingSensitivity: 0.5,
@@ -45,11 +48,12 @@ export const growthFactorsStore = defineStore("growthFactorsStore", () => {
   const starCoralStats = computed(() => {
     return {
       growthRate:
-        0.07 *
-        (1 - popStore.coralStress / 2) *
-        popStore.waterTempEffect *
-        popStore.pHImpact *
-        popStore.waterClarity *
+        ((0.07 *
+          (1 - popStore.coralStress / 2) *
+          popStore.waterTempEffect *
+          popStore.pHImpact *
+          popStore.waterClarity) /
+          100) *
         (1 - 0.5 * popStore.sedimentLoad),
       mortalityRate: 0.0008,
       thermalTolerance: 0.5,

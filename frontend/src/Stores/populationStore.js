@@ -58,6 +58,7 @@ export const populationStore = defineStore("populationStore", () => {
       additivePop - subtractivePop,
       algaeCapacity.value
     );
+    console.log("ALGAE", newPopulation);
     algae.value.population.push(parseFloat(newPopulation));
     return newPopulation;
   };
@@ -219,7 +220,7 @@ export const populationStore = defineStore("populationStore", () => {
     let subtractivePop =
       statStore.urchinStats.mortalityRate *
       longSpinedUrchin.value.population[index.value];
-
+    console.log("URCHIN", additivePop, subtractivePop);
     let newPopulation = Math.min(
       additivePop - subtractivePop,
       longSpinedUrchin.value.maxCapacity[index.value]
