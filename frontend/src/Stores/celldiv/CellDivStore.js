@@ -4,10 +4,14 @@ import { ref } from "vue";
 export const cellDivStore = defineStore("cellDivData", () => {
   const currentTime = ref(0); // keep track of current time value
   const currentCells = ref(1);
-  const graphData = ref([{ x: 0, y: 1 }]);
+  const initialGraph = {
+    x: [0],
+    y: [1],
+  };
+  const graphData = ref(initialGraph);
 
   function clearGraph() {
-    graphData.value = [{ x: 0, y: 1 }];
+    graphData.value = initialGraph;
     currentTime.value = 0;
     currentCells.value = 1;
   }
@@ -25,8 +29,10 @@ export const cellDivStore = defineStore("cellDivData", () => {
 
   function addPoint() {
     currentCells.value = currentCells.value * 2;
-    const obj = { x: currentTime.value, y: currentCells.value };
-    graphData.value = [...graphData.value, obj];
+    graphData.value = {
+      x: [...graphData.value.x, currentTime.value],
+      y: [...graphData.value.y, currentCells.value],
+    };
   }
 
   return {

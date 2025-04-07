@@ -1,9 +1,10 @@
 <script setup>
 import { ref, watch } from 'vue';
+import Card from 'primevue/card';
 import MiGameScene from '@/components/CellDivision/MiGameScene.vue'
 import MeiGameScene from '@/components/CellDivision/MeiGameScene.vue'
 import CellDivChart from '@/components/CellDivision/CellDivChart.vue';
-import { cellDivStore } from '@/Stores/CellDivStore';
+import { cellDivStore } from '@/Stores/celldiv/CellDivStore';
 
 import SelectButton from 'primevue/selectbutton';
 const chartType = ref('Mitosis');
@@ -39,7 +40,16 @@ watch(chartType,
             </div>
         </div>
         <div class="chart-container">
-            <CellDivChart :chartType="chartType" />
+            <CellDivChart :chartType="chartType" :key="componentKey" />
+            <Card>
+                <template #title>{{ chartType }}</template>
+                <template #content>
+                    <p v-if="chartType === 'Mitosis'">One round of mitosis occurs in about 60 minutes. The interphase
+                        period could be 6 hours or greater.In this demo, this time is omitted.</p>
+                    <p v-else-if="chartType === 'Meiosis'">Meiosis is a two-stage division process. We assume
+                        spermatogensis in this demo, which takes about 64 days a cycle.</p>
+                </template>
+            </Card>
         </div>
     </div>
 </template>
@@ -59,7 +69,7 @@ watch(chartType,
     width: 100%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 950px) {
     .sim-chart-container {
         grid-template-columns: 2fr 1fr;
     }
