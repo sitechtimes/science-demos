@@ -107,8 +107,9 @@ export const populationStore = defineStore("populationStore", () => {
 
   const staghornCoralCapacity = () => {
     const staghornSpace =
-      algae.value.population[index.value] -
-      (sponge.value.population[index.value] +
+      1500 -
+      (algae.value.population[index.value] +
+        sponge.value.population[index.value] +
         boulderStarCoral.value.population[index.value]);
     staghornCoral.value.maxCapacity.push(
       parseFloat(Math.max(staghornSpace, 1))
@@ -160,8 +161,9 @@ export const populationStore = defineStore("populationStore", () => {
 
   const boulderStarCoralCapacity = () => {
     let starCoralSpace =
-      algae.value.population[index.value] -
-      (boulderStarCoral.value.population[index.value] +
+      1500 -
+      (algae.value.population[index.value] +
+        boulderStarCoral.value.population[index.value] +
         staghornCoral.value.population[index.value]);
     boulderStarCoral.value.maxCapacity.push(Math.max(starCoralSpace, 1));
     return starCoralSpace;
