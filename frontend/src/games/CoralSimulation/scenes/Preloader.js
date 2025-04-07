@@ -25,7 +25,7 @@ export class Preloader extends Scene {
       // console.log(key, organisms[key].img)
     });
 
-    this.load.image("textbox", "/src/games/CoralSimulation/images/textbox.png");
+    this.load.image("textbox", "/demo-assets/cell-division/textbox.png");
   }
 
   create() {

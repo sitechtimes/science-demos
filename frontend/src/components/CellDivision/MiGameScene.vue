@@ -5,7 +5,7 @@ import PhaserGame from './MiPhaserGame.vue';
 import Button from 'primevue/button';
 import { Game } from '@/games/CellDivisionSimulation/mitosis/scenes/Game.js'
 import { limit } from '@/games/CellDivisionSimulation/mitosis/scenes/Game'
-import { cellDivStore } from '@/Stores/CellDivStore';
+import { cellDivStore } from '@/Stores/celldiv/CellDivStore';
 // The sprite can only be moved in the MainMenu Scene
 
 //  References to the PhaserGame component (game and scene are exposed)
@@ -46,7 +46,7 @@ watch(limit, async (newLimit) => {
 </script>
 
 <template>
-  <PhaserGame ref="phaserRef" @current-active-scene="currentScene" />
+  <PhaserGame ref="phaserRef" />
   <div>
     <div v-if="limit">
       <Button @click="handleRestart">Restart</Button>

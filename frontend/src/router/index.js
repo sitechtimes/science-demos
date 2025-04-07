@@ -38,7 +38,7 @@ const router = createRouter({
         {
           path: "/bio/celldivision",
           name: "dashboard",
-          component: () => import("@/views/pages/bio/Cell_Division.vue"),
+          component: () => import("@/views/pages/bio/CellDivision.vue"),
         },
       ],
     },
