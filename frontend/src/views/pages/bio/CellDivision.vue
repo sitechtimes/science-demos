@@ -1,6 +1,11 @@
 <script setup>
 import { ref, watch } from 'vue';
 import Card from 'primevue/card';
+import Stepper from 'primevue/stepper';
+import StepList from 'primevue/steplist';
+import StepPanels from 'primevue/steppanels';
+import StepItem from 'primevue/stepitem';
+import Step from 'primevue/step';
 import MiGameScene from '@/components/CellDivision/MiGameScene.vue'
 import MeiGameScene from '@/components/CellDivision/MeiGameScene.vue'
 import CellDivChart from '@/components/CellDivision/CellDivChart.vue';
@@ -52,6 +57,35 @@ watch(chartType,
             </Card>
         </div>
     </div>
+
+    <div class="card flex justify-center" v-if="chartType === 'Mitosis'">
+        <Stepper value="0" linear class="basis-[50rem]">
+            <StepList>
+                <Step value="0">Interphase</Step>
+                <Step value="1">Prophase</Step>
+                <Step value="2">Metaphase</Step>
+                <Step value="3">Anaphase</Step>
+                <Step value="4">Telophase</Step>
+            </StepList>
+        </Stepper>
+    </div>
+    <div class="card flex justify-center" v-else-if="chartType === 'Meiosis'">
+        <Stepper value="0" linear class="basis-[50rem]">
+            <StepList>
+                <Step value="0">Interphase</Step>
+                <Step value="1">Prophase I</Step>
+                <Step value="2">Metaphase I</Step>
+                <Step value="3">Anaphase I</Step>
+                <Step value="4">Telophase I</Step>
+                <Step value="5">Meiosis I</Step>
+                <Step value="1">Prophase II</Step>
+                <Step value="2">Metaphase II</Step>
+                <Step value="3">Anaphase II</Step>
+                <Step value="4">Telophase II</Step><!-- fix css -->
+            </StepList>
+        </Stepper>
+    </div>
+
 </template>
 
 <style scoped>

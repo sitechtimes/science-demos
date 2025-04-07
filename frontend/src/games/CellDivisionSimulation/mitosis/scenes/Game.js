@@ -27,7 +27,7 @@ export class Game extends Scene {
   progressYear() {
     if (this.year < 31) {
       switch (this.time_in_cycle) {
-        case 5:
+        case 4:
           this.time_in_cycle = 0;
           this.year++;
           this.cells.forEach((cell) => cell.setTexture("time0"));
