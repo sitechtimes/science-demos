@@ -47,12 +47,11 @@ export const growthFactorsStore = defineStore("growthFactorsStore", () => {
   const starCoralStats = computed(() => {
     return {
       growthRate:
-        ((0.07 *
-          (1 - popStore.coralStress / 2) *
-          popStore.waterTempEffect *
-          popStore.pHImpact *
-          popStore.waterClarity) /
-          100) *
+        0.07 *
+        (1 - popStore.coralStress / 2) *
+        popStore.waterTempEffect *
+        popStore.pHImpact *
+        (popStore.waterClarity / 100) *
         (1 - 0.5 * popStore.sedimentLoad),
       mortalityRate: 0.0008,
       thermalTolerance: 0.5,
