@@ -47,7 +47,7 @@ watch(chartType,
                     <p v-if="chartType === 'Mitosis'">One round of mitosis occurs in about 60 minutes. The interphase
                         period could be 6 hours or greater.In this demo, this time is omitted.</p>
                     <p v-else-if="chartType === 'Meiosis'">Meiosis is a two-stage division process. We assume
-                        spermatogensis in this demo, which takes about 64 days a cycle. </p>
+                        spermatogensis in this demo, which takes about 64 days a cycle.</p>
                 </template>
             </Card>
         </div>
