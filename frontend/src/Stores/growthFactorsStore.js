@@ -32,12 +32,11 @@ export const growthFactorsStore = defineStore("growthFactorsStore", () => {
   const staghornCoralStats = computed(() => {
     return {
       growthRate:
-        ((0.3 *
-          (1 - popStore.coralStress) *
-          popStore.waterTempEffect *
-          popStore.pHImpact *
-          popStore.waterClarity) /
-          100) *
+        0.3 *
+        (1 - popStore.coralStress) *
+        popStore.waterTempEffect *
+        popStore.pHImpact *
+        (popStore.waterClarity / 100) *
         (1 - 0.5 * popStore.sedimentLoad),
       mortalityRate: 0.002,
       bleachingSensitivity: 0.5,
