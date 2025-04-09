@@ -10,11 +10,11 @@ export class Game extends Scene {
   constructor() {
     super("Game");
     this.time_in_cycle = 0;
-    this.year = 0;
+    this.phase = 0;
   }
   restart() {
     limit.value = false;
-    this.year = 0;
+    this.phase = 0;
     this.time_in_cycle = 0;
     this.cells.forEach((cell) => cell.destroy());
     const cell = new Cell(this, 400, 300, "mei-time-0", "x").setDepth(0);
@@ -22,12 +22,12 @@ export class Game extends Scene {
     // console.log('restarted')
     // console.log(this.cells)
   }
-  progressYear() {
-    if (this.year < 21) {
+  progressPhase() {
+    if (this.phase < 21) {
       switch (this.time_in_cycle) {
         case 4:
           this.time_in_cycle++;
-          this.year++;
+          this.phase++;
           this.cells.forEach((cell) => cell.setTexture("mei-time-5"));
           for (let i in this.cells) {
             this.cells.push(
@@ -46,7 +46,7 @@ export class Game extends Scene {
           break;
         case 9:
           this.time_in_cycle = 0;
-          this.year++;
+          this.phase++;
           this.cells.forEach((cell) => cell.setTexture("mei-time-0"));
           for (let i in this.cells) {
             this.cells.push(
@@ -65,7 +65,7 @@ export class Game extends Scene {
           break;
         default:
           this.time_in_cycle++;
-          this.year++;
+          this.phase++;
           this.cells.forEach((cell) =>
             cell.setTexture("mei-time-" + this.time_in_cycle)
           );
@@ -75,13 +75,12 @@ export class Game extends Scene {
         // console.log(this.time_in_cycle);
       }
     }
-    // console.log(this.time_in_cycle, this.year)
-    if (this.year >= 20) {
+    // console.log(this.time_in_cycle, this.phase)
+    if (this.phase >= 20) {
       // console.log('ive hit my limit')
       limit.value = true;
       // console.log(limit)
     }
-    console.log(cellDivStore().currentState);
   }
   create() {
     // this.cameras.main.setBackgroundColor(0x00ff00);
@@ -125,11 +124,4 @@ export class Game extends Scene {
       }
     });
   }
-  // addOrganism(type) {
-  //     new Fish(this, Math.floor(Math.random() * this.scale.width), Math.floor(Math.random() * this.scale.height), 'fish', 'fish')
-  //     // console.log(this.organisms.children.getArray())
-  // }
-  // progressYear(){
-  //     // if year/7=0, make a new cell
-  // }
 }

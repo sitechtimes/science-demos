@@ -58,8 +58,8 @@ watch(chartType,
         </div>
     </div>
 
-    <div class="card flex justify-center" v-if="chartType === 'Mitosis'">
-        <Stepper value="0" linear class="basis-[50rem]">
+    <div v-if="chartType === 'Mitosis'">
+        <Stepper :value="`${cellDivStore().currentState}`" linear class="basis-[50rem] card flex justify-center">
             <StepList>
                 <Step value="0">Interphase</Step>
                 <Step value="1">Prophase</Step>
@@ -69,19 +69,23 @@ watch(chartType,
             </StepList>
         </Stepper>
     </div>
-    <div class="card flex justify-center" v-else-if="chartType === 'Meiosis'">
-        <Stepper value="0" linear class="basis-[50rem]">
+    <div v-else-if="chartType === 'Meiosis'" class="card">
+        <Stepper :value="`${cellDivStore().currentState}`" linear class="basis-[50rem] flex justify-center">
             <StepList>
                 <Step value="0">Interphase</Step>
                 <Step value="1">Prophase I</Step>
                 <Step value="2">Metaphase I</Step>
                 <Step value="3">Anaphase I</Step>
                 <Step value="4">Telophase I</Step>
+            </StepList>
+        </Stepper>
+        <Stepper :value="`${cellDivStore().currentState}`" linear class="basis-[50rem] flex justify-center">
+            <StepList>
                 <Step value="5">Meiosis I</Step>
-                <Step value="1">Prophase II</Step>
-                <Step value="2">Metaphase II</Step>
-                <Step value="3">Anaphase II</Step>
-                <Step value="4">Telophase II</Step><!-- fix css -->
+                <Step value="6">Prophase II</Step>
+                <Step value="7">Metaphase II</Step>
+                <Step value="8">Anaphase II</Step>
+                <Step value="9">Telophase II</Step>
             </StepList>
         </Stepper>
     </div>

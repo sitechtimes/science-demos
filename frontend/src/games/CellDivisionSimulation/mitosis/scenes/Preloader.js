@@ -23,7 +23,7 @@ export class Preloader extends Scene {
 
   preload() {
     //  Load the assets for the game - Replace with your own assets
-    this.load.image("time0", "/demo-assets/cell-division/mitosis/time0.jfif");
+    this.load.image("time0", "/demo-assets/cell-division/mitosis/time0.png");
     this.load.image("time1", "/demo-assets/cell-division/mitosis/time1.png");
     this.load.image("time2", "/demo-assets/cell-division/mitosis/time2.png");
     this.load.image("time3", "/demo-assets/cell-division/mitosis/time3.png");
