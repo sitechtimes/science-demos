@@ -52,7 +52,7 @@ watch(limit, async (newLimit) => {
       <Button @click="handleRestart">Restart</Button>
     </div>
     <div v-else>
-      <Button @click="handleClick">Progress Year</Button>
+      <Button @click="handleClick">Progress Stage</Button>
     </div>
   </div>
 </template>

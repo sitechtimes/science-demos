@@ -23,7 +23,7 @@ export class Game extends Scene {
     // console.log(this.cells)
   }
   progressYear() {
-    if (this.year < 31) {
+    if (this.year < 21) {
       switch (this.time_in_cycle) {
         case 4:
           this.time_in_cycle++;
@@ -41,24 +41,26 @@ export class Game extends Scene {
           }
           this.cells.forEach((cell) => cell.clearPopup());
           cellDivStore().addPoint();
+          cellDivStore().progressState(1);
           // console.log(this.time_in_cycle);
           break;
         case 9:
           this.time_in_cycle = 0;
           this.year++;
-          this.cells.forEach((cell) => cell.setTexture("mei-time-9"));
+          this.cells.forEach((cell) => cell.setTexture("mei-time-0"));
           for (let i in this.cells) {
             this.cells.push(
               new Cell(
                 this,
                 Math.floor(Math.random() * this.scale.width),
                 Math.floor(Math.random() * this.scale.height),
-                "mei-time-9"
+                "mei-time-0"
               ).setDepth(0)
             );
           }
           this.cells.forEach((cell) => cell.clearPopup());
           cellDivStore().addPoint();
+          cellDivStore().progressState(0);
           // console.log(this.time_in_cycle);
           break;
         default:
@@ -69,15 +71,17 @@ export class Game extends Scene {
           );
           this.cells.forEach((cell) => cell.clearPopup());
           cellDivStore().addTime("meiosis");
+          cellDivStore().progressState(1);
         // console.log(this.time_in_cycle);
       }
     }
     // console.log(this.time_in_cycle, this.year)
-    if (this.year >= 21) {
+    if (this.year >= 20) {
       // console.log('ive hit my limit')
       limit.value = true;
       // console.log(limit)
     }
+    console.log(cellDivStore().currentState);
   }
   create() {
     // this.cameras.main.setBackgroundColor(0x00ff00);

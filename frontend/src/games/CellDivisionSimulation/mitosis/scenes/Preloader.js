@@ -28,7 +28,6 @@ export class Preloader extends Scene {
     this.load.image("time2", "/demo-assets/cell-division/mitosis/time2.png");
     this.load.image("time3", "/demo-assets/cell-division/mitosis/time3.png");
     this.load.image("time4", "/demo-assets/cell-division/mitosis/time4.png");
-    this.load.image("time5", "/demo-assets/cell-division/mitosis/time5.png");
 
     this.load.image("textbox", "/demo-assets/cell-division/textbox.png");
   }

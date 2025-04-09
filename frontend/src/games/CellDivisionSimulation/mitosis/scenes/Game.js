@@ -45,6 +45,7 @@ export class Game extends Scene {
           }
           this.cells.forEach((cell) => cell.clearPopup());
           cellDivStore().addPoint();
+          cellDivStore().progressState(0);
           // console.log(this.time_in_cycle);
           break;
         default:
@@ -55,6 +56,7 @@ export class Game extends Scene {
           );
           this.cells.forEach((cell) => cell.clearPopup());
           cellDivStore().addTime("mitosis");
+          cellDivStore().progressState(1);
         // console.log(this.time_in_cycle);
       }
     }

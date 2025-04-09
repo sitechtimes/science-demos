@@ -15,6 +15,7 @@ export const cellDivStore = defineStore("cellDivData", () => {
     graphData.value = initialGraph;
     currentTime.value = 0;
     currentCells.value = 1;
+    currentState.value = 0;
   }
   function addTime(divType) {
     switch (divType) {
@@ -36,11 +37,21 @@ export const cellDivStore = defineStore("cellDivData", () => {
     };
   }
 
+  function progressState(type) {
+    if (type === 1) {
+      currentState.value = currentState.value + 1;
+    } else if (type === 0) {
+      currentState.value = 0;
+    }
+  }
+
   return {
     currentTime,
     graphData,
+    currentState,
     clearGraph,
     addTime,
     addPoint,
+    progressState,
   };
 });
