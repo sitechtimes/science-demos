@@ -529,10 +529,9 @@ export const populationStore = defineStore("populationStore", () => {
   const algalImpact = computed(() => {
     return (
       //(0.6 * textFields[3].obj.getValue() + // logging
-      ((0.3 * dataStore.agriculture.sliderValue) / 100 +
-        (0.05 * dataStore.sewage.sliderValue) / 100 +
-        (0.05 * dataStore.stormSeverity.sliderValue) / 100) / //
-      100
+      (0.3 * dataStore.agriculture.sliderValue) / 100 +
+      (0.05 * dataStore.sewage.sliderValue) / 100 +
+      (0.05 * dataStore.stormSeverity.sliderValue) / 100 //
     );
   });
 
