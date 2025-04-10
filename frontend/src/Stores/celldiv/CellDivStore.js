@@ -23,7 +23,7 @@ export const cellDivStore = defineStore("cellDivData", () => {
         currentTime.value = currentTime.value + 0.25;
         break;
       case "meiosis":
-        currentTime.value = currentTime.value + 8; // 1 cycle spermatogenesis takes 64 days, 8 phases
+        currentTime.value = currentTime.value + 9; // 1 cycle spermatogenesis takes 64 days, 8 phases
       default:
         break;
     }
