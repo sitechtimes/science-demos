@@ -23,7 +23,7 @@ export class Game extends Scene {
     // console.log(this.cells)
   }
   progressPhase() {
-    if (this.phase < 21) {
+    if (this.phase < 10) {
       switch (this.time_in_cycle) {
         case 4:
           this.time_in_cycle++;
@@ -76,7 +76,7 @@ export class Game extends Scene {
       }
     }
     // console.log(this.time_in_cycle, this.phase)
-    if (this.phase >= 20) {
+    if (this.phase >= 9) {
       // console.log('ive hit my limit')
       limit.value = true;
       // console.log(limit)
