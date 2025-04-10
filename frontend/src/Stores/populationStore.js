@@ -198,7 +198,7 @@ export const populationStore = defineStore("populationStore", () => {
 
   const longSpinedUrchin = ref({
     description: "blah blah blah blah blah",
-    maxCapacity: [1160],
+    maxCapacity: [1200],
     population: [1160],
   });
 
@@ -473,8 +473,10 @@ export const populationStore = defineStore("populationStore", () => {
 
   const currentYear = ref(0); // wherever you trigger the simulation, please add a for loop to increment currentYear by 1
   const index = computed(() => {
-    let previousYear = currentYear.value - 2;
-    previousYear < 0 ? (previousYear = 0) : previousYear;
+    let previousYear;
+    currentYear.value - 1 < 0
+      ? (previousYear = 0)
+      : (previousYear = currentYear.value - 1);
     return previousYear;
   });
 
