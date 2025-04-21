@@ -22,7 +22,10 @@ export const growthFactorsStore = defineStore("growthFactorsStore", () => {
   const spongeStats = computed(() => {
     return {
       growthRate:
-        0.3 * (0.8 + 0.25 * popStore.nutrientLoad - popStore.sedimentLoad),
+        0.3 *
+        (0.8 +
+          (0.25 * popStore.nutrientLoad) / 100 -
+          popStore.sedimentLoad / 100),
       mortalityRate: 0.002,
       competitionFactor: 0,
       symbiosisFactor: 0,
@@ -77,7 +80,7 @@ export const growthFactorsStore = defineStore("growthFactorsStore", () => {
 
   const angelFishStats = computed(() => {
     return {
-      growthRate: 0.0011, // Sponge consumption efficiency
+      growthRate: 0.0511, // Sponge consumption efficiency
       mortalityRate: 0.0014 + (0.71 * 0) / 100, // 0 stands for fishing pressure
       predationRate: 0.02,
       larvalSurvival: 0,

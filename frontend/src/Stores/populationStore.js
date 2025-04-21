@@ -66,7 +66,7 @@ export const populationStore = defineStore("populationStore", () => {
   const sponge = ref({
     description: "blah blah blah blah blah",
     maxCapacity: [1100],
-    population: [11],
+    population: [200],
   });
 
   const spongeCapacity = () => {
@@ -290,7 +290,7 @@ export const populationStore = defineStore("populationStore", () => {
         sponge.value.population[index.value];
     let subtractivePop =
       statStore.angelFishStats.mortalityRate *
-        queenAngelfish.value.population[index.value] -
+        queenAngelfish.value.population[index.value] +
       (nassauGrouper.value.population[index.value] +
         yellowtailSnapper.value.population[index.value] +
         6 * redLionfish.value.population[index.value]) *
@@ -300,6 +300,7 @@ export const populationStore = defineStore("populationStore", () => {
       additivePop - subtractivePop,
       queenAngelfish.value.maxCapacity[index.value]
     );
+    console.log("ANGEL", additivePop, subtractivePop);
     queenAngelfish.value.population.push(parseFloat(newPopulation));
     return newPopulation;
   };
