@@ -6,7 +6,7 @@ export class Boot extends Scene {
   }
 
   preload() {
-    this.load.image("background", "/demo-assets/cell-division/background.png");
+    this.load.image("background", "/demo-assets/abiotic-coral/background.png");
   }
 
   create() {
