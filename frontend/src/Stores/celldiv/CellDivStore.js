@@ -20,10 +20,10 @@ export const cellDivStore = defineStore("cellDivData", () => {
   function addTime(divType) {
     switch (divType) {
       case "mitosis": // 1 cycle of mitosis takes 1 hour, 4 phases 5 cell states
-        currentTime.value = currentTime.value + 0.25;
+        currentTime.value += 0.25;
         break;
       case "meiosis":
-        currentTime.value = currentTime.value + 9; // 1 cycle spermatogenesis takes 64 days, 8 phases
+        currentTime.value += 9; // 1 cycle spermatogenesis takes 64 days, 8 phases
       default:
         break;
     }
@@ -38,10 +38,9 @@ export const cellDivStore = defineStore("cellDivData", () => {
   }
 
   function progressState(type) {
-    if (type === 1) {
-      currentState.value = currentState.value + 1;
-    } else if (type === 0) {
-      currentState.value = 0;
+    function progressState(type) {
+      if (type === 1) return (currentState.value += 1); // will progress state
+      currentState.value = 0; // if type 0 will not progress, returns to initial
     }
   }
 

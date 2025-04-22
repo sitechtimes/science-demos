@@ -57,11 +57,11 @@ watch(chartType,
                         <p>This demo will start with one cell. </p>
                         <p class="font-semibold">stages</p>
                         <ol class="list-decimal">
-                            <li> Nuclear membrane dissolves </li>
-                            <li> Centrosomes attach to chromosomes </li>
+                            <li> Nuclear membrane dissolves</li>
+                            <li> Centrosomes attach to chromosomes</li>
                             <li>centrosomes pull apart chromosomes</li>
-                            <li> nuclear membrane develops around each set of chromosomes </li>
-                            <li> cell separates </li>
+                            <li> nuclear membrane develops around each set of chromosomes</li>
+                            <li> cell separates</li>
                         </ol>
                         <p>One round of mitosis occurs in
                             about 60 minutes. The interphase period could be 6 hours or greater. In this demo, this time
@@ -74,11 +74,11 @@ watch(chartType,
                             occur twice:</p>
                         <p class="font-semibold">stages</p>
                         <ol class="list-decimal">
-                            <li> Nuclear membrane dissolves </li>
-                            <li> Centrosomes attach to chromosomes </li>
+                            <li> Nuclear membrane dissolves</li>
+                            <li> Centrosomes attach to chromosomes</li>
                             <li>centrosomes pull apart chromosomes</li>
-                            <li> nuclear membrane develops around each set of chromosomes </li>
-                            <li> cell separates </li>
+                            <li> nuclear membrane develops around each set of chromosomes</li>
+                            <li> cell separates</li>
                         </ol>
                         <p>We assume
                             spermatogensis in this demo, which takes about 64 days a cycle. </p>
