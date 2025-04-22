@@ -1,10 +1,8 @@
 <script setup>
-import FloatingConfigurator from '@/components/FloatingConfigurator.vue';
 import Button from 'primevue/button';
 </script>
 
 <template>
-    <FloatingConfigurator />
     <div class="flex items-center justify-center min-h-screen overflow-hidden">
         <div class="flex flex-col items-center justify-center">
             <div

@@ -1,4 +1,3 @@
-import Phaser from "phaser";
 import Organism from "./Organism";
 
 export default class Fish extends Organism {
