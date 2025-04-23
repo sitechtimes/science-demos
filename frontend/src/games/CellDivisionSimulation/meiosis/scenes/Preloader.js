@@ -25,43 +25,43 @@ export class Preloader extends Scene {
     //  Load the assets for the game - Replace with your own assets
     this.load.image(
       "mei-time-0",
-      "/demo-assets/cell-division/meiosis/mei-time-0.jpg"
+      "/demo-assets/cell-division/meiosis/mei-time-0.png"
     );
     this.load.image(
       "mei-time-1",
-      "/demo-assets/cell-division/meiosis/mei-time-1.jpg"
+      "/demo-assets/cell-division/meiosis/mei-time-1.png"
     );
     this.load.image(
       "mei-time-2",
-      "/demo-assets/cell-division/meiosis/mei-time-2.jpg"
+      "/demo-assets/cell-division/meiosis/mei-time-2.png"
     );
     this.load.image(
       "mei-time-3",
-      "/demo-assets/cell-division/meiosis/mei-time-3.jpg"
+      "/demo-assets/cell-division/meiosis/mei-time-3.png"
     );
     this.load.image(
       "mei-time-4",
-      "/demo-assets/cell-division/meiosis/mei-time-4.jpg"
+      "/demo-assets/cell-division/meiosis/mei-time-4.png"
     );
     this.load.image(
       "mei-time-5",
-      "/demo-assets/cell-division/meiosis/mei-time-5.jpg"
+      "/demo-assets/cell-division/meiosis/mei-time-5.png"
     );
     this.load.image(
       "mei-time-6",
-      "/demo-assets/cell-division/meiosis/mei-time-6.jpg"
+      "/demo-assets/cell-division/meiosis/mei-time-6.png"
     );
     this.load.image(
       "mei-time-7",
-      "/demo-assets/cell-division/meiosis/mei-time-7.jpg"
+      "/demo-assets/cell-division/meiosis/mei-time-7.png"
     );
     this.load.image(
       "mei-time-8",
-      "/demo-assets/cell-division/meiosis/mei-time-8.jpg"
+      "/demo-assets/cell-division/meiosis/mei-time-8.png"
     );
     this.load.image(
       "mei-time-9",
-      "/demo-assets/cell-division/meiosis/mei-time-9.jpg"
+      "/demo-assets/cell-division/meiosis/mei-time-9.png"
     );
     this.load.image(
       "mei-time-10",

@@ -28,18 +28,20 @@ const setChartOptions = (styles, cellType) => {
               : "undefined",
       },
       zeroline: false,
+      gridcolor: styles.surfaceBorder,
     },
     yaxis: {
       title: {
         text: "number of cells",
       },
+      gridcolor: styles.surfaceBorder,
     },
     showlegend: false,
   };
   return chartOptions;
 };
 
-const setChartData = (storeData) => {
+const setChartData = (storeData, styles) => {
   // return data options
   return [
     {
@@ -47,6 +49,9 @@ const setChartData = (storeData) => {
       name: "cell number",
       fill: "tozeroy",
       type: "scatter",
+      line: {
+        color: styles.primaryColor,
+      },
     },
   ];
 };
