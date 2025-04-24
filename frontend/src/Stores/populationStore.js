@@ -681,31 +681,53 @@ export const populationStore = defineStore("populationStore", () => {
     return Math.min(bleachingProbability, 1); // Maximum 100% bleaching
   });
 
-  watch(currentYear, () => {
-    //populations
-    algaePopulation();
-    spongePopulation();
-    staghornCoralPopulation();
-    boulderStarCoralPopulation();
-    longSpinedUrchinPopulation();
-    spotlightParrotfishPopulation();
-    queenAngelfishPopulation();
-    crownOfThornsPopulation();
-    hawksbillSeaTurtlePopulation();
-    nassauGrouperPopulation();
-    redLionfishPopulation();
-    yellowtailSnapperPopulation();
-    //capacities
-    spongeCapacity();
-    staghornCoralCapacity();
-    boulderStarCoralCapacity();
-    longSpinedUrchinCapacity();
-    spotlightParrotfishCapacity();
-    queenAngelfishCapacity();
-    crownOfThornsCapacity();
-    hawksbillSeaTurtleCapacity();
-    nassauGrouperCapacity();
-    yellowtailSnapperCapacity();
+  watch(currentYear, (newYear, oldYear) => {
+    if (oldYear >= newYear) {
+      [
+        algae,
+        boulderStarCoral,
+        crownOfThornsStarfish,
+        hawksbillSeaTurtle,
+        longSpinedUrchin,
+        nassauGrouper,
+        queenAngelfish,
+        redLionfish,
+        sponge,
+        spotlightParrotfish,
+        staghornCoral,
+        yellowtailSnapper,
+      ].forEach((species) => {
+        species.value.population.pop();
+        if (species.value.maxCapacity === Array) {
+          species.value.maxCapacity.pop();
+        }
+      });
+    } else {
+      //populations
+      algaePopulation();
+      spongePopulation();
+      staghornCoralPopulation();
+      boulderStarCoralPopulation();
+      longSpinedUrchinPopulation();
+      spotlightParrotfishPopulation();
+      queenAngelfishPopulation();
+      crownOfThornsPopulation();
+      hawksbillSeaTurtlePopulation();
+      nassauGrouperPopulation();
+      redLionfishPopulation();
+      yellowtailSnapperPopulation();
+      //capacities
+      spongeCapacity();
+      staghornCoralCapacity();
+      boulderStarCoralCapacity();
+      longSpinedUrchinCapacity();
+      spotlightParrotfishCapacity();
+      queenAngelfishCapacity();
+      crownOfThornsCapacity();
+      hawksbillSeaTurtleCapacity();
+      nassauGrouperCapacity();
+      yellowtailSnapperCapacity();
+    }
 
     console.log("POPULATIONS:");
     console.log("algaepop", algae.value.population);
@@ -722,17 +744,17 @@ export const populationStore = defineStore("populationStore", () => {
     console.log("snapperpop", yellowtailSnapper.value.population);
 
     console.log("CAPACITIES:");
-    console.log("algae", algae.value.maxCapacity);
-    console.log("sponge", sponge.value.maxCapacity);
-    console.log("staghorn", staghornCoral.value.maxCapacity);
-    console.log("boulder", boulderStarCoral.value.maxCapacity);
-    console.log("urchin", longSpinedUrchin.value.maxCapacity);
-    console.log("parrotfish", spotlightParrotfish.value.maxCapacity);
-    console.log("angel", queenAngelfish.value.maxCapacity);
-    console.log("crown", crownOfThornsStarfish.value.maxCapacity);
-    console.log("turtle", hawksbillSeaTurtle.value.maxCapacity);
-    console.log("grouper", nassauGrouper.value.maxCapacity);
-    console.log("lionfish", redLionfish.value.maxCapacity);
+    console.log("algaecap", algae.value.maxCapacity);
+    console.log("spongecap", sponge.value.maxCapacity);
+    console.log("staghorncap", staghornCoral.value.maxCapacity);
+    console.log("bouldercap", boulderStarCoral.value.maxCapacity);
+    console.log("urchincap", longSpinedUrchin.value.maxCapacity);
+    console.log("parrotfishcap", spotlightParrotfish.value.maxCapacity);
+    console.log("angelcap", queenAngelfish.value.maxCapacity);
+    console.log("crowncap", crownOfThornsStarfish.value.maxCapacity);
+    console.log("turtlecap", hawksbillSeaTurtle.value.maxCapacity);
+    console.log("groupercap", nassauGrouper.value.maxCapacity);
+    console.log("lionfishcap", redLionfish.value.maxCapacity);
     console.log("snappercap", yellowtailSnapper.value.maxCapacity);
     console.log("year", index.value);
 
