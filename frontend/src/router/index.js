@@ -16,6 +16,17 @@ const router = createRouter({
       ],
     },
     {
+      path: "/artcredits",
+      component: AppLayout,
+      children: [
+        {
+          path: "/artcredits",
+          name: "Art Credits",
+          component: () => import("@/views/ArtCredits.vue"),
+        },
+      ],
+    },
+    {
       path: "/apes",
       component: AppLayout,
       children: [

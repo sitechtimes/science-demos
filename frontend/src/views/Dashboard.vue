@@ -1,5 +1,5 @@
 <template>
-    <div class="flex lg:flex-row flex-col gap-4 bg-surface-0 dark:bg-surface-900">
+    <div class="flex lg:flex-row flex-col gap-4 card">
         <div class="flex-1 flex items-center justify-center">
             <div class="p-6 pt-12 lg:p-12">
                 <h1
@@ -31,6 +31,13 @@
                 </template>
             </Carousel>
         </div>
+    </div>
+    <div class="card flex">
+        <h2
+            class="text-1xl lg:text-2xl font-bold text-surface-900 dark:text-surface-0 mb-4 lg:leading-normal text-center">
+            Check out our asset credits!
+        </h2>
+        <Button icon="pi pi-external-link" class="ml-2" as="router-link" label="see art credits" to="/artcredits" />
     </div>
 </template>
 <script setup>
