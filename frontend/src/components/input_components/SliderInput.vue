@@ -9,19 +9,13 @@ const slider = props.var;
 
 <template>
   <div class="flex flex-col space-y-4">
-  <div>
-    <label :for="slider.name" class="block">{{ slider.name }}</label>
-    <InputText v-model.number="slider.sliderValue" />
+    <div>
+      <label :for="slider.name" class="block">{{ slider.name }}</label>
+      <InputText v-model.number="slider.sliderValue" />
+    </div>
+    <Slider v-model="slider.sliderValue" :step="slider.sliderStep" :min="slider.sliderMin" :max="slider.sliderMax"
+      :id="slider.name" class="w-full" />
   </div>
-  <Slider
-    v-model="slider.sliderValue"
-    :step="slider.sliderStep"
-    :min="slider.sliderMin"
-    :max="slider.sliderMax"
-    :id="slider.name"
-    class="w-full"
-  />
-</div>
 </template>
 
 <style lang="scss" scoped></style>
