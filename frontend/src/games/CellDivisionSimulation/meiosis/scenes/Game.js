@@ -8,13 +8,13 @@ export const limit = ref(false);
 export class Game extends Scene {
   constructor() {
     super("Game");
-    this.time_in_cycle = 0;
+    this.cycleTime = 0;
     this.year = 0;
   }
   restart() {
     limit.value = false;
     this.year = 0;
-    this.time_in_cycle = 0;
+    this.cycleTime = 0;
     this.cells.forEach((cell) => cell.destroy());
     const cell = new Cell(this, 400, 300, "mei-time-0", "x").setDepth(0);
     this.cells = [cell];
@@ -23,9 +23,9 @@ export class Game extends Scene {
   }
   progressYear() {
     if (this.year < 31) {
-      switch (this.time_in_cycle) {
+      switch (this.cycleTime) {
         case 4:
-          this.time_in_cycle++;
+          this.cycleTime++;
           this.year++;
           this.cells.forEach((cell) => cell.setTexture("mei-time-5"));
           for (let i in this.cells) {
@@ -40,10 +40,10 @@ export class Game extends Scene {
           }
           this.cells.forEach((cell) => cell.clearPopup());
           cellDivStore().addPoint();
-          // console.log(this.time_in_cycle);
+          // console.log(this.cycleTime);
           break;
         case 9:
-          this.time_in_cycle = 0;
+          this.cycleTime = 0;
           this.year++;
           this.cells.forEach((cell) => cell.setTexture("mei-time-9"));
           for (let i in this.cells) {
@@ -58,20 +58,20 @@ export class Game extends Scene {
           }
           this.cells.forEach((cell) => cell.clearPopup());
           cellDivStore().addPoint();
-          // console.log(this.time_in_cycle);
+          // console.log(this.cycleTime);
           break;
         default:
-          this.time_in_cycle++;
+          this.cycleTime++;
           this.year++;
           this.cells.forEach((cell) =>
-            cell.setTexture("mei-time-" + this.time_in_cycle)
+            cell.setTexture("mei-time-" + this.cycleTime)
           );
           this.cells.forEach((cell) => cell.clearPopup());
           cellDivStore().addTime("meiosis");
-        // console.log(this.time_in_cycle);
+        // console.log(this.cycleTime);
       }
     }
-    // console.log(this.time_in_cycle, this.year)
+    // console.log(this.cycleTime, this.year)
     if (this.year >= 21) {
       // console.log('ive hit my limit')
       limit.value = true;

@@ -39,8 +39,8 @@ function removeOrganism(type) {
     <PhaserGame ref="phaserRef" @current-active-scene="currentScene" />
     <div>
         <div>
-            <Button @click="() => addOrganism('nassau_grouper')">Add Sprites</Button>
-            <Button @click="() => removeOrganism('nassau_grouper')">Remove Sprites</Button>
+            <Button @click="() => addOrganism('nassauGrouper')">Add Sprites</Button>
+            <Button @click="() => removeOrganism('nassauGrouper')">Remove Sprites</Button>
         </div>
     </div>
 </template>
