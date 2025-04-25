@@ -21,7 +21,7 @@ const changeScene = () => {
 }
 function handleClick() {
   const scene = toRaw(phaserRef.value.scene);
-  scene.progressYear()
+  scene.progressPhase()
   // console.log(limit, limit.value)
 }
 function handleRestart() {
@@ -50,7 +50,7 @@ watch(limit, async (newLimit) => {
       <Button @click="handleRestart">Restart</Button>
     </div>
     <div v-else>
-      <Button @click="handleClick">Progress Year</Button>
+      <Button @click="handleClick">Progress phase</Button>
     </div>
   </div>
 </template>
