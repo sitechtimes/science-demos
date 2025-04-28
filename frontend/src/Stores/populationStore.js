@@ -698,7 +698,7 @@ export const populationStore = defineStore("populationStore", () => {
         yellowtailSnapper,
       ].forEach((species) => {
         species.value.population.pop();
-        if (species.value.maxCapacity === Array) {
+        if (species.value.maxCapacity.length >= 1) {
           species.value.maxCapacity.pop();
         }
       });
