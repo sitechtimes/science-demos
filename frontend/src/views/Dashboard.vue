@@ -52,5 +52,4 @@ const demoRoutes = [];
 menuModel[1].items.forEach(item => {
     demoRoutes.push(...item.items);
 })
-console.log(demoRoutes)
 </script>
