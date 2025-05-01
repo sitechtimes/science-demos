@@ -6,15 +6,15 @@
         <DataView :value="demoRoutes" :layout="'grid'">
             <template #grid="slotProps">
                 <div class="grid grid-cols-12 gap-4">
-                    <div v-for="(item, index) in slotProps.items" :key="index"
+                    <div v-for="item in slotProps.items" :key="item.label"
                         class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-6 p-2">
                         <div
                             class="p-6 border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 rounded flex flex-col">
-                            <i :class="`${item.icon} w-full rounded`" style="font-size: 5rem"></i>
+                            <i :class="`${item.icon} w-full rounded lg-icon`"></i>
                             <div class="pt-6">
                                 <div class="flex flex-row justify-between items-start gap-2">
                                     <div>
-                                        <div class="text-lg font-medium mt-1" v-if="item.artistName != ''">assets by {{
+                                        <div class="text-lg font-medium mt-1" v-if="item.artistName !== ''">assets by {{
                                             item.artistName }}</div>
                                     </div>
                                 </div>
@@ -46,4 +46,8 @@ menuModel[1].items.forEach(item => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.lg-icon {
+    font-size: 5rem;
+}
+</style>

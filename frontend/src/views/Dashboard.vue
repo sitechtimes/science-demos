@@ -14,10 +14,10 @@
         <div class="flex-1 overflow-hidden">
             <Carousel :value="demoRoutes" :numVisible="1" :numScroll="1">
                 <template #item="slotProps">
-                    <div class="border border-surface-200 dark:border-surface-700 rounded m-2  p-4">
+                    <div class="border border-surface-200 dark:border-surface-700 rounded m-2 p-4">
                         <div class="mb-4">
                             <div class="relative mx-auto">
-                                <i :class="`${slotProps.data.icon} w-full rounded`" style="font-size: 5rem"></i>
+                                <i :class="`${slotProps.data.icon} w-full rounded lg-icon`"></i>
                             </div>
                         </div>
                         <div class="flex justify-between items-center">
@@ -53,3 +53,8 @@ menuModel[1].items.forEach(item => {
     demoRoutes.push(...item.items);
 })
 </script>
+<style scoped>
+.lg-icon {
+    font-size: 5rem;
+}
+</style>
