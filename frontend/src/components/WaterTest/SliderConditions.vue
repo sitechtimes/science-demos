@@ -4,7 +4,12 @@ import { waterTestConditions } from "@/Stores/watertest/waterTestStore";
 import { ref } from "vue";
 
 const dataStore = waterTestConditions();
-const sliderVariables = ref(["oceanTemp", "stormSeverity", "waterPH"]);
+const sliderVariables = ref(["waterTemp",
+  "acidRain",
+  "mineDrainage",
+  "deforestation",
+  "untreatedSewage",]);
+/* add tooltips to sliders to explain what each input should be */
 // if we do include more conditions we will have to include a selectbutton or dropdown to switch between
 </script>
 

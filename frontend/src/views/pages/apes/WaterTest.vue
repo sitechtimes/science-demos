@@ -1,10 +1,11 @@
 <template>
     <div class="chart-slider-container">
-        <div class="chart-container">
+        <div class="chart-container card">
             <p>unity scene placeholder</p>
+            <p>{{ waterTestConditions() }}</p>
         </div>
-        <div class="slider-container">
-            <p>b</p>
+        <div class="slider-container card">
+            <SliderConditions />
         </div>
     </div>
 </template>
@@ -12,6 +13,8 @@
 <script setup>
 import { onBeforeMount, ref, watch } from "vue";
 import { useLayout } from '@/layout/composables/layout';
+import SliderConditions from "@/components/WaterTest/SliderConditions.vue";
+import { waterTestConditions } from "@/Stores/watertest/waterTestStore";
 import PlotlyChart from '@/components/PlotlyChart.vue';
 import Slider from 'primevue/slider';
 import Card from "primevue/card";

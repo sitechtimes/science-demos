@@ -22,6 +22,12 @@ const menuModel = [
             to: "/apes/soiltypes",
             artistName: "",
           },
+          {
+            label: "Water Testing",
+            icon: "pi pi-fw pi-bookmark",
+            to: "/apes/watertesting",
+            artistName: "",
+          },
         ],
       },
       {
