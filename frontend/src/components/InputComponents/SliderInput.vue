@@ -5,7 +5,6 @@ const props = defineProps(['var']);
 // props.var is a ref from the store, so it's already reactive
 // make it so it takes input of unit % nothing years etc
 const slider = props.var;
-console.log(slider.tooltip)
 </script>
 
 <template>
@@ -15,7 +14,9 @@ console.log(slider.tooltip)
       <InputText v-model.number="slider.sliderValue" />
     </div>
     <Slider v-model="slider.sliderValue" :step="slider.sliderStep" :min="slider.sliderMin" :max="slider.sliderMax"
-      :id="slider.name" class="w-full" />
+      :id="slider.name" class="w-full" v-tooltip.top="`${slider.tooltip}`" v-if="slider.tooltip !== undefined" />
+    <Slider v-model="slider.sliderValue" :step="slider.sliderStep" :min="slider.sliderMin" :max="slider.sliderMax"
+      :id="slider.name" class="w-full" v-else />
   </div>
 </template>
 

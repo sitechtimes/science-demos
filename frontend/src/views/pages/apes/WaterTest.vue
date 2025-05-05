@@ -2,7 +2,10 @@
     <div class="chart-slider-container">
         <div class="chart-container card">
             <p>unity scene placeholder</p>
-            <p>{{ waterTestConditions() }}</p>
+            <div v-for="condition in waterTestConditions()" :key="condition.name">
+                <p>{{ condition.name }}</p>
+                <p>{{ condition.sliderValue }}</p>
+            </div>
         </div>
         <div class="slider-container card">
             <SliderConditions />
