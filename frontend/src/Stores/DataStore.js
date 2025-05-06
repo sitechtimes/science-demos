@@ -117,6 +117,7 @@ export const DataStore = defineStore("data", () => {
     sewage,
     //fishing,
     netFishing,
+    grouperFishing,
     blackBandDisease,
     whiteBandDisease,
 

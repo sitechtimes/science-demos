@@ -397,7 +397,7 @@ export const populationStore = defineStore("populationStore", () => {
     let subtractivePop =
       statStore.grouperStats.mortalityRate *
       nassauGrouper.value.population[index.value] *
-      (1 + 0 / 100); //0 stands for fishing pressure slider thing
+      (1 + 0 / 100); //0 stands for fishing pressure slider thing (uhh added slider)
     let newPopulation = Math.min(
       additivePop - subtractivePop,
       nassauGrouper.value.maxCapacity[index.value]
