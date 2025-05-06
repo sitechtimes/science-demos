@@ -11,7 +11,7 @@ const slider = props.var;
   <div class="flex flex-col space-y-4">
     <div>
       <label :for="slider.name" class="block">{{ slider.name }}</label>
-      <InputText v-model.number="slider.sliderValue" />
+      <InputText :aria-label="slider.name" v-model.number="slider.sliderValue" />
     </div>
     <Slider v-model="slider.sliderValue" :step="slider.sliderStep" :min="slider.sliderMin" :max="slider.sliderMax"
       :id="slider.name" class="w-full" v-tooltip.top="`${slider.tooltip}`" v-if="slider.tooltip !== undefined" />

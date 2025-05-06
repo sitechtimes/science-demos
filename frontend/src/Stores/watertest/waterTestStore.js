@@ -29,6 +29,7 @@ export const waterTestConditions = defineStore("waterTest", () => {
     sliderMin: 0,
     sliderMax: 100,
     sliderStep: 1,
+    tooltip: "select amount of acid rain in percent. ",
   });
   const mineDrainage = ref({
     // % of activity
@@ -37,6 +38,7 @@ export const waterTestConditions = defineStore("waterTest", () => {
     sliderMin: 0,
     sliderMax: 100,
     sliderStep: 1,
+    tooltip: "select amount of mine drainage in percent. ",
   });
   const deforestation = ref({
     // % of watershed area
@@ -45,6 +47,7 @@ export const waterTestConditions = defineStore("waterTest", () => {
     sliderMin: 0,
     sliderMax: 100,
     sliderStep: 1,
+    tooltip: "select amount of deforestation in percent. ",
   });
   const untreatedSewage = ref({
     // % that inputs into water
@@ -53,6 +56,7 @@ export const waterTestConditions = defineStore("waterTest", () => {
     sliderMin: 0,
     sliderMax: 100,
     sliderStep: 1,
+    tooltip: "select amount of sewage input into the water in percent. ",
   });
 
   return {
