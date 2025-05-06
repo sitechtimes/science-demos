@@ -96,6 +96,12 @@ export const populationStore = defineStore("populationStore", () => {
       sponge.value.maxCapacity[index.value]
     );
     sponge.value.population.push(parseFloat(newPopulation));
+    console.log(
+      "sponge additivePop",
+      additivePop,
+      "sponge subtractivePop",
+      subtractivePop
+    );
     return newPopulation;
   };
 
@@ -143,7 +149,7 @@ export const populationStore = defineStore("populationStore", () => {
         (dataStore.stormSeverity.sliderValue / 100) *
         staghornCoral.value.population[index.value];
     }
-
+    console.log("staghornCoral", additivePop, subtractivePop);
     let newPopulation = additivePop - subtractivePop;
     staghornCoral.value.population.push(
       parseFloat(
