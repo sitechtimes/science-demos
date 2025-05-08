@@ -22,8 +22,12 @@ unityContext
   .on("mounted", () => console.log("unity mounted ..."))
   .on("debug", (msg) => console.log("unity debug", msg));
 
-unityContext.addUnityListener("gameStart", (msg) => {
-  alert(msg);
-  console.log("gameStart : ", msg);
+  window.gameStart = function(msg) {
+  alert(msg);  
+  console.log("gameStart:", msg);  
+};
+
+  unityContext.addUnityListener("gameStart", (msg) => {
+  console.log("gameStart event received from Unity:", msg);
 });
 </script>
