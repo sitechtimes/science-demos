@@ -18,7 +18,7 @@ const sliderVariables = ref(["waterTemp",
     <div>
       <label for="water use" class="block">Water Use Type</label>
       <SelectButton aria-label="water use" v-model="dataStore.waterUse.inputSelected"
-        :options="dataStore.waterUse.inputList" />
+        :options="dataStore.waterUse.inputList" optionLabel="name" />
     </div>
     <div v-for="variable in sliderVariables" :key="variable">
       <SliderInput :var="dataStore[variable]" />

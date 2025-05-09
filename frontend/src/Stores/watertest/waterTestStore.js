@@ -1,16 +1,17 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import epaCompliance from "@/components/WaterTest/inputCalculations";
 
 export const waterTestConditions = defineStore("waterTest", () => {
   // conditions for user to change
   const waterUse = ref({
     name: "water use type",
-    inputSelected: "Warm Aquatic Life",
+    inputSelected: { name: "Warm Aquatic Life", value: "warmAquaticLife" },
     inputList: [
-      "Cold Aquatic Life",
-      "Warm Aquatic Life",
-      "Recreation",
-      "Drinking Water",
+      { name: "Cold Aquatic Life", value: "coldAquaticLife" },
+      { name: "Warm Aquatic Life", value: "warmAquaticLife" },
+      { name: "Recreation", value: "recreationWater" },
+      { name: "Drinking Water", value: "drinkingWater" },
     ],
   });
   const waterTemp = ref({
@@ -58,6 +59,27 @@ export const waterTestConditions = defineStore("waterTest", () => {
     sliderStep: 1,
     tooltip: "select amount of sewage input into the water in percent. ",
   });
+  const agricultureRunoff = ref({
+    // % that inputs into water
+    name: "Agricultural Runoff (%)",
+    sliderValue: 0,
+    sliderMin: 0,
+    sliderMax: 100,
+    sliderStep: 1,
+    tooltip:
+      "select amount of agricultural runoff into the water in percent. this contributes to nutrient amounts. ",
+  });
+  const compliance = computed(() =>
+    epaCompliance(
+      waterUse.value.inputSelected.value,
+      waterTemp.value.sliderValue,
+      acidRain.value.sliderValue,
+      mineDrainage.value.sliderValue,
+      deforestation.value.sliderValue,
+      untreatedSewage.value.sliderValue,
+      agricultureRunoff.value.sliderValue
+    )
+  );
 
   return {
     waterUse,
@@ -66,5 +88,7 @@ export const waterTestConditions = defineStore("waterTest", () => {
     mineDrainage,
     deforestation,
     untreatedSewage,
+    agricultureRunoff,
+    compliance,
   };
 });

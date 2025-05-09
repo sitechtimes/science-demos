@@ -1,3 +1,5 @@
+import epaStandards from "./epaStandards";
+
 const calculateNutrients = function (agricultureRunoff) {
   //Calculates nitrogen and phosphorus concentrations (mg/L) from agricultural runoff.
   //Sources: USDA (5-10% N loss), EPA (1-3% P loss).
@@ -39,15 +41,54 @@ const calculatePh = function (acidRain, mineDrainage) {
   return max(0.0, min(14.0, ph)); // pH must be 0-14
 };
 
-const calculate_turbidity = function (logging_percent) {
+const calculateTurbidity = function (logging) {
   // Calculates turbidity (NTU) from logging/deforestation.
   // because deforestation -> less roots in soil -> soil erods -> sediment comes out -> washes off into waters
   // Source: EPA (10% logging → ~50 NTU increase).
-  return 5.0 * logging_percent; // Linear approximation
+  return 5.0 * logging; // Linear approximation
 };
 
-const calculate_fecal_coliform = function (sewage) {
+const fecalColiform = function (sewage) {
   // Calculates fecal coliform (CFU/100mL) from sewage.
   // Source: WHO (1% untreated sewage ≈ 10^4 CFU).
   return 10000 * (sewage / 100); // 1% = 100 CFU, 100% = 10,000 CFU
 };
+
+const epaCompliance = function (
+  waterUse,
+  waterTemp,
+  acidRain,
+  mineDrainage,
+  deforestation,
+  untreatedSewage,
+  agricultureRunoff
+) {
+  const params = {
+    DO: calculateDissolvedOxygen(waterTemp),
+    pH: calculatePh(acidRain, mineDrainage),
+    turbidity: calculateTurbidity(deforestation),
+    fecal_coliform: fecalColiform(untreatedSewage),
+    nitrate: calculateNutrients(agricultureRunoff)[0],
+    phosphorus: calculateNutrients(agricultureRunoff)[1],
+  };
+
+  // Checks compliance with EPA WQS for a designated use.
+  const standards = epaStandards[waterUse];
+  let violations = [];
+
+  // Check each parameter
+  Object.entries(standards).forEach(([param, [minVal, maxVal]]) => {
+    const value = params[param];
+    if (value === undefined) return;
+    if (minVal !== null && value < minVal) {
+      violations.push(`${param} too low (${value.toFixed(1)} < ${minVal})`);
+    }
+    if (maxVal !== null && value > maxVal) {
+      violations.push(`${param} too high (${value.toFixed(1)} > ${maxVal})`);
+    }
+  });
+
+  return violations;
+};
+
+export default epaCompliance;
