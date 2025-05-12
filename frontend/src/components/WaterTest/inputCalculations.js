@@ -1,4 +1,5 @@
 import epaStandards from "./epaStandards";
+import { computed } from "vue";
 
 const calculateNutrients = function (agricultureRunoff) {
   //Calculates nitrogen and phosphorus concentrations (mg/L) from agricultural runoff.
@@ -23,14 +24,14 @@ const calculateDissolvedOxygen = function (temperature) {
   // in degrees celsius.
   //Calculates dissolved oxygen saturation (mg/L) using USGS formula.
   //Temperature constrained to 0-40°C (realistic water range).
-  temperature = max(0, min(40, temperature)); // Clamp temperature to biological limits (inputs are also limited to 0-40)
+  temperature = Math.max(0, Math.min(40, temperature)); // Clamp temperature to biological limits (inputs are also limited to 0-40)
   // Simplified USGS formula: DO_sat = 14.6 - 0.394*T + 0.00771*T² - 0.000064*T³
   const dissolvedOxygen =
     14.6 -
     0.394 * temperature +
     0.00771 * temperature ** 2 -
     0.000064 * temperature ** 3;
-  return max(dissolvedOxygen, 0); // DO can't be negative
+  return Math.max(dissolvedOxygen, 0); // DO can't be negative
 };
 
 const calculatePh = function (acidRain, mineDrainage) {
@@ -38,7 +39,7 @@ const calculatePh = function (acidRain, mineDrainage) {
   // Sources: EPA (1% acid rain ≈ 0.02 pH drop, 1% mining ≈ 0.05 pH drop).
   const basePh = 7.0; // Neutral pH
   const ph = basePh - 0.02 * acidRain - 0.05 * mineDrainage;
-  return max(0.0, min(14.0, ph)); // pH must be 0-14
+  return Math.max(0.0, Math.min(14.0, ph)); // pH must be 0-14
 };
 
 const calculateTurbidity = function (logging) {
@@ -74,21 +75,28 @@ const epaCompliance = function (
 
   // Checks compliance with EPA WQS for a designated use.
   const standards = epaStandards[waterUse];
-  let violations = [];
+  let waterStatus = [];
 
   // Check each parameter
   Object.entries(standards).forEach(([param, [minVal, maxVal]]) => {
     const value = params[param];
     if (value === undefined) return;
     if (minVal !== null && value < minVal) {
-      violations.push(`${param} too low (${value.toFixed(1)} < ${minVal})`);
+      waterStatus.push(`${param} too low (${value.toFixed(1)} < ${minVal})`);
     }
     if (maxVal !== null && value > maxVal) {
-      violations.push(`${param} too high (${value.toFixed(1)} > ${maxVal})`);
+      waterStatus.push(`${param} too high (${value.toFixed(1)} > ${maxVal})`);
+    }
+    if (value <= maxVal && value >= minVal) {
+      waterStatus.push("Compliant with EPA standards. ");
     }
   });
-
-  return violations;
+  let eutrophication = calculateEutrophication(
+    params.nitrate,
+    params.phosphorus
+  );
+  waterStatus.push(eutrophication);
+  return waterStatus;
 };
 
 export default epaCompliance;
