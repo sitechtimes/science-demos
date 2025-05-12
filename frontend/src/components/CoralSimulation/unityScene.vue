@@ -28,12 +28,16 @@ unityContext
   .on("debug", (msg) => console.log("unity debug", msg));
 
 unityContext.addUnityListener("gameStart", (msg) => {
+  alert(msg);
   console.log("gameStart event received from Unity:", msg);
 });
 
-unityContext.sendMessage(
-  "GameStart Trigger",
-  "ReceiveMessage",
-  "Hello from JavaScript!"
-);
+unityContext.on('mounted', () => {
+  unityContext.sendMessage(
+    "FishManager", 
+    "ReceiveMessage",
+    "Hello from JavaScript!"
+  );
+});
+
 </script>

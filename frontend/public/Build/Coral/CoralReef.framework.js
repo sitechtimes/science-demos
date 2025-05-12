@@ -12183,8 +12183,9 @@ var ASM_CONSTS = {
   }
   }
 
-  function _gameStart() {
-      console.log("gameStart called from C#!");
+  function _gameStart(msg) {
+      // This won't run — just needed to inform Unity the function exists.
+      // It tells the linker not to strip out 'gameStart' from JS.
     }
 
   function _getTempRet0() {
