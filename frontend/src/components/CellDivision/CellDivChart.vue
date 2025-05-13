@@ -27,13 +27,14 @@ function getStyles() { // obtain current theme colors for chart options to chang
         textColorSecondary: documentStyle.getPropertyValue('--p-text-muted-color'),
         surfaceBorder: documentStyle.getPropertyValue('--p-content-border-color'),
         surfaceCard: documentStyle.getPropertyValue('--surface-card'),
-        font: documentStyle.getPropertyValue('font-family')
+        font: documentStyle.getPropertyValue('font-family'),
+        primaryColor: documentStyle.getPropertyValue('--p-primary-color')
     };
 }
 
 function renderChanges() {
     chartOptions.value = setChartOptions(getStyles(), props.chartType);
-    chartData.value = setChartData(cellDivStore().graphData);
+    chartData.value = setChartData(cellDivStore().graphData, getStyles());
     componentKey.value++;
 }
 
@@ -41,7 +42,7 @@ onBeforeMount(() => {
     renderChanges()
 });
 
-watch([useLayout().isDarkTheme, cellDivStore(), toRef(props.chartType)], () => { // watch for changes
+watch([useLayout().layoutConfig, cellDivStore(), toRef(props.chartType)], () => { // watch for changes
     renderChanges()
 });
 </script>
