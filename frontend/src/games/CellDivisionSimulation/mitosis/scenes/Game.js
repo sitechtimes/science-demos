@@ -2,20 +2,19 @@ import { EventBus } from "../EventBus";
 import { Scene } from "phaser";
 import { cellDivStore } from "@/Stores/celldiv/CellDivStore";
 import Cell from "../Cell";
-// import Textbox from "../Cell"; // why is this not used?
 import { ref } from "vue";
 
 export const limit = ref(false);
 export class Game extends Scene {
   constructor() {
     super("Game");
-    this.time_in_cycle = 0;
+    this.cycleTime = 0;
     this.phase = 0;
   }
   restart() {
     limit.value = false;
     this.phase = 0;
-    this.time_in_cycle = 0;
+    this.cycleTime = 0;
     this.cells.forEach((cell) => cell.destroy());
     const cell = new Cell(this, 400, 300, "time0", "x")
       .setScale(0.5)
@@ -26,9 +25,9 @@ export class Game extends Scene {
   }
   progressPhase() {
     if (this.phase < 31) {
-      switch (this.time_in_cycle) {
+      switch (this.cycleTime) {
         case 4:
-          this.time_in_cycle = 0;
+          this.cycleTime = 0;
           this.phase++;
           this.cells.forEach((cell) => cell.setTexture("time0"));
           for (let i in this.cells) {
@@ -46,21 +45,21 @@ export class Game extends Scene {
           this.cells.forEach((cell) => cell.clearPopup());
           cellDivStore().addPoint();
           cellDivStore().progressState(0);
-          // console.log(this.time_in_cycle);
+          // console.log(this.cycleTime);
           break;
         default:
-          this.time_in_cycle++;
+          this.cycleTime++;
           this.phase++;
           this.cells.forEach((cell) =>
-            cell.setTexture("time" + this.time_in_cycle)
+            cell.setTexture("time" + this.cycleTime)
           );
           this.cells.forEach((cell) => cell.clearPopup());
           cellDivStore().addTime("mitosis");
           cellDivStore().progressState(1);
-        // console.log(this.time_in_cycle);
+        // console.log(this.cycleTime);
       }
     }
-    // console.log(this.time_in_cycle, this.phase)
+    // console.log(this.cycleTime, this.phase)
     if (this.phase >= 30) {
       // console.log('ive hit my limit')
       limit.value = true;

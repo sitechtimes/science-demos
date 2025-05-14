@@ -1,5 +1,5 @@
 <script setup>
-import SliderInput from "../input_components/SliderInput.vue";
+import SliderInput from "../InputComponents/SliderInput.vue";
 import { DataStore } from "@/Stores/DataStore";
 
 const dataStore = DataStore();

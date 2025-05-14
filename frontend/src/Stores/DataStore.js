@@ -17,7 +17,7 @@ export const DataStore = defineStore("data", () => {
 
   //Keystone Species
 
-  const path = "/src/games/CoralSimulation/images/";
+  const path = "/demo-assets/abiotic-coral/";
   const organisms = ref({
     algae: {
       population: 27,

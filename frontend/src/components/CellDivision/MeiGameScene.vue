@@ -3,14 +3,12 @@ import Phaser from 'phaser';
 import { ref, toRaw, watch } from 'vue';
 import PhaserGame from './MeiPhaserGame.vue';
 import Button from 'primevue/button';
-import { Game } from '@/games/CellDivisionSimulation/meiosis/scenes/Game.js'
 import { limit } from '@/games/CellDivisionSimulation/meiosis/scenes/Game'
 import { cellDivStore } from '@/Stores/celldiv/CellDivStore';
 // The sprite can only be moved in the MainMenu Scene
 
 //  References to the PhaserGame component (game and scene are exposed)
 const phaserRef = ref();
-const spritePosition = ref({ x: 0, y: 0 });
 const changeScene = () => {
 
   const scene = toRaw(phaserRef.value.scene);
