@@ -5,7 +5,7 @@
             <!-- <div v-for="condition in waterTestConditions()" :key="condition">
                 <p>{{ condition }}</p>
             </div> -->
-            <p>{{ waterTestConditions().compliance }}</p>
+            <p>{{ waterTestConditions().eutrophicationRisk }}</p>
         </div>
         <div class="slider-container card">
             <SliderConditions />

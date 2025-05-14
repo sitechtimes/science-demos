@@ -9,7 +9,8 @@ const sliderVariables = ref(["waterTemp",
   "acidRain",
   "mineDrainage",
   "deforestation",
-  "untreatedSewage",]);
+  "untreatedSewage",
+  "agricultureRunoff"]);
 // if we do include more conditions we will have to include a selectbutton or dropdown to switch between
 </script>
 

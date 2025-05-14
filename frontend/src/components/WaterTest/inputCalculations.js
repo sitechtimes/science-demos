@@ -9,11 +9,12 @@ const calculateNutrients = function (agricultureRunoff) {
   return nitrogen, phosphorus;
 };
 
-const calculateEutrophication = function (nitrogen, phosphorus) {
+const calculateEutrophication = function (agricultureRunoff) {
+  const nutrients = calculateNutrients(agricultureRunoff);
   // Determines eutrophication risk (NOAA thresholds).
-  if (nitrogen > 1.0 && phosphorus > 0.1) {
+  if (nutrients[0] > 1.0 && nutrients[1] > 0.1) {
     return "High risk (algal bloom likely)";
-  } else if (nitrogen > 0.5 || phosphorus > 0.05) {
+  } else if (nutrients[0] > 0.5 || nutrients[1] > 0.05) {
     return "Moderate risk";
   } else {
     return "Low risk";
@@ -91,12 +92,8 @@ const epaCompliance = function (
       waterStatus.push("Compliant with EPA standards. ");
     }
   });
-  let eutrophication = calculateEutrophication(
-    params.nitrate,
-    params.phosphorus
-  );
-  waterStatus.push(eutrophication);
+
   return waterStatus;
 };
 
-export default epaCompliance;
+export { epaCompliance, calculateEutrophication };
