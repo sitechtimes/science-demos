@@ -1,25 +1,3 @@
-<script setup>
-import { DataStore } from "@/Stores/DataStore";
-
-const dataStore = DataStore();
-
-function incrementYear() {
-  if (dataStore.selectedYear < 100) {
-    dataStore.selectedYear++;
-  }
-}
-
-function decrementYear() {
-  if (dataStore.selectedYear < 100) {
-    dataStore.selectedYear--;
-  }
-}
-
-function updateYear(){
-  unityContext.sendMessage('GameObject', 'ReceiveRole', dataStore.selectedYear) //need to update the context this was js the default in the documentation
-}
-</script>
-
 <template>
   <div class="text-xl font-semibold">Year</div>
   <form @submit.prevent="submitForm" class="flex flex-col gap-4">
@@ -55,5 +33,27 @@ function updateYear(){
     </div>
   </form>
 </template>
+
+<script setup>
+import { DataStore } from "@/Stores/DataStore";
+
+const dataStore = DataStore();
+
+function incrementYear() {
+  if (dataStore.selectedYear < 100) {
+    dataStore.selectedYear++;
+  }
+}
+
+function decrementYear() {
+  if (dataStore.selectedYear < 100) {
+    dataStore.selectedYear--;
+  }
+}
+
+function updateYear(){
+  unityContext.sendMessage('GameObject', 'ReceiveRole', dataStore.selectedYear) //need to update the context this was js the default in the documentation
+}
+</script>
 
 <style lang="scss" scoped></style>

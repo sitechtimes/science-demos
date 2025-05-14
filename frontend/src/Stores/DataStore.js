@@ -46,13 +46,9 @@ export const DataStore = defineStore("data", () => {
     sliderStep: 0.1,
   }); // (acidity) 7.6-8.6 slider
 
-  const selectedYear = ref({
-    name: "Current Year",
-    sliderValue: 0,
-    sliderMin: 0,
-    sliderMax: 100,
-    sliderStep: 1,
-  }); // 0-100 slider
+  const selectedYear = ref(
+    0
+  ); // 0-100 slider
 
   const agriculture = ref({
     sliderValue: 0.5,

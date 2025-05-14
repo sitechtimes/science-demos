@@ -7,9 +7,11 @@
 <script setup>
 import UnityWebgl from "unity-webgl";
 import UnityVue from "unity-webgl/vue";
+import { populationStore } from "@/Stores/populationStore";
 
+const popStore = populationStore();
 const cacheBuster = Date.now(); // Unique number each load
-
+console.log(popStore)
 window.gameStart = function (msg) {
   console.log("gameStart:", msg);
 };
