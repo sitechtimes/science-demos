@@ -26,14 +26,16 @@ const unityContext = new UnityWebgl({
 unityContext
   .on("progress", (p) => console.log("loading :", p))
   .on("mounted", () => console.log("unity mounted ..."))
-  .on("debug", (msg) => console.log("unity debug", msg));
-
-unityContext.on('mounted', () => {
-  unityContext.sendMessage(
-    "FishManager", 
-    "ReceiveMessage",
-    "Hello from JavaScript!"
-  );
+  .on("debug", (msg) => console.log("unity debug", msg))
+  .on('mounted', () => {
+    Object.keys(popStore.finalPopulations).forEach(key => {
+  console.log(key, popStore.finalPopulations[key]);
+  // unityContext.sendMessage(
+  //   "populationStore", 
+  //   "UpdatePop",
+  //   key,popStore.finalPopulations[key]
+  // ); //connecting js store to unity store
+  });
 });
 
 </script>
