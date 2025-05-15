@@ -7,7 +7,7 @@ const { onMenuToggle, toggleDarkMode, isDarkTheme } = useLayout();
 
 <template>
     <div class="layout-topbar">
-        <button class="layout-menu-button layout-topbar-action" @click="onMenuToggle" aria-label="menu">
+        <button class="layout-menu-button layout-topbar-action" @click="onMenuToggle">
             <i class="pi pi-bars"></i>
         </button>
         <div class="layout-topbar-logo-container">
@@ -17,15 +17,15 @@ const { onMenuToggle, toggleDarkMode, isDarkTheme } = useLayout();
         </div>
         <div class="layout-topbar-actions">
             <div class="layout-config-menu">
-                <button type="button" class="layout-topbar-action" @click="toggleDarkMode"
-                    aria-label="toggle light or dark mode">
+                <button type="button" class="layout-topbar-action" @click="toggleDarkMode">
                     <i :class="['pi', { 'pi-moon': isDarkTheme, 'pi-sun': !isDarkTheme }]"></i>
                 </button>
                 <div class="relative">
                     <button
                         v-styleclass="{ selector: '@next', enterFromClass: 'hidden', enterActiveClass: 'animate-scalein', leaveToClass: 'hidden', leaveActiveClass: 'animate-fadeout', hideOnOutsideClick: true }"
-                        type="button" class="layout-topbar-action layout-topbar-action-highlight"
-                        aria-label="change theme">
+                        type="button"
+                        class="layout-topbar-action layout-topbar-action-highlight"
+                    >
                         <i class="pi pi-palette"></i>
                     </button>
                     <AppConfigurator />

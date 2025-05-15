@@ -18,4 +18,4 @@ const slider = props.var;
   </div>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped></style>
