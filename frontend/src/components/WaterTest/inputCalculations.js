@@ -1,20 +1,20 @@
 import epaStandards from "./epaStandards";
-import { computed } from "vue";
 
 const calculateNutrients = function (agricultureRunoff) {
   //Calculates nitrogen and phosphorus concentrations (mg/L) from agricultural runoff.
   //Sources: USDA (5-10% N loss), EPA (1-3% P loss).
   const nitrogen = 0.075 * agricultureRunoff; // in mgL, 7.5% of applied N lost to runoff (midrange USDA)
   const phosphorus = 0.02 * agricultureRunoff; // in mgL, 2% of applied P lost (EPA)
-  return nitrogen, phosphorus;
+  return [nitrogen, phosphorus];
 };
 
 const calculateEutrophication = function (agricultureRunoff) {
-  const nutrients = calculateNutrients(agricultureRunoff);
+  const nitrogen = calculateNutrients(agricultureRunoff)[0];
+  const phosphorus = calculateNutrients(agricultureRunoff)[1];
   // Determines eutrophication risk (NOAA thresholds).
-  if (nutrients[0] > 1.0 && nutrients[1] > 0.1) {
+  if (nitrogen > 1.0 && phosphorus > 0.1) {
     return "High risk (algal bloom likely)";
-  } else if (nutrients[0] > 0.5 || nutrients[1] > 0.05) {
+  } else if (nitrogen > 0.5 || phosphorus > 0.05) {
     return "Moderate risk";
   } else {
     return "Low risk";
