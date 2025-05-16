@@ -6,15 +6,6 @@
     <!-- return to original settings button here? will need store to have default value -->
     {{ carbonStore.temperatureKelvins }}
 
-    <div>
-      <button @click="popStore.currentYear = popStore.currentYear - 1">
-        <
-      </button>
-      <p>{{ popStore.currentYear }}</p>
-      <button @click="popStore.currentYear = popStore.currentYear + 1">
-        >
-      </button>
-    </div>
   </div>
 </template>
 

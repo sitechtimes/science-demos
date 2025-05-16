@@ -1,5 +1,5 @@
 <template>
-  <div class="width: 800px; height: 600px;">
+  <div class="width: 1600px; height: 900px;">
     <UnityVue :unity="unityContext" tabindex="0" />
   </div>
 </template>
@@ -29,13 +29,14 @@ unityContext
   .on("debug", (msg) => console.log("unity debug", msg))
   .on('mounted', () => {
     Object.keys(popStore.finalPopulations).forEach(key => {
-  console.log(key, popStore.finalPopulations[key]);
-  // unityContext.sendMessage(
-  //   "populationStore", 
-  //   "UpdatePop",
-  //   key,popStore.finalPopulations[key]
-  // ); //connecting js store to unity store
-  });
+  const combined = `${key}|${popStore.finalPopulations[key]}`;
+  unityContext.sendMessage("FishManager", "UpdatePop", combined);
+});
+
+  unityContext.sendMessage(
+    "FishManager",
+    "initializeScene",
+  )
 });
 
 </script>
