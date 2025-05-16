@@ -1,9 +1,9 @@
 <template>
     <div class="chart-slider-container">
         <div class="chart-container card">
-            <p>unity scene placeholder</p>
-            <p>{{ waterTestConditions().compliance }}</p>
-            <p>{{ waterTestConditions().eutrophicationRisk }}</p>
+            <SelectButton v-model="toggleScene" :options="['demo', 'charts']" />
+            <p v-if="toggleScene === 'demo'">unity scene placeholder</p>
+            <WaterCharts v-else-if="toggleScene === 'charts'" />
         </div>
         <div class="slider-container card">
             <SliderConditions />
@@ -12,44 +12,13 @@
 </template>
 
 <script setup>
-import { onBeforeMount, ref, watch } from "vue";
-import { useLayout } from '@/layout/composables/layout';
+import { ref } from "vue";
 import SliderConditions from "@/components/WaterTest/SliderConditions.vue";
+import WaterCharts from "@/components/WaterTest/WaterCharts.vue";
 import { waterTestConditions } from "@/Stores/watertest/waterTestStore";
-import PlotlyChart from '@/components/PlotlyChart.vue';
-import Slider from 'primevue/slider';
-import Card from "primevue/card";
+import SelectButton from "primevue/selectbutton";
 
-const chartOptions = ref();
-const chartData = ref();
-const componentKey = ref(0); // idk why the layout isn't refreshing without this
-
-const displayType = ref('the jar test')
-
-function renderChanges() {
-    // rerender with different axes if chart type changed
-    //chartData.value = setChartData(clayPoint, sandPoint, siltPoint);
-    // chartOptions.value = setChartOptions(getStyles());
-    componentKey.value++;
-}
-
-onBeforeMount(() => { // load data and set chart options before mount to avoid Invalid prop on load  
-    renderChanges();
-});
-watch([useLayout().layoutConfig], () => {
-    renderChanges();
-});
-
-function getStyles() { // obtain current theme colors for chart options to change with theme
-    const documentStyle = getComputedStyle(document.documentElement);
-    return {
-        textColor: documentStyle.getPropertyValue('--p-text-color'),
-        textColorSecondary: documentStyle.getPropertyValue('--p-text-muted-color'),
-        surfaceBorder: documentStyle.getPropertyValue('--p-content-border-color'),
-        surfaceCard: documentStyle.getPropertyValue('--surface-card'),
-        font: documentStyle.getPropertyValue('font-family')
-    };
-}
+const toggleScene = ref('charts');
 </script>
 
 <style scoped>

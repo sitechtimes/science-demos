@@ -93,7 +93,7 @@ const epaCompliance = function (
     }
   });
 
-  return waterStatus;
+  return [waterStatus, params];
 };
 
 export { epaCompliance, calculateEutrophication };
