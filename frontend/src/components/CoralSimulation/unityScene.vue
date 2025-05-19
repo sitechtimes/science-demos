@@ -1,6 +1,6 @@
 <template>
-  <div class="width: 1600px; height: 900px;">
-    <UnityVue :unity="unityContext" tabindex="0" />
+  <div class="w-full aspect-[16/9]">
+    <UnityVue :unity="unityContext" tabindex="0" class="w-full h-full" />
   </div>
 </template>
 
