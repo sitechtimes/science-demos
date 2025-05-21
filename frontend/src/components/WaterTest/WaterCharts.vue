@@ -1,33 +1,36 @@
 <template>
     <div>
         <p>{{ waterTestConditions().compliance[1] }}</p>
+        <h2>Dissolved Oxygen: {{ waterTestConditions().compliance[1].DO.toFixed(2) }}</h2>
         <PlotlyChart :data="oxygenData" :config="{ displayModeBar: false }" :layout="oxygenLayout"
             :key="componentKey" />
-        <PlotlyChart :data="heatmapData" :config="{ displayModeBar: false }" :layout="heatmapLayout"
-            :key="componentKey" />
+        <h2>pH: {{ waterTestConditions().compliance[1].pH.toFixed(2) }}</h2>
+        <PlotlyChart :data="phData" :config="{ displayModeBar: false }" :layout="phLayout" :key="componentKey" />
     </div>
 </template>
 
 <script setup>
-import { ref, onBeforeMount, watch, toRef } from 'vue';
+import { ref, onBeforeMount, watch } from 'vue';
 import { waterTestConditions } from '@/Stores/watertest/waterTestStore';
-import { phOptions } from './chartOptions';
-import { setPhData } from './chartData';
+import { phOptions, oxygenOptions } from './chartOptions';
+import { setPhData, setOxygenData } from './chartData';
 import PlotlyChart from '@/components/PlotlyChart.vue';
 import { useLayout } from '@/layout/composables/layout';
 
 const componentKey = ref(0);
 
 const oxygenData = ref();
-const heatmapData = ref();
+const phData = ref();
 
 const oxygenLayout = ref()
-const heatmapLayout = ref();
+const phLayout = ref();
 
 function renderChanges() {
     // rerender with different axes if chart type changed
-    heatmapData.value = setPhData();
-    heatmapLayout.value = phOptions(getStyles());
+    phData.value = setPhData();
+    phLayout.value = phOptions(getStyles());
+    oxygenData.value = setOxygenData();
+    oxygenLayout.value = oxygenOptions(getStyles());
     componentKey.value++;
 }
 
