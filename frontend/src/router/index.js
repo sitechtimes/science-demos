@@ -16,6 +16,17 @@ const router = createRouter({
       ],
     },
     {
+      path: "/artcredits",
+      component: AppLayout,
+      children: [
+        {
+          path: "/artcredits",
+          name: "Art Credits",
+          component: () => import("@/views/ArtCredits.vue"),
+        },
+      ],
+    },
+    {
       path: "/apes",
       component: AppLayout,
       children: [
@@ -43,14 +54,9 @@ const router = createRouter({
       ],
     },
     {
-      path: "/testphaser",
-      component: () => import("@/components/CoralSimulation/GameScene.vue"),
-      name: "phaser",
-    },
-    {
       path: "/:pathMatch(.*)*",
       name: "notfound",
-      component: () => import("@/views/pages/NotFound.vue"),
+      component: () => import("@/views/NotFound.vue"),
     },
   ],
 });

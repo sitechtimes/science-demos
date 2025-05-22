@@ -45,7 +45,7 @@ function getStyles() { // obtain current theme colors for chart options
     };
 }
 
-watch([useLayout().isDarkTheme, selectedYear.value, chartType], () => {
+watch([useLayout().layoutConfig, selectedYear.value, chartType], () => {
     switch (chartType.value) { // rerender with different axes if chart type changed
         case 'Population %':
             chartInfo.value.currentGraph = 0;

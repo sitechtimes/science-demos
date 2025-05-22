@@ -79,7 +79,7 @@ function renderChanges() {
 onBeforeMount(() => { // load data and set chart options before mount to avoid Invalid prop on load  
     renderChanges();
 });
-watch([useLayout().isDarkTheme, clayPoint, sandPoint, siltPoint], () => {
+watch([useLayout().layoutConfig, clayPoint, sandPoint, siltPoint], () => {
     renderChanges();
 });
 
