@@ -536,6 +536,7 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const algalImpact = computed(() => {
+    //range: 0-1.9
     return (
       //(0.6 * textFields[3].obj.getValue() + // logging
       (0.3 * dataStore.agriculture.sliderValue) / 100 +
@@ -546,6 +547,7 @@ export const populationStore = defineStore("populationStore", () => {
 
   const coralHealthImpact = computed(() => {
     // calculations for coral health
+    //range: 0-0.1007?
     return (
       //0.2 * textFields[3].obj.getValue() + logging
       ((0.4 * dataStore.agriculture.sliderValue) / 100 +
@@ -557,6 +559,7 @@ export const populationStore = defineStore("populationStore", () => {
 
   const coralStress = computed(() => {
     // calculate coral stress
+    //range 0 - 5.34098
     return (
       (algalImpact.value +
         coralHealthImpact.value +
@@ -569,6 +572,7 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const sedimentLoad = computed(() => {
+    //range 0 - 950
     return 500 * algalImpact.value;
   });
 
