@@ -45,4 +45,53 @@ function oxygenOptions(styles) {
   return layout;
 }
 
-export { oxygenOptions, phOptions };
+function turbidityOptions(styles) {
+  const layout = {
+    title: "Turbidity",
+    plot_bgcolor: styles.surfaceCard,
+    paper_bgcolor: styles.surfaceCard,
+    margin: {
+      // should change to computed margin
+      t: 40,
+      b: 40,
+      l: 40,
+      r: 40,
+    },
+    font: {
+      size: 10,
+      color: styles.textColor,
+      family: styles.font,
+    },
+    height: 300,
+    width: 300,
+  };
+
+  return layout;
+}
+
+function nutrientOptions(styles) {
+  const layout = {
+    showlegend: false,
+    title: "Nitrogen & Phosphorus Concentrations",
+    plot_bgcolor: styles.surfaceCard,
+    paper_bgcolor: styles.surfaceCard,
+    margin: {
+      // should change to computed margin
+      t: 40,
+      b: 40,
+      l: 40,
+      r: 40,
+    },
+    font: {
+      size: 10,
+      color: styles.textColor,
+      family: styles.font,
+    },
+    yaxis: { range: [0, 8] },
+    width: 330,
+  };
+
+  return layout;
+}
+
+export { oxygenOptions, phOptions, nutrientOptions };

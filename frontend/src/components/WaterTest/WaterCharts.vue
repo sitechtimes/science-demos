@@ -1,23 +1,39 @@
 <template>
     <div>
-        <p class="text-lg">Dissolved Oxygen: {{ waterTestConditions().compliance[1].DO.toFixed(2) }} mg/L</p>
-        <PlotlyChart :data="oxygenData" :config="{ displayModeBar: false }" :layout="oxygenLayout"
-            :key="componentKey" />
-        <p class="text-lg">pH: {{ waterTestConditions().compliance[1].pH.toFixed(2) }}</p>
-        <PlotlyChart :data="phData" :config="{ displayModeBar: false }" :layout="phLayout" :key="componentKey" />
-        <p class="text-lg">turbidity: {{ waterTestConditions().compliance[1].turbidity }} NTU</p>
-        <p class="text-lg">fecal coliform: {{ waterTestConditions().compliance[1].fecal_coliform }} CFU/100mL
-        </p>
-        <p class="text-lg">nitrogen: {{ waterTestConditions().compliance[1].nitrate.toFixed(2) }} mg/L</p>
-        <p class="text-lg">phosphorus: {{ waterTestConditions().compliance[1].phosphorus.toFixed(2) }} mg/L</p>
-        <PlotlyChart :data="nutrientData" :config="{ displayModeBar: false }" :layout="''" :key="componentKey" />
+        <div>
+            <p class="text-lg">Dissolved Oxygen: {{ waterTestConditions().compliance[1].DO.toFixed(2) }} mg/L</p>
+            <PlotlyChart :data="oxygenData" :config="{ displayModeBar: false }" :layout="oxygenLayout"
+                :key="componentKey" />
+        </div>
+        <div>
+            <p class="text-lg">pH: {{ waterTestConditions().compliance[1].pH.toFixed(2) }}</p>
+            <PlotlyChart :data="phData" :config="{ displayModeBar: false }" :layout="phLayout" :key="componentKey" />
+        </div>
+        <div class="flex">
+            <div>
+                <div>
+                    <p class="text-lg">turbidity: {{ waterTestConditions().compliance[1].turbidity }} NTU</p>
+                </div>
+                <div>
+                    <p class="text-lg">fecal coliform: {{ waterTestConditions().compliance[1].fecal_coliform }}
+                        CFU/100mL
+                    </p>
+                </div>
+            </div>
+            <div>
+                <p class="text-lg">nitrogen: {{ waterTestConditions().compliance[1].nitrate.toFixed(2) }} mg/L</p>
+                <p class="text-lg">phosphorus: {{ waterTestConditions().compliance[1].phosphorus.toFixed(2) }} mg/L</p>
+                <PlotlyChart :data="nutrientData" :config="{ displayModeBar: false }" :layout="nutrientLayout"
+                    :key="componentKey" />
+            </div>
+        </div>
     </div>
 </template>
 
 <script setup>
 import { ref, onBeforeMount, watch } from 'vue';
 import { waterTestConditions } from '@/Stores/watertest/waterTestStore';
-import { phOptions, oxygenOptions } from './chartOptions';
+import { phOptions, oxygenOptions, nutrientOptions } from './chartOptions';
 import { setPhData, setOxygenData, setNutrientData } from './chartData';
 import PlotlyChart from '@/components/PlotlyChart.vue';
 import { useLayout } from '@/layout/composables/layout';
@@ -30,14 +46,16 @@ const nutrientData = ref()
 
 const oxygenLayout = ref()
 const phLayout = ref();
+const nutrientLayout = ref();
 
 function renderChanges() {
     // rerender with different axes if chart type changed
     phData.value = setPhData();
     phLayout.value = phOptions(getStyles());
     oxygenData.value = setOxygenData();
-    nutrientData.value = setNutrientData();
     oxygenLayout.value = oxygenOptions(getStyles());
+    nutrientData.value = setNutrientData();
+    nutrientLayout.value = nutrientOptions(getStyles());
     componentKey.value++;
 }
 
@@ -50,6 +68,7 @@ watch([useLayout().layoutConfig, waterTestConditions()], () => {
 
 function getStyles() { // obtain current theme colors for chart options to change with theme
     const documentStyle = getComputedStyle(document.documentElement);
+    console.log(documentStyle)
     return {
         textColor: documentStyle.getPropertyValue('--p-text-color'),
         textColorSecondary: documentStyle.getPropertyValue('--p-text-muted-color'),

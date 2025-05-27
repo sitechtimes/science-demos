@@ -1,4 +1,5 @@
 import { waterTestConditions } from "@/Stores/watertest/waterTestStore";
+import { color } from "d3";
 
 function setPhData() {
   const heatmapData = [
@@ -72,6 +73,25 @@ function setNutrientData() {
       type: "bar",
       marker: {
         color: ["#a47292", "#2567a2"],
+      },
+      name: "nutrients",
+    },
+    {
+      type: "scatter",
+      x: ["nitrogen", "phosphorus"],
+      y: [1, 0.1],
+      name: "high risk",
+      marker: {
+        color: "#FF0000",
+      },
+    },
+    {
+      type: "scatter",
+      x: ["nitrogen", "phosphorus"],
+      y: [0.5, 0.05],
+      name: "moderate risk",
+      marker: {
+        color: "#FFA500",
       },
     },
   ];
