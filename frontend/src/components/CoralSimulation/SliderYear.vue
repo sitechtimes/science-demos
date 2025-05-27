@@ -36,8 +36,11 @@
 
 <script setup>
 import { DataStore } from "@/Stores/DataStore";
+import { unityContext } from "./unityContext.js";
+import { populationStore } from "@/Stores/populationStore";
 
 const dataStore = DataStore();
+const popStore = populationStore();
 
 function incrementYear() {
   if (dataStore.selectedYear < 100) {
@@ -51,8 +54,17 @@ function decrementYear() {
   }
 }
 
-function updateYear(){
-  unityContext.sendMessage('GameObject', 'ReceiveRole', dataStore.selectedYear) //need to update the context this was js the default in the documentation
+function updateYear() {
+  if (unityContext) {
+    console.log(dataStore.selectedYear)
+    unityContext.sendMessage("FishManager","yearUpdate",dataStore.selectedYear)
+    Object.keys(popStore.finalPopulations).forEach((key) => {
+      const combined = `${key}|${popStore.finalPopulations[key]}`;
+      unityContext.sendMessage("FishManager", "UpdatePop", combined);
+    });
+
+    unityContext.sendMessage("FishManager", "initializeScene");
+  }
 }
 </script>
 

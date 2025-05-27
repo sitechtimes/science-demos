@@ -8,20 +8,14 @@
 import UnityWebgl from "unity-webgl";
 import UnityVue from "unity-webgl/vue";
 import { populationStore } from "@/Stores/populationStore";
-
+import {unityContext} from "./unityContext.js"
 const popStore = populationStore();
-const cacheBuster = Date.now(); // Unique number each load
 console.log(popStore)
 window.gameStart = function (msg) {
   console.log("gameStart:", msg);
 };
 
-const unityContext = new UnityWebgl({
-  loaderUrl: `/Build/Coral/CoralReef.loader.js?v=${cacheBuster}`,
-  dataUrl: `/Build/Coral/CoralReef.data?v=${cacheBuster}`,
-  frameworkUrl: `/Build/Coral/CoralReef.framework.js?v=${cacheBuster}`,
-  codeUrl: `/Build/Coral/CoralReef.wasm?v=${cacheBuster}`,
-});
+
 
 unityContext
   .on("progress", (p) => console.log("loading :", p))
