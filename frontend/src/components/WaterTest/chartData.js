@@ -62,6 +62,27 @@ function setOxygenData() {
   return heatmapData;
 }
 
+function setTurbidityData() {
+  const heatmapData = [
+    {
+      z: [
+        [0, 0, 0],
+        [0, waterTestConditions().compliance[1].turbidity, 0],
+        [0, 0, 0],
+      ],
+      type: "heatmap",
+      colorscale: [
+        [0, "rgb(0,0,0)"],
+        [
+          1,
+          `rgb(${(waterTestConditions().compliance[1].turbidity / 2).toFixed()},${(waterTestConditions().compliance[1].turbidity / 3).toFixed()},${(waterTestConditions().compliance[1].turbidity / 2).toFixed()})`,
+        ],
+      ],
+    },
+  ];
+  return heatmapData;
+}
+
 function setNutrientData() {
   const barData = [
     {
@@ -99,4 +120,4 @@ function setNutrientData() {
   return barData;
 }
 
-export { setOxygenData, setPhData, setNutrientData };
+export { setOxygenData, setPhData, setTurbidityData, setNutrientData };

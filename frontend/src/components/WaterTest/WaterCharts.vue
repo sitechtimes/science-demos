@@ -13,6 +13,8 @@
             <div>
                 <div>
                     <p class="text-lg">turbidity: {{ waterTestConditions().compliance[1].turbidity }} NTU</p>
+                    <PlotlyChart :data="turbidityData" :config="{ displayModeBar: false }" :layout="turbidityLayout"
+                        :key="componentKey" />
                 </div>
                 <div>
                     <p class="text-lg">fecal coliform: {{ waterTestConditions().compliance[1].fecal_coliform }}
@@ -33,8 +35,8 @@
 <script setup>
 import { ref, onBeforeMount, watch } from 'vue';
 import { waterTestConditions } from '@/Stores/watertest/waterTestStore';
-import { phOptions, oxygenOptions, nutrientOptions } from './chartOptions';
-import { setPhData, setOxygenData, setNutrientData } from './chartData';
+import { phOptions, oxygenOptions, turbidityOptions, nutrientOptions } from './chartOptions';
+import { setPhData, setOxygenData, setTurbidityData, setNutrientData } from './chartData';
 import PlotlyChart from '@/components/PlotlyChart.vue';
 import { useLayout } from '@/layout/composables/layout';
 
@@ -42,10 +44,12 @@ const componentKey = ref(0);
 
 const oxygenData = ref();
 const phData = ref();
-const nutrientData = ref()
+const turbidityData = ref();
+const nutrientData = ref();
 
 const oxygenLayout = ref()
 const phLayout = ref();
+const turbidityLayout = ref();
 const nutrientLayout = ref();
 
 function renderChanges() {
@@ -54,6 +58,8 @@ function renderChanges() {
     phLayout.value = phOptions(getStyles());
     oxygenData.value = setOxygenData();
     oxygenLayout.value = oxygenOptions(getStyles());
+    turbidityData.value = setTurbidityData();
+    turbidityLayout.value = turbidityOptions(getStyles());
     nutrientData.value = setNutrientData();
     nutrientLayout.value = nutrientOptions(getStyles());
     componentKey.value++;

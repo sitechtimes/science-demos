@@ -94,4 +94,4 @@ function nutrientOptions(styles) {
   return layout;
 }
 
-export { oxygenOptions, phOptions, nutrientOptions };
+export { oxygenOptions, phOptions, turbidityOptions, nutrientOptions };
