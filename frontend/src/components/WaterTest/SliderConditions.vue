@@ -15,7 +15,7 @@ const sliderVariables = ref(["waterTemp",
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
+  <div class="flex flex-col gap-4 card">
     <div>
       <label for="water use" class="block">Water Use Type</label>
       <SelectButton aria-label="water use" v-model="dataStore.waterUse.inputSelected"

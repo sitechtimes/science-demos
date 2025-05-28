@@ -1,9 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import {
-  epaCompliance,
-  calculateEutrophication,
-} from "@/components/WaterTest/inputCalculations";
+import { epaCompliance } from "@/components/WaterTest/inputCalculations";
 
 export const waterTestConditions = defineStore("waterTest", () => {
   // conditions for user to change
@@ -84,10 +81,6 @@ export const waterTestConditions = defineStore("waterTest", () => {
     )
   );
 
-  const eutrophicationRisk = computed(() =>
-    calculateEutrophication(agricultureRunoff.value.sliderValue)
-  );
-
   return {
     waterUse,
     waterTemp,
@@ -97,6 +90,5 @@ export const waterTestConditions = defineStore("waterTest", () => {
     untreatedSewage,
     agricultureRunoff,
     compliance,
-    eutrophicationRisk,
   };
 });

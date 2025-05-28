@@ -5,8 +5,11 @@
             <p v-if="toggleScene === 'demo'">unity scene placeholder</p>
             <WaterCharts v-else-if="toggleScene === 'charts'" />
         </div>
-        <div class="slider-container card">
+        <div class="slider-container">
             <SliderConditions />
+            <div class="card">
+                <p v-for="item in waterTestConditions().compliance[0]" :key="item">{{ item }}</p>
+            </div>
         </div>
     </div>
 </template>

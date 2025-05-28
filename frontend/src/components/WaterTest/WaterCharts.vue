@@ -80,7 +80,6 @@ watch([useLayout().layoutConfig, waterTestConditions()], () => {
 
 function getStyles() { // obtain current theme colors for chart options to change with theme
     const documentStyle = getComputedStyle(document.documentElement);
-    console.log(documentStyle)
     return {
         textColor: documentStyle.getPropertyValue('--p-text-color'),
         textColorSecondary: documentStyle.getPropertyValue('--p-text-muted-color'),
