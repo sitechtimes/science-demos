@@ -28,7 +28,7 @@
         @click="updateYear()"
         class="button px-3 py-1 border rounded-lg text-lg"
       >
-        Update Year
+        Set Year
       </button>
     </div>
   </form>
@@ -36,8 +36,9 @@
 
 <script setup>
 import { DataStore } from "@/Stores/DataStore";
-import { unityContext } from "./unityContext.js";
+import { unityContext, updatePop } from "./unityContext.js";
 import { populationStore } from "@/Stores/populationStore";
+import { data } from "autoprefixer";
 
 const dataStore = DataStore();
 const popStore = populationStore();
@@ -56,14 +57,13 @@ function decrementYear() {
 
 function updateYear() {
   if (unityContext) {
-    console.log(dataStore.selectedYear)
-    unityContext.sendMessage("FishManager","yearUpdate",dataStore.selectedYear)
-    Object.keys(popStore.finalPopulations).forEach((key) => {
-      const combined = `${key}|${popStore.finalPopulations[key]}`;
-      unityContext.sendMessage("FishManager", "UpdatePop", combined);
-    });
-
-    unityContext.sendMessage("FishManager", "initializeScene");
+    console.log(unityContext)
+    unityContext.sendMessage(
+      "FishManager",
+      "updateYear",
+      dataStore.selectedYear
+    );
+    updatePop(popStore)
   }
 }
 </script>

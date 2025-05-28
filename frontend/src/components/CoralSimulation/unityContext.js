@@ -10,4 +10,16 @@ const unityContext = new UnityWebgl({
     codeUrl: `/Build/Coral/CoralReef.wasm?v=${cacheBuster}`,
   });
 
-  export {unityContext}
+function updatePop(popStore){
+  //make population update based on environmental factors here 
+  Object.keys(popStore.finalPopulations).forEach((key) => {
+    const payload = {
+      popName: key,
+      population: popStore.finalPopulations[key],
+    };
+    const jsonString = JSON.stringify(payload);
+    unityContext.sendMessage("FishManager", "UpdatePop", jsonString);
+  });
+  unityContext.sendMessage("FishManager", "initializeScene");
+}
+  export {unityContext,updatePop}
