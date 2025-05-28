@@ -83,6 +83,27 @@ function setTurbidityData() {
   return heatmapData;
 }
 
+function setFeceData() {
+  const heatmapData = [
+    {
+      z: [
+        [0, 0, 0],
+        [0, waterTestConditions().compliance[1].fecal_coliform, 0],
+        [0, 0, 0],
+      ],
+      type: "heatmap",
+      colorscale: [
+        [0, "rgb(10,10,10)"],
+        [
+          1,
+          `rgb(${(waterTestConditions().compliance[1].fecal_coliform / 40).toFixed()},${(waterTestConditions().compliance[1].fecal_coliform / 60).toFixed()},0)`,
+        ],
+      ],
+    },
+  ];
+  return heatmapData;
+}
+
 function setNutrientData() {
   const barData = [
     {
@@ -120,4 +141,10 @@ function setNutrientData() {
   return barData;
 }
 
-export { setOxygenData, setPhData, setTurbidityData, setNutrientData };
+export {
+  setOxygenData,
+  setPhData,
+  setTurbidityData,
+  setFeceData,
+  setNutrientData,
+};

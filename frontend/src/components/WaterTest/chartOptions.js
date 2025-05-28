@@ -5,7 +5,6 @@ function phOptions(styles) {
     plot_bgcolor: styles.surfaceCard,
     paper_bgcolor: styles.surfaceCard,
     margin: {
-      // should change to computed margin
       t: 10,
       b: 10,
       l: 40,
@@ -28,7 +27,6 @@ function oxygenOptions(styles) {
     plot_bgcolor: styles.surfaceCard,
     paper_bgcolor: styles.surfaceCard,
     margin: {
-      // should change to computed margin
       t: 10,
       b: 10,
       l: 40,
@@ -51,7 +49,6 @@ function turbidityOptions(styles) {
     plot_bgcolor: styles.surfaceCard,
     paper_bgcolor: styles.surfaceCard,
     margin: {
-      // should change to computed margin
       t: 40,
       b: 40,
       l: 40,
@@ -62,7 +59,30 @@ function turbidityOptions(styles) {
       color: styles.textColor,
       family: styles.font,
     },
-    height: 300,
+    height: 280,
+    width: 300,
+  };
+
+  return layout;
+}
+
+function feceOptions(styles) {
+  const layout = {
+    title: "Fecal Coliform",
+    plot_bgcolor: styles.surfaceCard,
+    paper_bgcolor: styles.surfaceCard,
+    margin: {
+      t: 40,
+      b: 40,
+      l: 40,
+      r: 40,
+    },
+    font: {
+      size: 10,
+      color: styles.textColor,
+      family: styles.font,
+    },
+    height: 280,
     width: 300,
   };
 
@@ -76,7 +96,6 @@ function nutrientOptions(styles) {
     plot_bgcolor: styles.surfaceCard,
     paper_bgcolor: styles.surfaceCard,
     margin: {
-      // should change to computed margin
       t: 40,
       b: 40,
       l: 40,
@@ -94,4 +113,10 @@ function nutrientOptions(styles) {
   return layout;
 }
 
-export { oxygenOptions, phOptions, turbidityOptions, nutrientOptions };
+export {
+  oxygenOptions,
+  phOptions,
+  turbidityOptions,
+  feceOptions,
+  nutrientOptions,
+};
