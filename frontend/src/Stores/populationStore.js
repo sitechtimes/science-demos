@@ -577,10 +577,12 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const nutrientLoad = computed(() => {
+    //range 0 - 4.028
     return 40 * coralHealthImpact.value;
   });
 
   const waterClarity = computed(() => {
+    //range 0 - 100%
     return (
       100 *
       (1 -
@@ -591,6 +593,7 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const waterTempEffect = computed(() => {
+    //range 0 - 18
     return [
       0.08, 0.13, 0.21, 0.32, 0.46, 0.6, 0.75, 0.88, 0.97, 1, 0.97, 0.88, 0.75,
       0.6, 0.46, 0.32, 0.21, 0.13, 0.08,
@@ -598,6 +601,7 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const pHImpact = computed(() => {
+    //range 0.05 - 1 ?
     const thresholds = [7.7, 7.8, 7.9, 8.0, 8.1, Infinity]; // Upper bounds
     const impactValues = [0.05, 0.11, 0.23, 0.42, 0.69, 1]; // Corresponding values
 
@@ -608,6 +612,7 @@ export const populationStore = defineStore("populationStore", () => {
   });
 
   const whiteBandDisease = computed(() => {
+    //range 0 - 38.76
     // Calculate disease prevalence based on environmental stress
     const baseStressLevel =
       (sedimentLoad.value +
@@ -624,12 +629,13 @@ export const populationStore = defineStore("populationStore", () => {
     const diseasePrevalence =
       (0.6 + 0.4 * baseStressLevel) *
       Math.min(temperatureFactor, 1) *
-      (dataStore.whiteBandDisease.sliderValue / 100);
+      (dataStore.whiteBandDisease.sliderValue / 100); //this is hell of a lot higher than what it is supposed to be?
 
     return Math.min(diseasePrevalence, 1); // Cap at 100% prevalence
   });
 
   const blackBandDisease = computed(() => {
+    //range 0 - 38.76192
     // Base stress calculation combines chronic environmental factors
     const environmentalStress =
       (sedimentLoad.value +
@@ -645,7 +651,7 @@ export const populationStore = defineStore("populationStore", () => {
     const diseaseSpread =
       (0.6 + 0.4 * environmentalStress) *
       Math.min(thermalEffect, 1) *
-      (dataStore.blackBandDisease.sliderValue / 100);
+      (dataStore.blackBandDisease.sliderValue / 100); //this is hell of a lot higher than what it is supposed to be?
 
     return Math.min(diseaseSpread, 1); // Maximum 100% prevalence
   });
