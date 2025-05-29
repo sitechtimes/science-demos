@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div>
-                <p class="text-lg">nitrogen: {{ waterTestConditions().compliance[1].nitrate.toFixed(2) }} mg/L</p>
+                <p class="text-lg">nitrogen: {{ waterTestConditions().compliance[1].nitrogen.toFixed(2) }} mg/L</p>
                 <p class="text-lg">phosphorus: {{ waterTestConditions().compliance[1].phosphorus.toFixed(2) }} mg/L</p>
                 <PlotlyChart :data="nutrientData" :config="{ displayModeBar: false }" :layout="nutrientLayout"
                     :key="componentKey" />

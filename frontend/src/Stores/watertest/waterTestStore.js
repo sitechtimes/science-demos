@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import { epaCompliance } from "@/components/WaterTest/inputCalculations";
+import epaCompliance from "@/components/WaterTest/inputCalculations";
 
 export const waterTestConditions = defineStore("waterTest", () => {
   // conditions for user to change

@@ -1,5 +1,4 @@
 import { waterTestConditions } from "@/Stores/watertest/waterTestStore";
-import { color } from "d3";
 
 function setPhData() {
   const heatmapData = [

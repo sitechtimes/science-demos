@@ -16,7 +16,7 @@ const epaStandards = {
     pH: [6.5, 8.5], //range of acceptable pH
   },
   drinkingWater: {
-    nitrate: ["none", 10.0], // Max 10 mg/L NO3-N
+    nitrogen: ["none", 10.0], // Max 10 mg/L NO3-N
     phosphorus: ["none", 0.1], // Max 0.1 mg/L (varies by state)
     pH: [6.5, 8.5],
   },

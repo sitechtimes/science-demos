@@ -1,5 +1,4 @@
 function phOptions(styles) {
-  // set chart styles
   const layout = {
     title: "Water pH",
     plot_bgcolor: styles.surfaceCard,
@@ -16,6 +15,12 @@ function phOptions(styles) {
       family: styles.font,
     },
     height: 70,
+    xaxis: {
+      fixedrange: true,
+    },
+    yaxis: {
+      fixedrange: true,
+    },
   };
 
   return layout;
@@ -38,6 +43,12 @@ function oxygenOptions(styles) {
       family: styles.font,
     },
     height: 70,
+    xaxis: {
+      fixedrange: true,
+    },
+    yaxis: {
+      fixedrange: true,
+    },
   };
 
   return layout;
@@ -61,6 +72,12 @@ function turbidityOptions(styles) {
     },
     height: 280,
     width: 300,
+    xaxis: {
+      fixedrange: true,
+    },
+    yaxis: {
+      fixedrange: true,
+    },
   };
 
   return layout;
@@ -84,6 +101,12 @@ function feceOptions(styles) {
     },
     height: 280,
     width: 300,
+    xaxis: {
+      fixedrange: true,
+    },
+    yaxis: {
+      fixedrange: true,
+    },
   };
 
   return layout;
@@ -106,7 +129,10 @@ function nutrientOptions(styles) {
       color: styles.textColor,
       family: styles.font,
     },
-    yaxis: { range: [0, 8] },
+    xaxis: {
+      fixedrange: true,
+    },
+    yaxis: { range: [0, 8], fixedrange: true },
     width: 330,
   };
 

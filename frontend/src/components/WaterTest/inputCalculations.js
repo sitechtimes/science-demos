@@ -68,7 +68,7 @@ const epaCompliance = function (
     pH: calculatePh(acidRain, mineDrainage),
     turbidity: calculateTurbidity(deforestation),
     fecal_coliform: fecalColiform(untreatedSewage),
-    nitrate: calculateNutrients(agricultureRunoff)[0],
+    nitrogen: calculateNutrients(agricultureRunoff)[0],
     phosphorus: calculateNutrients(agricultureRunoff)[1],
   };
 
@@ -76,7 +76,7 @@ const epaCompliance = function (
   const standards = epaStandards[waterUse];
   let waterStatus = [];
 
-  waterStatus.push(calculateEutrophication(params.nitrate, params.phosphorus));
+  waterStatus.push(calculateEutrophication(params.nitrogen, params.phosphorus));
   // Check each parameter
   Object.entries(standards).forEach(([param, [minVal, maxVal]]) => {
     const value = params[param];
@@ -96,4 +96,4 @@ const epaCompliance = function (
   return [waterStatus, params];
 };
 
-export { epaCompliance };
+export default epaCompliance;
