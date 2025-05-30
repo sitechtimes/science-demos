@@ -2,21 +2,18 @@
 import Phaser from 'phaser';
 import { ref, toRaw } from 'vue';
 import PhaserGame from './PhaserGame.vue';
-import Fish from '@/games/CoralSimulation/Fish'
 import Button from 'primevue/button';
 
 // The sprite can only be moved in the MainMenu Scene
 
 //  References to the PhaserGame component (game and scene are exposed)
 const phaserRef = ref();
-const spritePosition = ref({ x: 0, y: 0 });
 
 const changeScene = () => {
 
     const scene = toRaw(phaserRef.value.scene);
 
-    if (scene)
-    {
+    if (scene) {
         //  Call the changeScene method defined in the `MainMenu`, `Game` and `GameOver` Scenes
         scene.changeScene();
     }
@@ -42,8 +39,8 @@ function removeOrganism(type) {
     <PhaserGame ref="phaserRef" @current-active-scene="currentScene" />
     <div>
         <div>
-            <Button @click="() => addOrganism('nassau_grouper')">Add Sprites</Button>
-            <Button @click="() => removeOrganism('nassau_grouper')">Remove Sprites</Button>
+            <Button @click="() => addOrganism('nassauGrouper')">Add Sprites</Button>
+            <Button @click="() => removeOrganism('nassauGrouper')">Remove Sprites</Button>
         </div>
     </div>
 </template>
