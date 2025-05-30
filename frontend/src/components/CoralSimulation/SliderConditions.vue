@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import SliderInput from "../input_components/SliderInput.vue";
+import SliderInput from "../InputComponents/SliderInput.vue";
 import { DataStore } from "@/Stores/DataStore";
 import { CarbonStore } from "@/Stores/CarbonStore";
 import { ref, computed } from "vue";
@@ -23,7 +23,6 @@ const sliderVariables = ref([
   "oceanTemp",
   "stormSeverity",
   "waterPH",
-  "grouperFishing",
 ]);
 // if we do include more conditions we will have to include a selectbutton or dropdown to switch between
 </script>

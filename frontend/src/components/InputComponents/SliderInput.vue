@@ -5,6 +5,7 @@ const props = defineProps(['var']);
 // props.var is a ref from the store, so it's already reactive
 // make it so it takes input of unit % nothing years etc
 const slider = props.var;
+console.log(slider.name)
 </script>
 
 <template>

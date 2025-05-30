@@ -4,7 +4,7 @@
     <div class="flex items-center gap-2">
       <input
         type="number"
-        v-model="dataStore.selectedYear"
+        v-model="popStore.currentYear"
         class="w-20 text-center border rounded-lg p-2 text-lg [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
       />
       <button
@@ -35,23 +35,21 @@
 </template>
 
 <script setup>
-import { DataStore } from "@/Stores/DataStore";
 import { unityContext, updatePop } from "./unityContext.js";
 import { populationStore } from "@/Stores/populationStore";
 import { data } from "autoprefixer";
 
-const dataStore = DataStore();
 const popStore = populationStore();
-
+console.log(popStore.currentYear)
 function incrementYear() {
-  if (dataStore.selectedYear < 100) {
-    dataStore.selectedYear++;
+  if (popStore.currentYear < 100) {
+    popStore.currentYear++;
   }
 }
 
 function decrementYear() {
-  if (dataStore.selectedYear < 100) {
-    dataStore.selectedYear--;
+  if (popStore.currentYear < 100) {
+    popStore.currentYear--;
   }
 }
 
@@ -61,7 +59,7 @@ function updateYear() {
     unityContext.sendMessage(
       "FishManager",
       "updateYear",
-      dataStore.selectedYear
+      popStore.currentYear
     );
     updatePop(popStore)
   }
