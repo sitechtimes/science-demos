@@ -108,7 +108,7 @@ function setNutrientData() {
     {
       x: ["nitrogen", "phosphorus"],
       y: [
-        waterTestConditions().compliance[1].nitrate,
+        waterTestConditions().compliance[1].nitrogen,
         waterTestConditions().compliance[1].phosphorus,
       ],
       type: "bar",
