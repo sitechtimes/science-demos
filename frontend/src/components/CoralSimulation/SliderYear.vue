@@ -37,10 +37,8 @@
 <script setup>
 import { unityContext, updatePop } from "./unityContext.js";
 import { populationStore } from "@/Stores/populationStore";
-import { data } from "autoprefixer";
 
 const popStore = populationStore();
-console.log(popStore.currentYear)
 function incrementYear() {
   if (popStore.currentYear < 100) {
     popStore.currentYear++;
@@ -48,7 +46,7 @@ function incrementYear() {
 }
 
 function decrementYear() {
-  if (popStore.currentYear < 100) {
+  if (popStore.currentYear!=0) {
     popStore.currentYear--;
   }
 }

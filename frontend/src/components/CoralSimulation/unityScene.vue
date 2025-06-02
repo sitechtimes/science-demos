@@ -9,7 +9,7 @@ import UnityVue from "unity-webgl/vue";
 import { populationStore } from "@/Stores/populationStore";
 import { unityContext, updatePop } from "./unityContext.js";
 const popStore = populationStore();
-console.log(popStore);
+
 window.gameStart = function (msg) {
   console.log("gameStart:", msg);
 };
