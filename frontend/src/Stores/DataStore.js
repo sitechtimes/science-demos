@@ -19,9 +19,6 @@ export const DataStore = defineStore("data", () => {
   //Disease
 
   //Keystone Species
-
-  const path = "/src/games/CoralSimulation/images/";
-
   //Ocean Conditions
   const oceanTemp = ref({
     name: "Ocean Temperature (°C)",
