@@ -3,8 +3,6 @@ import { ref, watch } from 'vue';
 import Card from 'primevue/card';
 import Stepper from 'primevue/stepper';
 import StepList from 'primevue/steplist';
-import StepPanels from 'primevue/steppanels';
-import StepItem from 'primevue/stepitem';
 import Step from 'primevue/step';
 import Button from 'primevue/button';
 import Popover from 'primevue/popover'

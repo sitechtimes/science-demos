@@ -1,9 +1,7 @@
 <template>
+  <p>{{ populationStore() }}</p>
   <div class="bg-surface-900 w-fit p-2 rounded">
-    <SelectButton
-      v-model="chartType"
-      :options="['Simulation', 'Population %', 'Population Count']"
-    />
+    <SelectButton v-model="chartType" :options="['Simulation', 'Population %', 'Population Count']" />
   </div>
   <div class="chart-slider-container">
     <div class="chart-container">
@@ -32,6 +30,7 @@ import SliderConditions from "@/components/CoralSimulation/SliderConditions.vue"
 import SliderYear from "@/components/CoralSimulation/SliderYear.vue";
 import SelectButton from "primevue/selectbutton";
 import UnityScene from "@/components/CoralSimulation/unityScene.vue";
+import { populationStore } from "@/Stores/populationStore"; // change this import when put in subfolder
 
 const chartType = ref("Population %");
 </script>

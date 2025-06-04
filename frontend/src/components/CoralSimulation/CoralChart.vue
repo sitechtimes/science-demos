@@ -1,14 +1,11 @@
 <template>
-    <!-- <div class="chartType">
-            <SelectButton v-model="chartType" :options="['Population %', 'Population Count']" />
-        </div> -->
     <div>
-        <Chart type="line" :data="chartInfo.chartData" :options="chartOptions" class="h-[30rem]" />
+        <PlotlyChart :data="chartData" :layout="chartOptions" :config="{ displayModeBar: false }" :key="componentKey" />
     </div>
 </template>
 
 <script setup>
-import Chart from 'primevue/chart';
+/* import PlotlyChart from "../PlotlyChart.vue";
 import { ref, onMounted, watch } from "vue";
 import { setChartData, setChartOptions } from '@/Stores/chartDataOptions';
 import { useLayout } from '@/layout/composables/layout';
@@ -65,6 +62,46 @@ watch([useLayout().layoutConfig, selectedYear.value, chartType], () => {
             chartOptions.value = setChartOptions(chartInfo.value.currentGraph, getStyles());
             break;
     }
+});
+ */
+import PlotlyChart from "@/components/PlotlyChart.vue"
+import { ref, toRef, onBeforeMount, watch } from "vue";
+import { useLayout } from '@/layout/composables/layout';
+import { cellDivStore } from '@/Stores/celldiv/CellDivStore';
+import setChartOptions from '@/components/CoralSimulation/chartOptions.js'
+import setChartData from "@/components/CoralSimulation/chartData.js";
+import { populationStore } from "@/Stores/populationStore";
+
+const props = defineProps({ chartType: String }); // pull charttype info from parent component
+
+const chartData = ref();
+const chartOptions = ref();
+const componentKey = ref(0);
+
+function getStyles() { // obtain current theme colors for chart options to change with theme
+    const documentStyle = getComputedStyle(document.documentElement);
+    return {
+        textColor: documentStyle.getPropertyValue('--p-text-color'),
+        textColorSecondary: documentStyle.getPropertyValue('--p-text-muted-color'),
+        surfaceBorder: documentStyle.getPropertyValue('--p-content-border-color'),
+        surfaceCard: documentStyle.getPropertyValue('--surface-card'),
+        font: documentStyle.getPropertyValue('font-family'),
+        primaryColor: documentStyle.getPropertyValue('--p-primary-color')
+    };
+}
+
+function renderChanges() {
+    chartOptions.value = setChartOptions(getStyles(), props.chartType);
+    chartData.value = setChartData(cellDivStore().graphData);
+    componentKey.value++;
+}
+
+onBeforeMount(() => {
+    renderChanges()
+});
+
+watch([useLayout().layoutConfig, populationStore(), toRef(props.chartType)], () => { // watch for changes
+    renderChanges()
 });
 </script>
 
