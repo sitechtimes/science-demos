@@ -1,5 +1,4 @@
 <template>
-  <p>{{ populationStore() }}</p>
   <div class="bg-surface-900 w-fit p-2 rounded">
     <SelectButton v-model="chartType" :options="['Simulation', 'Population %', 'Population Count']" />
   </div>
