@@ -8,7 +8,7 @@
         <UnityScene />
       </div>
       <div class="card" v-else>
-        <CoralChart v-model="chartType" />
+        <CoralChart :chart-type="chartType" />
       </div>
     </div>
     <div class="slider-container">
@@ -29,9 +29,8 @@ import SliderConditions from "@/components/CoralSimulation/SliderConditions.vue"
 import SliderYear from "@/components/CoralSimulation/SliderYear.vue";
 import SelectButton from "primevue/selectbutton";
 import UnityScene from "@/components/CoralSimulation/unityScene.vue";
-import { populationStore } from "@/Stores/populationStore"; // change this import when put in subfolder
 
-const chartType = ref("Population %");
+const chartType = ref("Population Count");
 </script>
 
 <style scoped>

@@ -1,4 +1,4 @@
-const setChartOptions = (styles, cellType) => {
+const setChartOptions = (styles, chartType) => {
   // return chart options
   const chartOptions = {
     title: "Number of Cells",
@@ -17,19 +17,19 @@ const setChartOptions = (styles, cellType) => {
     },
     xaxis: {
       title: {
-        text:
-          cellType === "Mitosis"
-            ? "time (hours)"
-            : cellType === "Meiosis"
-              ? "time (days)"
-              : "undefined",
+        text: "years",
       },
       zeroline: false,
       gridcolor: styles.surfaceBorder,
     },
     yaxis: {
       title: {
-        text: "number of cells",
+        text:
+          chartType === "Population %"
+            ? "% of organisms"
+            : chartType === "Population Count"
+              ? "# of organisms"
+              : "undefined",
       },
       gridcolor: styles.surfaceBorder,
     },

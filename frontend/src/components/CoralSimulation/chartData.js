@@ -2,11 +2,9 @@ import { populationStore } from "@/Stores/populationStore";
 
 const popStore = populationStore();
 
-const setChartData = () => {
+const setChartData = (chartType) => {
   let data = [];
-  /* popStore.value.forEach((element) => {
-    console.log(element);
-  }); */
+
   let organisms = [
     "algae",
     "boulderStarCoral",
@@ -36,18 +34,32 @@ const setChartData = () => {
     "#cc0234",
     "#ffce9d",
   ];
-
-  organisms.forEach((element, index) => {
-    data.push({
-      y: popStore[element].population,
-      name: element,
-      type: "scatter",
-      line: {
-        color: colors[index],
-      },
+  if (chartType === "Population Count") {
+    organisms.forEach((element, index) => {
+      data.push({
+        y: popStore[element].population.map((ele) => Math.round(ele)),
+        name: element,
+        type: "scatter",
+        line: {
+          color: colors[index],
+        },
+      });
     });
-  });
-  // return data options
+  } else if (chartType === "Population %") {
+    organisms.forEach((element, index) => {
+      data.push({
+        y: popStore[element].population.map(
+          (ele) => Math.round(ele / popStore[element].maxCapacity[0]) * 100
+        ),
+        name: element,
+        type: "scatter",
+        line: {
+          color: colors[index],
+        },
+      });
+    });
+  }
+
   return data;
 };
 
