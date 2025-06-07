@@ -1,14 +1,14 @@
 const setChartOptions = (styles, chartType) => {
   // return chart options
   const chartOptions = {
-    title: "Number of Cells",
+    title: "Organism Population",
     plot_bgcolor: styles.surfaceCard,
     paper_bgcolor: styles.surfaceCard,
     margin: {
-      t: 50,
-      b: 50,
-      l: 50,
-      r: 50,
+      t: 40,
+      b: 40,
+      l: 40,
+      r: 40,
     },
     font: {
       size: 10,
@@ -33,7 +33,6 @@ const setChartOptions = (styles, chartType) => {
       },
       gridcolor: styles.surfaceBorder,
     },
-    showlegend: false,
   };
   return chartOptions;
 };

@@ -7,7 +7,7 @@
       <div class="card" v-if="chartType === 'Simulation'">
         <UnityScene />
       </div>
-      <div class="card" v-else>
+      <div class="card p-0" v-else>
         <CoralChart :chart-type="chartType" />
       </div>
     </div>
