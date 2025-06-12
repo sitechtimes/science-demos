@@ -40,6 +40,11 @@ const router = createRouter({
           name: "Soil Types",
           component: () => import("@/views/pages/apes/SoilTypes.vue"),
         },
+        {
+          path: "/apes/watertesting",
+          name: "Water Testing",
+          component: () => import("@/views/pages/apes/WaterTest.vue"),
+        },
       ],
     },
     {

@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="flex-1 overflow-hidden">
-            <Carousel :value="demoRoutes" :numVisible="1" :numScroll="1">
+            <Carousel :value="demoRoutes" :numVisible="1" :numScroll="1" circular :autoplayInterval="3000">
                 <template #item="slotProps">
                     <div class="border border-surface-200 dark:border-surface-700 rounded m-2 p-4">
                         <div class="mb-4">
