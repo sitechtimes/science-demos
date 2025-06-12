@@ -38,10 +38,8 @@ export const cellDivStore = defineStore("cellDivData", () => {
   }
 
   function progressState(type) {
-    function progressState(type) {
-      if (type === 1) return (currentState.value += 1); // will progress state
-      currentState.value = 0; // if type 0 will not progress, returns to initial
-    }
+    if (type === 1) return (currentState.value += 1); // will progress state
+    currentState.value = 0; // if type 0 will not progress, returns to initial
   }
 
   return {
