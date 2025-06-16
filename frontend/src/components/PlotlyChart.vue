@@ -1,7 +1,5 @@
 <template>
-    <div class="card">
-        <div ref="chart"></div>
-    </div>
+    <div ref="chart"></div>
 </template>
 
 <script setup>

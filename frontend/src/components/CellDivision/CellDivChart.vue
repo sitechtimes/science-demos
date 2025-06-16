@@ -7,7 +7,6 @@
 </template>
 
 <script setup>
-import Chart from 'primevue/chart';
 import PlotlyChart from "@/components/PlotlyChart.vue"
 import { ref, toRef, onBeforeMount, watch } from "vue";
 import { useLayout } from '@/layout/composables/layout';
