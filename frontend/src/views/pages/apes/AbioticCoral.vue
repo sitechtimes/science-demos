@@ -1,17 +1,14 @@
 <template>
   <div class="bg-surface-900 w-fit p-2 rounded">
-    <SelectButton
-      v-model="chartType"
-      :options="['Simulation', 'Population %', 'Population Count']"
-    />
+    <SelectButton v-model="chartType" :options="['Simulation', 'Population %', 'Population Count']" />
   </div>
   <div class="chart-slider-container">
     <div class="chart-container">
       <div class="card" v-if="chartType === 'Simulation'">
         <UnityScene />
       </div>
-      <div class="card" v-else>
-        <CoralChart v-model="chartType" />
+      <div class="card p-0" v-else>
+        <CoralChart :chart-type="chartType" />
       </div>
     </div>
     <div class="slider-container">
@@ -33,7 +30,7 @@ import SliderYear from "@/components/CoralSimulation/SliderYear.vue";
 import SelectButton from "primevue/selectbutton";
 import UnityScene from "@/components/CoralSimulation/unityScene.vue";
 
-const chartType = ref("Population %");
+const chartType = ref("Population Count");
 </script>
 
 <style scoped>
